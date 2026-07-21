@@ -34,11 +34,26 @@ abstract class Widget implements WidgetInterface
 
     private ?AccessibilityBuilder $accessibility = null;
 
+    private static ?HtmlEscaper $sharedEscaper = null;
+
+    private static ?AttributeBag $sharedAttributeBag = null;
+
+    private static ?ClassMerger $sharedClassMerger = null;
+
+    protected readonly HtmlEscaper $escaper;
+
+    protected readonly AttributeBag $attributeBag;
+
+    protected readonly ClassMerger $classMerger;
+
     public function __construct(
-        protected readonly HtmlEscaper $escaper = new HtmlEscaper(),
-        protected readonly AttributeBag $attributeBag = new AttributeBag(),
-        protected readonly ClassMerger $classMerger = new ClassMerger(),
+        ?HtmlEscaper $escaper = null,
+        ?AttributeBag $attributeBag = null,
+        ?ClassMerger $classMerger = null,
     ) {
+        $this->escaper = $escaper ?? (self::$sharedEscaper ??= new HtmlEscaper());
+        $this->attributeBag = $attributeBag ?? (self::$sharedAttributeBag ??= new AttributeBag());
+        $this->classMerger = $classMerger ?? (self::$sharedClassMerger ??= new ClassMerger());
     }
 
     /**

@@ -1,4 +1,6 @@
-# SERIXA CLI (`v0.10.0`)
+# SERIXA CLI (`v0.11.0`)
+
+New to the CLI? [docs/getting-started.md](getting-started.md) and [docs/first-blog.md](first-blog.md) walk through `new` → `make:page` → routing end to end. This page is the reference.
 
 The CLI is a **developer tool**, independent from the HTML render pipeline.
 
@@ -8,13 +10,15 @@ vendor/bin/serixa
 php bin/serixa
 ```
 
+Running `serixa` with no arguments prints a quick-start banner (`serixa new blog`, `composer install`, `php -S`) and points at `docs/getting-started.md`.
+
 ## Global commands
 
 | Command | Purpose |
 |---------|---------|
-| `serixa` | Banner + usage |
-| `serixa version` / `-V` | Print CLI version |
-| `serixa help [command]` | Help text |
+| `serixa` | Banner + usage + quick start |
+| `serixa version` / `--version` / `-V` | Print CLI version (fast path — skips command registration) |
+| `serixa help [command]` | Help text; with no argument, also lists commands and links the beginner docs |
 | `serixa list` | List registered commands |
 
 ## Project & generators
@@ -44,4 +48,10 @@ use Serixa\Console\Plugin;
 Plugin::registerCommand(new MyCommand());
 ```
 
-See also [scaffolding.md](scaffolding.md), [project-generator.md](project-generator.md), [templates.md](templates.md).
+## Notes
+
+- `serixa new` warns (but doesn't block) if you run it from inside the SERIXA framework tree — see [Path-repository recursion](troubleshooting.md#path-repository-recursion).
+- `make:*` commands never overwrite an existing file; re-running one for the same name fails with a clear "refusing to overwrite" message — see [troubleshooting.md](troubleshooting.md#duplicate-make-commands).
+- `serixa help <command>` prints usage examples for that command (e.g. `serixa help new`).
+
+See also [scaffolding.md](scaffolding.md), [project-generator.md](project-generator.md), [templates.md](templates.md), and the beginner path: [getting-started.md](getting-started.md), [first-blog.md](first-blog.md), [first-dashboard.md](first-dashboard.md).

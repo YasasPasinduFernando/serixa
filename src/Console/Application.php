@@ -12,7 +12,11 @@ use Serixa\Console\Scaffold\WorkingDirectory;
  */
 final class Application
 {
-    public const VERSION = '0.10.0';
+    public const VERSION = '0.11.0';
+
+    private ?TemplateEngine $templateEngine = null;
+
+    private bool $defaultsRegistered = false;
 
     public function __construct(
         private readonly CommandRegistry $registry = new CommandRegistry(),
@@ -32,7 +36,7 @@ final class Application
 
     public function templateEngine(): TemplateEngine
     {
-        return new TemplateEngine($this->frameworkRoot() . DIRECTORY_SEPARATOR . 'templates');
+        return $this->templateEngine ??= new TemplateEngine($this->frameworkRoot() . DIRECTORY_SEPARATOR . 'templates');
     }
 
     /**
@@ -40,11 +44,17 @@ final class Application
      */
     public function registerDefaults(): self
     {
+        if ($this->defaultsRegistered) {
+            return $this;
+        }
+
         foreach ($this->defaultCommands() as $command) {
             if (! $this->registry->has($command->name())) {
                 $this->registry->register($command);
             }
         }
+
+        $this->defaultsRegistered = true;
 
         return $this;
     }
@@ -54,6 +64,8 @@ final class Application
      */
     public function syncDefaultRegistry(): self
     {
+        $this->registerDefaults();
+
         foreach ($this->registry->all() as $command) {
             if (! CommandRegistry::default()->has($command->name())) {
                 CommandRegistry::default()->register($command);
@@ -69,25 +81,33 @@ final class Application
     public function run(array $argv, ?InputOutput $io = null): int
     {
         $io ??= new InputOutput();
-        $this->registerDefaults();
-
         $args = array_values(array_slice($argv, 1));
+
+        // Fast path: avoid constructing generators for version probes.
+        if ($args !== [] && in_array($args[0], ['--version', '-V', 'version'], true)) {
+            $io->writeln('SERIXA CLI ' . self::VERSION);
+
+            return 0;
+        }
+
+        $this->registerDefaults();
 
         if ($args === []) {
             $this->printBanner($io);
             $io->writeln('Usage: serixa <command> [arguments] [options]');
             $io->writeln('Run `serixa list` or `serixa help` for available commands.');
+            $io->writeln('');
+            $io->writeln('Quick start:');
+            $io->writeln('  serixa new blog');
+            $io->writeln('  cd blog && composer install');
+            $io->writeln('  php -S localhost:8000 -t public');
+            $io->writeln('');
+            $io->writeln('Docs: docs/getting-started.md');
 
             return 0;
         }
 
         $commandName = array_shift($args) ?? '';
-
-        if (in_array($commandName, ['--version', '-V', 'version'], true)) {
-            $io->writeln('SERIXA CLI ' . self::VERSION);
-
-            return 0;
-        }
 
         if (in_array($commandName, ['--help', '-h', 'help'], true)) {
             return $this->printHelp($io, $args[0] ?? null);
@@ -101,7 +121,8 @@ final class Application
         $command = $this->registry->get($commandName);
 
         if ($command === null) {
-            $io->error(sprintf('Unknown command "%s". Run `serixa list`.', $commandName));
+            $io->error(sprintf('Unknown command "%s". Run `serixa list` or `serixa help`.', $commandName));
+            $io->info('Tip: try `serixa new blog` to scaffold an app.');
 
             return 1;
         }
@@ -177,12 +198,15 @@ final class Application
 
             if ($command === null) {
                 $io->error(sprintf('Unknown command "%s".', $commandName));
+                $io->info('Run `serixa list` to see commands.');
 
                 return 1;
             }
 
-            $io->writeln(sprintf('  %s', $command->name()));
-            $io->writeln(sprintf('    %s', $command->description()));
+            $io->writeln(sprintf('Command: %s', $command->name()));
+            $io->writeln(sprintf('  %s', $command->description()));
+            $io->writeln('');
+            $this->printCommandUsage($io, $command->name());
 
             return 0;
         }
@@ -191,13 +215,46 @@ final class Application
         $io->writeln('  serixa <command> [arguments] [options]');
         $io->writeln('');
         $io->writeln('Global:');
-        $io->writeln('  version, --version, -V');
-        $io->writeln('  help [command], --help, -h');
-        $io->writeln('  list');
+        $io->writeln('  version, --version, -V     Print CLI version (fast path)');
+        $io->writeln('  help [command], --help, -h Show help');
+        $io->writeln('  list                       List commands');
         $io->writeln('');
         $this->printList($io);
+        $io->writeln('');
+        $io->writeln('Learn more: docs/getting-started.md · docs/first-blog.md');
 
         return 0;
+    }
+
+    private function printCommandUsage(InputOutput $io, string $name): void
+    {
+        $examples = match ($name) {
+            'new' => [
+                'serixa new blog',
+                'serixa new my-app --type=crm',
+                'Presets: blog, crm, ecommerce (use --type= for custom folder names)',
+                'Avoid creating projects inside the framework tree (path-repo recursion).',
+            ],
+            'make:page' => ['serixa make:page Articles', 'Creates pages/ArticlesPage.php'],
+            'make:component' => ['serixa make:component ArticleCard', 'Creates components/ArticleCard.php'],
+            'make:layout' => ['serixa make:layout Site', 'Creates layouts/SiteLayout.php'],
+            'make:theme' => ['serixa make:theme Dark', 'Creates themes/DarkTheme.php'],
+            'make:plugin' => ['serixa make:plugin Charts', 'Creates plugins/ChartsPlugin.php'],
+            'docs' => ['serixa docs', 'Writes docs/generated/*'],
+            'build' => ['serixa build', 'Tokens, runtime copy, manifest, docs cache'],
+            'dev' => ['serixa dev --once', 'Single watch cycle (omit --once to poll)'],
+            default => [],
+        };
+
+        if ($examples === []) {
+            return;
+        }
+
+        $io->writeln('Examples:');
+
+        foreach ($examples as $line) {
+            $io->writeln('  ' . $line);
+        }
     }
 
     private function printList(InputOutput $io): int

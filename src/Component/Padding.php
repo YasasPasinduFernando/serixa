@@ -53,6 +53,30 @@ final class Padding extends Component
         return $padding;
     }
 
+    /** Tailwind scale shortcut: Padding::make()->sm()->child(...) */
+    public function sm(): self
+    {
+        $this->sides['all'] = 4;
+
+        return $this;
+    }
+
+    /** Tailwind scale shortcut: Padding::make()->md()->child(...) */
+    public function md(): self
+    {
+        $this->sides['all'] = 6;
+
+        return $this;
+    }
+
+    /** Tailwind scale shortcut: Padding::make()->lg()->child(...) */
+    public function lg(): self
+    {
+        $this->sides['all'] = 8;
+
+        return $this;
+    }
+
     /**
      * Fluent side setters.
      *
@@ -61,7 +85,11 @@ final class Padding extends Component
     public function __call(string $name, array $arguments): self
     {
         if (! in_array($name, self::SIDES, true)) {
-            throw new InvalidArgumentException(sprintf('Unknown Padding method: %s', $name));
+            throw new InvalidArgumentException(sprintf(
+                'Unknown Padding method "%s". Allowed: %s, plus sm()/md()/lg().',
+                $name,
+                implode(', ', self::SIDES),
+            ));
         }
 
         if ($arguments === []) {

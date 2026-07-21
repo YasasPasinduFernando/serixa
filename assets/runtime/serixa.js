@@ -1,5 +1,5 @@
 /**
- * SERIXA client runtime v0.9.0 — progressive enhancement + interactive modules.
+ * SERIXA client runtime v0.11.0 — progressive enhancement + interactive modules.
  *
  * NO virtual DOM, hydration, routing, or SPA state engine.
  */
@@ -600,7 +600,23 @@
   });
 
   function bootModules(root) {
+    var markers = {
+      modal: '[data-serixa-modal],[data-serixa-open-modal]',
+      drawer: '[data-serixa-drawer],[data-serixa-open-drawer]',
+      dropdown: '[data-serixa-dropdown]',
+      popover: '[data-serixa-popover]',
+      tooltip: '[data-serixa-tooltip]',
+      tabs: '[data-serixa-tabs]',
+      accordion: '[data-serixa-accordion]',
+      toast: '[data-serixa-toast],[data-serixa-show-toast]',
+      dismiss: '[data-serixa-alert],[data-serixa-chip],[data-serixa-alert-dismiss],[data-serixa-chip-dismiss]'
+    };
+
     Object.keys(modules).forEach(function (name) {
+      var selector = markers[name];
+      if (selector && !root.querySelector(selector)) {
+        return;
+      }
       try {
         modules[name].mount(root);
       } catch (err) {
@@ -623,7 +639,7 @@
   }
 
   var Serixa = {
-    version: '0.9.0',
+    version: '0.11.0',
     register: register,
     unregister: unregister,
     get: get,

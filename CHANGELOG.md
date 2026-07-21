@@ -5,6 +5,42 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.11.0] — 2026-07-22
+
+Polish release following the pre-1.0 validation pass (`validation/REPORT.md`): performance, DX, and beginner documentation. No breaking changes.
+
+### Added
+- Beginner documentation: `docs/getting-started.md`, `docs/first-blog.md` (30-minute blog tutorial), `docs/first-dashboard.md`, `docs/project-structure.md`, `docs/deployment.md`, `docs/faq.md`, `docs/troubleshooting.md`
+- `Padding::sm()` / `md()` / `lg()` shortcuts for common insets (`p-4` / `p-6` / `p-8`), alongside the existing fluent side setters
+- `Column::alignStretch()` / `Row::alignStretch()` for explicit stretch alignment (matches the existing default, now settable fluently)
+- `Scaffold::content()` as a readability alias for `Scaffold::body()`
+- `Stack::clip()` to opt into `overflow-hidden` on layered content
+- CLI: fast path for `serixa version` / `--version` / `-V` that skips command registration
+- CLI: richer `serixa help` / no-argument banner with quick-start commands and doc links
+- CLI: `serixa new` warns when run from inside the framework tree (path-repository recursion risk)
+- Generated project `README.md` now links `docs/getting-started.md`, `docs/first-blog.md`, `docs/first-dashboard.md`, `docs/troubleshooting.md`
+- Playground polish: minor demo/page cleanups following the validation pass
+
+### Changed
+- `DefaultTheme::classes()` now memoizes resolved class lists per component+state key; `token()` lookups are cached — addresses the ~0.8 ms/lookup cost measured in `docs/performance.md` (see `docs/performance-v011.md` for before/after tables)
+- `WidgetRegistry::defaultMetadata()` memoizes the built-in metadata list
+- `Serixa\Widget\Widget` shares one `HtmlEscaper`, `AttributeBag`, and `ClassMerger` instance across widget instances by default instead of constructing new ones per widget
+- Client runtime (`assets/runtime/serixa.js`) only mounts an interactive module (modal, dropdown, tabs, accordion, toast, …) when a matching marker is present in the DOM subtree being booted, instead of unconditionally mounting every module
+- Validation error messages from layout/theme widgets (`Padding`, `Row`, `Column`, `DefaultTheme`) and pipeline passes now include actionable context
+- `docs/cli.md` updated for `v0.11.0` and cross-linked to the new beginner docs
+- `README.md`: new "Beginner path" section linking `getting-started.md` / `first-blog.md` / `first-dashboard.md`, expanded documentation index
+- Playground demo extracts shared `PageSection` / `StatGrid` components to cut page duplication
+- Generated project `README.md` stub expanded with setup, structure, and learning links
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
+### Performance
+- Theme 3 000 class lookups: ~2 287 ms → ~43 ms (~53×) — see `docs/performance-v011.md`
+
 ## [v0.10.0] — 2026-07-22
 
 ### Added

@@ -26,7 +26,7 @@ final class BuildTreePass implements RenderPassInterface
         $root = $context->root();
 
         if ($root === null) {
-            throw new PipelineException('RenderContext has no root widget.');
+            throw new PipelineException('BuildTreePass: RenderContext has no root widget. Pass a WidgetInterface to Renderer::render().');
         }
 
         $context->setTree(WidgetTree::from($root));

@@ -34,7 +34,7 @@ final class RenderPass implements RenderPassInterface
         $root = $context->root();
 
         if ($root === null) {
-            throw new PipelineException('RenderPass requires a root widget.');
+            throw new PipelineException('RenderPass requires a root widget on RenderContext before HTML emission.');
         }
 
         $fragment = $root->render();

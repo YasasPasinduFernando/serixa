@@ -6,3 +6,7 @@
 *.cache
 /docs/generated/
 /build/
+/validation/**/vendor/
+/playground/**/vendor/
+/validation/**/composer.lock
+/playground/**/composer.lock

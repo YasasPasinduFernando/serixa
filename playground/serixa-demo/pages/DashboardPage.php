@@ -9,19 +9,18 @@ use Serixa\Component\ActivityList;
 use Serixa\Component\Badge;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
-use Serixa\Component\Column;
 use Serixa\Component\Dropdown;
 use Serixa\Component\DropdownItem;
 use Serixa\Component\Metric;
-use Serixa\Component\PageHeader;
 use Serixa\Component\Row;
 use Serixa\Component\SizedBox;
-use Serixa\Component\StatCard;
 use Serixa\Component\Tab;
 use Serixa\Component\Tabs;
 use Serixa\Component\Text;
 use Serixa\Component\Toast;
 use Serixa\Document\Document;
+use SerixaDemo\Components\PageSection;
+use SerixaDemo\Components\StatGrid;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Missing;
 use SerixaDemo\Shell;
@@ -30,44 +29,38 @@ final class DashboardPage
 {
     public static function document(): Document
     {
-        $stats = Row::make([
-            StatCard::make()->title('Users')->value('1,284')->trend('+3.1%')->color('primary'),
-            StatCard::make()->title('Revenue')->value('$48.2k')->subtitle('Last 7 days')->color('success'),
-            StatCard::make()->title('Sessions')->value('9,441')->trend('+12%'),
-            StatCard::make()->title('Churn')->value('2.1%')->color('warning'),
-        ])->gap(4)->spaceBetween();
-
-        $metrics = Row::make([
-            Metric::make()->label('Avg latency')->value('42ms'),
-            Metric::make()->label('Error rate')->value('0.04%'),
-            Metric::make()->label('Uptime')->value('99.98%'),
-        ])->gap(6)->spaceBetween();
-
-        $main = Column::make([
-            PageHeader::make()
-                ->title('Dashboard')
-                ->subtitle('Overview of the last 7 days.')
-                ->actions(
-                    Dropdown::make()
-                        ->trigger(Button::make('Actions')->secondary())
-                        ->items([
-                            DropdownItem::make('Refresh')->href('/?page=dashboard'),
-                            DropdownItem::make('Export')->href('/?page=dashboard&export=1'),
-                        ]),
-                    Button::make('Notify')
-                        ->ghost()
-                        ->attribute('data-serixa-show-toast', 'dash-toast'),
-                ),
-            SizedBox::height(2),
+        $main = PageSection::make(
+            'Dashboard',
+            'Overview of the last 7 days.',
+            [
+                Dropdown::make()
+                    ->trigger(Button::make('Actions')->secondary())
+                    ->items([
+                        DropdownItem::make('Refresh')->href('/?page=dashboard'),
+                        DropdownItem::make('Export')->href('/?page=dashboard&export=1'),
+                    ]),
+                Button::make('Notify')
+                    ->ghost()
+                    ->attribute('data-serixa-show-toast', 'dash-toast'),
+            ],
             Row::make([
                 Badge::make('Live')->color('success'),
                 Badge::make('SSR')->color('primary'),
                 Text::make('Interactive PE widgets')->size('sm')->tone('muted'),
             ])->gap(2)->alignCenter(),
             SizedBox::height(2),
-            $stats,
+            StatGrid::make(
+                ['title' => 'Users', 'value' => '1,284', 'trend' => '+3.1%', 'color' => 'primary'],
+                ['title' => 'Revenue', 'value' => '$48.2k', 'subtitle' => 'Last 7 days', 'color' => 'success'],
+                ['title' => 'Sessions', 'value' => '9,441', 'trend' => '+12%'],
+                ['title' => 'Churn', 'value' => '2.1%', 'color' => 'warning'],
+            ),
             SizedBox::height(3),
-            $metrics,
+            Row::make([
+                Metric::make()->label('Avg latency')->value('42ms'),
+                Metric::make()->label('Error rate')->value('0.04%'),
+                Metric::make()->label('Uptime')->value('99.98%'),
+            ])->gap(6)->spaceBetween(),
             SizedBox::height(4),
             Tabs::make()
                 ->tab(
@@ -88,7 +81,7 @@ final class DashboardPage
                         ->content(Missing::widget('Chart', 'Line/bar chart placeholder for traffic')),
                 ),
             Toast::make()->id('dash-toast')->message('Dashboard refreshed')->tone('success')->open(false),
-        ])->gap(2)->alignStart();
+        );
 
         return DocumentFactory::page(
             'Dashboard',

@@ -84,6 +84,9 @@ final class WidgetRegistry
     /** @var array<string, WidgetMetadata> */
     private array $widgets = [];
 
+    /** @var list<WidgetMetadata>|null */
+    private static ?array $defaultMetadataCache = null;
+
     public function register(WidgetMetadata $metadata): void
     {
         if ($metadata->name() === '') {
@@ -152,7 +155,7 @@ final class WidgetRegistry
      */
     public static function defaultMetadata(): array
     {
-        return [
+        return self::$defaultMetadataCache ??= [
             new WidgetMetadata('button', 'input', 'Interactive button', ['variant', 'size', 'disabled', 'rounded'], ['click'], false, '0.1.0', Button::class),
             new WidgetMetadata('text', 'typography', 'Semantic text node', ['size', 'weight', 'tone', 'as'], [], false, '0.1.0', Text::class),
             new WidgetMetadata('card', 'surface', 'Content card', ['title', 'padding'], [], true, '0.1.0', Card::class),

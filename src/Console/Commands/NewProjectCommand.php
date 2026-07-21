@@ -56,8 +56,18 @@ final class NewProjectCommand extends Command
 
         if (is_dir($target) || is_file($target)) {
             $io->error(sprintf('Path already exists: %s', $target));
+            $io->info('Choose a different name, or remove the existing folder first.');
 
             return 1;
+        }
+
+        $cwd = realpath(getcwd() ?: '.') ?: (getcwd() ?: '.');
+        $framework = realpath($this->frameworkRoot) ?: $this->frameworkRoot;
+
+        if ($this->isInsideFrameworkTree($cwd, $framework)) {
+            $io->info('Warning: creating a project inside the SERIXA framework tree.');
+            $io->info('Composer path repositories may recurse through nested vendor folders.');
+            $io->info('Prefer generating apps in a sibling directory outside the framework clone.');
         }
 
         $namespace = 'App';
@@ -95,8 +105,17 @@ final class NewProjectCommand extends Command
         $io->info(sprintf('  cd %s', $name));
         $io->info('  composer install');
         $io->info('  php -S localhost:8000 -t public');
+        $io->info('Then open http://localhost:8000 — see docs/getting-started.md');
 
         return 0;
+    }
+
+    private function isInsideFrameworkTree(string $cwd, string $framework): bool
+    {
+        $cwdNorm = strtolower(str_replace('\\', '/', rtrim($cwd, '\\/')));
+        $fwNorm = strtolower(str_replace('\\', '/', rtrim($framework, '\\/')));
+
+        return $cwdNorm === $fwNorm || str_starts_with($cwdNorm, $fwNorm . '/');
     }
 
     private function relativeFrameworkPath(string $projectPath): string

@@ -55,6 +55,14 @@ final class Scaffold extends Component
         return $this;
     }
 
+    /**
+     * Alias of {@see body()} for app-shell readability.
+     */
+    public function content(WidgetInterface|string|null $content): self
+    {
+        return $this->body($content);
+    }
+
     public function footer(WidgetInterface|string|null $footer): self
     {
         $this->footer = $footer;

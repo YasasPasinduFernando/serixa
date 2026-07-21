@@ -19,7 +19,8 @@
     "autoload": {
         "psr-4": {
             "SerixaDemo\\": "app/",
-            "SerixaDemo\\Pages\\": "pages/"
+            "SerixaDemo\\Pages\\": "pages/",
+            "SerixaDemo\\Components\\": "components/"
         }
     },
     "minimum-stability": "dev",

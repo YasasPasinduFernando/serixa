@@ -33,7 +33,7 @@ final class LifecyclePass implements RenderPassInterface
         $tree = $context->tree();
 
         if ($tree === null) {
-            throw new PipelineException('LifecyclePass requires a built WidgetTree.');
+            throw new PipelineException('LifecyclePass requires a built WidgetTree. Ensure BuildTreePass runs first in the pipeline.');
         }
 
         $this->walker->walk($tree->root(), LifecycleTreeVisitor::mount());

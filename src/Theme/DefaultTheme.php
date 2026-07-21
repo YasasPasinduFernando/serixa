@@ -24,12 +24,29 @@ final class DefaultTheme implements ThemeInterface
     /** @var list<int|float|string> */
     private const SPACING_SCALE = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96];
 
+    /** @var array<string, list<string>> */
+    private array $classCache = [];
+
+    /** @var array<string, list<string>>|null */
+    private ?array $tokenMapCache = null;
+
     public function __construct(
         private readonly ClassMerger $classMerger = new ClassMerger(),
     ) {
     }
 
     public function classes(string $component, array $state = []): array
+    {
+        $key = $component . "\0" . $this->stateCacheKey($state);
+
+        return $this->classCache[$key] ??= $this->resolveClasses($component, $state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function resolveClasses(string $component, array $state): array
     {
         return match ($component) {
             'button' => $this->button($state),
@@ -196,6 +213,20 @@ final class DefaultTheme implements ThemeInterface
         return $map[$name];
     }
 
+    /**
+     * @param array<string, scalar|bool|null> $state
+     */
+    private function stateCacheKey(array $state): string
+    {
+        if ($state === []) {
+            return '';
+        }
+
+        ksort($state);
+
+        return (string) json_encode($state, JSON_THROW_ON_ERROR);
+    }
+
     public function buttonPrimary(): array
     {
         return $this->classes('button', ['variant' => 'primary']);
@@ -221,7 +252,7 @@ final class DefaultTheme implements ThemeInterface
      */
     private function tokenMap(): array
     {
-        return [
+        return $this->tokenMapCache ??= [
             ColorToken::primary()->name() => ['bg-sky-600', 'hover:bg-sky-700'],
             ColorToken::secondary()->name() => ['bg-slate-100', 'hover:bg-slate-200'],
             ColorToken::danger()->name() => ['bg-red-600', 'hover:bg-red-700'],
@@ -283,7 +314,13 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($sizes[$size], $variants[$variant])) {
-            throw new InvalidArgumentException('Invalid button theme state.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid button theme state: variant="%s" size="%s". Allowed variants: %s. Allowed sizes: %s.',
+                $variant,
+                $size,
+                implode(', ', array_keys($variants)),
+                implode(', ', array_keys($sizes)),
+            ));
         }
 
         return $this->classMerger->merge(
@@ -329,7 +366,12 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($sizes[$size], $weights[$weight], $tones[$tone])) {
-            throw new InvalidArgumentException('Invalid text theme state.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid text theme state: size="%s" weight="%s" tone="%s".',
+                $size,
+                $weight,
+                $tone,
+            ));
         }
 
         return [$sizes[$size], $weights[$weight], $tones[$tone]];
@@ -350,7 +392,11 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($paddings[$padding])) {
-            throw new InvalidArgumentException('Invalid card theme state.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid card theme state: padding="%s". Allowed: %s.',
+                $padding,
+                implode(', ', array_keys($paddings)),
+            ));
         }
 
         return $this->classMerger->merge(
@@ -400,7 +446,11 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($maxWidths[$maxWidth], $paddings[$padding])) {
-            throw new InvalidArgumentException('Invalid container theme state.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid container theme state: maxWidth="%s" padding="%s".',
+                $maxWidth,
+                $padding,
+            ));
         }
 
         return $this->classMerger->merge(
@@ -435,7 +485,11 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($justifies[$justify], $aligns[$align])) {
-            throw new InvalidArgumentException('Invalid row theme state.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid row theme state: justify="%s" align="%s".',
+                $justify,
+                $align,
+            ));
         }
 
         $classes = ['flex', 'flex-row', 'w-full', $justifies[$justify], $aligns[$align]];
@@ -464,7 +518,11 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($aligns[$align])) {
-            throw new InvalidArgumentException('Invalid column theme state.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid column theme state: align="%s". Allowed: %s.',
+                $align,
+                implode(', ', array_keys($aligns)),
+            ));
         }
 
         $classes = ['flex', 'flex-col', 'w-full', $aligns[$align]];
@@ -570,7 +628,11 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($spacingMap[$spacing])) {
-            throw new InvalidArgumentException('Invalid divider spacing.');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid divider spacing "%s". Allowed: %s.',
+                $spacing,
+                implode(', ', array_keys($spacingMap)),
+            ));
         }
 
         if ($orientation === 'vertical') {

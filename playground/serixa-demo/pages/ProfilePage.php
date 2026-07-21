@@ -8,18 +8,17 @@ use Serixa\Component\Avatar;
 use Serixa\Component\Badge;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
-use Serixa\Component\Column;
 use Serixa\Component\Image;
 use Serixa\Component\Input;
 use Serixa\Component\Label;
 use Serixa\Component\Link;
-use Serixa\Component\Logo;
 use Serixa\Component\Row;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Text;
 use Serixa\Component\Textarea;
 use Serixa\Component\Tooltip;
 use Serixa\Document\Document;
+use SerixaDemo\Components\PageSection;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Shell;
 
@@ -27,13 +26,10 @@ final class ProfilePage
 {
     public static function document(): Document
     {
-        $content = Column::make([
-            Row::make([
-                Logo::make()->text('SERIXA')->href('/?page=dashboard'),
-                Button::make('Edit')->secondary(),
-            ])->alignCenter()->spaceBetween(),
-            Text::make('Personal presence and public details.')->tone('muted'),
-            SizedBox::height(3),
+        $content = PageSection::make(
+            'Profile',
+            'Personal presence and public details.',
+            [Button::make('Edit')->secondary()],
             Image::make()
                 ->src('https://placehold.co/640x160/e2e8f0/64748b?text=Cover')
                 ->alt('Profile cover')
@@ -76,7 +72,7 @@ final class ProfilePage
                     ->href('https://example.com/ada')
                     ->target('_blank'),
             )->padding('md'),
-        ])->gap(2)->alignStart();
+        );
 
         return DocumentFactory::page(
             'Profile',

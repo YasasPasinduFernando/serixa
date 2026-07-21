@@ -35,6 +35,14 @@ final class Stack extends Component
         return $stack;
     }
 
+    /**
+     * Clip overflowing layered children (additive class; default Stack unchanged).
+     */
+    public function clip(): self
+    {
+        return $this->class('overflow-hidden');
+    }
+
     public function render(): string
     {
         $attrs = $this->buildAttributeString($this->theme()->classes('stack'));

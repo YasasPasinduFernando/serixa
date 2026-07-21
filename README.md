@@ -12,6 +12,23 @@ Frontend development should feel like Flutter — developers focus on business l
 
 SERIXA is not a Laravel clone and not a React clone. It is a **components-first PHP UI engine** with a long-lived Runtime Core.
 
+## Beginner path
+
+New to SERIXA? Start here instead of the reference docs below:
+
+1. [Getting started](docs/getting-started.md) — what SERIXA is (and isn't), core concepts, minimal example.
+2. [Build a blog in 30 minutes](docs/first-blog.md) — full copy-paste tutorial: CLI, pages, layout, a card list, a contact form.
+3. [Build an admin dashboard shell](docs/first-dashboard.md) — sidebar, stat cards, a data table sketch.
+
+```bash
+serixa new blog
+cd blog
+composer install
+php -S localhost:8000 -t public
+```
+
+Then open http://localhost:8000. See [docs/troubleshooting.md](docs/troubleshooting.md) if something doesn't work.
+
 ## Features
 
 - Fluent, chainable widgets (`Button::make('Save')->primary()->large()`)
@@ -48,6 +65,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 8.1 | Forms attribute isolation patch | Complete (`v0.8.1`) |
 | 9.0 | Interactive Components | Complete (`v0.9.0`) |
 | 10.0 | Developer Experience / CLI | Complete (`v0.10.0`) |
+| 10.1 | Polish: performance, beginner docs, clearer errors | Complete (`v0.11.0`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -70,6 +88,8 @@ composer test
 ```
 
 ## Quick start
+
+> Looking for a full runnable app instead of a fragment? See the [Beginner path](#beginner-path) above — [docs/getting-started.md](docs/getting-started.md) and [docs/first-blog.md](docs/first-blog.md).
 
 ```php
 use Serixa\Component\Button;
@@ -169,6 +189,18 @@ php bin/serixa new blog
 ```
 
 ## Documentation
+
+**Start here:**
+
+- [Getting started](docs/getting-started.md)
+- [Build a blog in 30 minutes](docs/first-blog.md)
+- [Build an admin dashboard shell](docs/first-dashboard.md)
+- [Project structure](docs/project-structure.md)
+- [Deployment](docs/deployment.md)
+- [FAQ](docs/faq.md)
+- [Troubleshooting](docs/troubleshooting.md)
+
+**Reference:**
 
 - [Architecture overview](docs/architecture.md)
 - [Namespace policy](docs/NAMESPACE.md)

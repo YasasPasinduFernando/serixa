@@ -12,7 +12,6 @@ use Serixa\Component\DropdownItem;
 use Serixa\Component\EmptyState;
 use Serixa\Component\Link;
 use Serixa\Component\Modal;
-use Serixa\Component\PageHeader;
 use Serixa\Component\Pagination;
 use Serixa\Component\Progress;
 use Serixa\Component\Row;
@@ -23,6 +22,8 @@ use Serixa\Component\Spinner;
 use Serixa\Component\Text;
 use Serixa\Component\Toolbar;
 use Serixa\Document\Document;
+use SerixaDemo\Components\PageSection;
+use SerixaDemo\Components\StatGrid;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Shell;
 
@@ -104,11 +105,15 @@ final class CrudPage
             )
             ->open(false);
 
-        $content = Column::make([
-            PageHeader::make()
-                ->title('Users')
-                ->subtitle('CRUD with Modal, Dropdown, Spinner, and Progress.')
-                ->actions(Button::make('Import')->secondary()),
+        $content = PageSection::make(
+            'Users',
+            'CRUD with Modal, Dropdown, Spinner, and Progress.',
+            [Button::make('Import')->secondary()],
+            StatGrid::make(
+                ['title' => 'Total users', 'value' => '3', 'color' => 'primary'],
+                ['title' => 'Admins', 'value' => '1', 'color' => 'success'],
+                ['title' => 'Pending invites', 'value' => '0', 'subtitle' => 'Last 30 days'],
+            ),
             SizedBox::height(2),
             $toolbar,
             SizedBox::height(2),
@@ -124,7 +129,7 @@ final class CrudPage
                 ->totalPages(4)
                 ->urlForPage(static fn (int $page): string => '/?page=crud&p=' . $page),
             $modal,
-        ])->gap(2)->alignStart();
+        );
 
         return DocumentFactory::page(
             'CRUD',

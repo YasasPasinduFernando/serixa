@@ -206,7 +206,7 @@ final class InteractiveComponentsTest extends TestCase
         $this->assertFileExists($path);
         $contents = (string) file_get_contents($path);
         $this->assertStringContainsString('module(', $contents);
-        $this->assertStringContainsString('0.9.0', $contents);
+        $this->assertStringContainsString('0.11.0', $contents);
         $this->assertStringContainsString('modal', $contents);
     }
 }

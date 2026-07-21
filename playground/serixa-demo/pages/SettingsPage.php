@@ -18,6 +18,7 @@ use Serixa\Component\Tab;
 use Serixa\Component\Tabs;
 use Serixa\Component\Text;
 use Serixa\Document\Document;
+use SerixaDemo\Components\PageSection;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Shell;
 
@@ -46,14 +47,11 @@ final class SettingsPage
                 ->value('UTC'),
         ])->gap(2)->alignStart();
 
-        $content = Form::make()
+        $form = Form::make()
             ->method('POST')
             ->action('/?page=settings')
             ->child(
                 Column::make([
-                    Text::make('Settings')->as('h1')->size('2xl')->weight('bold'),
-                    Text::make('Workspace preferences with Tabs and Accordion.')->tone('muted'),
-                    SizedBox::height(2),
                     Tabs::make()
                         ->tab(Tab::make('General')->active()->content($general))
                         ->tab(
@@ -88,6 +86,13 @@ final class SettingsPage
                     Button::make('Save changes')->primary()->large()->type('submit'),
                 ])->gap(2)->alignStart(),
             );
+
+        $content = PageSection::make(
+            'Settings',
+            'Workspace preferences with Tabs and Accordion.',
+            [],
+            $form,
+        );
 
         return DocumentFactory::page(
             'Settings',

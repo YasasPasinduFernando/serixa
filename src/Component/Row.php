@@ -96,6 +96,13 @@ final class Row extends Component
         return $this;
     }
 
+    public function alignStretch(): self
+    {
+        $this->align = 'stretch';
+
+        return $this;
+    }
+
     public function gap(int|float|string $gap): self
     {
         $this->gap = $gap;

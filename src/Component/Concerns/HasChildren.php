@@ -32,7 +32,10 @@ trait HasChildren
 
         foreach ($nodes as $node) {
             if (! $node instanceof WidgetInterface && ! is_string($node)) {
-                throw new InvalidArgumentException('Children must be widgets or strings.');
+                throw new InvalidArgumentException(sprintf(
+                    'Children must be widgets or strings; %s given.',
+                    get_debug_type($node),
+                ));
             }
 
             $children[] = $node;

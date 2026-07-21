@@ -57,10 +57,15 @@ abstract class AbstractMakeCommand extends Command
         } catch (InvalidArgumentException $e) {
             $io->error($e->getMessage());
 
+            if (str_contains($e->getMessage(), 'already exists')) {
+                $io->info('Duplicate generation blocked — rename the target or delete the existing file.');
+            }
+
             return 1;
         }
 
         $io->success(sprintf('Created %s', $destination));
+        $io->info(sprintf('Namespace: %s\\%s', $namespace, $class));
 
         return 0;
     }

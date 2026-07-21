@@ -10,7 +10,6 @@ use Serixa\Component\Alert;
 use Serixa\Component\Badge;
 use Serixa\Component\Button;
 use Serixa\Component\Chip;
-use Serixa\Component\Column;
 use Serixa\Component\Drawer;
 use Serixa\Component\Dropdown;
 use Serixa\Component\DropdownItem;
@@ -26,6 +25,7 @@ use Serixa\Component\Text;
 use Serixa\Component\Toast;
 use Serixa\Component\Tooltip;
 use Serixa\Document\Document;
+use SerixaDemo\Components\PageSection;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Shell;
 
@@ -33,9 +33,10 @@ final class InteractivePage
 {
     public static function document(): Document
     {
-        $content = Column::make([
-            Text::make('Interactive components')->as('h1')->size('2xl')->weight('bold'),
-            Text::make('SSR markup + Serixa runtime modules (no VDOM).')->tone('muted'),
+        $content = PageSection::make(
+            'Interactive components',
+            'SSR markup + Serixa runtime modules (no VDOM).',
+            [],
             Alert::make()->tone('info')->title('Progressive enhancement')->body('These widgets work as HTML; JS adds behavior.'),
             Row::make([
                 Badge::make('Badge')->color('primary'),
@@ -65,7 +66,7 @@ final class InteractivePage
             Modal::make()->id('demo-modal')->title('Demo modal')->body(Text::make('Focus trap + Escape.'))->open(false),
             Drawer::make()->id('demo-drawer')->title('Demo drawer')->body(Text::make('Side panel.'))->open(false),
             Toast::make()->id('demo-toast')->message('Hello from ToastModule')->open(false),
-        ])->gap(4)->alignStart();
+        );
 
         return DocumentFactory::page('Interactive', Shell::app('interactive', $content));
     }
