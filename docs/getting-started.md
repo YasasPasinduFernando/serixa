@@ -41,20 +41,21 @@ If you keep this in mind, the rest of the framework is straightforward.
 
 ## The fastest path to a running app
 
-From a **clone of this monorepo**, the CLI lives under `framework/`:
+From a **clone of this monorepo**, install and run the CLI package:
 
 ```bash
-php framework/bin/serixa new blog
+cd packages/cli
+composer install
+php bin/serixa new blog
 cd blog
 composer install
 php -S localhost:8000 -t public
 ```
 
-Or work inside the package:
+Or from an app that already requires `serixa/cli`:
 
 ```bash
-cd framework
-php bin/serixa new ../my-blog
+vendor/bin/serixa new blog
 ```
 
 Prefer generating apps **outside** `framework/` (sibling folders like `starters/` or a directory outside the clone). See [Path-repository recursion](troubleshooting.md#path-repository-recursion).
@@ -64,6 +65,7 @@ Open http://localhost:8000. You now have a runnable SSR app with a home page, la
 For the full 30-minute walkthrough (pages, layout, a card list, a contact form), read [first-blog.md](first-blog.md).
 
 Monorepo overview: [monorepo.md](monorepo.md).
+CLI reference: [cli.md](cli.md).
 
 ## Core concepts, in order
 

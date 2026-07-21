@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Serixa\Cli\Application;
+
+$autoloadCandidates = [
+    dirname(__DIR__) . '/vendor/autoload.php',                 // packages/cli/vendor
+    dirname(__DIR__, 3) . '/vendor/autoload.php',             // monorepo root vendor (unlikely)
+    dirname(__DIR__, 2) . '/../framework/vendor/autoload.php', // sibling framework vendor when developing CLI alone
+    dirname(__DIR__, 3) . '/framework/vendor/autoload.php',   // monorepo: packages/cli → framework/vendor
+    dirname(__DIR__, 4) . '/autoload.php',                    // vendor/serixa/cli → vendor/autoload
+];
+
+$loaded = false;
+
+foreach ($autoloadCandidates as $autoload) {
+    if (is_file($autoload)) {
+        require $autoload;
+        $loaded = true;
+        break;
+    }
+}
+
+if (! $loaded) {
+    fwrite(STDERR, "Unable to locate Composer autoloader. Run `composer install` in packages/cli or the monorepo root.\n");
+    exit(1);
+}
+
+$app = new Application(cliRoot: dirname(__DIR__));
+exit($app->run($argv));

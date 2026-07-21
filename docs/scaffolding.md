@@ -1,6 +1,6 @@
 # Scaffolding
 
-Make commands render stubs from `/templates` through `Serixa\Console\Scaffold\TemplateEngine`.
+Make commands render stubs from `packages/cli/templates` through `Serixa\Cli\Scaffold\TemplateEngine`.
 
 ## Rules
 

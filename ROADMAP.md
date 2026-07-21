@@ -111,6 +111,11 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Root meta Composer + CI matrix for framework / packages / starters
 - [x] `docs/monorepo.md`
 
+### Milestone 12 — Extract CLI (`serixa/cli` v0.1.0 / framework v0.12.0)
+- [x] Move Console + templates to `packages/cli`
+- [x] Framework runtime-only (no `bin/`, no scaffolding)
+- [x] Namespace `Serixa\Cli\`
+
 ### Milestone 7 — Interactive widgets (historical)
 - [x] Modal, Tabs, Accordion, Drawer, Dropdown, Toast (delivered in v0.9.0)
 

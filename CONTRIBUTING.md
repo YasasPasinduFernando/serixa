@@ -28,7 +28,7 @@ This repository is an ecosystem monorepo. Read [docs/monorepo.md](docs/monorepo.
 composer install          # root meta → installs framework deps
 composer qa               # delegates to framework/
 php framework/examples/basic.php
-php framework/bin/serixa version
+cd packages/cli && composer install && php bin/serixa version
 ```
 
 ## Pull requests

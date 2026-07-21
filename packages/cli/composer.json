@@ -1,0 +1,61 @@
+{
+    "name": "serixa/cli",
+    "description": "Official SERIXA CLI — project scaffolding, generators, build and docs tooling.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "serixa",
+        "cli",
+        "scaffolding"
+    ],
+    "authors": [
+        {
+            "name": "SERIXA Contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "serixa/framework": "*@dev",
+        "composer-runtime-api": "^2.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "bin": [
+        "bin/serixa"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Serixa\\Cli\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Serixa\\Cli\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": [
+            "@test",
+            "@phpstan",
+            "@cs-check"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

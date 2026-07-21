@@ -1,6 +1,6 @@
 # Templates
 
-Scaffolding never concatenates PHP source inline. Files live under `/templates`:
+Scaffolding never concatenates PHP source inline. Files live under `packages/cli/templates`:
 
 ```text
 templates/

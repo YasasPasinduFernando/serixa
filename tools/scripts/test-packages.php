@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Verify package skeletons exist and composer.json is readable.
  */
 $root = dirname(__DIR__, 2);
-$packages = ['icons', 'charts', 'calendar', 'admin', 'auth-ui', 'devtools'];
+$packages = ['icons', 'charts', 'calendar', 'admin', 'auth-ui', 'devtools', 'cli'];
 $failed = 0;
 
 foreach ($packages as $name) {

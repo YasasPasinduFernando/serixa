@@ -30,18 +30,20 @@ The core UI engine lives in [`framework/`](framework/). Namespace: **`Serixa\`**
 cd framework
 composer install
 composer qa
-php bin/serixa version
 ```
 
-From the monorepo root (delegates to `framework/`):
+## CLI
+
+Scaffolding lives in [`packages/cli`](packages/cli/) (`serixa/cli`).
 
 ```bash
+cd packages/cli
 composer install
-composer test
-composer qa
+php bin/serixa version
+php bin/serixa new blog
 ```
 
-Beginner path: [docs/getting-started.md](docs/getting-started.md) · [docs/first-blog.md](docs/first-blog.md)
+Or: `composer require --dev serixa/cli` in an application.
 
 ## Packages
 

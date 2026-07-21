@@ -38,7 +38,7 @@ blog/
 | `components/` | App-specific reusable widgets (your own composition of SERIXA widgets). | `App\Components\` |
 | `layouts/` | Shared chrome: asset registration (`wrap()`) and shell composition (`shell()`). | `App\Layouts\` |
 | `themes/` | Optional custom themes, if you don't want the default Tailwind class maps. | `App\Themes\` |
-| `plugins/` | Optional CLI or runtime plugins registered via `Serixa\Console\Plugin`. | `App\Plugins\` |
+| `plugins/` | Optional CLI or runtime plugins registered via `Serixa\Cli\Plugin`. | `App\Plugins\` |
 | `config/app.php` | Plain PHP array (`name`, `preset`, `title`). Not a framework config loader — read it yourself if you need it. | — |
 
 None of this is enforced by the framework at runtime. It's a convention the CLI generates for you; you can rename or reorganize folders as long as your Composer autoload map and `use` statements agree.
