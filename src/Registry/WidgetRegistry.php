@@ -18,6 +18,7 @@ use NovaPHP\Component\Spacer;
 use NovaPHP\Component\Stack;
 use NovaPHP\Component\Text;
 use NovaPHP\Contracts\WidgetInterface;
+use NovaPHP\Exception\RegistryException;
 
 /**
  * Registers widget types and their metadata for discovery.
@@ -30,7 +31,7 @@ final class WidgetRegistry
     public function register(WidgetMetadata $metadata): void
     {
         if ($metadata->name() === '') {
-            throw new \InvalidArgumentException('Widget metadata name cannot be empty.');
+            throw new RegistryException('Widget metadata name cannot be empty.');
         }
 
         $this->widgets[$metadata->name()] = $metadata;

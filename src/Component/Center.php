@@ -6,7 +6,7 @@ namespace NovaPHP\Component;
 
 use NovaPHP\Component\Concerns\HasChildren;
 use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Contracts\ComponentInterface;
+use NovaPHP\Contracts\WidgetInterface;
 
 /**
  * Centers children on both axes via flex.
@@ -21,7 +21,10 @@ final class Center extends Component
         parent::__construct();
     }
 
-    public static function make(ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function make(WidgetInterface|string|array ...$children): self
     {
         $center = new self();
         $center->setChildren(self::normalizeChildren($children));

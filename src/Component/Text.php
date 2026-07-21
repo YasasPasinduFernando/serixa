@@ -6,6 +6,7 @@ namespace NovaPHP\Component;
 
 use NovaPHP\Component\Concerns\AssertsOption;
 use NovaPHP\Component\Concerns\ResolvesTheme;
+use NovaPHP\Exception\InvalidArgumentException;
 
 /**
  * Semantic text node. Intent maps through the active theme.
@@ -46,7 +47,7 @@ final class Text extends Component
         $tag = strtolower(trim($tag));
 
         if ($tag === '' || ! preg_match('/^[a-z][a-z0-9]*$/', $tag)) {
-            throw new \InvalidArgumentException(sprintf('Invalid HTML tag: %s', $tag));
+            throw new InvalidArgumentException(sprintf('Invalid HTML tag: %s', $tag));
         }
 
         $this->tag = $tag;

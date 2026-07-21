@@ -62,7 +62,7 @@ final class FoundationTest extends TestCase
 
     public function testRendererRunsLifecycleHooks(): void
     {
-        $widget = new class extends Component {
+        $widget = new class () extends Component {
             public array $calls = [];
 
             public function beforeMount(): void

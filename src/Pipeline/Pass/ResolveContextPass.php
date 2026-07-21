@@ -9,6 +9,8 @@ use NovaPHP\Runtime\RenderContext;
 
 /**
  * Records resolved WidgetContext onto render metadata for downstream passes.
+ *
+ * @internal
  */
 final class ResolveContextPass implements RenderPassInterface
 {

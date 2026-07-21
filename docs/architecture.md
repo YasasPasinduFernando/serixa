@@ -1,22 +1,26 @@
 # Architecture overview
 
-SERIXA is a PHP UI widget engine. It produces HTML fragments. It does not include routing, HTTP, ORM, auth, or CLI in core.
+SERIXA is a PHP UI widget engine. It produces HTML fragments **and** complete HTML documents. It does not include routing, HTTP, ORM, auth, or CLI in core.
 
 ## Layers
 
 ```text
 App code
    ↓
+┌──────────────────────────────┐
+│ Document (optional page)     │
+│  SeoManager + AssetManager   │
+│  Html / Head / Body          │
+└──────────────┬───────────────┘
+               ↓ body widgets
 Widgets (Component/* — public DX)
    ↓
-Widget base + concerns (attributes, children, theme resolve, a11y, state key)
-   ↓
 Renderer (coordinator)
-   ↓
-RenderPipeline passes
-   BuildTree → ResolveContext → Lifecycle → ThemeResolution → Accessibility → Render
-   ↓
-HtmlWriter → HTML string
+   ├─ DocumentInterface → DocumentRenderer → full HTML
+   └─ WidgetInterface   → RenderPipeline → fragment
+        BuildTree → ResolveContext → Lifecycle → Theme → A11y → Render
+        ↓
+     HtmlWriter → HTML string
 ```
 
 Cross-cutting runtime services:
@@ -35,11 +39,11 @@ Inspector + Performance contracts
 
 | Principle | How |
 |-----------|-----|
-| SRP | Escaper, HtmlWriter, each pipeline pass, Container, Registry |
-| OCP | New passes/plugins/widgets without editing Renderer internals |
-| LSP | `Component` is a `Widget`; plugin interfaces extend `PluginInterface` |
-| ISP | Narrow contracts (inspectors, profilers, plugins, passes) |
-| DIP | Pipeline depends on `RenderPassInterface`; plugins boot via Container |
+| SRP | Document ≠ fragment Renderer; SeoManager ≠ AssetManager; each head element owns one tag |
+| OCP | New assets/SEO fields without changing widget APIs |
+| LSP | `Document` implements `DocumentInterface` |
+| ISP | Narrow document/asset/SEO contracts |
+| DIP | DocumentRenderer depends on pipeline/context, not concrete themes |
 
 ## Namespace note
 
@@ -53,8 +57,16 @@ Product branding is **SERIXA** (`serixa/framework`).
 3. **Pipeline** — implement `RenderPassInterface`, compose `RenderPipeline`
 4. **Plugins** — implement `WidgetPlugin` / `ThemePlugin` / `RuntimePlugin`
 5. **Context** — pass `WidgetContext` into `Renderer`
-6. **Inspectors / profilers** — implement contracts when DevTools land
+6. **Documents** — `Document::make()` + assets/SEO
+7. **Inspectors / profilers** — implement contracts when DevTools land
+
+## Governance
+
+- [API stability](API_STABILITY.md)
+- [Versioning](VERSIONING.md)
+- [Deprecation](DEPRECATION.md)
+- [ADRs](adr/README.md)
 
 ## Non-goals (core)
 
-Routing, controllers, middleware, sessions, cookies, database, full SPA runtime, marketplace UI.
+Routing, controllers, middleware, sessions, cookies, database, Vite bundler, full SPA runtime, marketplace UI.

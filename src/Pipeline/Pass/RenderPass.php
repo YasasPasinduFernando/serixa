@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NovaPHP\Pipeline\Pass;
 
+use NovaPHP\Exception\PipelineException;
 use NovaPHP\Pipeline\RenderPassInterface;
 use NovaPHP\Rendering\HtmlWriter;
 use NovaPHP\Runtime\RenderContext;
@@ -12,6 +13,8 @@ use NovaPHP\Tree\TreeWalker;
 
 /**
  * Invokes widget render() and writes HTML via HtmlWriter; finishes lifecycle.
+ *
+ * @internal
  */
 final class RenderPass implements RenderPassInterface
 {
@@ -31,7 +34,7 @@ final class RenderPass implements RenderPassInterface
         $root = $context->root();
 
         if ($root === null) {
-            throw new \RuntimeException('RenderPass requires a root widget.');
+            throw new PipelineException('RenderPass requires a root widget.');
         }
 
         $fragment = $root->render();

@@ -10,6 +10,8 @@ use NovaPHP\Theme\ThemeManager;
 
 /**
  * Bridges WidgetContext theme into ThemeManager for BC with existing widgets.
+ *
+ * @internal
  */
 final class ThemeResolutionPass implements RenderPassInterface
 {

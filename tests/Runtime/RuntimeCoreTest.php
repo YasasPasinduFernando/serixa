@@ -8,6 +8,7 @@ use NovaPHP\Component\Button;
 use NovaPHP\Component\Text;
 use NovaPHP\Container\Container;
 use NovaPHP\Contracts\ThemeInterface;
+use NovaPHP\Exception\PipelineException;
 use NovaPHP\Pipeline\Pass\BuildTreePass;
 use NovaPHP\Pipeline\RenderPipeline;
 use NovaPHP\Plugin\PluginManager;
@@ -72,7 +73,7 @@ final class RuntimeCoreTest extends TestCase
         $container = new Container();
         $container->instance(ThemeInterface::class, new DefaultTheme());
         $container->singleton('counter', static function (): object {
-            return new class {
+            return new class () {
                 public int $n = 0;
             };
         });
@@ -135,7 +136,7 @@ final class RuntimeCoreTest extends TestCase
 
     public function testRendererAcceptsCustomWidgetContext(): void
     {
-        $theme = new class implements ThemeInterface {
+        $theme = new class () implements ThemeInterface {
             public function classes(string $component, array $state = []): array
             {
                 return ['from-context-theme'];
@@ -190,7 +191,7 @@ final class RuntimeCoreTest extends TestCase
     {
         $manager = new PluginManager(new Container(), WidgetRegistry::withDefaults());
 
-        $plugin = new class implements WidgetPlugin {
+        $plugin = new class () implements WidgetPlugin {
             public function name(): string
             {
                 return 'demo-widgets';
@@ -218,7 +219,7 @@ final class RuntimeCoreTest extends TestCase
 
     public function testBuildTreePassRequiresRoot(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(PipelineException::class);
         (new BuildTreePass())->handle(new RenderContext());
     }
 

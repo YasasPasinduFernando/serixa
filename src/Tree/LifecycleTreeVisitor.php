@@ -6,6 +6,8 @@ namespace NovaPHP\Tree;
 
 /**
  * Invokes widget lifecycle hooks while walking the tree.
+ *
+ * @internal
  */
 final class LifecycleTreeVisitor implements TreeVisitor
 {

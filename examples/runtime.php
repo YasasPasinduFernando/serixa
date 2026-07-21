@@ -20,7 +20,7 @@ $container = new Container();
 $container->instance(DefaultTheme::class, new DefaultTheme());
 
 $plugins = new PluginManager($container, $registry);
-$plugins->register(new class implements RuntimePlugin {
+$plugins->register(new class () implements RuntimePlugin {
     public function name(): string
     {
         return 'runtime-demo';

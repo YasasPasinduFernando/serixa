@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace NovaPHP\Theme;
 
 use NovaPHP\Contracts\ThemeInterface;
+use NovaPHP\Exception\InvalidArgumentException;
 use NovaPHP\Support\ClassMerger;
 use NovaPHP\Token\ColorToken;
 use NovaPHP\Token\DesignToken;
@@ -45,7 +46,7 @@ final class DefaultTheme implements ThemeInterface
             'sizedBox' => $this->sizedBox($state),
             'stack' => $this->stack($state),
             'divider' => $this->divider($state),
-            default => throw new \InvalidArgumentException(sprintf('Unknown theme component "%s".', $component)),
+            default => throw new InvalidArgumentException(sprintf('Unknown theme component "%s".', $component)),
         };
     }
 
@@ -55,7 +56,7 @@ final class DefaultTheme implements ThemeInterface
         $map = $this->tokenMap();
 
         if (! isset($map[$name])) {
-            throw new \InvalidArgumentException(sprintf('Unknown design token "%s".', $name));
+            throw new InvalidArgumentException(sprintf('Unknown design token "%s".', $name));
         }
 
         return $map[$name];
@@ -148,7 +149,7 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($sizes[$size], $variants[$variant])) {
-            throw new \InvalidArgumentException('Invalid button theme state.');
+            throw new InvalidArgumentException('Invalid button theme state.');
         }
 
         return $this->classMerger->merge(
@@ -194,7 +195,7 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($sizes[$size], $weights[$weight], $tones[$tone])) {
-            throw new \InvalidArgumentException('Invalid text theme state.');
+            throw new InvalidArgumentException('Invalid text theme state.');
         }
 
         return [$sizes[$size], $weights[$weight], $tones[$tone]];
@@ -215,7 +216,7 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($paddings[$padding])) {
-            throw new \InvalidArgumentException('Invalid card theme state.');
+            throw new InvalidArgumentException('Invalid card theme state.');
         }
 
         return $this->classMerger->merge(
@@ -265,7 +266,7 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($maxWidths[$maxWidth], $paddings[$padding])) {
-            throw new \InvalidArgumentException('Invalid container theme state.');
+            throw new InvalidArgumentException('Invalid container theme state.');
         }
 
         return $this->classMerger->merge(
@@ -300,7 +301,7 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($justifies[$justify], $aligns[$align])) {
-            throw new \InvalidArgumentException('Invalid row theme state.');
+            throw new InvalidArgumentException('Invalid row theme state.');
         }
 
         $classes = ['flex', 'flex-row', 'w-full', $justifies[$justify], $aligns[$align]];
@@ -329,7 +330,7 @@ final class DefaultTheme implements ThemeInterface
         ];
 
         if (! isset($aligns[$align])) {
-            throw new \InvalidArgumentException('Invalid column theme state.');
+            throw new InvalidArgumentException('Invalid column theme state.');
         }
 
         $classes = ['flex', 'flex-col', 'w-full', $aligns[$align]];
@@ -443,13 +444,13 @@ final class DefaultTheme implements ThemeInterface
         }
 
         if (! is_int($value) && ! is_float($value) && ! (is_string($value) && is_numeric($value))) {
-            throw new \InvalidArgumentException(sprintf('Invalid spacing value for "%s".', $prefix));
+            throw new InvalidArgumentException(sprintf('Invalid spacing value for "%s".', $prefix));
         }
 
         $normalized = is_string($value) ? (str_contains($value, '.') ? (float) $value : (int) $value) : $value;
 
         if (! in_array($normalized, self::SPACING_SCALE, true)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Spacing value "%s" is not on the Tailwind scale.',
                 (string) $value,
             ));

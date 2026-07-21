@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace NovaPHP\Plugin;
 
 use NovaPHP\Container\Container;
+use NovaPHP\Exception\PluginException;
 use NovaPHP\Registry\WidgetRegistry;
 
 /**
@@ -26,7 +27,7 @@ final class PluginManager
         $name = $plugin->name();
 
         if (isset($this->plugins[$name])) {
-            throw new \InvalidArgumentException(sprintf('Plugin "%s" is already registered.', $name));
+            throw new PluginException(sprintf('Plugin "%s" is already registered.', $name));
         }
 
         $plugin->boot($this->container, $this->registry);

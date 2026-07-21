@@ -9,6 +9,8 @@ use NovaPHP\Theme\ThemeManager;
 
 /**
  * Resolves the active theme for class lookup.
+ *
+ * @internal
  */
 trait ResolvesTheme
 {

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace NovaPHP\Component\Concerns;
 
 use NovaPHP\Contracts\WidgetInterface;
+use NovaPHP\Exception\InvalidArgumentException;
 
 /**
  * Shared child-list management for composable layout widgets.
+ *
+ * @internal
  */
 trait HasChildren
 {
@@ -15,13 +18,13 @@ trait HasChildren
     private array $children = [];
 
     /**
-     * @param list<WidgetInterface|string>|WidgetInterface|string ...$nodes
+     * @param array<int, mixed> $nodes
      * @return list<WidgetInterface|string>
      */
     protected static function normalizeChildren(array $nodes): array
     {
         if (count($nodes) === 1 && is_array($nodes[0])) {
-            /** @var list<WidgetInterface|string> $nodes */
+            /** @var array<int, mixed> $nodes */
             $nodes = $nodes[0];
         }
 
@@ -29,7 +32,7 @@ trait HasChildren
 
         foreach ($nodes as $node) {
             if (! $node instanceof WidgetInterface && ! is_string($node)) {
-                throw new \InvalidArgumentException('Children must be widgets or strings.');
+                throw new InvalidArgumentException('Children must be widgets or strings.');
             }
 
             $children[] = $node;

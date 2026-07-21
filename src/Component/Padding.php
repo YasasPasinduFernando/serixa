@@ -6,7 +6,7 @@ namespace NovaPHP\Component;
 
 use NovaPHP\Component\Concerns\HasChildren;
 use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Contracts\ComponentInterface;
+use NovaPHP\Contracts\WidgetInterface;
 
 /**
  * Spacing wrapper. Prefer static factories over raw Tailwind padding classes.
@@ -26,7 +26,10 @@ final class Padding extends Component
         parent::__construct();
     }
 
-    public static function make(ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function make(WidgetInterface|string|array ...$children): self
     {
         $padding = new self();
         $padding->setChildren(self::normalizeChildren($children));
@@ -34,43 +37,64 @@ final class Padding extends Component
         return $padding;
     }
 
-    public static function all(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function all(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('all', $value, $children);
     }
 
-    public static function x(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function x(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('x', $value, $children);
     }
 
-    public static function y(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function y(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('y', $value, $children);
     }
 
-    public static function top(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function top(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('top', $value, $children);
     }
 
-    public static function bottom(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function bottom(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('bottom', $value, $children);
     }
 
-    public static function left(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function left(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('left', $value, $children);
     }
 
-    public static function right(int|float|string $value, ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function right(int|float|string $value, WidgetInterface|string|array ...$children): self
     {
         return self::factory('right', $value, $children);
     }
 
     /**
-     * @param list<ComponentInterface|string|array> $children
+     * @param array<int, mixed> $children
      */
     private static function factory(string $side, int|float|string $value, array $children): self
     {

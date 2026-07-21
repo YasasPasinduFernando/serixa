@@ -12,6 +12,8 @@ use NovaPHP\Runtime\RenderContext;
  *
  * Widgets already emit ARIA via AccessibilityBuilder; this pass is the extension point
  * for automated audits / injected attributes without changing Widget APIs.
+ *
+ * @internal
  */
 final class AccessibilityPass implements RenderPassInterface
 {

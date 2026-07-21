@@ -6,7 +6,7 @@ namespace NovaPHP\Component;
 
 use NovaPHP\Component\Concerns\HasChildren;
 use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Contracts\ComponentInterface;
+use NovaPHP\Contracts\WidgetInterface;
 
 /**
  * Vertical flex layout (Flutter Column).
@@ -27,7 +27,10 @@ final class Column extends Component
         parent::__construct();
     }
 
-    public static function make(ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function make(WidgetInterface|string|array ...$children): self
     {
         $column = new self();
         $column->setChildren(self::normalizeChildren($children));

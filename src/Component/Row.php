@@ -6,7 +6,7 @@ namespace NovaPHP\Component;
 
 use NovaPHP\Component\Concerns\HasChildren;
 use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Contracts\ComponentInterface;
+use NovaPHP\Contracts\WidgetInterface;
 
 /**
  * Horizontal flex layout (Flutter Row).
@@ -29,7 +29,10 @@ final class Row extends Component
         parent::__construct();
     }
 
-    public static function make(ComponentInterface|string|array ...$children): self
+    /**
+     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     */
+    public static function make(WidgetInterface|string|array ...$children): self
     {
         $row = new self();
         $row->setChildren(self::normalizeChildren($children));

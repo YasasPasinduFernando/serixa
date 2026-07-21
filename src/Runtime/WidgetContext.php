@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace NovaPHP\Runtime;
 
 use NovaPHP\Contracts\ThemeInterface;
+use NovaPHP\Exception\InvalidArgumentException;
 use NovaPHP\Theme\DefaultTheme;
 
 /**
@@ -27,11 +28,11 @@ final class WidgetContext
         private readonly array $featureFlags = [],
     ) {
         if (! in_array($this->textDirection, ['ltr', 'rtl'], true)) {
-            throw new \InvalidArgumentException('textDirection must be ltr or rtl.');
+            throw new InvalidArgumentException('textDirection must be ltr or rtl.');
         }
 
         if (! in_array($this->colorMode, ['light', 'dark', 'system'], true)) {
-            throw new \InvalidArgumentException('colorMode must be light, dark, or system.');
+            throw new InvalidArgumentException('colorMode must be light, dark, or system.');
         }
     }
 

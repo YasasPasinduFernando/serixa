@@ -29,7 +29,7 @@ final class ThemeTest extends TestCase
 
     public function testSetReplacesCurrentTheme(): void
     {
-        $custom = new class implements ThemeInterface {
+        $custom = new class () implements ThemeInterface {
             public function classes(string $component, array $state = []): array
             {
                 return ['custom-' . $component];

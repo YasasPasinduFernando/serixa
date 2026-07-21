@@ -31,12 +31,22 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Plugin contracts + PluginManager
 - [x] Inspector / Snapshot / Performance contracts
 
-## Upcoming
+### Milestone 5 — Document & Asset Engine (`v0.5.0`)
+- [x] Document, Html, Head, Body
+- [x] Title, Meta, Link, Script, Style
+- [x] SeoManager (OG, Twitter, JSON-LD placeholder)
+- [x] AssetManager, AssetBundle, AssetManifest, AssetResolver
+- [x] DocumentRenderer + Renderer document detection
 
-### Milestone 5 — Document & assets
-- [ ] HTML document shell (`html` / `head` / `body`)
-- [ ] Asset / Tailwind pipeline conventions
-- [ ] Dark-mode toggle helpers (using WidgetContext colorMode)
+### Milestone 5.1 — API Stewardship (`v0.5.1`)
+- [x] Public API freeze / stability docs
+- [x] Exception hierarchy
+- [x] PHPStan + PHP-CS-Fixer + EditorConfig
+- [x] GitHub Actions CI
+- [x] ADRs, versioning & deprecation policies
+- [x] `@internal` markers on non-SemVer types
+
+## Upcoming
 
 ### Milestone 6 — Forms
 - [ ] Input, Textarea, Select, Checkbox, Label
@@ -49,9 +59,11 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 
 ### Milestone 8 — App DX
 - [ ] `App::build` / page composition helpers
+- [ ] Dark-mode toggle helpers (using WidgetContext colorMode)
 - [ ] Namespace rebrand path (`NovaPHP\` → `Serixa\`) if approved
 - [ ] Plugin marketplace adapters (optional)
 
 ### Later
 - [ ] Routing (optional adapter, not a full framework clone)
 - [ ] Auth / ORM / CLI — out of core UI scope unless explicitly scheduled
+- [ ] Vite / asset bundler adapters

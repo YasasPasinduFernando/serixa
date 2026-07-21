@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace NovaPHP\Container;
 
+use NovaPHP\Exception\ContainerException;
+
 /**
  * Lightweight, PSR-inspired service container (no facades, no auto-wiring magic beyond constructors).
  *
@@ -55,7 +57,7 @@ final class Container
     /**
      * Resolve a binding or autowire a concrete class via constructor injection.
      *
-     * @template T
+     * @template T of object
      * @param class-string<T>|string $abstract
      * @return ($abstract is class-string<T> ? T : mixed)
      */
@@ -76,12 +78,10 @@ final class Container
         }
 
         if (! class_exists($abstract)) {
-            throw new \InvalidArgumentException(sprintf('Cannot resolve "%s".', $abstract));
+            throw new ContainerException(sprintf('Cannot resolve "%s".', $abstract));
         }
 
-        $concrete = $this->build($abstract);
-
-        return $concrete;
+        return $this->build($abstract);
     }
 
     public function has(string $abstract): bool
@@ -99,7 +99,7 @@ final class Container
         $reflection = new \ReflectionClass($class);
 
         if (! $reflection->isInstantiable()) {
-            throw new \InvalidArgumentException(sprintf('Class "%s" is not instantiable.', $class));
+            throw new ContainerException(sprintf('Class "%s" is not instantiable.', $class));
         }
 
         $constructor = $reflection->getConstructor();
@@ -133,7 +133,7 @@ final class Container
             return null;
         }
 
-        throw new \InvalidArgumentException(sprintf(
+        throw new ContainerException(sprintf(
             'Unable to resolve parameter $%s of %s.',
             $parameter->getName(),
             $parameter->getDeclaringClass()?->getName() ?? 'unknown',

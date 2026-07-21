@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace NovaPHP\Pipeline\Pass;
 
+use NovaPHP\Exception\PipelineException;
 use NovaPHP\Pipeline\RenderPassInterface;
 use NovaPHP\Runtime\RenderContext;
 use NovaPHP\Tree\WidgetTree;
 
 /**
  * Builds WidgetTree from the root widget.
+ *
+ * @internal
  */
 final class BuildTreePass implements RenderPassInterface
 {
@@ -23,7 +26,7 @@ final class BuildTreePass implements RenderPassInterface
         $root = $context->root();
 
         if ($root === null) {
-            throw new \RuntimeException('RenderContext has no root widget.');
+            throw new PipelineException('RenderContext has no root widget.');
         }
 
         $context->setTree(WidgetTree::from($root));

@@ -18,6 +18,7 @@ use NovaPHP\Component\Spacer;
 use NovaPHP\Component\Stack;
 use NovaPHP\Component\Text;
 use NovaPHP\Contracts\WidgetInterface;
+use NovaPHP\Exception\InvalidArgumentException;
 
 /**
  * Named widget construction for registries, serializers, and future DevTools.
@@ -77,13 +78,13 @@ final class WidgetFactory
     public function make(string $name, mixed ...$args): WidgetInterface
     {
         if (! isset($this->map[$name])) {
-            throw new \InvalidArgumentException(sprintf('Unknown widget "%s".', $name));
+            throw new InvalidArgumentException(sprintf('Unknown widget "%s".', $name));
         }
 
         $class = $this->map[$name];
 
         if (! method_exists($class, 'make')) {
-            throw new \InvalidArgumentException(sprintf('Widget "%s" has no make() factory.', $name));
+            throw new InvalidArgumentException(sprintf('Widget "%s" has no make() factory.', $name));
         }
 
         /** @var WidgetInterface $widget */

@@ -5,6 +5,47 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.5.1] — 2026-07-21
+
+### Added
+- Exception hierarchy: `SerixaException`, `InvalidArgumentException`, `ContainerException`, `PipelineException`, `RegistryException`, `PluginException`
+- Coding standards: `.editorconfig`, `.php-cs-fixer.dist.php`, `phpstan.neon.dist`
+- GitHub Actions CI (PHPUnit + PHPStan + CS dry-run)
+- Governance docs: `docs/API_STABILITY.md`, `docs/VERSIONING.md`, `docs/DEPRECATION.md`, `docs/CODING_STANDARDS.md`
+- Architecture Decision Records under `docs/adr/`
+- `@internal` markers on pipeline passes, component concerns, `HeadElement`
+
+### Changed
+- Container/pipeline/registry/plugin/theme errors use SERIXA exception types (still subclasses of SPL exceptions for BC)
+- Composer scripts: `phpstan`, `cs-check`, `cs-fix`, `qa`
+
+### Deprecated
+- None (existing Component aliases unchanged)
+
+### Fixed
+- None
+
+## [v0.5.0] — 2026-07-21
+
+### Added
+- Document engine: `Document`, `Html`, `Head`, `Body`
+- Head elements: `Title`, `Meta`, `Link`, `Script`, `Style`
+- `SeoManager` — title, description, keywords, canonical, robots, author, theme-color, favicon, Open Graph, Twitter Cards, JSON-LD placeholder
+- Asset architecture: `AssetManager`, `AssetBundle`, `AssetManifest`, `AssetResolver` (versioning, defer, preload, prefetch — no Vite)
+- `DocumentRenderer` for full HTML pages
+- `DocumentInterface`; `Renderer` detects documents vs fragments
+- Docs: `docs/document-engine.md`, `examples/document.php`, Document PHPUnit suite
+
+### Changed
+- `RendererInterface::render()` accepts `DocumentInterface|WidgetInterface|string` (additive)
+- Roadmap: Milestone 5 marked complete
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.4.0] — 2026-07-21
 
 ### Added
