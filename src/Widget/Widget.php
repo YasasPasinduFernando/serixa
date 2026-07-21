@@ -1,0 +1,219 @@
+<?php
+
+declare(strict_types=1);
+
+namespace NovaPHP\Widget;
+
+use NovaPHP\Accessibility\AccessibilityBuilder;
+use NovaPHP\Contracts\WidgetInterface;
+use NovaPHP\State\StateManager;
+use NovaPHP\State\WidgetState;
+use NovaPHP\Support\AttributeBag;
+use NovaPHP\Support\ClassMerger;
+use NovaPHP\Support\HtmlEscaper;
+
+/**
+ * Abstract widget: attributes, chaining, lifecycle defaults, optional state, a11y helpers.
+ *
+ * Concrete UI widgets live under NovaPHP\Component for backward compatibility
+ * and extend either this class or the Component alias.
+ */
+abstract class Widget implements WidgetInterface
+{
+    protected ?string $id = null;
+
+    /** @var list<string> */
+    protected array $classes = [];
+
+    /** @var array<string, string|bool|null> */
+    protected array $attributes = [];
+
+    protected ?string $stateKey = null;
+
+    private bool $mounted = false;
+
+    private ?AccessibilityBuilder $accessibility = null;
+
+    public function __construct(
+        protected readonly HtmlEscaper $escaper = new HtmlEscaper(),
+        protected readonly AttributeBag $attributeBag = new AttributeBag(),
+        protected readonly ClassMerger $classMerger = new ClassMerger(),
+    ) {
+    }
+
+    /**
+     * @return static
+     */
+    public function id(string $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function class(string ...$classes): static
+    {
+        foreach ($classes as $class) {
+            foreach (preg_split('/\s+/', trim($class)) ?: [] as $token) {
+                if ($token !== '') {
+                    $this->classes[] = $token;
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function attribute(string $name, string|bool|null $value): static
+    {
+        if ($value === null) {
+            unset($this->attributes[$name]);
+        } else {
+            $this->attributes[$name] = $value;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, string|bool|null> $attributes
+     * @return static
+     */
+    public function attributes(array $attributes): static
+    {
+        foreach ($attributes as $name => $value) {
+            $this->attribute($name, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Bind this widget to a StateManager key (memory-only).
+     *
+     * @return static
+     */
+    public function stateKey(string $key): static
+    {
+        $this->stateKey = $key;
+
+        return $this;
+    }
+
+    public function getStateKey(): ?string
+    {
+        return $this->stateKey;
+    }
+
+    /**
+     * Optional per-widget state bag from the process StateManager.
+     */
+    protected function state(?StateManager $manager = null): WidgetState
+    {
+        $manager ??= StateManager::current();
+        $key = $this->stateKey ?? ('widget_' . spl_object_id($this));
+
+        return $manager->get($key);
+    }
+
+    public function accessibility(): AccessibilityBuilder
+    {
+        return $this->accessibility ??= new AccessibilityBuilder();
+    }
+
+    public function beforeMount(): void
+    {
+    }
+
+    public function mounted(): void
+    {
+        $this->mounted = true;
+    }
+
+    public function beforeRender(): void
+    {
+    }
+
+    public function afterRender(): void
+    {
+    }
+
+    public function destroy(): void
+    {
+        $this->mounted = false;
+    }
+
+    public function isMounted(): bool
+    {
+        return $this->mounted;
+    }
+
+    /**
+     * @return list<WidgetInterface|string>
+     */
+    public function childrenForTree(): array
+    {
+        return [];
+    }
+
+    abstract public function render(): string;
+
+    /**
+     * @param list<string> $frameworkClasses
+     * @param array<string, string|bool|null> $extraAttributes
+     */
+    protected function buildAttributeString(array $frameworkClasses = [], array $extraAttributes = []): string
+    {
+        $classString = $this->classMerger->toString($frameworkClasses, $this->classes);
+
+        $attributes = array_merge($this->attributes, $extraAttributes);
+
+        if ($this->accessibility !== null) {
+            $attributes = array_merge($attributes, $this->accessibility->toAttributes());
+        }
+
+        if ($this->id !== null) {
+            $attributes['id'] = $this->id;
+        }
+
+        if ($classString !== '') {
+            $attributes['class'] = $classString;
+        }
+
+        return $this->attributeBag->build($attributes);
+    }
+
+    protected function escape(string $value): string
+    {
+        return $this->escaper->escape($value);
+    }
+
+    protected function renderChild(WidgetInterface|string $child): string
+    {
+        if ($child instanceof WidgetInterface) {
+            return $child->render();
+        }
+
+        return $this->escape($child);
+    }
+
+    /**
+     * @param list<WidgetInterface|string> $children
+     */
+    protected function renderChildren(array $children): string
+    {
+        $html = '';
+
+        foreach ($children as $child) {
+            $html .= $this->renderChild($child);
+        }
+
+        return $html;
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "name": "serixa/framework",
+    "description": "SERIXA — a Flutter-inspired PHP UI framework. Write PHP widgets, get semantic HTML.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "serixa",
+        "php",
+        "ui",
+        "widgets",
+        "components",
+        "html",
+        "tailwind",
+        "flutter"
+    ],
+    "authors": [
+        {
+            "name": "SERIXA Contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NovaPHP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NovaPHP\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
