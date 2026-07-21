@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace NovaPHP\Contracts;
 
 /**
- * Renders one or more widgets into a single HTML document fragment.
+ * Renders widgets (fragments) or documents (full HTML pages).
  */
 interface RendererInterface
 {
     /**
-     * Render any number of widgets (or raw trusted HTML strings) into one string.
+     * Render widgets, documents, or raw trusted HTML strings.
      *
-     * @param WidgetInterface|string ...$nodes
+     * @param DocumentInterface|WidgetInterface|string ...$nodes
      */
-    public function render(WidgetInterface|string ...$nodes): string;
+    public function render(DocumentInterface|WidgetInterface|string ...$nodes): string;
 }
