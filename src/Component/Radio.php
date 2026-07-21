@@ -75,14 +75,14 @@ final class Radio extends Component
             return $input;
         }
 
-        $labelAttrs = $this->buildAttributeString(
+        $labelAttrs = $this->buildStructuralAttributeString(
             $this->theme()->classes('radio.label'),
             ['for' => $inputId],
         );
 
         return sprintf(
             '<div%s>%s<label%s>%s</label></div>',
-            $this->buildAttributeString($this->theme()->classes('radio.wrap')),
+            $this->buildStructuralAttributeString($this->theme()->classes('radio.wrap')),
             $input,
             $labelAttrs,
             $this->escape($this->label),

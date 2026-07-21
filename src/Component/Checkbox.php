@@ -71,14 +71,14 @@ final class Checkbox extends Component
             return $input;
         }
 
-        $labelAttrs = $this->buildAttributeString(
+        $labelAttrs = $this->buildStructuralAttributeString(
             $this->theme()->classes('checkbox.label'),
             ['for' => $inputId],
         );
 
         return sprintf(
             '<div%s>%s<label%s>%s</label></div>',
-            $this->buildAttributeString($this->theme()->classes('checkbox.wrap')),
+            $this->buildStructuralAttributeString($this->theme()->classes('checkbox.wrap')),
             $input,
             $labelAttrs,
             $this->escape($this->label),

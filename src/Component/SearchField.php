@@ -70,14 +70,17 @@ final class SearchField extends Component
         if ($this->icon !== null) {
             $iconHtml = sprintf(
                 '<span%s aria-hidden="true">%s</span>',
-                $this->buildAttributeString($this->theme()->classes('searchField.icon')),
+                $this->buildStructuralAttributeString($this->theme()->classes('searchField.icon')),
                 $this->renderChild($this->icon),
             );
         }
 
         return sprintf(
-            '<div%s role="search">%s<input%s /></div>',
-            $this->buildAttributeString($this->theme()->classes('searchField')),
+            '<div%s>%s<input%s /></div>',
+            $this->buildStructuralAttributeString(
+                $this->theme()->classes('searchField'),
+                ['role' => 'search'],
+            ),
             $iconHtml,
             $inputAttrs,
         );

@@ -73,14 +73,14 @@ final class SwitchControl extends Component
             return $input;
         }
 
-        $labelAttrs = $this->buildAttributeString(
+        $labelAttrs = $this->buildStructuralAttributeString(
             $this->theme()->classes('switch.label'),
             ['for' => $inputId],
         );
 
         return sprintf(
             '<div%s>%s<label%s>%s</label></div>',
-            $this->buildAttributeString($this->theme()->classes('switch.wrap')),
+            $this->buildStructuralAttributeString($this->theme()->classes('switch.wrap')),
             $input,
             $labelAttrs,
             $this->escape($this->label),

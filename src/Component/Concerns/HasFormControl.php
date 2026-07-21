@@ -180,7 +180,6 @@ trait HasFormControl
     {
         return [
             'name' => $this->name,
-            'id' => $this->id,
             'disabled' => $this->disabled ? true : null,
             'required' => $this->required ? true : null,
             'readonly' => $this->readonly ? true : null,

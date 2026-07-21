@@ -5,6 +5,23 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.8.1] — 2026-07-22
+
+### Fixed
+- **Attribute leakage on multi-node form widgets:** `Checkbox`, `Radio`, `SwitchControl`, and `SearchField` no longer copy widget `id` / `class` / custom attributes / a11y / PE event metadata onto wrappers, nested labels, or icon chrome.
+- **Duplicate IDs:** labeled checkboxes/radios/switches no longer emit the same `id` on both the control and the wrapper/label.
+- **SearchField `role` ownership:** `role="search"` stays on the wrapper once; `role="searchbox"` and event metadata stay on the `<input>` only.
+- **`HasFormControl` id ownership:** `id` is applied once via widget chrome on the interactive element (plus explicit derived ids for unlabeled fallbacks), not re-declared inside the shared form-control attribute map.
+
+### Added
+- Regression coverage in `tests/Component/FormAttributeIsolationTest.php`
+
+### Changed
+- None (public fluent APIs unchanged)
+
+### Deprecated
+- None
+
 ## [v0.8.0] — 2026-07-22
 
 ### Added

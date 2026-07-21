@@ -167,19 +167,28 @@ abstract class Widget implements WidgetInterface
     /**
      * @param list<string> $frameworkClasses
      * @param array<string, string|bool|null> $extraAttributes
+     * @param bool $inheritWidgetState When false, omit widget id/class/attributes/a11y
+     *                                 (use for nested wrappers/labels to prevent leakage).
      */
-    protected function buildAttributeString(array $frameworkClasses = [], array $extraAttributes = []): string
-    {
-        $classString = $this->classMerger->toString($frameworkClasses, $this->classes);
+    protected function buildAttributeString(
+        array $frameworkClasses = [],
+        array $extraAttributes = [],
+        bool $inheritWidgetState = true,
+    ): string {
+        if (! $inheritWidgetState) {
+            $classString = $this->classMerger->toString($frameworkClasses, []);
+            $attributes = $extraAttributes;
+        } else {
+            $classString = $this->classMerger->toString($frameworkClasses, $this->classes);
+            $attributes = array_merge($this->attributes, $extraAttributes);
 
-        $attributes = array_merge($this->attributes, $extraAttributes);
+            if ($this->accessibility !== null) {
+                $attributes = array_merge($attributes, $this->accessibility->toAttributes());
+            }
 
-        if ($this->accessibility !== null) {
-            $attributes = array_merge($attributes, $this->accessibility->toAttributes());
-        }
-
-        if ($this->id !== null) {
-            $attributes['id'] = $this->id;
+            if ($this->id !== null) {
+                $attributes['id'] = $this->id;
+            }
         }
 
         if ($classString !== '') {
@@ -187,6 +196,20 @@ abstract class Widget implements WidgetInterface
         }
 
         return $this->attributeBag->build($attributes);
+    }
+
+    /**
+     * Attributes for nested structural nodes (wrapper, label chrome, icons).
+     * Never inherits interactive widget state.
+     *
+     * @param list<string> $frameworkClasses
+     * @param array<string, string|bool|null> $extraAttributes
+     */
+    protected function buildStructuralAttributeString(
+        array $frameworkClasses = [],
+        array $extraAttributes = [],
+    ): string {
+        return $this->buildAttributeString($frameworkClasses, $extraAttributes, false);
     }
 
     protected function escape(string $value): string
