@@ -1,11 +1,14 @@
 {
     "name": "serixa/admin",
-    "description": "SERIXA admin UI kit (skeleton).",
+    "description": "Official SERIXA admin UI kit — dashboards, shells, tables and cards. No routing, auth, ORM or JS.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "serixa",
-        "admin"
+        "admin",
+        "dashboard",
+        "ui",
+        "widgets"
     ],
     "authors": [
         {
@@ -14,15 +17,25 @@
     ],
     "require": {
         "php": "^8.2",
-        "serixa/framework": "^0.11"
+        "serixa/framework": "*@dev",
+        "serixa/icons": "*@dev"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../icons",
             "options": {
                 "symlink": true
             }
@@ -37,6 +50,17 @@
         "psr-4": {
             "Serixa\\Admin\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": [
+            "@test",
+            "@phpstan",
+            "@cs-check"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
