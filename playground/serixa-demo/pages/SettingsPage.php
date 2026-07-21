@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SerixaDemo\Pages;
 
+use Serixa\Component\Accordion;
+use Serixa\Component\AccordionItem;
 use Serixa\Component\Button;
-use Serixa\Component\Card;
-use Serixa\Component\Checkbox;
 use Serixa\Component\Column;
 use Serixa\Component\Form;
 use Serixa\Component\Input;
@@ -14,6 +14,8 @@ use Serixa\Component\Label;
 use Serixa\Component\Select;
 use Serixa\Component\SizedBox;
 use Serixa\Component\SwitchControl;
+use Serixa\Component\Tab;
+use Serixa\Component\Tabs;
 use Serixa\Component\Text;
 use Serixa\Document\Document;
 use SerixaDemo\DocumentFactory;
@@ -23,52 +25,65 @@ final class SettingsPage
 {
     public static function document(): Document
     {
+        $general = Column::make([
+            Label::make('Workspace name')->for('workspace'),
+            Input::make()
+                ->id('workspace')
+                ->name('workspace')
+                ->placeholder('Acme Inc')
+                ->value('SERIXA Demo'),
+            Label::make('Default timezone')->for('timezone'),
+            Select::make()
+                ->id('timezone')
+                ->name('timezone')
+                ->placeholder('Choose timezone')
+                ->options([
+                    'UTC' => 'UTC',
+                    'America/New_York' => 'America/New_York',
+                    'Europe/London' => 'Europe/London',
+                    'Asia/Colombo' => 'Asia/Colombo',
+                ])
+                ->value('UTC'),
+        ])->gap(2)->alignStart();
+
         $content = Form::make()
             ->method('POST')
             ->action('/?page=settings')
             ->child(
                 Column::make([
                     Text::make('Settings')->as('h1')->size('2xl')->weight('bold'),
-                    Text::make('Workspace preferences.')->tone('muted'),
+                    Text::make('Workspace preferences with Tabs and Accordion.')->tone('muted'),
                     SizedBox::height(2),
-                    Card::make(
-                        Text::make('General')->as('h2')->size('lg')->weight('semibold'),
-                        Label::make('Workspace name')->for('workspace'),
-                        Input::make()
-                            ->id('workspace')
-                            ->name('workspace')
-                            ->placeholder('Acme Inc')
-                            ->value('SERIXA Demo'),
-                        Label::make('Default timezone')->for('timezone'),
-                        Select::make()
-                            ->id('timezone')
-                            ->name('timezone')
-                            ->placeholder('Choose timezone')
-                            ->options([
-                                'UTC' => 'UTC',
-                                'America/New_York' => 'America/New_York',
-                                'Europe/London' => 'Europe/London',
-                                'Asia/Colombo' => 'Asia/Colombo',
-                            ])
-                            ->value('UTC'),
-                    )->padding('md'),
-                    SizedBox::height(3),
-                    Card::make(
-                        Text::make('Appearance')->as('h2')->size('lg')->weight('semibold'),
-                        SwitchControl::make()
-                            ->name('dark_mode')
-                            ->label('Dark mode'),
-                        Text::make('Toggle is render-only; WidgetContext colorMode wiring is a later milestone.')
-                            ->size('sm')
-                            ->tone('muted'),
-                    )->padding('md'),
-                    SizedBox::height(3),
-                    Card::make(
-                        Text::make('Notifications')->as('h2')->size('lg')->weight('semibold'),
-                        Checkbox::make()->name('email_digests')->label('Email digests')->checked(),
-                        Checkbox::make()->name('product_updates')->label('Product updates'),
-                        SwitchControl::make()->name('push')->label('Push notifications'),
-                    )->padding('md'),
+                    Tabs::make()
+                        ->tab(Tab::make('General')->active()->content($general))
+                        ->tab(
+                            Tab::make('Appearance')->content(
+                                Column::make([
+                                    SwitchControl::make()->name('dark_mode')->label('Dark mode'),
+                                    Text::make('Toggle is progressive enhancement only.')
+                                        ->size('sm')
+                                        ->tone('muted'),
+                                ])->gap(2),
+                            ),
+                        ),
+                    SizedBox::height(4),
+                    Accordion::make()
+                        ->item(
+                            AccordionItem::make()
+                                ->title('Notifications')
+                                ->content(
+                                    Column::make([
+                                        SwitchControl::make()->name('email_digests')->label('Email digests'),
+                                        SwitchControl::make()->name('push')->label('Push notifications'),
+                                    ])->gap(2),
+                                )
+                                ->open(),
+                        )
+                        ->item(
+                            AccordionItem::make()
+                                ->title('Privacy FAQ')
+                                ->content(Text::make('SERIXA keeps forms SSR-first; JS only enhances overlays and disclosure widgets.')),
+                        ),
                     SizedBox::height(3),
                     Button::make('Save changes')->primary()->large()->type('submit'),
                 ])->gap(2)->alignStart(),

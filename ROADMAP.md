@@ -72,20 +72,30 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] `EventRegistry` + `ClientRuntime` registration helpers
 - [x] Playground Login / CRUD event metadata demos
 
+### Milestone 8.1 — Stability patch (`v0.8.1`)
+- [x] Checkbox / Radio / SwitchControl / SearchField attribute isolation
+
+### Milestone 9.0 — Interactive Components (`v0.9.0`)
+- [x] Modal, Drawer, Popover, Tooltip
+- [x] Toast, Alert, Badge, Chip, Spinner, Progress, Skeleton
+- [x] Dropdown / DropdownMenu / DropdownItem
+- [x] Accordion / AccordionItem
+- [x] Tabs / Tab / TabPanel
+- [x] Modular runtime modules + WAI-ARIA patterns
+- [x] Playground Interactive page demos
+
 ## Upcoming
 
 ### Milestone 7.1 — Polish & validation display
-- [ ] Badge
-- [ ] Field validation adapters (UI only)
 - [ ] Chart placeholder contract / adapters
+- [ ] Field validation adapters (UI only)
 
-### Milestone 8.1 — Interactive widgets (PE modules)
-- [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast as optional runtime modules
-- [ ] Focus trap / dialog a11y helpers via `Serixa.use()`
+### Milestone 9.1 — Interactive polish
+- [ ] Focus trap hardening / stacked overlays API
+- [ ] Toast queue / portal helpers
 
-### Milestone 7 — Interactive widgets
-- [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast
-- [ ] Minimal JS bridge driven by StateManager + events
+### Milestone 7 — Interactive widgets (historical)
+- [x] Modal, Tabs, Accordion, Drawer, Dropdown, Toast (delivered in v0.9.0)
 
 ### Milestone 8 — App DX
 - [ ] `App::build` / page composition helpers

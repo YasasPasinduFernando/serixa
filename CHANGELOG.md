@@ -5,6 +5,26 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.9.0] — 2026-07-22
+
+### Added
+- Interactive overlays: `Modal`, `Drawer`, `Popover`, `Tooltip`
+- Feedback: `Toast`, `Alert`, `Badge`, `Chip`, `Spinner`, `Progress`, `Skeleton`
+- Navigation: `Dropdown`, `DropdownMenu`, `DropdownItem`, `Tabs`, `Tab`, `TabPanel`
+- Disclosure: `Accordion`, `AccordionItem`
+- Modular client runtime modules in `assets/runtime/serixa.js` (`Serixa.module`)
+- Docs: `docs/interactive-components.md`, `docs/runtime-modules.md`, `examples/interactive.php`
+- Playground Interactive page + Dashboard/CRUD/Settings/Profile demos
+
+### Changed
+- Client runtime version `0.9.0` with focus trap, keyboard nav, and overlay helpers
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.8.1] — 2026-07-22
 
 ### Fixed

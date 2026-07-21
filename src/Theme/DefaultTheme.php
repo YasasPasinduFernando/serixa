@@ -130,6 +130,56 @@ final class DefaultTheme implements ThemeInterface
             'toolbar.leading' => $this->toolbarLeading($state),
             'toolbar.center' => $this->toolbarCenter($state),
             'toolbar.trailing' => $this->toolbarTrailing($state),
+            'badge' => $this->badge($state),
+            'chip' => $this->chip($state),
+            'chip.label' => $this->chipLabel($state),
+            'chip.dismiss' => $this->chipDismiss($state),
+            'spinner' => $this->spinner($state),
+            'spinner.glyph' => $this->spinnerGlyph($state),
+            'progress' => $this->progress($state),
+            'progress.bar' => $this->progressBar($state),
+            'skeleton' => $this->skeleton($state),
+            'skeleton.group' => $this->skeletonGroup($state),
+            'alert' => $this->alert($state),
+            'alert.title' => $this->alertTitle($state),
+            'alert.body' => $this->alertBody($state),
+            'alert.dismiss' => $this->alertDismiss($state),
+            'toast' => $this->toast($state),
+            'toast.message' => $this->toastMessage($state),
+            'toast.action' => $this->toastAction($state),
+            'modal' => $this->modal($state),
+            'modal.backdrop' => $this->modalBackdrop($state),
+            'modal.dialog' => $this->modalDialog($state),
+            'modal.title' => $this->modalTitle($state),
+            'modal.body' => $this->modalBody($state),
+            'modal.footer' => $this->modalFooter($state),
+            'modal.close' => $this->modalClose($state),
+            'drawer' => $this->drawer($state),
+            'drawer.backdrop' => $this->drawerBackdrop($state),
+            'drawer.panel' => $this->drawerPanel($state),
+            'drawer.title' => $this->drawerTitle($state),
+            'drawer.body' => $this->drawerBody($state),
+            'drawer.close' => $this->drawerClose($state),
+            'popover' => $this->popover($state),
+            'popover.trigger' => $this->popoverTrigger($state),
+            'popover.panel' => $this->popoverPanel($state),
+            'tooltip' => $this->tooltip($state),
+            'tooltip.trigger' => $this->tooltipTrigger($state),
+            'tooltip.content' => $this->tooltipContent($state),
+            'dropdown' => $this->dropdown($state),
+            'dropdown.trigger' => $this->dropdownTrigger($state),
+            'dropdown.panel' => $this->dropdownPanel($state),
+            'dropdownMenu' => $this->dropdownMenu($state),
+            'dropdownItem' => $this->dropdownItem($state),
+            'accordion' => $this->accordion($state),
+            'accordionItem' => $this->accordionItem($state),
+            'accordion.heading' => $this->accordionHeading($state),
+            'accordion.button' => $this->accordionButton($state),
+            'accordion.panel' => $this->accordionPanel($state),
+            'tabs' => $this->tabs($state),
+            'tabs.list' => $this->tabsList($state),
+            'tabs.tab' => $this->tabsTab($state),
+            'tabs.panel' => $this->tabsPanel($state),
             default => throw new InvalidArgumentException(sprintf('Unknown theme component "%s".', $component)),
         };
     }
@@ -1457,6 +1507,524 @@ final class DefaultTheme implements ThemeInterface
     private function toolbarTrailing(array $state): array
     {
         return ['flex', 'items-center', 'gap-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function badge(array $state): array
+    {
+        $color = (string) ($state['color'] ?? 'neutral');
+        $tones = [
+            'neutral' => ['bg-slate-100', 'text-slate-700'],
+            'primary' => ['bg-teal-100', 'text-teal-800'],
+            'success' => ['bg-emerald-100', 'text-emerald-800'],
+            'warning' => ['bg-amber-100', 'text-amber-900'],
+            'danger' => ['bg-rose-100', 'text-rose-800'],
+        ];
+
+        return array_merge(
+            ['inline-flex', 'items-center', 'rounded-full', 'px-2.5', 'py-0.5', 'text-xs', 'font-semibold'],
+            $tones[$color] ?? $tones['neutral'],
+        );
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function chip(array $state): array
+    {
+        return array_merge($this->badge($state), ['gap-1', 'pr-1']);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function chipLabel(array $state): array
+    {
+        return ['px-1'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function chipDismiss(array $state): array
+    {
+        return ['ml-1', 'rounded-full', 'px-1', 'text-sm', 'hover:bg-black/10'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function spinner(array $state): array
+    {
+        return ['inline-flex', 'items-center', 'justify-center', 'text-teal-700'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function spinnerGlyph(array $state): array
+    {
+        $size = (string) ($state['size'] ?? 'md');
+        $map = ['sm' => 'h-4 w-4', 'md' => 'h-6 w-6', 'lg' => 'h-8 w-8'];
+
+        return array_merge(
+            ['inline-block', 'animate-spin', 'rounded-full', 'border-2', 'border-teal-200', 'border-t-teal-700'],
+            explode(' ', $map[$size] ?? $map['md']),
+        );
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function progress(array $state): array
+    {
+        $size = (string) ($state['size'] ?? 'md');
+        $h = ['sm' => 'h-1.5', 'md' => 'h-2.5', 'lg' => 'h-4'];
+
+        return ['w-full', 'overflow-hidden', 'rounded-full', 'bg-slate-200', $h[$size] ?? 'h-2.5'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function progressBar(array $state): array
+    {
+        $base = ['h-full', 'rounded-full', 'bg-teal-600'];
+        if (! empty($state['indeterminate'])) {
+            return array_merge($base, ['w-1/3', 'animate-pulse']);
+        }
+
+        return $base;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function skeleton(array $state): array
+    {
+        $variant = (string) ($state['variant'] ?? 'text');
+        $base = ['animate-pulse', 'rounded', 'bg-slate-200'];
+
+        return match ($variant) {
+            'avatar' => array_merge($base, ['h-12', 'w-12', 'rounded-full']),
+            'card' => array_merge($base, ['h-24', 'w-full']),
+            'rect' => array_merge($base, ['h-16', 'w-full']),
+            default => array_merge($base, ['h-3', 'w-full']),
+        };
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function skeletonGroup(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function alert(array $state): array
+    {
+        $tone = (string) ($state['tone'] ?? 'info');
+        $tones = [
+            'info' => ['bg-sky-50', 'text-sky-900', 'border-sky-200'],
+            'success' => ['bg-emerald-50', 'text-emerald-900', 'border-emerald-200'],
+            'warning' => ['bg-amber-50', 'text-amber-950', 'border-amber-200'],
+            'danger' => ['bg-rose-50', 'text-rose-900', 'border-rose-200'],
+        ];
+
+        return array_merge(
+            ['relative', 'flex', 'gap-3', 'rounded-lg', 'border', 'p-4', 'text-sm'],
+            $tones[$tone] ?? $tones['info'],
+        );
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function alertTitle(array $state): array
+    {
+        return ['block', 'font-semibold'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function alertBody(array $state): array
+    {
+        return ['mt-1'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function alertDismiss(array $state): array
+    {
+        return ['absolute', 'right-2', 'top-2', 'rounded', 'px-1', 'hover:bg-black/5'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toast(array $state): array
+    {
+        $tone = (string) ($state['tone'] ?? 'info');
+
+        return array_merge(
+            ['fixed', 'bottom-4', 'right-4', 'z-50', 'max-w-sm', 'rounded-lg', 'border', 'bg-white', 'p-4', 'shadow-lg'],
+            $this->alert(['tone' => $tone]),
+        );
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toastMessage(array $state): array
+    {
+        return ['text-sm', 'font-medium'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toastAction(array $state): array
+    {
+        return ['mt-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modal(array $state): array
+    {
+        return ['fixed', 'inset-0', 'z-50', 'flex', 'items-center', 'justify-center', 'p-4'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modalBackdrop(array $state): array
+    {
+        return ['absolute', 'inset-0', 'bg-slate-900/50'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modalDialog(array $state): array
+    {
+        return ['relative', 'z-10', 'w-full', 'max-w-lg', 'rounded-xl', 'bg-white', 'p-6', 'shadow-xl'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modalTitle(array $state): array
+    {
+        return ['mb-2', 'pr-8', 'text-lg', 'font-semibold', 'text-slate-900'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modalBody(array $state): array
+    {
+        return ['text-sm', 'text-slate-600'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modalFooter(array $state): array
+    {
+        return ['mt-6', 'flex', 'justify-end', 'gap-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function modalClose(array $state): array
+    {
+        return ['absolute', 'right-3', 'top-3', 'rounded', 'px-2', 'text-lg', 'text-slate-500', 'hover:bg-slate-100'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function drawer(array $state): array
+    {
+        return ['fixed', 'inset-0', 'z-50'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function drawerBackdrop(array $state): array
+    {
+        return ['absolute', 'inset-0', 'bg-slate-900/40'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function drawerPanel(array $state): array
+    {
+        $side = (string) ($state['side'] ?? 'right');
+        $pos = $side === 'left' ? ['left-0'] : ['right-0'];
+
+        return array_merge(
+            ['absolute', 'top-0', 'h-full', 'w-full', 'max-w-sm', 'bg-white', 'p-6', 'shadow-xl'],
+            $pos,
+        );
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function drawerTitle(array $state): array
+    {
+        return $this->modalTitle($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function drawerBody(array $state): array
+    {
+        return $this->modalBody($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function drawerClose(array $state): array
+    {
+        return $this->modalClose($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function popover(array $state): array
+    {
+        return ['relative', 'inline-block'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function popoverTrigger(array $state): array
+    {
+        return ['inline-flex'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function popoverPanel(array $state): array
+    {
+        return ['absolute', 'z-20', 'mt-2', 'min-w-[12rem]', 'rounded-lg', 'border', 'border-slate-200', 'bg-white', 'p-3', 'shadow-lg'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tooltip(array $state): array
+    {
+        return ['relative', 'inline-flex'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tooltipTrigger(array $state): array
+    {
+        return ['inline-flex'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tooltipContent(array $state): array
+    {
+        return ['absolute', 'bottom-full', 'left-1/2', 'z-30', 'mb-2', '-translate-x-1/2', 'whitespace-nowrap', 'rounded', 'bg-slate-900', 'px-2', 'py-1', 'text-xs', 'text-white'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dropdown(array $state): array
+    {
+        return ['relative', 'inline-block'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dropdownTrigger(array $state): array
+    {
+        return ['inline-flex'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dropdownPanel(array $state): array
+    {
+        return ['absolute', 'right-0', 'z-20', 'mt-2', 'min-w-[10rem]', 'rounded-lg', 'border', 'border-slate-200', 'bg-white', 'py-1', 'shadow-lg'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dropdownMenu(array $state): array
+    {
+        return ['flex', 'flex-col'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dropdownItem(array $state): array
+    {
+        $classes = ['block', 'w-full', 'px-3', 'py-2', 'text-left', 'text-sm', 'text-slate-700', 'hover:bg-slate-50'];
+        if (! empty($state['danger'])) {
+            $classes[] = 'text-rose-700';
+        }
+        if (! empty($state['disabled'])) {
+            $classes = array_merge($classes, ['opacity-50', 'pointer-events-none']);
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function accordion(array $state): array
+    {
+        return ['divide-y', 'divide-slate-200', 'rounded-lg', 'border', 'border-slate-200', 'bg-white'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function accordionItem(array $state): array
+    {
+        return ['p-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function accordionHeading(array $state): array
+    {
+        return ['m-0', 'text-base', 'font-medium'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function accordionButton(array $state): array
+    {
+        return ['flex', 'w-full', 'items-center', 'justify-between', 'px-4', 'py-3', 'text-left', 'hover:bg-slate-50'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function accordionPanel(array $state): array
+    {
+        return ['px-4', 'pb-4', 'text-sm', 'text-slate-600'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tabs(array $state): array
+    {
+        return ['w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tabsList(array $state): array
+    {
+        return ['mb-4', 'flex', 'gap-1', 'border-b', 'border-slate-200'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tabsTab(array $state): array
+    {
+        $active = ! empty($state['active']);
+
+        return $active
+            ? ['-mb-px', 'border-b-2', 'border-teal-600', 'px-3', 'py-2', 'text-sm', 'font-semibold', 'text-teal-800']
+            : ['-mb-px', 'border-b-2', 'border-transparent', 'px-3', 'py-2', 'text-sm', 'text-slate-600', 'hover:text-slate-900'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tabsPanel(array $state): array
+    {
+        return ['text-sm', 'text-slate-700'];
     }
 
     private function spacingClass(string $prefix, mixed $value): string

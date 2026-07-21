@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Serixa\Rendering\Renderer;
 use SerixaDemo\Pages\CrudPage;
 use SerixaDemo\Pages\DashboardPage;
+use SerixaDemo\Pages\InteractivePage;
 use SerixaDemo\Pages\LoginPage;
 use SerixaDemo\Pages\ProfilePage;
 use SerixaDemo\Pages\SettingsPage;
@@ -18,6 +19,7 @@ $document = match ($page) {
     'crud', 'users' => CrudPage::document(),
     'settings' => SettingsPage::document(),
     'profile' => ProfilePage::document(),
+    'interactive' => InteractivePage::document(),
     default => LoginPage::document(),
 };
 

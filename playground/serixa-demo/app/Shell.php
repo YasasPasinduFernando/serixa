@@ -29,6 +29,7 @@ final class Shell
                     ->actions(
                         self::navLink('Dashboard', 'dashboard', $active),
                         self::navLink('CRUD', 'crud', $active),
+                        self::navLink('Interactive', 'interactive', $active),
                         self::navLink('Settings', 'settings', $active),
                         self::navLink('Profile', 'profile', $active),
                         Button::make('Logout')->ghost()->small(),
@@ -39,6 +40,7 @@ final class Shell
                     Text::make('Menu')->as('h2')->size('sm')->weight('semibold')->tone('muted'),
                     self::navLink('Dashboard', 'dashboard', $active),
                     self::navLink('Users (CRUD)', 'crud', $active),
+                    self::navLink('Interactive', 'interactive', $active),
                     self::navLink('Settings', 'settings', $active),
                     self::navLink('Profile', 'profile', $active),
                     Divider::make()->spacing('sm'),
@@ -46,7 +48,7 @@ final class Shell
                 )->ariaLabel('Primary'),
             )
             ->body(MainContent::make($content))
-            ->footer(Footer::make('SERIXA Demo · Progressive Enhancement (v0.8.0)'));
+            ->footer(Footer::make('SERIXA Demo · Interactive Components (v0.9.0)'));
     }
 
     private static function navLink(string $label, string $page, string $active): WidgetInterface

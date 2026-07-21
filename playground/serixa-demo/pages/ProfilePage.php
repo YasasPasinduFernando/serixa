@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SerixaDemo\Pages;
 
 use Serixa\Component\Avatar;
+use Serixa\Component\Badge;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Column;
@@ -17,6 +18,7 @@ use Serixa\Component\Row;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Text;
 use Serixa\Component\Textarea;
+use Serixa\Component\Tooltip;
 use Serixa\Document\Document;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Shell;
@@ -40,7 +42,12 @@ final class ProfilePage
                 ->loading('lazy'),
             SizedBox::height(3),
             Card::make(
-                Avatar::make()->initials('AL')->size('xl')->circle(),
+                Row::make([
+                    Tooltip::make()
+                        ->text('Verified mathematician')
+                        ->child(Avatar::make()->initials('AL')->size('xl')->circle()),
+                    Badge::make('Pro')->color('primary'),
+                ])->gap(3)->alignCenter(),
                 Text::make('Ada Lovelace')->as('h2')->size('lg')->weight('semibold'),
                 Text::make('ada@example.com')->tone('muted')->size('sm'),
             )->padding('md'),

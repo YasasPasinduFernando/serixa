@@ -4,18 +4,27 @@ declare(strict_types=1);
 
 namespace Serixa\Registry;
 
+use Serixa\Component\Accordion;
+use Serixa\Component\AccordionItem;
 use Serixa\Component\ActivityItem;
 use Serixa\Component\ActivityList;
+use Serixa\Component\Alert;
 use Serixa\Component\AppBar;
 use Serixa\Component\Avatar;
+use Serixa\Component\Badge;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Center;
 use Serixa\Component\Checkbox;
+use Serixa\Component\Chip;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Component\DataTable;
 use Serixa\Component\Divider;
+use Serixa\Component\Drawer;
+use Serixa\Component\Dropdown;
+use Serixa\Component\DropdownItem;
+use Serixa\Component\DropdownMenu;
 use Serixa\Component\EmptyState;
 use Serixa\Component\ErrorText;
 use Serixa\Component\Expanded;
@@ -30,10 +39,13 @@ use Serixa\Component\Link;
 use Serixa\Component\Logo;
 use Serixa\Component\MainContent;
 use Serixa\Component\Metric;
+use Serixa\Component\Modal;
 use Serixa\Component\Padding;
 use Serixa\Component\PageHeader;
 use Serixa\Component\Pagination;
 use Serixa\Component\PasswordInput;
+use Serixa\Component\Popover;
+use Serixa\Component\Progress;
 use Serixa\Component\Radio;
 use Serixa\Component\Row;
 use Serixa\Component\Scaffold;
@@ -41,19 +53,26 @@ use Serixa\Component\SearchField;
 use Serixa\Component\Select;
 use Serixa\Component\Sidebar;
 use Serixa\Component\SizedBox;
+use Serixa\Component\Skeleton;
 use Serixa\Component\Spacer;
+use Serixa\Component\Spinner;
 use Serixa\Component\Stack;
 use Serixa\Component\StatCard;
 use Serixa\Component\SwitchControl;
+use Serixa\Component\Tab;
 use Serixa\Component\Table;
 use Serixa\Component\TableBody;
 use Serixa\Component\TableCell;
 use Serixa\Component\TableHead;
 use Serixa\Component\TableHeaderCell;
 use Serixa\Component\TableRow;
+use Serixa\Component\TabPanel;
+use Serixa\Component\Tabs;
 use Serixa\Component\Text;
 use Serixa\Component\Textarea;
+use Serixa\Component\Toast;
 use Serixa\Component\Toolbar;
+use Serixa\Component\Tooltip;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Exception\RegistryException;
 
@@ -184,6 +203,25 @@ final class WidgetRegistry
             new WidgetMetadata('activityItem', 'data', 'Activity item', ['title', 'description', 'timestamp'], [], false, '0.7.0', ActivityItem::class),
             new WidgetMetadata('pageHeader', 'layout', 'Page header', ['title', 'subtitle', 'actions'], [], true, '0.7.0', PageHeader::class),
             new WidgetMetadata('toolbar', 'layout', 'Toolbar slots', ['leading', 'center', 'trailing'], [], true, '0.7.0', Toolbar::class),
+            new WidgetMetadata('modal', 'overlay', 'Modal dialog', ['title', 'body', 'footer', 'open'], ['close'], true, '0.9.0', Modal::class),
+            new WidgetMetadata('drawer', 'overlay', 'Side drawer', ['side', 'title', 'body', 'open'], ['close'], true, '0.9.0', Drawer::class),
+            new WidgetMetadata('popover', 'overlay', 'Popover panel', ['trigger', 'content', 'open'], [], true, '0.9.0', Popover::class),
+            new WidgetMetadata('tooltip', 'overlay', 'Tooltip', ['text', 'child'], [], true, '0.9.0', Tooltip::class),
+            new WidgetMetadata('toast', 'feedback', 'Toast live region', ['message', 'tone', 'open'], [], true, '0.9.0', Toast::class),
+            new WidgetMetadata('alert', 'feedback', 'Alert banner', ['tone', 'title', 'body'], [], true, '0.9.0', Alert::class),
+            new WidgetMetadata('badge', 'feedback', 'Badge', ['color'], [], false, '0.9.0', Badge::class),
+            new WidgetMetadata('chip', 'feedback', 'Chip', ['color', 'dismissible'], [], false, '0.9.0', Chip::class),
+            new WidgetMetadata('spinner', 'feedback', 'Spinner', ['size', 'label'], [], false, '0.9.0', Spinner::class),
+            new WidgetMetadata('progress', 'feedback', 'Progress bar', ['value', 'max', 'label'], [], false, '0.9.0', Progress::class),
+            new WidgetMetadata('skeleton', 'feedback', 'Skeleton placeholder', ['variant', 'lines'], [], false, '0.9.0', Skeleton::class),
+            new WidgetMetadata('dropdown', 'navigation', 'Dropdown', ['trigger', 'items', 'open'], [], true, '0.9.0', Dropdown::class),
+            new WidgetMetadata('dropdownMenu', 'navigation', 'Dropdown menu', [], [], true, '0.9.0', DropdownMenu::class),
+            new WidgetMetadata('dropdownItem', 'navigation', 'Dropdown item', ['href', 'disabled'], [], false, '0.9.0', DropdownItem::class),
+            new WidgetMetadata('accordion', 'layout', 'Accordion', ['item', 'multiple'], [], true, '0.9.0', Accordion::class),
+            new WidgetMetadata('accordionItem', 'layout', 'Accordion item', ['title', 'content', 'open'], [], true, '0.9.0', AccordionItem::class),
+            new WidgetMetadata('tabs', 'navigation', 'Tabs', ['tab'], [], true, '0.9.0', Tabs::class),
+            new WidgetMetadata('tab', 'navigation', 'Tab definition', ['content', 'active'], [], true, '0.9.0', Tab::class),
+            new WidgetMetadata('tabPanel', 'navigation', 'Tab panel', ['content'], [], true, '0.9.0', TabPanel::class),
         ];
     }
 }

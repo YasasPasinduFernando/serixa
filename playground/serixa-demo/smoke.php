@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$pages = ['login', 'dashboard', 'crud', 'settings', 'profile'];
+$pages = ['login', 'dashboard', 'crud', 'settings', 'profile', 'interactive'];
 $needles = [
     'login' => [
         'Sign in',
@@ -13,17 +13,44 @@ $needles = [
         'required',
         'serixa.js',
     ],
-    'dashboard' => ['1,284', 'Avg latency', 'Recent activity', 'Ada joined', 'Missing widget: Chart'],
+    'dashboard' => [
+        '1,284',
+        'Avg latency',
+        'Ada joined',
+        'data-serixa-dropdown',
+        'role="tablist"',
+        'data-serixa-toast',
+        'Live',
+    ],
     'crud' => [
         'User directory',
         'type="search"',
         'Pagination',
         'Ada Lovelace',
-        'data-serixa-on-input="search"',
-        'data-serixa-on-click="createUser"',
+        'data-serixa-modal',
+        'role="progressbar"',
+        'data-serixa-spinner',
     ],
-    'settings' => ['Workspace name', 'role="switch"', 'Email digests'],
-    'profile' => ['AL', 'SERIXA', 'Profile cover', 'Biography', 'ada@example.com'],
+    'settings' => [
+        'Workspace name',
+        'role="tablist"',
+        'data-serixa-accordion',
+        'Notifications',
+    ],
+    'profile' => [
+        'AL',
+        'SERIXA',
+        'Profile cover',
+        'role="tooltip"',
+        'Pro',
+    ],
+    'interactive' => [
+        'Interactive components',
+        'data-serixa-modal',
+        'data-serixa-drawer',
+        'role="tablist"',
+        'data-serixa-accordion',
+    ],
 ];
 
 foreach ($pages as $page) {

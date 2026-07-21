@@ -19,6 +19,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 - **UI Foundation:** forms, Scaffold chrome, Link, …
 - **Data Display:** `DataTable` (headers/rows + composition), `StatCard`, `Metric`, `Pagination`, `Avatar`, `Toolbar`, …
 - **Progressive Enhancement:** `onClick` / `onSubmit` / …, HTML constraints, tiny `serixa.js` runtime (no VDOM)
+- **Interactive Components:** Modal, Drawer, Dropdown, Tabs, Accordion, Toast, Badge, … (SSR + runtime modules)
 - Fluent `Padding::make()->x(6)->y(4)->child(...)`
 - Theme seam + design tokens
 - Widget tree + lifecycle hooks
@@ -43,6 +44,8 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 6.0 | UI Foundation | Complete (`v0.6.0`) |
 | 7.0 | Data Display & Application Widgets | Complete (`v0.7.0`) |
 | 8.0 | Progressive Enhancement Foundation | Complete (`v0.8.0`) |
+| 8.1 | Forms attribute isolation patch | Complete (`v0.8.1`) |
+| 9.0 | Interactive Components | Complete (`v0.9.0`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -171,6 +174,8 @@ examples/
 - [Data Display](docs/data-display.md)
 - [Events](docs/events.md)
 - [Progressive Enhancement](docs/progressive-enhancement.md)
+- [Interactive Components](docs/interactive-components.md)
+- [Runtime Modules](docs/runtime-modules.md)
 
 ## Roadmap
 
