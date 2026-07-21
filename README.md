@@ -10,16 +10,17 @@ PHP namespace today: `NovaPHP\` (kept for backward compatibility). The product n
 
 Frontend development should feel like Flutter — developers focus on business logic, not HTML, Tailwind classes, or JavaScript boilerplate for common UI.
 
-SERIXA is not a Laravel clone and not a React clone. It is a **components-first PHP UI engine**.
+SERIXA is not a Laravel clone and not a React clone. It is a **components-first PHP UI engine** with a long-lived Runtime Core.
 
 ## Features
 
 - Fluent, chainable widgets (`Button::make('Save')->primary()->large()`)
 - Layout widgets: `Row`, `Column`, `Center`, `Padding`, `Spacer`, `Expanded`, `SizedBox`, `Stack`, `Divider`
-- Theme seam + design tokens (swap Tailwind/Bootstrap later without changing widgets)
-- Widget tree + lifecycle hooks (foundation for DevTools / interactive UI)
-- Memory-only state manager (prepared for Modal, Tabs, Accordion)
-- Accessibility helpers (`AccessibilityBuilder`)
+- Theme seam + design tokens
+- Widget tree + lifecycle hooks
+- **Runtime Core:** WidgetContext, RenderContext, Container, Registry, Render Pipeline, Plugins
+- Memory-only state manager
+- Accessibility helpers
 - Escaped output by default
 - PSR-4, PHP 8.2+, PHPUnit-tested
 
@@ -30,6 +31,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 1 | Rendering engine | Complete |
 | 2 | Layout engine + theme | Complete |
 | 3 | Framework foundations | Complete (`v0.3.0`) |
+| 4 | Runtime Core | Complete (`v0.4.0`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -72,11 +74,24 @@ $html = (new Renderer())->render(
 );
 ```
 
-## Example
+## Runtime context example
+
+```php
+use NovaPHP\Rendering\Renderer;
+use NovaPHP\Runtime\WidgetContext;
+
+$renderer = new Renderer(
+    null,
+    WidgetContext::defaults()->withColorMode('dark')->withLocale('en'),
+);
+```
+
+## Examples
 
 ```bash
 php examples/basic.php
 php examples/foundations.php
+php examples/runtime.php
 ```
 
 ## Project structure
@@ -85,9 +100,16 @@ php examples/foundations.php
 src/
   Accessibility/   ARIA helpers
   Component/       Concrete widgets (+ Component BC alias)
+  Container/       Service container
   Contracts/       Interfaces
-  Event/           Event contracts (prep only)
-  Rendering/       Renderer (tree + lifecycle)
+  Event/           Event contracts
+  Inspector/       DevTools contracts + snapshots
+  Performance/     Profiler contracts
+  Pipeline/        Render pipeline + passes
+  Plugin/          Plugin contracts + manager
+  Registry/        Widget registry + metadata
+  Rendering/       Renderer, HtmlWriter
+  Runtime/         WidgetContext, RenderContext
   State/           Memory-only state engine
   Support/         Escaper, attributes, class merge
   Theme/           DefaultTheme, ThemeManager
@@ -101,10 +123,11 @@ examples/
 
 ## Documentation
 
-- [Rendering engine](docs/rendering-engine.md) (Milestone 1)
-- [Layout engine](docs/layout-engine.md) (Milestone 2)
-- [Framework foundations](docs/framework-foundations.md) (Milestone 3)
 - [Architecture overview](docs/architecture.md)
+- [Rendering engine](docs/rendering-engine.md)
+- [Layout engine](docs/layout-engine.md)
+- [Framework foundations](docs/framework-foundations.md)
+- [Runtime Core](docs/runtime-core.md)
 
 ## Roadmap
 
@@ -113,12 +136,6 @@ See [ROADMAP.md](ROADMAP.md).
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-1. Keep public APIs stable unless a major version says otherwise.
-2. Prefer composition over inheritance.
-3. Put CSS class maps in themes/tokens — not in widgets.
-4. Add PHPUnit coverage for new behavior.
-5. Run `composer test` before opening a PR.
 
 ## License
 

@@ -23,26 +23,34 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Event interfaces (prep only)
 - [x] AccessibilityBuilder
 
-## Upcoming (untouched)
+### Milestone 4 — Runtime Core (`v0.4.0`)
+- [x] WidgetContext + RenderContext
+- [x] Service Container
+- [x] WidgetRegistry + WidgetMetadata
+- [x] Render Pipeline + HtmlWriter
+- [x] Plugin contracts + PluginManager
+- [x] Inspector / Snapshot / Performance contracts
 
-### Milestone 4 — Document & assets
+## Upcoming
+
+### Milestone 5 — Document & assets
 - [ ] HTML document shell (`html` / `head` / `body`)
 - [ ] Asset / Tailwind pipeline conventions
-- [ ] Dark-mode toggle helpers
+- [ ] Dark-mode toggle helpers (using WidgetContext colorMode)
 
-### Milestone 5 — Forms
+### Milestone 6 — Forms
 - [ ] Input, Textarea, Select, Checkbox, Label
 - [ ] Form layout helpers
 - [ ] Validation display (UI only)
 
-### Milestone 6 — Interactive widgets
+### Milestone 7 — Interactive widgets
 - [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast
 - [ ] Minimal JS bridge driven by StateManager + events
 
-### Milestone 7 — App DX
+### Milestone 8 — App DX
 - [ ] `App::build` / page composition helpers
 - [ ] Namespace rebrand path (`NovaPHP\` → `Serixa\`) if approved
-- [ ] Plugin API
+- [ ] Plugin marketplace adapters (optional)
 
 ### Later
 - [ ] Routing (optional adapter, not a full framework clone)

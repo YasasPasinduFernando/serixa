@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace NovaPHP\Pipeline\Pass;
+
+use NovaPHP\Pipeline\RenderPassInterface;
+use NovaPHP\Runtime\RenderContext;
+
+/**
+ * Placeholder pass for future tree-wide accessibility enrichment.
+ *
+ * Widgets already emit ARIA via AccessibilityBuilder; this pass is the extension point
+ * for automated audits / injected attributes without changing Widget APIs.
+ */
+final class AccessibilityPass implements RenderPassInterface
+{
+    public function name(): string
+    {
+        return 'accessibility';
+    }
+
+    public function handle(RenderContext $context): void
+    {
+        $context->setMeta('pipeline.accessibility', true);
+    }
+}

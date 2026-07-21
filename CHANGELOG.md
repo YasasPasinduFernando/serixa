@@ -5,6 +5,29 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.4.0] — 2026-07-21
+
+### Added
+- Runtime Core: `WidgetContext`, `RenderContext`
+- Service `Container` (`bind`, `singleton`, `instance`, `resolve` + constructor autowiring)
+- `WidgetRegistry` and `WidgetMetadata` with built-in widget catalog
+- Replaceable `RenderPipeline` with passes: build tree, resolve context, lifecycle, theme resolution, accessibility, render
+- `HtmlWriter` for HTML fragment assembly
+- Plugin contracts: `PluginInterface`, `WidgetPlugin`, `ThemePlugin`, `RuntimePlugin`, `PluginManager`
+- Inspector contracts and snapshots: `WidgetInspector`, `TreeInspector`, `WidgetSnapshot`, `RenderSnapshot`, `PerformanceSnapshot`
+- Performance contracts: `PerformanceProfiler`, `RenderProfiler`, `MemoryProfiler`
+- Docs: `docs/runtime-core.md`, `examples/runtime.php`, Runtime PHPUnit suite
+
+### Changed
+- `Renderer` is now a pipeline coordinator (public render APIs preserved)
+- Roadmap renumbered upcoming milestones after Runtime Core
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.3.0] — 2026-07-21
 
 ### Added

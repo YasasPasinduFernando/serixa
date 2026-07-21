@@ -6,34 +6,43 @@ namespace NovaPHP\Rendering;
 
 use NovaPHP\Contracts\RendererInterface;
 use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Tree\LifecycleTreeVisitor;
-use NovaPHP\Tree\TreeWalker;
+use NovaPHP\Pipeline\RenderPipeline;
+use NovaPHP\Runtime\RenderContext;
+use NovaPHP\Runtime\WidgetContext;
 use NovaPHP\Tree\WidgetTree;
 
 /**
- * Renders widgets through WidgetTree with lifecycle hooks.
+ * Render coordinator: builds a RenderContext and runs the replaceable pipeline.
  *
- * Does not wrap in html/body — that belongs to a future Document layer.
- * Raw strings passed here are treated as trusted HTML (use widgets for user text).
+ * Public API unchanged from Milestone 1–3. Pipeline is an additive extension point.
  */
 final class Renderer implements RendererInterface
 {
+    private readonly RenderPipeline $pipeline;
+
     public function __construct(
-        private readonly TreeWalker $walker = new TreeWalker(),
+        ?RenderPipeline $pipeline = null,
+        private readonly ?WidgetContext $defaultWidgetContext = null,
     ) {
+        $this->pipeline = $pipeline ?? RenderPipeline::default();
+    }
+
+    public static function withPipeline(RenderPipeline $pipeline, ?WidgetContext $context = null): self
+    {
+        return new self($pipeline, $context);
     }
 
     public function render(WidgetInterface|string ...$nodes): string
     {
-        $html = '';
+        $buffer = '';
 
         foreach ($nodes as $node) {
-            $html .= is_string($node)
+            $buffer .= is_string($node)
                 ? $node
                 : $this->renderWidget($node);
         }
 
-        return $html;
+        return $buffer;
     }
 
     /**
@@ -45,20 +54,19 @@ final class Renderer implements RendererInterface
     }
 
     /**
-     * Render a single widget through the tree + lifecycle pipeline.
+     * Render a single widget through the runtime pipeline.
      */
-    public function renderWidget(WidgetInterface $widget): string
+    public function renderWidget(WidgetInterface $widget, ?RenderContext $context = null): string
     {
-        $tree = WidgetTree::from($widget);
+        $context ??= new RenderContext(
+            widgetContext: $this->defaultWidgetContext ?? WidgetContext::defaults(),
+        );
+        $context->setRoot($widget);
+        $context->setHtml('');
 
-        $this->walker->walk($tree->root(), LifecycleTreeVisitor::mount());
-        $this->walker->walk($tree->root(), LifecycleTreeVisitor::beforeRender());
+        $this->pipeline->run($context);
 
-        $html = $widget->render();
-
-        $this->walker->walk($tree->root(), LifecycleTreeVisitor::afterRender());
-
-        return $html;
+        return $context->html();
     }
 
     /**
@@ -67,5 +75,10 @@ final class Renderer implements RendererInterface
     public function tree(WidgetInterface $widget): WidgetTree
     {
         return WidgetTree::from($widget);
+    }
+
+    public function pipeline(): RenderPipeline
+    {
+        return $this->pipeline;
     }
 }

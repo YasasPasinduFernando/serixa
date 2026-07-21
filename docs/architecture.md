@@ -11,34 +11,50 @@ Widgets (Component/* — public DX)
    ↓
 Widget base + concerns (attributes, children, theme resolve, a11y, state key)
    ↓
-ThemeManager → ThemeInterface → tokens → CSS classes
+Renderer (coordinator)
    ↓
-Renderer → WidgetTree → lifecycle → HTML string
+RenderPipeline passes
+   BuildTree → ResolveContext → Lifecycle → ThemeResolution → Accessibility → Render
+   ↓
+HtmlWriter → HTML string
+```
+
+Cross-cutting runtime services:
+
+```text
+WidgetContext / RenderContext
+Container (DI)
+WidgetRegistry + WidgetMetadata
+PluginManager
+ThemeManager (BC bridge from WidgetContext.theme)
+StateManager (memory-only)
+Inspector + Performance contracts
 ```
 
 ## SOLID mapping
 
 | Principle | How |
 |-----------|-----|
-| SRP | Escaper, AttributeBuilder, Theme, TreeWalker, StateManager each own one job |
-| OCP | New widgets + theme keys; themes swap without editing widgets |
-| LSP | `Component` is a `Widget`; `ComponentInterface` is a `WidgetInterface` |
-| ISP | Narrow contracts (`WidgetInterface`, `ThemeInterface`, `StateInterface`, event interfaces) |
-| DIP | Widgets depend on `ThemeInterface` via ThemeManager; Renderer depends on `WidgetInterface` |
+| SRP | Escaper, HtmlWriter, each pipeline pass, Container, Registry |
+| OCP | New passes/plugins/widgets without editing Renderer internals |
+| LSP | `Component` is a `Widget`; plugin interfaces extend `PluginInterface` |
+| ISP | Narrow contracts (inspectors, profilers, plugins, passes) |
+| DIP | Pipeline depends on `RenderPassInterface`; plugins boot via Container |
 
 ## Namespace note
 
 Runtime namespace is `NovaPHP\` for backward compatibility through `v0.x`.
-Product branding is **SERIXA** (`serixa/framework`). A future major may introduce `Serixa\` with aliases.
+Product branding is **SERIXA** (`serixa/framework`).
 
 ## Extension points
 
 1. **Themes** — implement `ThemeInterface` (including `token()`)
-2. **Widgets** — extend `Widget` / `Component`, register in `WidgetFactory` if needed
-3. **Tree visitors** — implement `TreeVisitor` for inspection / plugins
-4. **State** — use `StateManager` keys; inject a manager later via `StateManager::set()`
-5. **Events** — implement `WidgetEventDispatcher` when the JS bridge arrives
+2. **Widgets** — extend `Widget` / `Component`, register metadata in `WidgetRegistry`
+3. **Pipeline** — implement `RenderPassInterface`, compose `RenderPipeline`
+4. **Plugins** — implement `WidgetPlugin` / `ThemePlugin` / `RuntimePlugin`
+5. **Context** — pass `WidgetContext` into `Renderer`
+6. **Inspectors / profilers** — implement contracts when DevTools land
 
 ## Non-goals (core)
 
-Routing, controllers, middleware, sessions, cookies, database, full SPA runtime.
+Routing, controllers, middleware, sessions, cookies, database, full SPA runtime, marketplace UI.
