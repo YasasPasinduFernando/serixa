@@ -1,0 +1,43 @@
+{
+    "name": "serixa/calendar",
+    "description": "SERIXA calendar widgets (skeleton).",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "serixa",
+        "calendar"
+    ],
+    "authors": [
+        {
+            "name": "SERIXA Contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "serixa/framework": "^0.11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Serixa\\Calendar\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Serixa\\Calendar\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

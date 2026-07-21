@@ -1,0 +1,22 @@
+﻿name: serixa-auth-ui
+
+on:
+  push:
+    paths:
+      - 'packages/auth-ui/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/auth-ui/**'
+      - 'framework/**'
+
+jobs:
+  placeholder:
+    name: Package skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify skeleton
+        run: |
+          test -f packages/auth-ui/composer.json
+          test -d packages/auth-ui/src

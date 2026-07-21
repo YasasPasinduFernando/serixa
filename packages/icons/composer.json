@@ -1,0 +1,43 @@
+{
+    "name": "serixa/icons",
+    "description": "SERIXA icon set and icon widget helpers (skeleton).",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "serixa",
+        "icons"
+    ],
+    "authors": [
+        {
+            "name": "SERIXA Contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "serixa/framework": "^0.11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Serixa\\Icons\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Serixa\\Icons\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

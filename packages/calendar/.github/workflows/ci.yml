@@ -1,0 +1,22 @@
+﻿name: serixa-calendar
+
+on:
+  push:
+    paths:
+      - 'packages/calendar/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/calendar/**'
+      - 'framework/**'
+
+jobs:
+  placeholder:
+    name: Package skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify skeleton
+        run: |
+          test -f packages/calendar/composer.json
+          test -d packages/calendar/src

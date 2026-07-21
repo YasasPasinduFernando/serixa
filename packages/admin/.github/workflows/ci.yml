@@ -1,0 +1,22 @@
+﻿name: serixa-admin
+
+on:
+  push:
+    paths:
+      - 'packages/admin/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/admin/**'
+      - 'framework/**'
+
+jobs:
+  placeholder:
+    name: Package skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify skeleton
+        run: |
+          test -f packages/admin/composer.json
+          test -d packages/admin/src

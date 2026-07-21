@@ -1,6 +1,6 @@
 {
     "name": "app/blog",
-    "description": "Blog · blog — SERIXA application",
+    "description": "Blog \u2014 SERIXA validation application",
     "type": "project",
     "require": {
         "php": "^8.2",
@@ -9,7 +9,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "D:/yasas/PersonalProjects/Serixa",
+            "url": "../../framework",
             "options": {
                 "symlink": true
             }

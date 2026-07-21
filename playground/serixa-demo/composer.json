@@ -1,12 +1,12 @@
 {
     "name": "serixa/demo",
-    "description": "SERIXA DX playground — consumes the local framework like a real app",
+    "description": "SERIXA DX playground \u2014 consumes the local framework like a real app",
     "type": "project",
     "license": "MIT",
     "repositories": [
         {
             "type": "path",
-            "url": "../../",
+            "url": "../../framework",
             "options": {
                 "symlink": true
             }

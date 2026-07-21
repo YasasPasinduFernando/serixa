@@ -104,6 +104,13 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [ ] Browser live-reload hook for `serixa dev`
 - [ ] Installable community template packages
 
+### Milestone 11 — Ecosystem monorepo (`v0.11.1`)
+- [x] Move production package to `framework/`
+- [x] Package skeletons (`packages/*`)
+- [x] Starter skeletons (`starters/*`)
+- [x] Root meta Composer + CI matrix for framework / packages / starters
+- [x] `docs/monorepo.md`
+
 ### Milestone 7 — Interactive widgets (historical)
 - [x] Modal, Tabs, Accordion, Drawer, Dropdown, Toast (delivered in v0.9.0)
 

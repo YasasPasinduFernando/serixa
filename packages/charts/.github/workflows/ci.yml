@@ -1,0 +1,22 @@
+﻿name: serixa-charts
+
+on:
+  push:
+    paths:
+      - 'packages/charts/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/charts/**'
+      - 'framework/**'
+
+jobs:
+  placeholder:
+    name: Package skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify skeleton
+        run: |
+          test -f packages/charts/composer.json
+          test -d packages/charts/src

@@ -1,17 +1,12 @@
 {
-    "name": "serixa/framework",
-    "description": "SERIXA — a Flutter-inspired PHP UI framework. Write PHP widgets, get semantic HTML.",
-    "type": "library",
+    "name": "serixa/serixa",
+    "description": "SERIXA ecosystem monorepo — local development meta-package (does not replace serixa/framework).",
+    "type": "project",
     "license": "MIT",
+    "private": true,
     "keywords": [
         "serixa",
-        "php",
-        "ui",
-        "widgets",
-        "components",
-        "html",
-        "tailwind",
-        "flutter"
+        "monorepo"
     ],
     "authors": [
         {
@@ -21,35 +16,46 @@
     "require": {
         "php": "^8.2"
     },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.64",
-        "phpstan/phpstan": "^2.0",
-        "phpunit/phpunit": "^11.0"
-    },
-    "bin": [
-        "bin/serixa"
+    "repositories": [
+        {
+            "type": "path",
+            "url": "framework",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "packages/*",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "starters/*",
+            "options": {
+                "symlink": true
+            }
+        }
     ],
-    "autoload": {
-        "psr-4": {
-            "Serixa\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Serixa\\Tests\\": "tests/"
-        }
-    },
     "scripts": {
-        "test": "phpunit",
-        "phpstan": "phpstan analyse --memory-limit=512M",
-        "cs-check": "php-cs-fixer fix --dry-run --diff",
-        "cs-fix": "php-cs-fixer fix",
-        "qa": [
-            "@test",
-            "@phpstan",
-            "@cs-check"
-        ]
+        "install-framework": "composer install --working-dir=framework --no-interaction",
+        "post-install-cmd": [
+            "@install-framework"
+        ],
+        "post-update-cmd": [
+            "@install-framework"
+        ],
+        "test": "composer test --working-dir=framework --no-interaction",
+        "phpstan": "composer phpstan --working-dir=framework --no-interaction",
+        "cs-check": "composer cs-check --working-dir=framework --no-interaction",
+        "cs-fix": "composer cs-fix --working-dir=framework --no-interaction",
+        "qa": "composer qa --working-dir=framework --no-interaction",
+        "test:packages": "php tools/scripts/test-packages.php",
+        "test:starters": "php tools/scripts/test-starters.php",
+        "benchmark": "php tools/benchmark/run.php"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

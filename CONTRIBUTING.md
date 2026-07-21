@@ -2,6 +2,14 @@
 
 Thanks for helping build SERIXA.
 
+## Monorepo
+
+This repository is an ecosystem monorepo. Read [docs/monorepo.md](docs/monorepo.md) first.
+
+- Framework code: `framework/`
+- Optional packages: `packages/` (skeletons until scheduled)
+- Starters: `starters/` (structure only until scheduled)
+
 ## Rules
 
 - Do not break public APIs in patch releases. See [docs/VERSIONING.md](docs/VERSIONING.md) and [docs/DEPRECATION.md](docs/DEPRECATION.md).
@@ -10,16 +18,17 @@ Thanks for helping build SERIXA.
 - One responsibility per class.
 - Mark non-SemVer types with `@internal`.
 - Add or update PHPUnit tests for behavior changes.
-- Update `CHANGELOG.md` for user-visible changes.
-- Do not add routing, auth, ORM, or CLI unless a milestone explicitly calls for it.
+- Update `framework/CHANGELOG.md` for user-visible framework changes.
+- Do not implement package/starter features unless a milestone explicitly calls for it.
 - Record significant decisions as ADRs in `docs/adr/`.
 
 ## Setup
 
 ```bash
-composer install
-composer qa
-php examples/basic.php
+composer install          # root meta → installs framework deps
+composer qa               # delegates to framework/
+php framework/examples/basic.php
+php framework/bin/serixa version
 ```
 
 ## Pull requests
@@ -27,4 +36,4 @@ php examples/basic.php
 - Keep diffs focused.
 - Document architectural decisions in `docs/` when introducing new seams.
 - Mention BC impact in the PR description.
-- Ensure CI (tests + PHPStan + CS) is green.
+- Ensure CI (framework tests + PHPStan + CS + skeleton checks) is green.

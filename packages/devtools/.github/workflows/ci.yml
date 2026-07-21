@@ -1,0 +1,22 @@
+﻿name: serixa-devtools
+
+on:
+  push:
+    paths:
+      - 'packages/devtools/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/devtools/**'
+      - 'framework/**'
+
+jobs:
+  placeholder:
+    name: Package skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify skeleton
+        run: |
+          test -f packages/devtools/composer.json
+          test -d packages/devtools/src

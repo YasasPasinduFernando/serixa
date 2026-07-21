@@ -1,14 +1,22 @@
-# SERIXA CLI (`v0.11.0`)
+# SERIXA CLI (`v0.11.1`)
 
 New to the CLI? [docs/getting-started.md](getting-started.md) and [docs/first-blog.md](first-blog.md) walk through `new` → `make:page` → routing end to end. This page is the reference.
 
-The CLI is a **developer tool**, independent from the HTML render pipeline.
+Monorepo note: the CLI binary lives at `framework/bin/serixa`. From the framework package root:
+
+```bash
+php bin/serixa
+```
+
+Or, once installed as a dependency:
 
 ```bash
 vendor/bin/serixa
-# or
-php bin/serixa
 ```
+
+See [monorepo.md](monorepo.md).
+
+The CLI is a **developer tool**, independent from the HTML render pipeline.
 
 Running `serixa` with no arguments prints a quick-start banner (`serixa new blog`, `composer install`, `php -S`) and points at `docs/getting-started.md`.
 

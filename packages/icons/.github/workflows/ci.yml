@@ -1,0 +1,22 @@
+﻿name: serixa-icons
+
+on:
+  push:
+    paths:
+      - 'packages/icons/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/icons/**'
+      - 'framework/**'
+
+jobs:
+  placeholder:
+    name: Package skeleton
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify skeleton
+        run: |
+          test -f packages/icons/composer.json
+          test -d packages/icons/src
