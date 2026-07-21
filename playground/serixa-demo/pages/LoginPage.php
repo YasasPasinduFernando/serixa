@@ -14,12 +14,12 @@ use Serixa\Component\Form;
 use Serixa\Component\Input;
 use Serixa\Component\Label;
 use Serixa\Component\Link;
+use Serixa\Component\Logo;
 use Serixa\Component\PasswordInput;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Text;
 use Serixa\Document\Document;
 use SerixaDemo\DocumentFactory;
-use SerixaDemo\Missing;
 
 final class LoginPage
 {
@@ -30,8 +30,7 @@ final class LoginPage
             ->action('/?page=login')
             ->child(
                 Card::make(
-                    // Still missing: Logo / Brand / Image
-                    Missing::widget('Logo', 'Product mark above the login form'),
+                    Logo::make()->text('SERIXA')->href('/?page=login'),
                     Text::make('Sign in')->as('h1')->size('xl')->weight('bold'),
                     Text::make('Use your SERIXA account to continue.')->tone('muted')->size('sm'),
                     SizedBox::height(4),

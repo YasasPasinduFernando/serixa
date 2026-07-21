@@ -5,6 +5,25 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.7.0] — 2026-07-22
+
+### Added
+- Data display: `DataTable`, `Table`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell`
+- Application widgets: `SearchField`, `Pagination`, `PageHeader`, `Toolbar`, `EmptyState`
+- Media: `Avatar`, `Image`, `Logo`
+- Dashboard: `StatCard`, `Metric`, `ActivityList`, `ActivityItem`
+- Docs: `docs/data-display.md`, `examples/dashboard.php`, `examples/table.php`, `examples/profile.php`
+- Playground CRUD / Dashboard / Profile / Login updated to remove data-display placeholders
+
+### Changed
+- `WidgetRegistry` / `DefaultTheme` cover all v0.7.0 widgets
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.6.0] — 2026-07-22
 
 ### Added

@@ -58,13 +58,18 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Link, FieldGroup, HelperText, ErrorText
 - [x] Divider orientation / spacing improvements
 
+### Milestone 7.0 — Data Display & Application Widgets (`v0.7.0`)
+- [x] DataTable + Table primitives
+- [x] SearchField, Pagination, Toolbar, PageHeader
+- [x] Avatar, Image, Logo
+- [x] StatCard, Metric, EmptyState, ActivityList / ActivityItem
+
 ## Upcoming
 
-### Milestone 6.1 — Form validation display & data primitives
-- [ ] Field error / success state adapters (UI only)
-- [ ] SearchField, DataTable, Pagination
-- [ ] StatCard / Metric, List / ListTile
-- [ ] Avatar
+### Milestone 7.1 — Polish & validation display
+- [ ] Badge
+- [ ] Field validation adapters (UI only)
+- [ ] Chart placeholder contract / adapters
 
 ### Milestone 7 — Interactive widgets
 - [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast

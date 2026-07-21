@@ -4,37 +4,56 @@ declare(strict_types=1);
 
 namespace Serixa\Registry;
 
+use Serixa\Component\ActivityItem;
+use Serixa\Component\ActivityList;
 use Serixa\Component\AppBar;
+use Serixa\Component\Avatar;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Center;
 use Serixa\Component\Checkbox;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
+use Serixa\Component\DataTable;
 use Serixa\Component\Divider;
+use Serixa\Component\EmptyState;
 use Serixa\Component\ErrorText;
 use Serixa\Component\Expanded;
 use Serixa\Component\FieldGroup;
 use Serixa\Component\Footer;
 use Serixa\Component\Form;
 use Serixa\Component\HelperText;
+use Serixa\Component\Image;
 use Serixa\Component\Input;
 use Serixa\Component\Label;
 use Serixa\Component\Link;
+use Serixa\Component\Logo;
 use Serixa\Component\MainContent;
+use Serixa\Component\Metric;
 use Serixa\Component\Padding;
+use Serixa\Component\PageHeader;
+use Serixa\Component\Pagination;
 use Serixa\Component\PasswordInput;
 use Serixa\Component\Radio;
 use Serixa\Component\Row;
 use Serixa\Component\Scaffold;
+use Serixa\Component\SearchField;
 use Serixa\Component\Select;
 use Serixa\Component\Sidebar;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Spacer;
 use Serixa\Component\Stack;
+use Serixa\Component\StatCard;
 use Serixa\Component\SwitchControl;
+use Serixa\Component\Table;
+use Serixa\Component\TableBody;
+use Serixa\Component\TableCell;
+use Serixa\Component\TableHead;
+use Serixa\Component\TableHeaderCell;
+use Serixa\Component\TableRow;
 use Serixa\Component\Text;
 use Serixa\Component\Textarea;
+use Serixa\Component\Toolbar;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Exception\RegistryException;
 
@@ -146,6 +165,25 @@ final class WidgetRegistry
             new WidgetMetadata('helperText', 'form', 'Helper copy', [], [], false, '0.6.0', HelperText::class),
             new WidgetMetadata('errorText', 'form', 'Error copy', [], [], false, '0.6.0', ErrorText::class),
             new WidgetMetadata('link', 'navigation', 'Anchor link', ['href', 'active', 'target'], [], false, '0.6.0', Link::class),
+            new WidgetMetadata('table', 'data', 'HTML table', [], [], true, '0.7.0', Table::class),
+            new WidgetMetadata('tableHead', 'data', 'Table head', [], [], true, '0.7.0', TableHead::class),
+            new WidgetMetadata('tableBody', 'data', 'Table body', [], [], true, '0.7.0', TableBody::class),
+            new WidgetMetadata('tableRow', 'data', 'Table row', [], [], true, '0.7.0', TableRow::class),
+            new WidgetMetadata('tableCell', 'data', 'Table cell', [], [], true, '0.7.0', TableCell::class),
+            new WidgetMetadata('tableHeaderCell', 'data', 'Table header cell', ['scope'], [], true, '0.7.0', TableHeaderCell::class),
+            new WidgetMetadata('dataTable', 'data', 'Data table composer', ['headers', 'rows', 'striped', 'hover', 'compact'], [], true, '0.7.0', DataTable::class),
+            new WidgetMetadata('searchField', 'form', 'Search field (render-only)', ['name', 'placeholder', 'value'], [], false, '0.7.0', SearchField::class),
+            new WidgetMetadata('pagination', 'navigation', 'Pagination controls', ['currentPage', 'totalPages'], [], false, '0.7.0', Pagination::class),
+            new WidgetMetadata('avatar', 'media', 'User avatar', ['image', 'initials', 'size', 'shape'], [], false, '0.7.0', Avatar::class),
+            new WidgetMetadata('image', 'media', 'Image element', ['src', 'alt', 'loading'], [], false, '0.7.0', Image::class),
+            new WidgetMetadata('logo', 'media', 'Brand logo', ['image', 'text', 'href'], [], false, '0.7.0', Logo::class),
+            new WidgetMetadata('statCard', 'data', 'Statistic card', ['title', 'value', 'trend', 'color'], [], false, '0.7.0', StatCard::class),
+            new WidgetMetadata('metric', 'data', 'Inline metric', ['label', 'value'], [], false, '0.7.0', Metric::class),
+            new WidgetMetadata('emptyState', 'data', 'Empty state', ['title', 'description', 'action'], [], true, '0.7.0', EmptyState::class),
+            new WidgetMetadata('activityList', 'data', 'Activity feed', [], [], true, '0.7.0', ActivityList::class),
+            new WidgetMetadata('activityItem', 'data', 'Activity item', ['title', 'description', 'timestamp'], [], false, '0.7.0', ActivityItem::class),
+            new WidgetMetadata('pageHeader', 'layout', 'Page header', ['title', 'subtitle', 'actions'], [], true, '0.7.0', PageHeader::class),
+            new WidgetMetadata('toolbar', 'layout', 'Toolbar slots', ['leading', 'center', 'trailing'], [], true, '0.7.0', Toolbar::class),
         ];
     }
 }

@@ -46,7 +46,7 @@ final class Shell
                 )->ariaLabel('Primary'),
             )
             ->body(MainContent::make($content))
-            ->footer(Footer::make('SERIXA Demo · UI Foundation (v0.6.0)'));
+            ->footer(Footer::make('SERIXA Demo · Data Display (v0.7.0)'));
     }
 
     private static function navLink(string $label, string $page, string $active): WidgetInterface

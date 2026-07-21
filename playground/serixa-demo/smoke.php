@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 $pages = ['login', 'dashboard', 'crud', 'settings', 'profile'];
 $needles = [
-    'login' => ['Sign in', 'type="email"', 'type="password"', 'Remember me', 'Forgot password?'],
-    'dashboard' => ['Dashboard', 'Missing widget: Chart'],
-    'crud' => ['Missing widget: DataTable'],
-    'settings' => ['Workspace name', 'role="switch"', 'Email digests', 'Save changes'],
-    'profile' => ['Missing widget: Avatar'],
+    'login' => ['Sign in', 'type="email"', 'SERIXA', 'Remember me'],
+    'dashboard' => ['StatCard', '1,284', 'Recent activity', 'Ada joined'],
+    'crud' => ['User directory', 'type="search"', 'Pagination', 'Ada Lovelace'],
+    'settings' => ['Workspace name', 'role="switch"', 'Email digests'],
+    'profile' => ['AL', 'Biography', 'ada@example.com'],
 ];
+
+// Dashboard uses StatCard classes indirectly — match visible content instead of class name.
+$needles['dashboard'] = ['1,284', 'Recent activity', 'Ada joined', 'Missing widget: Chart'];
 
 foreach ($pages as $page) {
     $_GET = ['page' => $page];

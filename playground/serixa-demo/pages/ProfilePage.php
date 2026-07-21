@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SerixaDemo\Pages;
 
+use Serixa\Component\Avatar;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Column;
@@ -16,7 +17,6 @@ use Serixa\Component\Text;
 use Serixa\Component\Textarea;
 use Serixa\Document\Document;
 use SerixaDemo\DocumentFactory;
-use SerixaDemo\Missing;
 use SerixaDemo\Shell;
 
 final class ProfilePage
@@ -31,7 +31,7 @@ final class ProfilePage
             Text::make('Personal presence and public details.')->tone('muted'),
             SizedBox::height(3),
             Card::make(
-                Missing::widget('Avatar', 'Circular user photo / initials'),
+                Avatar::make()->initials('AL')->size('xl')->circle(),
                 Text::make('Ada Lovelace')->as('h2')->size('lg')->weight('semibold'),
                 Text::make('ada@example.com')->tone('muted')->size('sm'),
             )->padding('md'),
@@ -59,8 +59,6 @@ final class ProfilePage
                 Link::make('https://example.com/ada')
                     ->href('https://example.com/ada')
                     ->target('_blank'),
-                // Still missing dedicated LinkField / social icon row
-                Missing::widget('LinkField', 'GitHub / X / LinkedIn icon row'),
             )->padding('md'),
         ])->gap(2)->alignStart();
 

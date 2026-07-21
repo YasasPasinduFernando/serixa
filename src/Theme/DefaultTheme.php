@@ -76,6 +76,60 @@ final class DefaultTheme implements ThemeInterface
             'helperText' => $this->helperText($state),
             'errorText' => $this->errorText($state),
             'link' => $this->link($state),
+            'table' => $this->table($state),
+            'tableHead' => $this->tableHead($state),
+            'tableBody' => $this->tableBody($state),
+            'tableRow' => $this->tableRow($state),
+            'tableCell' => $this->tableCell($state),
+            'tableHeaderCell' => $this->tableHeaderCell($state),
+            'dataTable' => $this->dataTable($state),
+            'dataTable.scroll' => $this->dataTableScroll($state),
+            'dataTable.caption' => $this->dataTableCaption($state),
+            'searchField' => $this->searchField($state),
+            'searchField.input' => $this->searchFieldInput($state),
+            'searchField.icon' => $this->searchFieldIcon($state),
+            'pagination' => $this->pagination($state),
+            'pagination.list' => $this->paginationList($state),
+            'pagination.item' => $this->paginationItem($state),
+            'pagination.link' => $this->paginationLink($state),
+            'pagination.ellipsis' => $this->paginationEllipsis($state),
+            'avatar' => $this->avatar($state),
+            'avatar.image' => $this->avatarImage($state),
+            'avatar.initials' => $this->avatarInitials($state),
+            'image' => $this->image($state),
+            'logo' => $this->logo($state),
+            'logo.image' => $this->logoImage($state),
+            'logo.text' => $this->logoText($state),
+            'statCard' => $this->statCard($state),
+            'statCard.icon' => $this->statCardIcon($state),
+            'statCard.title' => $this->statCardTitle($state),
+            'statCard.value' => $this->statCardValue($state),
+            'statCard.subtitle' => $this->statCardSubtitle($state),
+            'statCard.trend' => $this->statCardTrend($state),
+            'metric' => $this->metric($state),
+            'metric.label' => $this->metricLabel($state),
+            'metric.value' => $this->metricValue($state),
+            'emptyState' => $this->emptyState($state),
+            'emptyState.icon' => $this->emptyStateIcon($state),
+            'emptyState.title' => $this->emptyStateTitle($state),
+            'emptyState.description' => $this->emptyStateDescription($state),
+            'emptyState.action' => $this->emptyStateAction($state),
+            'activityList' => $this->activityList($state),
+            'activityItem' => $this->activityItem($state),
+            'activityItem.icon' => $this->activityItemIcon($state),
+            'activityItem.body' => $this->activityItemBody($state),
+            'activityItem.title' => $this->activityItemTitle($state),
+            'activityItem.description' => $this->activityItemDescription($state),
+            'activityItem.timestamp' => $this->activityItemTimestamp($state),
+            'pageHeader' => $this->pageHeader($state),
+            'pageHeader.text' => $this->pageHeaderText($state),
+            'pageHeader.title' => $this->pageHeaderTitle($state),
+            'pageHeader.subtitle' => $this->pageHeaderSubtitle($state),
+            'pageHeader.actions' => $this->pageHeaderActions($state),
+            'toolbar' => $this->toolbar($state),
+            'toolbar.leading' => $this->toolbarLeading($state),
+            'toolbar.center' => $this->toolbarCenter($state),
+            'toolbar.trailing' => $this->toolbarTrailing($state),
             default => throw new InvalidArgumentException(sprintf('Unknown theme component "%s".', $component)),
         };
     }
@@ -827,6 +881,582 @@ final class DefaultTheme implements ThemeInterface
     private function scaffoldFooter(array $state): array
     {
         return ['w-full', 'shrink-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function table(array $state): array
+    {
+        $classes = ['w-full', 'text-left', 'text-sm', 'border-collapse'];
+
+        if (! empty($state['compact'])) {
+            $classes[] = 'text-xs';
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tableHead(array $state): array
+    {
+        return ['bg-slate-50', 'dark:bg-slate-800'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tableBody(array $state): array
+    {
+        return ['divide-y', 'divide-slate-200', 'dark:divide-slate-700'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tableRow(array $state): array
+    {
+        return [];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tableCell(array $state): array
+    {
+        return ['px-3', 'py-2', 'align-middle', 'text-slate-700', 'dark:text-slate-200'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function tableHeaderCell(array $state): array
+    {
+        return ['px-3', 'py-2', 'font-semibold', 'text-slate-900', 'dark:text-slate-100'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dataTable(array $state): array
+    {
+        $classes = [
+            'w-full',
+            'rounded-lg',
+            'border',
+            'border-slate-200',
+            'dark:border-slate-700',
+            'bg-white',
+            'dark:bg-slate-900',
+            'overflow-hidden',
+        ];
+
+        if (! empty($state['striped'])) {
+            $classes[] = '[&_tbody_tr:nth-child(odd)]:bg-slate-50';
+            $classes[] = 'dark:[&_tbody_tr:nth-child(odd)]:bg-slate-800/50';
+        }
+
+        if (! empty($state['hover'])) {
+            $classes[] = '[&_tbody_tr:hover]:bg-slate-100';
+            $classes[] = 'dark:[&_tbody_tr:hover]:bg-slate-800';
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dataTableScroll(array $state): array
+    {
+        return ['w-full', 'overflow-x-auto'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function dataTableCaption(array $state): array
+    {
+        return ['caption-top', 'px-3', 'py-2', 'text-left', 'text-sm', 'text-slate-500'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function searchField(array $state): array
+    {
+        return ['relative', 'flex', 'items-center', 'w-full', 'max-w-md'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function searchFieldInput(array $state): array
+    {
+        return array_merge($this->controlField($state), ['pr-3']);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function searchFieldIcon(array $state): array
+    {
+        return ['absolute', 'left-3', 'text-slate-400', 'pointer-events-none'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function pagination(array $state): array
+    {
+        return ['w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function paginationList(array $state): array
+    {
+        return ['flex', 'flex-wrap', 'items-center', 'gap-1', 'list-none', 'p-0', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function paginationItem(array $state): array
+    {
+        return [];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function paginationLink(array $state): array
+    {
+        $classes = [
+            'inline-flex',
+            'items-center',
+            'justify-center',
+            'min-w-9',
+            'h-9',
+            'px-3',
+            'rounded-md',
+            'text-sm',
+            'border',
+            'border-slate-200',
+            'dark:border-slate-700',
+        ];
+
+        if (! empty($state['current'])) {
+            $classes[] = 'bg-sky-600';
+            $classes[] = 'text-white';
+            $classes[] = 'border-sky-600';
+        }
+
+        if (! empty($state['disabled'])) {
+            $classes[] = 'opacity-50';
+            $classes[] = 'cursor-not-allowed';
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function paginationEllipsis(array $state): array
+    {
+        return ['px-2', 'text-slate-400'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function avatar(array $state): array
+    {
+        $sizes = ['sm' => 'h-8 w-8 text-xs', 'md' => 'h-10 w-10 text-sm', 'lg' => 'h-14 w-14 text-base', 'xl' => 'h-20 w-20 text-lg'];
+        $size = (string) ($state['size'] ?? 'md');
+        $shape = (string) ($state['shape'] ?? 'circle');
+
+        return [
+            'inline-flex',
+            'items-center',
+            'justify-center',
+            'overflow-hidden',
+            'bg-slate-200',
+            'dark:bg-slate-700',
+            'text-slate-700',
+            'dark:text-slate-100',
+            'font-semibold',
+            $sizes[$size] ?? $sizes['md'],
+            $shape === 'square' ? 'rounded-md' : 'rounded-full',
+        ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function avatarImage(array $state): array
+    {
+        return ['h-full', 'w-full', 'object-cover'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function avatarInitials(array $state): array
+    {
+        return ['leading-none'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function image(array $state): array
+    {
+        return ['max-w-full', 'h-auto'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function logo(array $state): array
+    {
+        return ['inline-flex', 'items-center', 'gap-2', 'font-bold', 'text-slate-900', 'dark:text-slate-100', 'no-underline'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function logoImage(array $state): array
+    {
+        return ['h-8', 'w-8', 'object-contain'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function logoText(array $state): array
+    {
+        return ['text-lg', 'tracking-tight'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function statCard(array $state): array
+    {
+        $colors = [
+            'default' => 'border-slate-200 dark:border-slate-700',
+            'primary' => 'border-sky-300',
+            'success' => 'border-emerald-300',
+            'warning' => 'border-amber-300',
+            'danger' => 'border-rose-300',
+        ];
+        $color = (string) ($state['color'] ?? 'default');
+
+        return [
+            'flex',
+            'flex-col',
+            'gap-1',
+            'rounded-lg',
+            'border',
+            'bg-white',
+            'dark:bg-slate-900',
+            'p-4',
+            'shadow-sm',
+            'min-w-[10rem]',
+            'flex-1',
+            $colors[$color] ?? $colors['default'],
+        ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function statCardIcon(array $state): array
+    {
+        return ['text-slate-400', 'mb-1'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function statCardTitle(array $state): array
+    {
+        return ['text-sm', 'text-slate-500'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function statCardValue(array $state): array
+    {
+        return ['text-2xl', 'font-bold', 'text-slate-900', 'dark:text-slate-100'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function statCardSubtitle(array $state): array
+    {
+        return ['text-xs', 'text-slate-500'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function statCardTrend(array $state): array
+    {
+        return ['text-xs', 'font-medium', 'text-emerald-600'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function metric(array $state): array
+    {
+        return ['inline-flex', 'flex-col', 'gap-0.5', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function metricLabel(array $state): array
+    {
+        return ['text-xs', 'text-slate-500', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function metricValue(array $state): array
+    {
+        return ['text-sm', 'font-semibold', 'text-slate-900', 'dark:text-slate-100', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function emptyState(array $state): array
+    {
+        return ['flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'text-center', 'px-6', 'py-10'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function emptyStateIcon(array $state): array
+    {
+        return ['text-slate-400', 'text-3xl'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function emptyStateTitle(array $state): array
+    {
+        return ['text-lg', 'font-semibold', 'text-slate-900', 'dark:text-slate-100', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function emptyStateDescription(array $state): array
+    {
+        return ['text-sm', 'text-slate-500', 'm-0', 'max-w-sm'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function emptyStateAction(array $state): array
+    {
+        return ['mt-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityList(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-3', 'list-none', 'p-0', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityItem(array $state): array
+    {
+        return ['flex', 'gap-3', 'items-start'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityItemIcon(array $state): array
+    {
+        return ['mt-0.5', 'text-slate-400'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityItemBody(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-0.5', 'min-w-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityItemTitle(array $state): array
+    {
+        return ['text-sm', 'font-medium', 'text-slate-900', 'dark:text-slate-100'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityItemDescription(array $state): array
+    {
+        return ['text-sm', 'text-slate-500'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function activityItemTimestamp(array $state): array
+    {
+        return ['text-xs', 'text-slate-400'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function pageHeader(array $state): array
+    {
+        return ['flex', 'flex-wrap', 'items-start', 'justify-between', 'gap-4', 'w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function pageHeaderText(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-1', 'min-w-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function pageHeaderTitle(array $state): array
+    {
+        return ['text-2xl', 'font-bold', 'text-slate-900', 'dark:text-slate-100', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function pageHeaderSubtitle(array $state): array
+    {
+        return ['text-sm', 'text-slate-500', 'm-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function pageHeaderActions(array $state): array
+    {
+        return ['flex', 'items-center', 'gap-2', 'flex-shrink-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toolbar(array $state): array
+    {
+        return ['flex', 'flex-wrap', 'items-center', 'justify-between', 'gap-3', 'w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toolbarLeading(array $state): array
+    {
+        return ['flex', 'items-center', 'gap-2', 'flex-1', 'min-w-[12rem]'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toolbarCenter(array $state): array
+    {
+        return ['flex', 'items-center', 'gap-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function toolbarTrailing(array $state): array
+    {
+        return ['flex', 'items-center', 'gap-2'];
     }
 
     private function spacingClass(string $prefix, mixed $value): string

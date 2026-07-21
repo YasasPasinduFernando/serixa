@@ -5,53 +5,87 @@ declare(strict_types=1);
 namespace SerixaDemo\Pages;
 
 use Serixa\Component\Button;
-use Serixa\Component\Card;
 use Serixa\Component\Column;
-use Serixa\Component\Row;
+use Serixa\Component\DataTable;
+use Serixa\Component\EmptyState;
+use Serixa\Component\Link;
+use Serixa\Component\PageHeader;
+use Serixa\Component\Pagination;
+use Serixa\Component\SearchField;
+use Serixa\Component\Select;
 use Serixa\Component\SizedBox;
-use Serixa\Component\Spacer;
 use Serixa\Component\Text;
+use Serixa\Component\Toolbar;
 use Serixa\Document\Document;
 use SerixaDemo\DocumentFactory;
-use SerixaDemo\Missing;
 use SerixaDemo\Shell;
 
 final class CrudPage
 {
     public static function document(): Document
     {
-        $toolbar = Row::make([
-            // Missing: SearchField / Input
-            Missing::widget('SearchField', 'Search users by name or email'),
-            // Missing: Select / FilterBar
-            Missing::widget('Select', 'Filter by role / status'),
-            Spacer::make(),
-            Button::make('Create')->primary(),
-        ])->alignCenter()->gap(3)->spaceBetween();
+        $toolbar = Toolbar::make()
+            ->leading(
+                Column::make([
+                    SearchField::make()->name('q')->placeholder('Search users by name or email'),
+                    Select::make()
+                        ->name('role')
+                        ->placeholder('Filter by role')
+                        ->options([
+                            'admin' => 'Admin',
+                            'editor' => 'Editor',
+                            'viewer' => 'Viewer',
+                        ]),
+                ])->gap(2),
+            )
+            ->trailing(Button::make('Create')->primary());
+
+        $table = DataTable::make()
+            ->caption('User directory')
+            ->headers(['Name', 'Email', 'Role', 'Actions'])
+            ->rows([
+                [
+                    'Ada Lovelace',
+                    'ada@example.com',
+                    Text::make('Admin')->size('sm')->weight('semibold'),
+                    Link::make('Edit')->href('/?page=crud&edit=1'),
+                ],
+                [
+                    'Alan Turing',
+                    'alan@example.com',
+                    Text::make('Editor')->size('sm')->tone('muted'),
+                    Link::make('Edit')->href('/?page=crud&edit=2'),
+                ],
+                [
+                    'Grace Hopper',
+                    'grace@example.com',
+                    Text::make('Viewer')->size('sm')->tone('muted'),
+                    Link::make('Edit')->href('/?page=crud&edit=3'),
+                ],
+            ])
+            ->striped()
+            ->hover()
+            ->emptyState(
+                EmptyState::make()
+                    ->title('No users found')
+                    ->description('Try another search or create a user.')
+                    ->action(Button::make('Create')->primary()),
+            );
 
         $content = Column::make([
-            Text::make('Users')->as('h1')->size('2xl')->weight('bold'),
-            Text::make('CRUD table demo — widgets that do not exist are placeholders.')
-                ->tone('muted')
-                ->size('sm'),
+            PageHeader::make()
+                ->title('Users')
+                ->subtitle('CRUD table demo using DataTable, Toolbar, and Pagination.')
+                ->actions(Button::make('Import')->secondary()),
             SizedBox::height(2),
             $toolbar,
             SizedBox::height(3),
-            Card::make(
-                // Missing: DataTable / Table
-                Missing::widget('DataTable', 'Columns: Name, Email, Role, Actions'),
-                Text::make('Ada Lovelace · ada@example.com · Admin')->size('sm'),
-                Text::make('Alan Turing · alan@example.com · Editor')->size('sm')->tone('muted'),
-                Text::make('Grace Hopper · grace@example.com · Viewer')->size('sm')->tone('muted'),
-                SizedBox::height(2),
-                Row::make([
-                    Button::make('Edit')->secondary()->small(),
-                    Button::make('Delete')->danger()->small(),
-                ])->gap(2),
-            )->title('Directory')->padding('md'),
-            SizedBox::height(2),
-            // Missing: Pagination
-            Missing::widget('Pagination', 'Page controls (prev / next / page size)'),
+            $table,
+            SizedBox::height(3),
+            Pagination::make()
+                ->currentPage(1)
+                ->totalPages(4)
+                ->urlForPage(static fn (int $page): string => '/?page=crud&p=' . $page),
         ])->gap(2)->alignStart();
 
         return DocumentFactory::page(
