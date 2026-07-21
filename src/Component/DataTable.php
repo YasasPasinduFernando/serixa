@@ -6,11 +6,13 @@ namespace Serixa\Component;
 
 use Serixa\Component\Concerns\ResolvesTheme;
 use Serixa\Contracts\WidgetInterface;
+use Serixa\Exception\InvalidArgumentException;
 
 /**
- * High-level data table composer. Supports string and widget cells.
+ * High-level data table composer. Supports convenience headers/rows and composition via child(Table).
  *
  * @example DataTable::make()->headers(['Name'])->rows([['Ada'], [Link::make('Edit')->href('#')]])
+ * @example DataTable::make()->child(Table::make()->head(...)->body(...))
  */
 final class DataTable extends Component
 {
@@ -31,6 +33,8 @@ final class DataTable extends Component
     private ?WidgetInterface $emptyState = null;
 
     private ?string $caption = null;
+
+    private ?Table $composedTable = null;
 
     private function __construct()
     {
@@ -64,6 +68,22 @@ final class DataTable extends Component
         }
 
         $this->rows = $normalized;
+
+        return $this;
+    }
+
+    /**
+     * Composition API: wrap a manually built {@see Table}.
+     *
+     * Convenience {@see headers()} / {@see rows()} are ignored when a composed table is set.
+     */
+    public function child(WidgetInterface|string $child): self
+    {
+        if (! $child instanceof Table) {
+            throw new InvalidArgumentException('DataTable::child() accepts a Table widget only.');
+        }
+
+        $this->composedTable = $child;
 
         return $this;
     }
@@ -105,6 +125,16 @@ final class DataTable extends Component
 
     public function childrenForTree(): array
     {
+        if ($this->composedTable !== null) {
+            $nodes = [$this->composedTable];
+
+            if ($this->emptyState !== null) {
+                $nodes[] = $this->emptyState;
+            }
+
+            return $nodes;
+        }
+
         $nodes = $this->headers;
 
         foreach ($this->rows as $row) {
@@ -122,6 +152,10 @@ final class DataTable extends Component
 
     public function render(): string
     {
+        if ($this->composedTable !== null) {
+            return $this->renderComposed();
+        }
+
         if ($this->rows === [] && $this->emptyState !== null) {
             return $this->renderChild($this->emptyState);
         }
@@ -144,11 +178,7 @@ final class DataTable extends Component
             $bodyRows[] = TableRow::make($cells);
         }
 
-        $state = [
-            'striped' => $this->striped,
-            'hover' => $this->hover,
-            'compact' => $this->compact,
-        ];
+        $state = $this->tableState();
 
         $captionHtml = '';
 
@@ -188,5 +218,41 @@ final class DataTable extends Component
             $headHtml,
             $bodyHtml,
         );
+    }
+
+    private function renderComposed(): string
+    {
+        assert($this->composedTable !== null);
+
+        $table = $this->composedTable
+            ->striped($this->striped)
+            ->hover($this->hover)
+            ->compact($this->compact);
+
+        $state = $this->tableState();
+
+        $wrapperAttrs = $this->buildAttributeString(
+            $this->theme()->classes('dataTable', $state),
+            ['role' => 'region', 'aria-label' => $this->caption ?? 'Data table'],
+        );
+
+        return sprintf(
+            '<div%s><div%s>%s</div></div>',
+            $wrapperAttrs,
+            $this->buildAttributeString($this->theme()->classes('dataTable.scroll')),
+            $this->renderChild($table),
+        );
+    }
+
+    /**
+     * @return array{striped: bool, hover: bool, compact: bool}
+     */
+    private function tableState(): array
+    {
+        return [
+            'striped' => $this->striped,
+            'hover' => $this->hover,
+            'compact' => $this->compact,
+        ];
     }
 }

@@ -8,9 +8,11 @@ use Serixa\Component\Avatar;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Column;
+use Serixa\Component\Image;
 use Serixa\Component\Input;
 use Serixa\Component\Label;
 use Serixa\Component\Link;
+use Serixa\Component\Logo;
 use Serixa\Component\Row;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Text;
@@ -25,10 +27,17 @@ final class ProfilePage
     {
         $content = Column::make([
             Row::make([
-                Text::make('Profile')->as('h1')->size('2xl')->weight('bold'),
+                Logo::make()->text('SERIXA')->href('/?page=dashboard'),
                 Button::make('Edit')->secondary(),
             ])->alignCenter()->spaceBetween(),
             Text::make('Personal presence and public details.')->tone('muted'),
+            SizedBox::height(3),
+            Image::make()
+                ->src('https://placehold.co/640x160/e2e8f0/64748b?text=Cover')
+                ->alt('Profile cover')
+                ->width(640)
+                ->height(160)
+                ->loading('lazy'),
             SizedBox::height(3),
             Card::make(
                 Avatar::make()->initials('AL')->size('xl')->circle(),

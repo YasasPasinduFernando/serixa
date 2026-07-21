@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - Data display: `DataTable`, `Table`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell`
+- `DataTable` dual API: convenience `headers()`/`rows()` and composition `child(Table)` with `Table::head()` / `body()`
 - Application widgets: `SearchField`, `Pagination`, `PageHeader`, `Toolbar`, `EmptyState`
 - Media: `Avatar`, `Image`, `Logo`
 - Dashboard: `StatCard`, `Metric`, `ActivityList`, `ActivityItem`
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - `WidgetRegistry` / `DefaultTheme` cover all v0.7.0 widgets
+- Playground Dashboard uses `Metric`; Profile uses `Logo` + `Image` + `Avatar`
 
 ### Deprecated
 - None

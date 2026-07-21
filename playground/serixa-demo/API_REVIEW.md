@@ -1,7 +1,7 @@
 # SERIXA API Review — Demo DX Findings
 
 **Scope:** Through Data Display (`v0.7.0`)  
-**Updated:** 2026-07-22  
+**Updated:** 2026-07-22 (release audit)
 
 ---
 
@@ -14,14 +14,15 @@ Forms, Link, Scaffold chrome, FieldGroup/HelperText/ErrorText, fluent Padding, `
 | Former placeholder / issue | Resolution |
 |----------------------------|------------|
 | DataTable / Table | `DataTable` + table primitives |
+| DataTable dual API | `headers()`/`rows()` **and** `child(Table)` + `Table::head()`/`body()` |
 | SearchField | `SearchField` (render-only) |
 | Pagination | `Pagination` + `urlForPage()` |
 | Toolbar / PageHeader | `Toolbar`, `PageHeader` |
-| StatCard / Metric | `StatCard`, `Metric` |
+| StatCard / Metric | `StatCard`, `Metric` (both on Dashboard) |
 | ActivityList | `ActivityList` / `ActivityItem` |
 | EmptyState | `EmptyState` |
-| Avatar | `Avatar` |
-| Logo / Image | `Logo`, `Image` |
+| Avatar | `Avatar` on Profile |
+| Logo / Image | `Logo` + `Image` on Profile; `Logo` on Login |
 
 Dashboard, CRUD, Profile, and Login placeholders for the above are removed in the playground.
 
@@ -42,4 +43,4 @@ Dashboard, CRUD, Profile, and Login placeholders for the above are removed in th
 
 ## Verdict
 
-Playground CRUD and Dashboard are demo-complete for **SSR data display**. Remaining gaps are charts, badges, and interactive overlays — not blocking for static admin shells.
+Playground CRUD and Dashboard are demo-complete for **SSR data display**. DataTable supports both convenience and composition APIs. Remaining gaps are charts, badges, and interactive overlays — not blocking for static admin shells.

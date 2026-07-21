@@ -59,10 +59,11 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Divider orientation / spacing improvements
 
 ### Milestone 7.0 — Data Display & Application Widgets (`v0.7.0`)
-- [x] DataTable + Table primitives
+- [x] DataTable + Table primitives (convenience `headers()`/`rows()` + composition `child(Table)`)
 - [x] SearchField, Pagination, Toolbar, PageHeader
 - [x] Avatar, Image, Logo
 - [x] StatCard, Metric, EmptyState, ActivityList / ActivityItem
+- [x] Playground CRUD / Dashboard / Profile wired to real widgets
 
 ## Upcoming
 

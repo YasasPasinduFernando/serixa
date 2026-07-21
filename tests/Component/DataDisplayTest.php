@@ -80,6 +80,34 @@ final class DataDisplayTest extends TestCase
         $this->assertStringNotContainsString('<table', $empty);
     }
 
+    public function testDataTableSupportsCompositionApi(): void
+    {
+        $html = DataTable::make()
+            ->striped()
+            ->hover()
+            ->child(
+                Table::make()
+                    ->head(TableRow::make(TableHeaderCell::make('Name'), TableHeaderCell::make('Role')))
+                    ->body(
+                        TableRow::make(TableCell::make('Ada'), TableCell::make('Admin')),
+                        TableRow::make(TableCell::make('Alan'), TableCell::make(Link::make('Edit')->href('/edit'))),
+                    ),
+            )
+            ->render();
+
+        $this->assertStringContainsString('role="region"', $html);
+        $this->assertStringContainsString('<thead', $html);
+        $this->assertStringContainsString('<tbody', $html);
+        $this->assertStringContainsString('Ada', $html);
+        $this->assertStringContainsString('href="/edit"', $html);
+    }
+
+    public function testDataTableChildRequiresTable(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        DataTable::make()->child(Link::make('Nope')->href('#'));
+    }
+
     public function testSearchFieldAndPagination(): void
     {
         $search = SearchField::make()->name('q')->placeholder('Find users')->value('ada')->render();

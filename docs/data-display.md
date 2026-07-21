@@ -7,7 +7,8 @@ Render-only widgets for dashboards and CRUD surfaces. No routing, search logic, 
 ## Architecture
 
 ```text
-DataTable  →  wraps Table / thead / tbody / tr / th / td
+DataTable  →  convenience headers/rows OR child(Table) composition
+Table      →  head() / body() + TableHead / TableBody / TableRow / cells
 Toolbar    →  leading | center | trailing slots
 PageHeader →  title + subtitle + actions
 StatCard / Metric / ActivityList / EmptyState → dashboard blocks
@@ -17,7 +18,7 @@ SearchField / Pagination → CRUD chrome (markup only)
 
 All widgets resolve Tailwind via `ThemeInterface`, register in `WidgetRegistry`, and compose through the existing render pipeline.
 
-## DataTable
+## DataTable — convenience API
 
 ```php
 DataTable::make()
@@ -29,6 +30,20 @@ DataTable::make()
     ->hover()
     ->emptyState(EmptyState::make()->title('No rows'));
 ```
+
+## DataTable — composition API
+
+```php
+DataTable::make()
+    ->striped()
+    ->child(
+        Table::make()
+            ->head(TableRow::make(TableHeaderCell::make('Name')))
+            ->body(TableRow::make(TableCell::make('Ada'))),
+    );
+```
+
+`DataTable::child()` accepts a `Table` only. When set, `headers()` / `rows()` are ignored. `Table::head()` / `body()` wrap children in `TableHead` / `TableBody` (or accept those widgets directly).
 
 Low-level primitives: `Table`, `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell`.
 
@@ -45,7 +60,7 @@ Pagination::make()
 
 | Widget | Notes |
 |--------|-------|
-| DataTable | Responsive region + optional caption |
+| DataTable | Responsive region + optional caption (convenience API) |
 | Pagination | `nav` + `aria-current="page"` |
 | SearchField | `role="search"` / `searchbox` |
 | Avatar | `role="img"` + `aria-label` |
