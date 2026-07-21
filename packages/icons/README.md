@@ -1,21 +1,54 @@
-﻿# serixa/icons
+﻿# SERIXA Icons
 
-SERIXA icon set and icon widget helpers (skeleton).
+Official icon system for the SERIXA ecosystem (`serixa/icons`).
 
-> Skeleton only — implementation comes in a later release.
+Inline SVG · SSR · no JavaScript · no CDN · no icon fonts.
 
-## Local development
+## Install (monorepo)
 
 ```bash
+cd packages/icons
 composer install
 ```
 
-Uses a Composer **path repository** pointing at `../../framework` (no Packagist required).
+Path repository points at `../../framework`.
 
-## Namespace
+## Quick start
 
-`Serixa\Icons\`
+```php
+use Serixa\Icons\Component\Icon;
+use Serixa\Rendering\Renderer;
 
-## Status
+echo (new Renderer())->render(Icon::make('search')->size('lg')->color('primary'));
+```
 
-Not implemented. Public API will be designed when this package is scheduled.
+## API
+
+| Method | Purpose |
+|--------|---------|
+| `Icon::make('name')` | Create icon (optional `pack:name`) |
+| `->pack('feather')` | Select pack |
+| `->size('sm'|'md'|…)` | Theme size |
+| `->color('primary'|…)` | Semantic color |
+| `->class(...)` | Extra CSS classes (Widget) |
+| `->ariaLabel('…')` | Informative icon |
+| `->decorative()` | `aria-hidden` |
+| `->title('…')` | SVG `<title>` |
+| `->strokeWidth(1.5)` | Outline stroke |
+| `->filled()` / `->outlined()` | Paint mode |
+
+Default pack: **Heroicons**. Also registered: **Feather**, **Lucide**.
+
+## Docs
+
+See [docs/icons.md](docs/icons.md).
+
+## Quality
+
+```bash
+composer qa
+```
+
+## License
+
+MIT
