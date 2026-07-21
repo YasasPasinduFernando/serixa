@@ -1,11 +1,19 @@
-﻿<?php
+<?php
 
 declare(strict_types=1);
 
+use App\Web;
+use Serixa\Rendering\Renderer;
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+$page = is_string($_GET['page'] ?? null) ? $_GET['page'] : 'dashboard';
+
+if (! Web::isKnown($page)) {
+    http_response_code(404);
+}
+
+$document = Web::document($page, $_GET);
+
 header('Content-Type: text/html; charset=utf-8');
-echo '<!DOCTYPE html><html><head><title>SERIXA Blog</title></head><body>';
-echo '<h1>SERIXA starter: Blog</h1>';
-echo '<p>Skeleton only. Add pages under <code>pages/</code>.</p>';
-echo '</body></html>';
+echo (new Renderer())->render($document), PHP_EOL;

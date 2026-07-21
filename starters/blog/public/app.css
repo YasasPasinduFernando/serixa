@@ -1,0 +1,27 @@
+/*
+ * SERIXA Blog Starter — minimal presentation-only stylesheet.
+ *
+ * The starter relies on the Tailwind CDN build (registered in
+ * app/DocumentFactory.php) for utility classes. This file only holds the
+ * handful of tweaks that are awkward to express with utilities alone.
+ */
+
+:root {
+    color-scheme: light;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Native <details>/<summary> disclosures (sidebar groups, user menu, column
+   visibility) should not show the default browser marker. */
+summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}

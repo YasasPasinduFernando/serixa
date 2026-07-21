@@ -1,0 +1,12 @@
+parameters:
+  level: 6
+  paths:
+    - app
+    - components
+    - layouts
+    - pages
+    - routes
+  excludePaths:
+    analyseAndScan:
+      - vendor
+  treatPhpDocTypesAsCertain: false
