@@ -20,6 +20,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 - **Data Display:** `DataTable` (headers/rows + composition), `StatCard`, `Metric`, `Pagination`, `Avatar`, `Toolbar`, …
 - **Progressive Enhancement:** `onClick` / `onSubmit` / …, HTML constraints, tiny `serixa.js` runtime (no VDOM)
 - **Interactive Components:** Modal, Drawer, Dropdown, Tabs, Accordion, Toast, Badge, … (SSR + runtime modules)
+- **CLI & scaffolding:** `serixa new`, `make:*`, `docs`, `build`, `dev` (DX — independent of the renderer)
 - Fluent `Padding::make()->x(6)->y(4)->child(...)`
 - Theme seam + design tokens
 - Widget tree + lifecycle hooks
@@ -46,6 +47,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 8.0 | Progressive Enhancement Foundation | Complete (`v0.8.0`) |
 | 8.1 | Forms attribute isolation patch | Complete (`v0.8.1`) |
 | 9.0 | Interactive Components | Complete (`v0.9.0`) |
+| 10.0 | Developer Experience / CLI | Complete (`v0.10.0`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -154,6 +156,16 @@ src/
 tests/
 docs/
 examples/
+bin/
+templates/
+```
+
+## CLI
+
+```bash
+composer install
+php bin/serixa list
+php bin/serixa new blog
 ```
 
 ## Documentation
@@ -176,6 +188,10 @@ examples/
 - [Progressive Enhancement](docs/progressive-enhancement.md)
 - [Interactive Components](docs/interactive-components.md)
 - [Runtime Modules](docs/runtime-modules.md)
+- [CLI](docs/cli.md)
+- [Scaffolding](docs/scaffolding.md)
+- [Project generator](docs/project-generator.md)
+- [Templates](docs/templates.md)
 
 ## Roadmap
 

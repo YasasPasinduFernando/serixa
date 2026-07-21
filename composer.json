@@ -26,6 +26,9 @@
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0"
     },
+    "bin": [
+        "bin/serixa"
+    ],
     "autoload": {
         "psr-4": {
             "Serixa\\": "src/"

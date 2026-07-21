@@ -84,6 +84,12 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Modular runtime modules + WAI-ARIA patterns
 - [x] Playground Interactive page demos
 
+### Milestone 10.0 — Developer Experience / CLI (`v0.10.0`)
+- [x] `bin/serixa` + `CommandRegistry` / `Application`
+- [x] `new`, `make:*`, `docs`, `build`, `dev`
+- [x] Filesystem templates + project presets (blog/crm/ecommerce)
+- [x] Plugin command registration facade
+
 ## Upcoming
 
 ### Milestone 7.1 — Polish & validation display
@@ -93,6 +99,10 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 ### Milestone 9.1 — Interactive polish
 - [ ] Focus trap hardening / stacked overlays API
 - [ ] Toast queue / portal helpers
+
+### Milestone 10.1 — CLI polish
+- [ ] Browser live-reload hook for `serixa dev`
+- [ ] Installable community template packages
 
 ### Milestone 7 — Interactive widgets (historical)
 - [x] Modal, Tabs, Accordion, Drawer, Dropdown, Toast (delivered in v0.9.0)
@@ -104,5 +114,5 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 
 ### Later
 - [ ] Routing (optional adapter, not a full framework clone)
-- [ ] Auth / ORM / CLI — out of core UI scope unless explicitly scheduled
+- [ ] Auth / ORM / CLI marketplace — out of core UI scope unless explicitly scheduled
 - [ ] Vite / asset bundler adapters

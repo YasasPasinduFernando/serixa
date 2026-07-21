@@ -5,6 +5,25 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.10.0] — 2026-07-22
+
+### Added
+- SERIXA CLI (`bin/serixa`) with `Application`, `CommandRegistry`, and pluggable commands
+- Commands: `new`, `make:page`, `make:component`, `make:layout`, `make:theme`, `make:plugin`, `docs`, `dev`, `build`
+- Filesystem template engine + `/templates` stubs (project / page / component / layout / theme / plugin)
+- Project generator presets: `blog`, `crm`, `ecommerce`
+- `Serixa\Console\Plugin::registerCommand()` for future packages
+- Docs: `docs/cli.md`, `docs/scaffolding.md`, `docs/project-generator.md`, `docs/templates.md`
+
+### Changed
+- Composer `bin` exposes `serixa`
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.9.0] — 2026-07-22
 
 ### Added
