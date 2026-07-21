@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Select list. Options are value => label pairs (render-only).
  *
- * @example Select::make()->name('role')->options(['admin' => 'Admin', 'user' => 'User'])
+ * @example Select::make()->name('role')->required()->onChange('filterRole')
  */
 final class Select extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -62,7 +64,7 @@ final class Select extends Component
                 'invalid' => $this->invalid,
                 'disabled' => $this->disabled,
             ]),
-            $this->formControlAttributes(),
+            array_merge($this->formControlAttributes(), $this->domEventAttributes()),
         );
 
         $optionsHtml = '';

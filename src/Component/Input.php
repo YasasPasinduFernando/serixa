@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Serixa\Component;
 
 use Serixa\Component\Concerns\AssertsOption;
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Textual HTML input. No validation engine — aria-invalid is UI-only.
  *
- * @example Input::make()->id('email')->name('email')->type('email')->placeholder('You@example.com')
+ * @example Input::make()->id('email')->name('email')->type('email')->onInput('search')
  */
 final class Input extends Component
 {
     use AssertsOption;
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -67,7 +69,7 @@ final class Input extends Component
                 'invalid' => $this->invalid,
                 'disabled' => $this->disabled,
             ]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'type' => $this->type,
                 'value' => $this->value,
                 'placeholder' => $this->placeholder,

@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Multi-line text control.
  *
- * @example Textarea::make()->name('bio')->rows(4)->placeholder('About you')
+ * @example Textarea::make()->name('bio')->rows(4)->maxLength(500)
  */
 final class Textarea extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -73,7 +75,7 @@ final class Textarea extends Component
                 'invalid' => $this->invalid,
                 'disabled' => $this->disabled,
             ]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'placeholder' => $this->placeholder,
                 'rows' => (string) $this->rows,
                 'cols' => $this->cols !== null ? (string) $this->cols : null,

@@ -6,18 +6,20 @@ namespace Serixa\Component;
 
 use Serixa\Component\Concerns\AssertsOption;
 use Serixa\Component\Concerns\HasChildren;
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\ResolvesTheme;
 use Serixa\Contracts\WidgetInterface;
 
 /**
  * Semantic HTML form. Render-only — no submission or validation engine.
  *
- * @example Form::make()->method('POST')->action('/login')->child(Input::make()->name('email'))
+ * @example Form::make()->method('POST')->action('/login')->onSubmit('login')
  */
 final class Form extends Component
 {
     use AssertsOption;
     use HasChildren;
+    use HasDomEvents;
     use ResolvesTheme;
 
     private string $method = 'POST';
@@ -90,13 +92,13 @@ final class Form extends Component
     {
         $attrs = $this->buildAttributeString(
             $this->theme()->classes('form'),
-            [
+            array_merge($this->domEventAttributes(), [
                 'method' => $this->method,
                 'action' => $this->action,
                 'enctype' => $this->enctype,
                 'target' => $this->target,
                 'novalidate' => $this->novalidate ? true : null,
-            ],
+            ]),
         );
 
         return sprintf('<form%s>%s</form>', $attrs, $this->renderChildren($this->getChildren()));

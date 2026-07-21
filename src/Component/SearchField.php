@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 use Serixa\Contracts\WidgetInterface;
@@ -11,10 +12,11 @@ use Serixa\Contracts\WidgetInterface;
 /**
  * Render-only search input. No search logic.
  *
- * @example SearchField::make()->name('q')->placeholder('Search…')
+ * @example SearchField::make()->name('q')->onInput('search')
  */
 final class SearchField extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -55,7 +57,7 @@ final class SearchField extends Component
     {
         $inputAttrs = $this->buildAttributeString(
             $this->theme()->classes('searchField.input', ['disabled' => $this->disabled]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'type' => 'search',
                 'value' => $this->value,
                 'placeholder' => $this->placeholder,

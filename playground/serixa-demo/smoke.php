@@ -4,9 +4,24 @@ declare(strict_types=1);
 
 $pages = ['login', 'dashboard', 'crud', 'settings', 'profile'];
 $needles = [
-    'login' => ['Sign in', 'type="email"', 'SERIXA', 'Remember me'],
+    'login' => [
+        'Sign in',
+        'type="email"',
+        'SERIXA',
+        'Remember me',
+        'data-serixa-on-submit="login"',
+        'required',
+        'serixa.js',
+    ],
     'dashboard' => ['1,284', 'Avg latency', 'Recent activity', 'Ada joined', 'Missing widget: Chart'],
-    'crud' => ['User directory', 'type="search"', 'Pagination', 'Ada Lovelace'],
+    'crud' => [
+        'User directory',
+        'type="search"',
+        'Pagination',
+        'Ada Lovelace',
+        'data-serixa-on-input="search"',
+        'data-serixa-on-click="createUser"',
+    ],
     'settings' => ['Workspace name', 'role="switch"', 'Email digests'],
     'profile' => ['AL', 'SERIXA', 'Profile cover', 'Biography', 'ada@example.com'],
 ];

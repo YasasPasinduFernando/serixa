@@ -65,12 +65,23 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] StatCard, Metric, EmptyState, ActivityList / ActivityItem
 - [x] Playground CRUD / Dashboard / Profile wired to real widgets
 
+### Milestone 8.0 — Progressive Enhancement Foundation (`v0.8.0`)
+- [x] Fluent DOM events (`onClick`, `onChange`, `onInput`, `onSubmit`, …) → `data-serixa-on-*`
+- [x] HTML validation attributes (`min`/`max`/`minLength`/`maxLength`/`pattern`/`readonly`/…)
+- [x] Tiny client runtime `assets/runtime/serixa.js` (no VDOM / hydration / routing)
+- [x] `EventRegistry` + `ClientRuntime` registration helpers
+- [x] Playground Login / CRUD event metadata demos
+
 ## Upcoming
 
 ### Milestone 7.1 — Polish & validation display
 - [ ] Badge
 - [ ] Field validation adapters (UI only)
 - [ ] Chart placeholder contract / adapters
+
+### Milestone 8.1 — Interactive widgets (PE modules)
+- [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast as optional runtime modules
+- [ ] Focus trap / dialog a11y helpers via `Serixa.use()`
 
 ### Milestone 7 — Interactive widgets
 - [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast

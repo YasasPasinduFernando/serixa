@@ -27,7 +27,10 @@ final class CrudPage
         $toolbar = Toolbar::make()
             ->leading(
                 Column::make([
-                    SearchField::make()->name('q')->placeholder('Search users by name or email'),
+                    SearchField::make()
+                        ->name('q')
+                        ->placeholder('Search users by name or email')
+                        ->onInput('search'),
                     Select::make()
                         ->name('role')
                         ->placeholder('Filter by role')
@@ -35,10 +38,11 @@ final class CrudPage
                             'admin' => 'Admin',
                             'editor' => 'Editor',
                             'viewer' => 'Viewer',
-                        ]),
+                        ])
+                        ->onChange('filterRole'),
                 ])->gap(2),
             )
-            ->trailing(Button::make('Create')->primary());
+            ->trailing(Button::make('Create')->primary()->onClick('createUser'));
 
         $table = DataTable::make()
             ->caption('User directory')

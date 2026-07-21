@@ -6,6 +6,7 @@ namespace SerixaDemo;
 
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
+use Serixa\Runtime\ClientRuntime;
 
 /**
  * Shared document shell for demo pages (SEO + assets).
@@ -26,6 +27,8 @@ final class DocumentFactory
         $document->assets()
             ->js('https://cdn.tailwindcss.com')
             ->css('/assets/demo.css');
+
+        ClientRuntime::register($document->assets());
 
         return $document;
     }

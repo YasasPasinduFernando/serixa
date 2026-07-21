@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
- * Binary switch (checkbox + role=switch). No JavaScript toggle behaviour.
+ * Binary switch (checkbox + role=switch). Progressive enhancement only — no required JS.
  *
- * @example Switch::make()->name('notifications')->label('Email digests')->checked()
+ * @example SwitchControl::make()->name('notifications')->label('Email digests')->onChange('toggleDigests')
  */
 final class SwitchControl extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -55,7 +57,7 @@ final class SwitchControl extends Component
                 'disabled' => $this->disabled,
                 'checked' => $this->checked,
             ]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'id' => $inputId,
                 'type' => 'checkbox',
                 'role' => 'switch',

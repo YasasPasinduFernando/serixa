@@ -18,6 +18,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 - Layout widgets: `Row`, `Column`, `Center`, `Padding`, `Spacer`, `Expanded`, `SizedBox`, `Stack`, `Divider`, `Scaffold`
 - **UI Foundation:** forms, Scaffold chrome, Link, …
 - **Data Display:** `DataTable` (headers/rows + composition), `StatCard`, `Metric`, `Pagination`, `Avatar`, `Toolbar`, …
+- **Progressive Enhancement:** `onClick` / `onSubmit` / …, HTML constraints, tiny `serixa.js` runtime (no VDOM)
 - Fluent `Padding::make()->x(6)->y(4)->child(...)`
 - Theme seam + design tokens
 - Widget tree + lifecycle hooks
@@ -41,6 +42,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 5.2 | DX cleanup | Complete (`v0.5.2`) |
 | 6.0 | UI Foundation | Complete (`v0.6.0`) |
 | 7.0 | Data Display & Application Widgets | Complete (`v0.7.0`) |
+| 8.0 | Progressive Enhancement Foundation | Complete (`v0.8.0`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -167,6 +169,8 @@ examples/
 - [Document & Asset Engine](docs/document-engine.md)
 - [UI Foundation](docs/ui-foundation.md)
 - [Data Display](docs/data-display.md)
+- [Events](docs/events.md)
+- [Progressive Enhancement](docs/progressive-enhancement.md)
 
 ## Roadmap
 

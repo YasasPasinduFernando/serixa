@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace Serixa\Component;
 
 use Serixa\Component\Concerns\AssertsOption;
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Interactive button. Semantic props map to Tailwind via the active theme.
  *
- * @example Button::make('Save')->primary()->large()->rounded()
+ * @example Button::make('Save')->primary()->large()->rounded()->onClick('saveForm')
  */
 final class Button extends Component
 {
     use AssertsOption;
+    use HasDomEvents;
     use ResolvesTheme;
 
     private string $label;
@@ -117,11 +119,11 @@ final class Button extends Component
                 'disabled' => $this->disabled,
                 'rounded' => $this->rounded,
             ]),
-            [
+            array_merge($this->domEventAttributes(), [
                 'type' => $this->type,
                 'disabled' => $this->disabled ? true : null,
                 'aria-disabled' => $this->disabled ? 'true' : null,
-            ],
+            ]),
         );
 
         return sprintf(

@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Checkbox with optional visible label.
  *
- * @example Checkbox::make()->name('remember')->label('Remember me')->checked()
+ * @example Checkbox::make()->name('remember')->label('Remember me')->onChange('toggleRemember')
  */
 final class Checkbox extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -55,7 +57,7 @@ final class Checkbox extends Component
                 'disabled' => $this->disabled,
                 'invalid' => $this->invalid,
             ]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'id' => $inputId,
                 'type' => 'checkbox',
                 'value' => $this->value ?? '1',

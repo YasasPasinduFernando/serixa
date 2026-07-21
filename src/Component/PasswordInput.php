@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
- * Password field (type=password). No reveal toggle (no JavaScript in M6.1).
+ * Password field (type=password). No reveal toggle (optional JS is progressive enhancement only).
  *
- * @example PasswordInput::make()->name('password')->required()
+ * @example PasswordInput::make()->name('password')->required()->minLength(8)
  */
 final class PasswordInput extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -52,7 +54,7 @@ final class PasswordInput extends Component
                 'invalid' => $this->invalid,
                 'disabled' => $this->disabled,
             ]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'type' => 'password',
                 'value' => $this->value,
                 'placeholder' => $this->placeholder,

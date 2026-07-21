@@ -28,6 +28,7 @@ final class LoginPage
         $form = Form::make()
             ->method('POST')
             ->action('/?page=login')
+            ->onSubmit('login')
             ->child(
                 Card::make(
                     Logo::make()->text('SERIXA')->href('/?page=login'),
@@ -40,16 +41,20 @@ final class LoginPage
                         ->name('email')
                         ->type('email')
                         ->placeholder('Enter your email')
-                        ->required(),
+                        ->autocomplete('email')
+                        ->required()
+                        ->maxLength(255),
                     Label::make('Password')->for('password'),
                     PasswordInput::make()
                         ->id('password')
                         ->name('password')
-                        ->required(),
+                        ->required()
+                        ->minLength(6)
+                        ->maxLength(255),
                     Checkbox::make()
                         ->name('remember')
                         ->label('Remember me'),
-                    Button::make('Login')->primary()->large()->type('submit'),
+                    Button::make('Login')->primary()->large()->type('submit')->onClick('loginSubmit'),
                     Link::make('Forgot password?')->href('/?page=login&forgot=1'),
                 )->title('Welcome')->padding('lg'),
             );

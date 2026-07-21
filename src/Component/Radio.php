@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Serixa\Component;
 
+use Serixa\Component\Concerns\HasDomEvents;
 use Serixa\Component\Concerns\HasFormControl;
 use Serixa\Component\Concerns\ResolvesTheme;
 use Serixa\Exception\InvalidArgumentException;
@@ -15,6 +16,7 @@ use Serixa\Exception\InvalidArgumentException;
  */
 final class Radio extends Component
 {
+    use HasDomEvents;
     use HasFormControl;
     use ResolvesTheme;
 
@@ -59,7 +61,7 @@ final class Radio extends Component
                 'disabled' => $this->disabled,
                 'invalid' => $this->invalid,
             ]),
-            array_merge($this->formControlAttributes(), [
+            array_merge($this->formControlAttributes(), $this->domEventAttributes(), [
                 'id' => $inputId,
                 'type' => 'radio',
                 'value' => $this->value,

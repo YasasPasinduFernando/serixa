@@ -5,6 +5,25 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.8.0] — 2026-07-22
+
+### Added
+- Progressive enhancement: fluent DOM events (`onClick`, `onChange`, `onInput`, `onSubmit`, `onFocus`, `onBlur`, `onKeyDown`, `onKeyUp`) → `data-serixa-on-*`
+- HTML constraint helpers on form controls: `readonly()`, `min()`, `max()`, `minLength()`, `maxLength()`, `pattern()`
+- Client runtime: `assets/runtime/serixa.js` + `Serixa\Runtime\ClientRuntime`
+- `Serixa\Event\EventRegistry` for handler metadata / future plugins
+- Docs: `docs/events.md`, `docs/progressive-enhancement.md`, `examples/events.php`
+- Playground Login / CRUD demonstrate event metadata (no JS business logic)
+
+### Changed
+- Form controls and Button/Form emit optional PE attributes; SSR behavior unchanged without JS
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.7.0] — 2026-07-22
 
 ### Added
