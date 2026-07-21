@@ -2,23 +2,24 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Registry;
+namespace Serixa\Registry;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Card;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Container;
-use NovaPHP\Component\Divider;
-use NovaPHP\Component\Expanded;
-use NovaPHP\Component\Padding;
-use NovaPHP\Component\Row;
-use NovaPHP\Component\SizedBox;
-use NovaPHP\Component\Spacer;
-use NovaPHP\Component\Stack;
-use NovaPHP\Component\Text;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Exception\RegistryException;
+use Serixa\Component\Button;
+use Serixa\Component\Card;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\Container;
+use Serixa\Component\Divider;
+use Serixa\Component\Expanded;
+use Serixa\Component\Padding;
+use Serixa\Component\Row;
+use Serixa\Component\Scaffold;
+use Serixa\Component\SizedBox;
+use Serixa\Component\Spacer;
+use Serixa\Component\Stack;
+use Serixa\Component\Text;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Exception\RegistryException;
 
 /**
  * Registers widget types and their metadata for discovery.
@@ -110,6 +111,7 @@ final class WidgetRegistry
             new WidgetMetadata('sizedBox', 'layout', 'Fixed width/height box', ['width', 'height'], [], true, '0.2.0', SizedBox::class),
             new WidgetMetadata('stack', 'layout', 'Layered stack', [], [], true, '0.2.0', Stack::class),
             new WidgetMetadata('divider', 'layout', 'Horizontal rule', [], [], false, '0.2.0', Divider::class),
+            new WidgetMetadata('scaffold', 'layout', 'App shell (appBar, sidebar, body, footer)', ['appBar', 'sidebar', 'body', 'footer'], [], true, '0.5.2', Scaffold::class),
         ];
     }
 }

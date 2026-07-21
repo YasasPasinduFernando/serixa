@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Contracts;
+namespace Serixa\Contracts;
 
 /**
  * A renderable UI widget with optional lifecycle and tree participation.

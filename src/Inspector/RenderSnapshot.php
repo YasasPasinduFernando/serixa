@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Inspector;
+namespace Serixa\Inspector;
 
 /**
  * Snapshot of a full render for inspection / DevTools.

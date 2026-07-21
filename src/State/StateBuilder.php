@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\State;
+namespace Serixa\State;
 
 /**
  * Fluent builder for initial widget state payloads.

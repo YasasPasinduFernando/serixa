@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Container;
+namespace Serixa\Container;
 
-use NovaPHP\Exception\ContainerException;
+use Serixa\Exception\ContainerException;
 
 /**
  * Lightweight, PSR-inspired service container (no facades, no auto-wiring magic beyond constructors).

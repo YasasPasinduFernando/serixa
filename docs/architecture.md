@@ -6,21 +6,21 @@ SERIXA is a PHP UI widget engine. It produces HTML fragments **and** complete HT
 
 ```text
 App code
-   ↓
-┌──────────────────────────────┐
-│ Document (optional page)     │
-│  SeoManager + AssetManager   │
-│  Html / Head / Body          │
-└──────────────┬───────────────┘
-               ↓ body widgets
+   â†“
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Document (optional page)     â”‚
+â”‚  SeoManager + AssetManager   â”‚
+â”‚  Html / Head / Body          â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+               â†“ body widgets
 Widgets (Component/* — public DX)
-   ↓
+   â†“
 Renderer (coordinator)
-   ├─ DocumentInterface → DocumentRenderer → full HTML
-   └─ WidgetInterface   → RenderPipeline → fragment
-        BuildTree → ResolveContext → Lifecycle → Theme → A11y → Render
-        ↓
-     HtmlWriter → HTML string
+   â”œâ”€ DocumentInterface â†’ DocumentRenderer â†’ full HTML
+   â””â”€ WidgetInterface   â†’ RenderPipeline â†’ fragment
+        BuildTree â†’ ResolveContext â†’ Lifecycle â†’ Theme â†’ A11y â†’ Render
+        â†“
+     HtmlWriter â†’ HTML string
 ```
 
 Cross-cutting runtime services:
@@ -39,7 +39,7 @@ Inspector + Performance contracts
 
 | Principle | How |
 |-----------|-----|
-| SRP | Document ≠ fragment Renderer; SeoManager ≠ AssetManager; each head element owns one tag |
+| SRP | Document â‰  fragment Renderer; SeoManager â‰  AssetManager; each head element owns one tag |
 | OCP | New assets/SEO fields without changing widget APIs |
 | LSP | `Document` implements `DocumentInterface` |
 | ISP | Narrow document/asset/SEO contracts |
@@ -47,7 +47,7 @@ Inspector + Performance contracts
 
 ## Namespace note
 
-Runtime namespace is `NovaPHP\` for backward compatibility through `v0.x`.
+Runtime namespace is **`Serixa\`**. See [NAMESPACE.md](NAMESPACE.md).
 Product branding is **SERIXA** (`serixa/framework`).
 
 ## Extension points

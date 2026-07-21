@@ -5,6 +5,24 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.5.2] — 2026-07-22
+
+### Added
+- Fluent `Padding` builder: `Padding::make()->all(4)->child(...)` / `->x()` / `->y()` / side setters
+- `Scaffold` layout widget (`appBar`, `sidebar`, `body`, `footer`)
+- Canonical PSR-4 namespace `Serixa\`
+- Docs: `docs/NAMESPACE.md`, ADR 0006
+
+### Changed
+- Composer autoload root is `Serixa\`
+- Theme maps `scaffold*` class keys for the new shell widget
+
+### Deprecated
+- Static `Padding::all()` / `Padding::x()` / … factories (use fluent `Padding::make()->…`; still work via `__callStatic`)
+
+### Fixed
+- None
+
 ## [v0.5.1] — 2026-07-21
 
 ### Added
@@ -88,10 +106,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Renderer now builds a `WidgetTree` and runs lifecycle visitors before/after paint
 - `DefaultTheme` resolves visual styles via design tokens where applicable
-- Package identity: Composer name `serixa/framework` (PSR-4 namespace remains `NovaPHP\` for BC)
+- Package identity: Composer name `serixa/framework` (PSR-4 namespace remains `Serixa\` for BC)
 
 ### Deprecated
-- Prefer `NovaPHP\Widget\Widget` over `NovaPHP\Component\Component` (alias retained)
+- Prefer `Serixa\Widget\Widget` over `Serixa\Component\Component` (alias retained)
 - Prefer `WidgetInterface` over `ComponentInterface` (interface retained as extension alias)
 - Prefer `Renderer::renderWidget()`; `renderComponent()` remains as alias
 

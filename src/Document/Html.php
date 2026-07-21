@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document;
+namespace Serixa\Document;
 
-use NovaPHP\Support\HtmlEscaper;
+use Serixa\Support\HtmlEscaper;
 
 /**
  * Root &lt;html&gt; element wrapper.

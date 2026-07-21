@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component;
+namespace Serixa\Component;
 
-use NovaPHP\Component\Concerns\ResolvesTheme;
+use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Flexible empty space inside a Row or Column (Flutter Spacer).

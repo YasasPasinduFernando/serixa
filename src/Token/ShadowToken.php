@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Token;
+namespace Serixa\Token;
 
 /** Semantic shadow token. */
 final class ShadowToken extends DesignToken

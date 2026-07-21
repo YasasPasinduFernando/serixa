@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Pipeline;
+namespace Serixa\Pipeline;
 
-use NovaPHP\Runtime\RenderContext;
+use Serixa\Runtime\RenderContext;
 
 /**
  * Ordered coordinator of render passes. Renderer delegates here.

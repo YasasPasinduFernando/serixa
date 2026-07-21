@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Theme;
+namespace Serixa\Theme;
 
-use NovaPHP\Contracts\ThemeInterface;
-use NovaPHP\Exception\InvalidArgumentException;
-use NovaPHP\Support\ClassMerger;
-use NovaPHP\Token\ColorToken;
-use NovaPHP\Token\DesignToken;
-use NovaPHP\Token\RadiusToken;
-use NovaPHP\Token\ShadowToken;
-use NovaPHP\Token\SpacingToken;
-use NovaPHP\Token\TypographyToken;
+use Serixa\Contracts\ThemeInterface;
+use Serixa\Exception\InvalidArgumentException;
+use Serixa\Support\ClassMerger;
+use Serixa\Token\ColorToken;
+use Serixa\Token\DesignToken;
+use Serixa\Token\RadiusToken;
+use Serixa\Token\ShadowToken;
+use Serixa\Token\SpacingToken;
+use Serixa\Token\TypographyToken;
 
 /**
  * Default Tailwind-backed theme.
@@ -46,6 +46,12 @@ final class DefaultTheme implements ThemeInterface
             'sizedBox' => $this->sizedBox($state),
             'stack' => $this->stack($state),
             'divider' => $this->divider($state),
+            'scaffold' => $this->scaffold($state),
+            'scaffold.appBar' => $this->scaffoldAppBar($state),
+            'scaffold.sidebar' => $this->scaffoldSidebar($state),
+            'scaffold.main' => $this->scaffoldMain($state),
+            'scaffold.body' => $this->scaffoldBody($state),
+            'scaffold.footer' => $this->scaffoldFooter($state),
             default => throw new InvalidArgumentException(sprintf('Unknown theme component "%s".', $component)),
         };
     }
@@ -433,6 +439,60 @@ final class DefaultTheme implements ThemeInterface
             'w-full',
             'my-4',
         ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function scaffold(array $state): array
+    {
+        return ['flex', 'flex-col', 'min-h-full', 'w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function scaffoldAppBar(array $state): array
+    {
+        return ['w-full', 'shrink-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function scaffoldSidebar(array $state): array
+    {
+        return ['shrink-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function scaffoldMain(array $state): array
+    {
+        return ['flex', 'flex-1', 'w-full', 'min-h-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function scaffoldBody(array $state): array
+    {
+        return ['flex-1', 'min-w-0', 'min-h-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function scaffoldFooter(array $state): array
+    {
+        return ['w-full', 'shrink-0'];
     }
 
     private function spacingClass(string $prefix, mixed $value): string

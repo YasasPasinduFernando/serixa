@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Pipeline\Pass;
+namespace Serixa\Pipeline\Pass;
 
-use NovaPHP\Pipeline\RenderPassInterface;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Theme\ThemeManager;
+use Serixa\Pipeline\RenderPassInterface;
+use Serixa\Runtime\RenderContext;
+use Serixa\Theme\ThemeManager;
 
 /**
  * Bridges WidgetContext theme into ThemeManager for BC with existing widgets.

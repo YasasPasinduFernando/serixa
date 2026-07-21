@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Asset;
+namespace Serixa\Document\Asset;
 
 /**
  * Versioned path map for resolved public assets (Vite-ready shape, no bundler).

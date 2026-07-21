@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Performance;
+namespace Serixa\Performance;
 
-use NovaPHP\Inspector\PerformanceSnapshot;
+use Serixa\Inspector\PerformanceSnapshot;
 
 /**
  * Contract for overall runtime performance profiling (implementation later).

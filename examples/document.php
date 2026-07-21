@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Text;
-use NovaPHP\Document\Asset\AssetBundle;
-use NovaPHP\Document\Document;
-use NovaPHP\Rendering\Renderer;
+use Serixa\Component\Button;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\Text;
+use Serixa\Document\Asset\AssetBundle;
+use Serixa\Document\Document;
+use Serixa\Rendering\Renderer;
 
 $document = Document::make()
     ->title('Dashboard')

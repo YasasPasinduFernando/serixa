@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tree;
+namespace Serixa\Tree;
 
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\WidgetInterface;
 
 /**
- * One node in a WidgetTree — either a widget or a text leaf.
+ * One node in a WidgetTree â€” either a widget or a text leaf.
  */
 final class TreeNode
 {

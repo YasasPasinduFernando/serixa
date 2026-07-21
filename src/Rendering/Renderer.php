@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Rendering;
+namespace Serixa\Rendering;
 
-use NovaPHP\Contracts\DocumentInterface;
-use NovaPHP\Contracts\RendererInterface;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Document\DocumentRenderer;
-use NovaPHP\Pipeline\RenderPipeline;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Runtime\WidgetContext;
-use NovaPHP\Tree\WidgetTree;
+use Serixa\Contracts\DocumentInterface;
+use Serixa\Contracts\RendererInterface;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Document\DocumentRenderer;
+use Serixa\Pipeline\RenderPipeline;
+use Serixa\Runtime\RenderContext;
+use Serixa\Runtime\WidgetContext;
+use Serixa\Tree\WidgetTree;
 
 /**
  * Render coordinator: fragments via pipeline, documents via DocumentRenderer.

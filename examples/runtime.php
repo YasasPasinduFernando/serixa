@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Text;
-use NovaPHP\Container\Container;
-use NovaPHP\Plugin\PluginManager;
-use NovaPHP\Plugin\RuntimePlugin;
-use NovaPHP\Registry\WidgetRegistry;
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\Runtime\WidgetContext;
-use NovaPHP\Theme\DefaultTheme;
+use Serixa\Component\Button;
+use Serixa\Component\Column;
+use Serixa\Component\Text;
+use Serixa\Container\Container;
+use Serixa\Plugin\PluginManager;
+use Serixa\Plugin\RuntimePlugin;
+use Serixa\Registry\WidgetRegistry;
+use Serixa\Rendering\Renderer;
+use Serixa\Runtime\WidgetContext;
+use Serixa\Theme\DefaultTheme;
 
 $registry = WidgetRegistry::withDefaults();
 $container = new Container();

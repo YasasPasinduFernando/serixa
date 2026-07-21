@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Support;
+namespace Serixa\Support;
 
 /**
  * Builds a space-prefixed HTML attribute string from a name/value map.

@@ -2,21 +2,37 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component;
+namespace Serixa\Component;
 
-use NovaPHP\Component\Concerns\HasChildren;
-use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Component\Concerns\HasChildren;
+use Serixa\Component\Concerns\ResolvesTheme;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Exception\InvalidArgumentException;
 
 /**
- * Spacing wrapper. Prefer static factories over raw Tailwind padding classes.
+ * Spacing wrapper. Prefer the fluent builder; theme maps sides to Tailwind classes.
  *
- * @example Padding::all(4)->child(Text::make('Inset'))
+ * @example Padding::make()->all(4)->child(Text::make('Inset'))
+ * @example Padding::make()->x(6)->y(4)->child(Text::make('Inset'))
+ *
+ * Side setters are implemented with {@see __call} / {@see __callStatic} so fluent
+ * instance methods and deprecated static factories can share the same names
+ * (PHP cannot declare both).
+ *
+ * @method self all(int|float|string $value)
+ * @method self x(int|float|string $value)
+ * @method self y(int|float|string $value)
+ * @method self top(int|float|string $value)
+ * @method self bottom(int|float|string $value)
+ * @method self left(int|float|string $value)
+ * @method self right(int|float|string $value)
  */
 final class Padding extends Component
 {
     use HasChildren;
     use ResolvesTheme;
+
+    private const SIDES = ['all', 'x', 'y', 'top', 'bottom', 'left', 'right'];
 
     /** @var array<string, int|float|string|null> */
     private array $sides = [];
@@ -38,59 +54,50 @@ final class Padding extends Component
     }
 
     /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     * Fluent side setters.
+     *
+     * @param list<mixed> $arguments
      */
-    public static function all(int|float|string $value, WidgetInterface|string|array ...$children): self
+    public function __call(string $name, array $arguments): self
     {
-        return self::factory('all', $value, $children);
+        if (! in_array($name, self::SIDES, true)) {
+            throw new InvalidArgumentException(sprintf('Unknown Padding method: %s', $name));
+        }
+
+        if ($arguments === []) {
+            throw new InvalidArgumentException(sprintf('Padding::%s() requires a value.', $name));
+        }
+
+        /** @var int|float|string $value */
+        $value = $arguments[0];
+        $this->sides[$name] = $value;
+
+        return $this;
     }
 
     /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
+     * Deprecated static factories: Padding::all(4), Padding::x(2, $child), …
+     *
+     * @param list<mixed> $arguments
+     *
+     * @deprecated Use Padding::make()->all($value)->child(...) (or x/y/top/…)
      */
-    public static function x(int|float|string $value, WidgetInterface|string|array ...$children): self
+    public static function __callStatic(string $name, array $arguments): self
     {
-        return self::factory('x', $value, $children);
-    }
+        if (! in_array($name, self::SIDES, true)) {
+            throw new InvalidArgumentException(sprintf('Unknown Padding static method: %s', $name));
+        }
 
-    /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
-     */
-    public static function y(int|float|string $value, WidgetInterface|string|array ...$children): self
-    {
-        return self::factory('y', $value, $children);
-    }
+        if ($arguments === []) {
+            throw new InvalidArgumentException(sprintf('Padding::%s() requires a value.', $name));
+        }
 
-    /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
-     */
-    public static function top(int|float|string $value, WidgetInterface|string|array ...$children): self
-    {
-        return self::factory('top', $value, $children);
-    }
+        /** @var int|float|string $value */
+        $value = $arguments[0];
+        /** @var array<int, mixed> $children */
+        $children = array_slice($arguments, 1);
 
-    /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
-     */
-    public static function bottom(int|float|string $value, WidgetInterface|string|array ...$children): self
-    {
-        return self::factory('bottom', $value, $children);
-    }
-
-    /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
-     */
-    public static function left(int|float|string $value, WidgetInterface|string|array ...$children): self
-    {
-        return self::factory('left', $value, $children);
-    }
-
-    /**
-     * @param WidgetInterface|string|list<WidgetInterface|string> ...$children
-     */
-    public static function right(int|float|string $value, WidgetInterface|string|array ...$children): self
-    {
-        return self::factory('right', $value, $children);
+        return self::factory($name, $value, $children);
     }
 
     /**

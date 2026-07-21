@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document;
+namespace Serixa\Document;
 
-use NovaPHP\Contracts\DocumentInterface;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Document\Asset\AssetManager;
-use NovaPHP\Document\Seo\SeoManager;
+use Serixa\Contracts\DocumentInterface;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Document\Asset\AssetManager;
+use Serixa\Document\Seo\SeoManager;
 
 /**
  * Fluent full-page document builder.

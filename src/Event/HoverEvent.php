@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Event;
+namespace Serixa\Event;
 
-use NovaPHP\Contracts\EventInterface;
+use Serixa\Contracts\EventInterface;
 
-/** Prepared hover event contract — no browser implementation yet. */
+/** Prepared hover event contract â€” no browser implementation yet. */
 final class HoverEvent implements EventInterface
 {
     public function name(): string

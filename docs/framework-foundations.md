@@ -10,7 +10,7 @@ Architectural foundations for scaling SERIXA to hundreds of widgets — without 
 |---------|-----|
 | **Widget vocabulary** | Flutter-aligned naming; `Component` remains as a BC alias |
 | **WidgetTree** | Separates structure from paint — enables future diffing, DevTools, hot reload |
-| **Lifecycle** | Stable hooks for plugins (`beforeMount` → `destroy`) without changing widget APIs |
+| **Lifecycle** | Stable hooks for plugins (`beforeMount` â†’ `destroy`) without changing widget APIs |
 | **StateManager** | Memory-only state for Modal/Tabs/Accordion later — no sessions/cookies/DB |
 | **Design tokens** | Widgets/themes speak semantic tokens; CSS frameworks stay swappable |
 | **Events (interfaces)** | Reserve contracts now; browser wiring later without a second rewrite |
@@ -20,7 +20,7 @@ Architectural foundations for scaling SERIXA to hundreds of widgets — without 
 
 | Old API | New API | Status |
 |---------|---------|--------|
-| `NovaPHP\Component\Component` | `NovaPHP\Widget\Widget` | Alias — still works |
+| `Serixa\Component\Component` | `Serixa\Widget\Widget` | Alias — still works |
 | `ComponentInterface` | `WidgetInterface` | Extends — still works |
 | `Renderer::renderComponent()` | `renderWidget()` | Both work |
 | `ThemeInterface::classes()` | + `token()` | Additive |
@@ -30,7 +30,7 @@ Existing `Button::make()->primary()` code requires **no** changes.
 ## Widget tree pipeline
 
 ```text
-Widget → WidgetTree::from() → TreeWalker + LifecycleVisitor → widget.render()
+Widget â†’ WidgetTree::from() â†’ TreeWalker + LifecycleVisitor â†’ widget.render()
 ```
 
 Lifecycle order per render:
@@ -55,11 +55,11 @@ Button::make('Toggle')->stateKey('modal');
 ## Design tokens
 
 ```php
-use NovaPHP\Token\ColorToken;
-use NovaPHP\Theme\ThemeManager;
+use Serixa\Token\ColorToken;
+use Serixa\Theme\ThemeManager;
 
 ThemeManager::current()->token(ColorToken::primary());
-// → ['bg-sky-600', 'hover:bg-sky-700']
+// â†’ ['bg-sky-600', 'hover:bg-sky-700']
 ```
 
 Token types: `ColorToken`, `SpacingToken`, `RadiusToken`, `ShadowToken`, `TypographyToken`.

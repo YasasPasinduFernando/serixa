@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Asset;
+namespace Serixa\Document\Asset;
 
 /**
  * Resolves logical asset paths through an optional manifest and query versioning.

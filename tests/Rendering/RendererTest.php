@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Rendering;
+namespace Serixa\Tests\Rendering;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Text;
-use NovaPHP\Rendering\Renderer;
 use PHPUnit\Framework\TestCase;
+use Serixa\Component\Button;
+use Serixa\Component\Text;
+use Serixa\Rendering\Renderer;
 
 final class RendererTest extends TestCase
 {

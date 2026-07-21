@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Support;
+namespace Serixa\Tests\Support;
 
-use NovaPHP\Support\AttributeBag;
-use NovaPHP\Support\ClassMerger;
-use NovaPHP\Support\HtmlEscaper;
 use PHPUnit\Framework\TestCase;
+use Serixa\Support\AttributeBag;
+use Serixa\Support\ClassMerger;
+use Serixa\Support\HtmlEscaper;
 
 final class SupportTest extends TestCase
 {

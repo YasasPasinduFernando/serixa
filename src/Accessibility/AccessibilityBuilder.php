@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Accessibility;
+namespace Serixa\Accessibility;
 
 /**
  * Builds ARIA and related accessibility attributes for widgets.

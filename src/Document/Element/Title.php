@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Element;
+namespace Serixa\Document\Element;
 
 /**
  * HTML &lt;title&gt; element.

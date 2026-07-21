@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Rendering;
+namespace Serixa\Rendering;
 
-use NovaPHP\Runtime\RenderContext;
+use Serixa\Runtime\RenderContext;
 
 /**
  * Writes HTML fragments into RenderContext (separated from pipeline orchestration).

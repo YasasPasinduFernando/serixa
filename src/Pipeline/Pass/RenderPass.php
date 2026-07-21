@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Pipeline\Pass;
+namespace Serixa\Pipeline\Pass;
 
-use NovaPHP\Exception\PipelineException;
-use NovaPHP\Pipeline\RenderPassInterface;
-use NovaPHP\Rendering\HtmlWriter;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Tree\LifecycleTreeVisitor;
-use NovaPHP\Tree\TreeWalker;
+use Serixa\Exception\PipelineException;
+use Serixa\Pipeline\RenderPassInterface;
+use Serixa\Rendering\HtmlWriter;
+use Serixa\Runtime\RenderContext;
+use Serixa\Tree\LifecycleTreeVisitor;
+use Serixa\Tree\TreeWalker;
 
 /**
  * Invokes widget render() and writes HTML via HtmlWriter; finishes lifecycle.

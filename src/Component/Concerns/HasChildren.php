@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component\Concerns;
+namespace Serixa\Component\Concerns;
 
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Exception\InvalidArgumentException;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Exception\InvalidArgumentException;
 
 /**
  * Shared child-list management for composable layout widgets.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Token;
+namespace Serixa\Token;
 
 /** Semantic color token. */
 final class ColorToken extends DesignToken

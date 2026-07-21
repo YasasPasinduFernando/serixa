@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Pipeline\Pass;
+namespace Serixa\Pipeline\Pass;
 
-use NovaPHP\Exception\PipelineException;
-use NovaPHP\Pipeline\RenderPassInterface;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Tree\LifecycleTreeVisitor;
-use NovaPHP\Tree\TreeWalker;
+use Serixa\Exception\PipelineException;
+use Serixa\Pipeline\RenderPassInterface;
+use Serixa\Runtime\RenderContext;
+use Serixa\Tree\LifecycleTreeVisitor;
+use Serixa\Tree\TreeWalker;
 
 /**
  * Runs mount + beforeRender lifecycle hooks on the widget tree.

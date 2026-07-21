@@ -27,4 +27,4 @@ Public = classes/interfaces/methods in `src/` **without** `@internal`, plus docu
 
 ## Namespace
 
-Runtime namespace `NovaPHP\` is public API. See ADR 0001.
+Runtime namespace `Serixa\` is public API. See [NAMESPACE.md](NAMESPACE.md) and ADR 0006.

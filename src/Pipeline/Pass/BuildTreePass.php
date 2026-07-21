@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Pipeline\Pass;
+namespace Serixa\Pipeline\Pass;
 
-use NovaPHP\Exception\PipelineException;
-use NovaPHP\Pipeline\RenderPassInterface;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Tree\WidgetTree;
+use Serixa\Exception\PipelineException;
+use Serixa\Pipeline\RenderPassInterface;
+use Serixa\Runtime\RenderContext;
+use Serixa\Tree\WidgetTree;
 
 /**
  * Builds WidgetTree from the root widget.

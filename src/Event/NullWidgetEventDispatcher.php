@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Event;
+namespace Serixa\Event;
 
-use NovaPHP\Contracts\EventInterface;
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\EventInterface;
+use Serixa\Contracts\WidgetInterface;
 
 /**
  * In-memory dispatcher stub for tests and future JS bridge.

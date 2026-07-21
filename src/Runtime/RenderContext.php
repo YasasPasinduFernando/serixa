@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Runtime;
+namespace Serixa\Runtime;
 
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Tree\WidgetTree;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Tree\WidgetTree;
 
 /**
  * Mutable per-render bag: widget context, tree, depth, SSR/debug flags, metadata.

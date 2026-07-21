@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Component;
+namespace Serixa\Tests\Component;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Divider;
-use NovaPHP\Component\Expanded;
-use NovaPHP\Component\Padding;
-use NovaPHP\Component\Row;
-use NovaPHP\Component\SizedBox;
-use NovaPHP\Component\Spacer;
-use NovaPHP\Component\Stack;
-use NovaPHP\Component\Text;
-use NovaPHP\Theme\ThemeManager;
 use PHPUnit\Framework\TestCase;
+use Serixa\Component\Button;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\Divider;
+use Serixa\Component\Expanded;
+use Serixa\Component\Padding;
+use Serixa\Component\Row;
+use Serixa\Component\SizedBox;
+use Serixa\Component\Spacer;
+use Serixa\Component\Stack;
+use Serixa\Component\Text;
+use Serixa\Theme\ThemeManager;
 
 final class LayoutTest extends TestCase
 {

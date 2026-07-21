@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Event;
+namespace Serixa\Event;
 
-use NovaPHP\Contracts\EventInterface;
+use Serixa\Contracts\EventInterface;
 
-/** Prepared click event contract — no browser implementation yet. */
+/** Prepared click event contract â€” no browser implementation yet. */
 final class ClickEvent implements EventInterface
 {
     public function name(): string

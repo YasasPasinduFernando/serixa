@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Inspector;
+namespace Serixa\Inspector;
 
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\WidgetInterface;
 
 /**
- * Contract for inspecting a single widget instance (DevTools — no UI).
+ * Contract for inspecting a single widget instance (DevTools â€” no UI).
  */
 interface WidgetInspector
 {

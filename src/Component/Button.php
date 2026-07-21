@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component;
+namespace Serixa\Component;
 
-use NovaPHP\Component\Concerns\AssertsOption;
-use NovaPHP\Component\Concerns\ResolvesTheme;
+use Serixa\Component\Concerns\AssertsOption;
+use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Interactive button. Semantic props map to Tailwind via the active theme.

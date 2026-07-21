@@ -17,8 +17,9 @@ Allow evolution without surprising consumers.
 
 | API | Prefer | Since |
 |-----|--------|-------|
-| `NovaPHP\Component\Component` | `NovaPHP\Widget\Widget` | v0.3.0 |
-| `NovaPHP\Contracts\ComponentInterface` | `NovaPHP\Contracts\WidgetInterface` | v0.3.0 |
+| `Serixa\Component\Component` | `Serixa\Widget\Widget` | v0.3.0 |
+| `Serixa\Contracts\ComponentInterface` | `Serixa\Contracts\WidgetInterface` | v0.3.0 |
 | `Renderer::renderComponent()` | `Renderer::renderWidget()` | v0.3.0 |
+| Static `Padding::all()` / `x()` / `y()` / sides | `Padding::make()->all()` / `->x()` / … | v0.5.2 |
 
 These remain supported; no removal is scheduled before `1.0.0` planning.

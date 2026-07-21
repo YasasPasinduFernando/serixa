@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Plugin;
+namespace Serixa\Plugin;
 
-use NovaPHP\Container\Container;
-use NovaPHP\Registry\WidgetRegistry;
+use Serixa\Container\Container;
+use Serixa\Registry\WidgetRegistry;
 
 /**
- * Base plugin contract — boots into the runtime container and registry.
+ * Base plugin contract â€” boots into the runtime container and registry.
  */
 interface PluginInterface
 {

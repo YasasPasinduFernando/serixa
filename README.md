@@ -4,7 +4,7 @@
 
 > Write PHP. SERIXA renders HTML, applies Tailwind through a theme, handles responsive layout, and cares about accessibility.
 
-PHP namespace today: `NovaPHP\` (kept for backward compatibility). The product name is **SERIXA**.
+PHP namespace: **`Serixa\`**. See [docs/NAMESPACE.md](docs/NAMESPACE.md).
 
 ## Vision
 
@@ -15,7 +15,8 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 ## Features
 
 - Fluent, chainable widgets (`Button::make('Save')->primary()->large()`)
-- Layout widgets: `Row`, `Column`, `Center`, `Padding`, `Spacer`, `Expanded`, `SizedBox`, `Stack`, `Divider`
+- Layout widgets: `Row`, `Column`, `Center`, `Padding`, `Spacer`, `Expanded`, `SizedBox`, `Stack`, `Divider`, `Scaffold`
+- Fluent `Padding::make()->x(6)->y(4)->child(...)`
 - Theme seam + design tokens
 - Widget tree + lifecycle hooks
 - **Runtime Core:** WidgetContext, RenderContext, Container, Registry, Render Pipeline, Plugins
@@ -23,7 +24,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 - Memory-only state manager
 - Accessibility helpers
 - Escaped output by default
-- PSR-4, PHP 8.2+, PHPUnit-tested
+- PSR-4 (`Serixa\`), PHP 8.2+, PHPUnit-tested
 
 ## Status
 
@@ -35,6 +36,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 4 | Runtime Core | Complete (`v0.4.0`) |
 | 5 | Document & Asset Engine | Complete (`v0.5.0`) |
 | 5.1 | API Stewardship | Complete (`v0.5.1`) |
+| 5.2 | DX cleanup | Complete (`v0.5.2`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -59,12 +61,12 @@ composer test
 ## Quick start
 
 ```php
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\SizedBox;
-use NovaPHP\Component\Text;
-use NovaPHP\Rendering\Renderer;
+use Serixa\Component\Button;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\SizedBox;
+use Serixa\Component\Text;
+use Serixa\Rendering\Renderer;
 
 $html = (new Renderer())->render(
     Center::make(
@@ -80,8 +82,8 @@ $html = (new Renderer())->render(
 ## Runtime context example
 
 ```php
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\Runtime\WidgetContext;
+use Serixa\Rendering\Renderer;
+use Serixa\Runtime\WidgetContext;
 
 $renderer = new Renderer(
     null,
@@ -92,10 +94,10 @@ $renderer = new Renderer(
 ## Document example
 
 ```php
-use NovaPHP\Document\Document;
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Text;
-use NovaPHP\Rendering\Renderer;
+use Serixa\Document\Document;
+use Serixa\Component\Button;
+use Serixa\Component\Text;
+use Serixa\Rendering\Renderer;
 
 $html = (new Renderer())->render(
     Document::make()
@@ -148,6 +150,7 @@ examples/
 ## Documentation
 
 - [Architecture overview](docs/architecture.md)
+- [Namespace policy](docs/NAMESPACE.md)
 - [API stability](docs/API_STABILITY.md)
 - [Versioning](docs/VERSIONING.md)
 - [Deprecation policy](docs/DEPRECATION.md)
@@ -157,7 +160,6 @@ examples/
 - [Layout engine](docs/layout-engine.md)
 - [Framework foundations](docs/framework-foundations.md)
 - [Runtime Core](docs/runtime-core.md)
-- [Document & Asset Engine](docs/document-engine.md)
 - [Document & Asset Engine](docs/document-engine.md)
 
 ## Roadmap

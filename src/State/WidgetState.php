@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\State;
+namespace Serixa\State;
 
-use NovaPHP\Contracts\StateInterface;
+use Serixa\Contracts\StateInterface;
 
 /**
  * Mutable in-memory state for a single widget instance key.

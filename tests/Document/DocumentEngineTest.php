@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Document;
+namespace Serixa\Tests\Document;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Text;
-use NovaPHP\Document\Asset\AssetBundle;
-use NovaPHP\Document\Asset\AssetManager;
-use NovaPHP\Document\Asset\AssetManifest;
-use NovaPHP\Document\Asset\AssetResolver;
-use NovaPHP\Document\Document;
-use NovaPHP\Document\DocumentRenderer;
-use NovaPHP\Document\Element\Link;
-use NovaPHP\Document\Element\Meta;
-use NovaPHP\Document\Element\Script;
-use NovaPHP\Document\Element\Style;
-use NovaPHP\Document\Element\Title;
-use NovaPHP\Document\Head;
-use NovaPHP\Document\Seo\SeoManager;
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\Theme\ThemeManager;
 use PHPUnit\Framework\TestCase;
+use Serixa\Component\Button;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\Text;
+use Serixa\Document\Asset\AssetBundle;
+use Serixa\Document\Asset\AssetManager;
+use Serixa\Document\Asset\AssetManifest;
+use Serixa\Document\Asset\AssetResolver;
+use Serixa\Document\Document;
+use Serixa\Document\DocumentRenderer;
+use Serixa\Document\Element\Link;
+use Serixa\Document\Element\Meta;
+use Serixa\Document\Element\Script;
+use Serixa\Document\Element\Style;
+use Serixa\Document\Element\Title;
+use Serixa\Document\Head;
+use Serixa\Document\Seo\SeoManager;
+use Serixa\Rendering\Renderer;
+use Serixa\Theme\ThemeManager;
 
 final class DocumentEngineTest extends TestCase
 {

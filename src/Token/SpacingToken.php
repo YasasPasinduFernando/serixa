@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Token;
+namespace Serixa\Token;
 
 /** Semantic spacing token. */
 final class SpacingToken extends DesignToken

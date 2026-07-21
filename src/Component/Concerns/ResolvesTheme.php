@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component\Concerns;
+namespace Serixa\Component\Concerns;
 
-use NovaPHP\Contracts\ThemeInterface;
-use NovaPHP\Theme\ThemeManager;
+use Serixa\Contracts\ThemeInterface;
+use Serixa\Theme\ThemeManager;
 
 /**
  * Resolves the active theme for class lookup.

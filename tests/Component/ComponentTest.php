@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Component;
+namespace Serixa\Tests\Component;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Card;
-use NovaPHP\Component\Container;
-use NovaPHP\Component\Text;
 use PHPUnit\Framework\TestCase;
+use Serixa\Component\Button;
+use Serixa\Component\Card;
+use Serixa\Component\Container;
+use Serixa\Component\Text;
 
 final class ComponentTest extends TestCase
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component;
+namespace Serixa\Component;
 
-use NovaPHP\Component\Concerns\ResolvesTheme;
+use Serixa\Component\Concerns\ResolvesTheme;
 
 /**
  * Semantic horizontal rule.

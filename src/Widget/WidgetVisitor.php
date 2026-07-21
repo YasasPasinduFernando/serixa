@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Widget;
+namespace Serixa\Widget;
 
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\WidgetInterface;
 
 /**
  * Visitor over live widgets (preparation for DevTools / plugins).

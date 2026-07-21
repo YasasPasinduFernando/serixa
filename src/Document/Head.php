@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document;
+namespace Serixa\Document;
 
-use NovaPHP\Document\Element\HeadElement;
-use NovaPHP\Document\Element\Link;
-use NovaPHP\Document\Element\Meta;
-use NovaPHP\Document\Element\Script;
-use NovaPHP\Document\Element\Style;
-use NovaPHP\Document\Element\Title;
+use Serixa\Document\Element\HeadElement;
+use Serixa\Document\Element\Link;
+use Serixa\Document\Element\Meta;
+use Serixa\Document\Element\Script;
+use Serixa\Document\Element\Style;
+use Serixa\Document\Element\Title;
 
 /**
- * Document &lt;head&gt; — collects title, meta, links, styles, and scripts.
+ * Document &lt;head&gt; â€” collects title, meta, links, styles, and scripts.
  */
 final class Head
 {

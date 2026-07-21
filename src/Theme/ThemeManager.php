@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Theme;
+namespace Serixa\Theme;
 
-use NovaPHP\Contracts\ThemeInterface;
+use Serixa\Contracts\ThemeInterface;
 
 /**
  * Process-wide theme accessor.
  *
  * Convention: DefaultTheme until an app calls set().
- * Reset exists for isolated tests — not for application hot-swapping mid-request.
+ * Reset exists for isolated tests â€” not for application hot-swapping mid-request.
  */
 final class ThemeManager
 {

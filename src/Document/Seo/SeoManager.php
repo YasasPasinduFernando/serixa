@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Seo;
+namespace Serixa\Document\Seo;
 
-use NovaPHP\Document\Element\Link;
-use NovaPHP\Document\Element\Meta;
-use NovaPHP\Document\Element\Script;
-use NovaPHP\Document\Element\Title;
-use NovaPHP\Document\Head;
+use Serixa\Document\Element\Link;
+use Serixa\Document\Element\Meta;
+use Serixa\Document\Element\Script;
+use Serixa\Document\Element\Title;
+use Serixa\Document\Head;
 
 /**
  * Builds semantic SEO head elements (title, meta, OG, Twitter, JSON-LD placeholder).

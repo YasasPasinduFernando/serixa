@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Token;
+namespace Serixa\Token;
 
 /**
- * Named design token. Themes map tokens to CSS classes — widgets never hard-code utilities.
+ * Named design token. Themes map tokens to CSS classes â€” widgets never hard-code utilities.
  */
 abstract class DesignToken
 {

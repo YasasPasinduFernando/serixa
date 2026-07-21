@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Event;
+namespace Serixa\Event;
 
-use NovaPHP\Contracts\EventInterface;
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\EventInterface;
+use Serixa\Contracts\WidgetInterface;
 
 /**
  * Event dispatcher contract for future interactive widgets.
  *
- * Architecture only — does not attach DOM listeners in this milestone.
+ * Architecture only â€” does not attach DOM listeners in this milestone.
  */
 interface WidgetEventDispatcher
 {

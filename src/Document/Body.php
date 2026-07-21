@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document;
+namespace Serixa\Document;
 
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Support\HtmlEscaper;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Support\HtmlEscaper;
 
 /**
- * Document &lt;body&gt; — holds widget children and optional attributes.
+ * Document &lt;body&gt; â€” holds widget children and optional attributes.
  */
 final class Body
 {

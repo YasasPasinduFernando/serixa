@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Contracts;
+namespace Serixa\Contracts;
 
 /**
  * Renders widgets (fragments) or documents (full HTML pages).

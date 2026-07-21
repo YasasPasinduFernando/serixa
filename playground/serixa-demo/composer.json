@@ -1,0 +1,27 @@
+{
+    "name": "serixa/demo",
+    "description": "SERIXA DX playground — consumes the local framework like a real app",
+    "type": "project",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "serixa/framework": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SerixaDemo\\": "app/",
+            "SerixaDemo\\Pages\\": "pages/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Asset;
+namespace Serixa\Document\Asset;
 
-use NovaPHP\Document\Element\Link;
-use NovaPHP\Document\Element\Script;
-use NovaPHP\Document\Head;
+use Serixa\Document\Element\Link;
+use Serixa\Document\Element\Script;
+use Serixa\Document\Head;
 
 /**
- * Registers CSS/JS/fonts/icons and emits head elements (architecture only — no Vite).
+ * Registers CSS/JS/fonts/icons and emits head elements (architecture only â€” no Vite).
  */
 final class AssetManager
 {

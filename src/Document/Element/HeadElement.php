@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Element;
+namespace Serixa\Document\Element;
 
-use NovaPHP\Support\AttributeBag;
-use NovaPHP\Support\HtmlEscaper;
+use Serixa\Support\AttributeBag;
+use Serixa\Support\HtmlEscaper;
 
 /**
  * Shared escaping / attribute helpers for document head elements.

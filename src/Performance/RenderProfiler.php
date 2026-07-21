@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Performance;
+namespace Serixa\Performance;
 
 /**
  * Contract for per-render / per-pass timing (implementation later).

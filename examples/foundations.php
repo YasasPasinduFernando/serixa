@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Text;
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\State\StateManager;
-use NovaPHP\Theme\ThemeManager;
-use NovaPHP\Token\ColorToken;
+use Serixa\Component\Button;
+use Serixa\Component\Column;
+use Serixa\Component\Text;
+use Serixa\Rendering\Renderer;
+use Serixa\State\StateManager;
+use Serixa\Theme\ThemeManager;
+use Serixa\Token\ColorToken;
 
 $primary = ThemeManager::current()->token(ColorToken::primary());
 StateManager::current()->get('demo')->set('clicks', 0);

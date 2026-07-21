@@ -1,18 +1,17 @@
-# ADR 0001 — Runtime namespace remains `NovaPHP\`
+# ADR 0001 — Early namespace branding (historical)
 
 ## Status
 
-Accepted
+**Superseded** by [ADR 0006](0006-serixa-namespace.md) (v0.5.2).
 
 ## Context
 
-The product is branded **SERIXA** (`serixa/framework`), but early milestones shipped under the `NovaPHP\` PSR-4 namespace. Renaming now would break every consumer import.
+Early milestones used a temporary PHP namespace that did not match the SERIXA product name. That mismatch hurt onboarding.
 
-## Decision
+## Decision (historical)
 
-Keep `NovaPHP\` as the runtime namespace through `0.x`. Document SERIXA as the product name. A future major (`1.0` or dedicated major) may introduce `Serixa\` with aliases.
+Defer the rename until after Milestones 1–5.1.
 
-## Consequences
+## Supersession
 
-- Composer package name and docs say SERIXA; code says `NovaPHP\`.
-- No silent rename of namespaces in minor releases.
+As of v0.5.2 the only public namespace is `Serixa\`.

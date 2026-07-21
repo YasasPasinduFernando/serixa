@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\State;
+namespace Serixa\State;
 
-use NovaPHP\Contracts\StateInterface;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Widget\Widget;
+use Serixa\Contracts\StateInterface;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Widget\Widget;
 
 /**
  * Resolves the state bag for a widget (explicit key or object-id fallback).

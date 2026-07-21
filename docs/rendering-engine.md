@@ -4,7 +4,7 @@ Status: **complete** (ships in SERIXA from `v0.1.0`; still the base of later mil
 
 This document describes the rendering engine: responsibilities, public API, and design decisions.
 
-> Prefer the word **widget** in new code (`NovaPHP\Widget\Widget`). The `Component` name remains as a backward-compatible alias.
+> Prefer the word **widget** in new code (`Serixa\Widget\Widget`). The `Component` name remains as a backward-compatible alias.
 
 ## Goals
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tree;
+namespace Serixa\Tree;
 
 /**
  * Walks a WidgetTree in depth-first order.

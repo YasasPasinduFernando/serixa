@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Contracts;
+namespace Serixa\Contracts;
 
-use NovaPHP\Token\DesignToken;
+use Serixa\Token\DesignToken;
 
 /**
  * Maps widget intent + design tokens to CSS class lists.

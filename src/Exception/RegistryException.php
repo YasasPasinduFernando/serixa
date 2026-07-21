@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Exception;
+namespace Serixa\Exception;
 
 /**
  * Widget registry registration or lookup failure.

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Theme;
+namespace Serixa\Tests\Theme;
 
-use NovaPHP\Contracts\ThemeInterface;
-use NovaPHP\Theme\DefaultTheme;
-use NovaPHP\Theme\ThemeManager;
-use NovaPHP\Token\ColorToken;
-use NovaPHP\Token\DesignToken;
 use PHPUnit\Framework\TestCase;
+use Serixa\Contracts\ThemeInterface;
+use Serixa\Theme\DefaultTheme;
+use Serixa\Theme\ThemeManager;
+use Serixa\Token\ColorToken;
+use Serixa\Token\DesignToken;
 
 final class ThemeTest extends TestCase
 {

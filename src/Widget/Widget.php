@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Widget;
+namespace Serixa\Widget;
 
-use NovaPHP\Accessibility\AccessibilityBuilder;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\State\StateManager;
-use NovaPHP\State\WidgetState;
-use NovaPHP\Support\AttributeBag;
-use NovaPHP\Support\ClassMerger;
-use NovaPHP\Support\HtmlEscaper;
+use Serixa\Accessibility\AccessibilityBuilder;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\State\StateManager;
+use Serixa\State\WidgetState;
+use Serixa\Support\AttributeBag;
+use Serixa\Support\ClassMerger;
+use Serixa\Support\HtmlEscaper;
 
 /**
  * Abstract widget: attributes, chaining, lifecycle defaults, optional state, a11y helpers.
  *
- * Concrete UI widgets live under NovaPHP\Component for backward compatibility
+ * Concrete UI widgets live under Serixa\Component for backward compatibility
  * and extend either this class or the Component alias.
  */
 abstract class Widget implements WidgetInterface

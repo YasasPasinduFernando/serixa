@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NovaPHP\\": "src/"
+            "Serixa\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NovaPHP\\Tests\\": "tests/"
+            "Serixa\\Tests\\": "tests/"
         }
     },
     "scripts": {

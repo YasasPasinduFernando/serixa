@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Widget;
+namespace Serixa\Widget;
 
 use Countable;
 use IteratorAggregate;
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\WidgetInterface;
 use Traversable;
 
 /**

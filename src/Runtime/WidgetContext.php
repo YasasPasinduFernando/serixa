@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Runtime;
+namespace Serixa\Runtime;
 
-use NovaPHP\Contracts\ThemeInterface;
-use NovaPHP\Exception\InvalidArgumentException;
-use NovaPHP\Theme\DefaultTheme;
+use Serixa\Contracts\ThemeInterface;
+use Serixa\Exception\InvalidArgumentException;
+use Serixa\Theme\DefaultTheme;
 
 /**
  * Immutable runtime facts available during a render (theme, locale, mode, etc.).

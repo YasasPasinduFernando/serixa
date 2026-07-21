@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Contracts;
+namespace Serixa\Contracts;
 
-use NovaPHP\Document\Asset\AssetManager;
-use NovaPHP\Document\Seo\SeoManager;
+use Serixa\Document\Asset\AssetManager;
+use Serixa\Document\Seo\SeoManager;
 
 /**
  * A full HTML document (not a fragment).
@@ -19,7 +19,7 @@ interface DocumentInterface
     public function getLanguage(): string;
 
     /**
-     * @return list<\NovaPHP\Contracts\WidgetInterface|string>
+     * @return list<\Serixa\Contracts\WidgetInterface|string>
      */
     public function bodyChildren(): array;
 }

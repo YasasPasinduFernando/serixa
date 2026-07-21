@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Token;
+namespace Serixa\Token;
 
 /** Semantic typography token. */
 final class TypographyToken extends DesignToken

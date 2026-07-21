@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Registry;
+namespace Serixa\Registry;
 
 /**
  * Descriptive metadata for a widget type (builders, DevTools, marketplace).

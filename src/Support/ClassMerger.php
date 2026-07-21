@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Support;
+namespace Serixa\Support;
 
 /**
  * Merges CSS class tokens, preserving order and removing duplicates.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Exception;
+namespace Serixa\Exception;
 
 /**
  * Invalid argument or configuration supplied to a SERIXA API.

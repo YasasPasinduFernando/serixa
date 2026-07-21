@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component;
+namespace Serixa\Component;
 
-use NovaPHP\Component\Concerns\AssertsOption;
-use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Exception\InvalidArgumentException;
+use Serixa\Component\Concerns\AssertsOption;
+use Serixa\Component\Concerns\ResolvesTheme;
+use Serixa\Exception\InvalidArgumentException;
 
 /**
  * Semantic text node. Intent maps through the active theme.
@@ -40,7 +40,7 @@ final class Text extends Component
     }
 
     /**
-     * HTML tag used for this text node (e.g. p, span, h1–h6, label).
+     * HTML tag used for this text node (e.g. p, span, h1â€“h6, label).
      */
     public function as(string $tag): self
     {

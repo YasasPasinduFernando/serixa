@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tree;
+namespace Serixa\Tree;
 
 /**
  * Invokes widget lifecycle hooks while walking the tree.

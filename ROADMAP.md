@@ -46,6 +46,12 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] ADRs, versioning & deprecation policies
 - [x] `@internal` markers on non-SemVer types
 
+### Milestone 5.2 — DX cleanup (`v0.5.2`)
+- [x] Fluent Padding builder (`Padding::make()->x()->y()->child()`)
+- [x] Structural `Scaffold` widget (appBar / sidebar / body / footer)
+- [x] Canonical `Serixa\` namespace across the codebase
+- [x] Namespace / architecture docs
+
 ## Upcoming
 
 ### Milestone 6 — Forms
@@ -60,7 +66,6 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 ### Milestone 8 — App DX
 - [ ] `App::build` / page composition helpers
 - [ ] Dark-mode toggle helpers (using WidgetContext colorMode)
-- [ ] Namespace rebrand path (`NovaPHP\` → `Serixa\`) if approved
 - [ ] Plugin marketplace adapters (optional)
 
 ### Later

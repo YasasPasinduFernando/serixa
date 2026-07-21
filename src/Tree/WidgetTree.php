@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tree;
+namespace Serixa\Tree;
 
-use NovaPHP\Contracts\WidgetInterface;
+use Serixa\Contracts\WidgetInterface;
 
 /**
  * Immutable snapshot of a widget composition graph.
  *
- * Prepared for future diffing, inspection, and hot reload — not a virtual DOM.
+ * Prepared for future diffing, inspection, and hot reload â€” not a virtual DOM.
  */
 final class WidgetTree
 {

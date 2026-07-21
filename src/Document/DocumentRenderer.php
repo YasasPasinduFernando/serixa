@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document;
+namespace Serixa\Document;
 
-use NovaPHP\Contracts\DocumentInterface;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Pipeline\RenderPipeline;
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Runtime\WidgetContext;
+use Serixa\Contracts\DocumentInterface;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Pipeline\RenderPipeline;
+use Serixa\Rendering\Renderer;
+use Serixa\Runtime\RenderContext;
+use Serixa\Runtime\WidgetContext;
 
 /**
- * Coordinates Html → Head (SEO + Assets) → Body (widgets) into a complete HTML document.
+ * Coordinates Html â†’ Head (SEO + Assets) â†’ Body (widgets) into a complete HTML document.
  */
 final class DocumentRenderer
 {

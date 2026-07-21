@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tree;
+namespace Serixa\Tree;
 
 /**
  * Visitor over tree nodes (enter/leave for pre- and post-order work).

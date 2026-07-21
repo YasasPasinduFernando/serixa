@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Inspector;
+namespace Serixa\Inspector;
 
-use NovaPHP\Tree\WidgetTree;
+use Serixa\Tree\WidgetTree;
 
 /**
- * Contract for inspecting a widget tree (DevTools — no UI).
+ * Contract for inspecting a widget tree (DevTools â€” no UI).
  */
 interface TreeInspector
 {

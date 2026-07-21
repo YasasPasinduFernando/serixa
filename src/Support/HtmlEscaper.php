@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Support;
+namespace Serixa\Support;
 
 /**
  * Escapes values for safe inclusion in HTML content and attributes.

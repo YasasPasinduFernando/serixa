@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component;
+namespace Serixa\Component;
 
-use NovaPHP\Component\Concerns\AssertsOption;
-use NovaPHP\Component\Concerns\HasChildren;
-use NovaPHP\Component\Concerns\ResolvesTheme;
-use NovaPHP\Contracts\ComponentInterface;
+use Serixa\Component\Concerns\AssertsOption;
+use Serixa\Component\Concerns\HasChildren;
+use Serixa\Component\Concerns\ResolvesTheme;
+use Serixa\Contracts\ComponentInterface;
 
 /**
  * Content card with optional title. Renders as a semantic article.

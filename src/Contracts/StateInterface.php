@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Contracts;
+namespace Serixa\Contracts;
 
 /**
  * Read/write bag of in-memory widget state values.

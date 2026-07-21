@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Component\Concerns;
+namespace Serixa\Component\Concerns;
 
-use NovaPHP\Exception\InvalidArgumentException;
+use Serixa\Exception\InvalidArgumentException;
 
 /**
  * Validates semantic option values against an allow-list.

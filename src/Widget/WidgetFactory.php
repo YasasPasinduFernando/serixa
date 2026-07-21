@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Widget;
+namespace Serixa\Widget;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Card;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Container;
-use NovaPHP\Component\Divider;
-use NovaPHP\Component\Expanded;
-use NovaPHP\Component\Padding;
-use NovaPHP\Component\Row;
-use NovaPHP\Component\SizedBox;
-use NovaPHP\Component\Spacer;
-use NovaPHP\Component\Stack;
-use NovaPHP\Component\Text;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Exception\InvalidArgumentException;
+use Serixa\Component\Button;
+use Serixa\Component\Card;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\Container;
+use Serixa\Component\Divider;
+use Serixa\Component\Expanded;
+use Serixa\Component\Padding;
+use Serixa\Component\Row;
+use Serixa\Component\SizedBox;
+use Serixa\Component\Spacer;
+use Serixa\Component\Stack;
+use Serixa\Component\Text;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Exception\InvalidArgumentException;
 
 /**
  * Named widget construction for registries, serializers, and future DevTools.
  *
- * Does not replace fluent make() APIs — those remain the primary DX.
+ * Does not replace fluent make() APIs â€” those remain the primary DX.
  */
 final class WidgetFactory
 {

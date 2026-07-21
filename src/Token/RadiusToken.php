@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Token;
+namespace Serixa\Token;
 
 /** Semantic border-radius token. */
 final class RadiusToken extends DesignToken

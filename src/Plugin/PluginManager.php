@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Plugin;
+namespace Serixa\Plugin;
 
-use NovaPHP\Container\Container;
-use NovaPHP\Exception\PluginException;
-use NovaPHP\Registry\WidgetRegistry;
+use Serixa\Container\Container;
+use Serixa\Exception\PluginException;
+use Serixa\Registry\WidgetRegistry;
 
 /**
- * Boots and tracks registered plugins (no marketplace — local composition only).
+ * Boots and tracks registered plugins (no marketplace â€” local composition only).
  */
 final class PluginManager
 {

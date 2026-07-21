@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Exception;
+namespace Serixa\Exception;
 
 /**
  * Base exception for SERIXA runtime failures.

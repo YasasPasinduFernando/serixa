@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Pipeline\Pass;
+namespace Serixa\Pipeline\Pass;
 
-use NovaPHP\Pipeline\RenderPassInterface;
-use NovaPHP\Runtime\RenderContext;
+use Serixa\Pipeline\RenderPassInterface;
+use Serixa\Runtime\RenderContext;
 
 /**
  * Placeholder pass for future tree-wide accessibility enrichment.

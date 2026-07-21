@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Foundation;
+namespace Serixa\Tests\Foundation;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Center;
-use NovaPHP\Component\Column;
-use NovaPHP\Component\Component;
-use NovaPHP\Component\Text;
-use NovaPHP\Contracts\ComponentInterface;
-use NovaPHP\Contracts\WidgetInterface;
-use NovaPHP\Event\ClickEvent;
-use NovaPHP\Event\NullWidgetEventDispatcher;
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\State\StateBuilder;
-use NovaPHP\State\StateManager;
-use NovaPHP\State\StateResolver;
-use NovaPHP\State\WidgetState;
-use NovaPHP\Token\ColorToken;
-use NovaPHP\Tree\TreeWalker;
-use NovaPHP\Tree\WidgetTree;
-use NovaPHP\Widget\Widget;
-use NovaPHP\Widget\WidgetCollection;
-use NovaPHP\Widget\WidgetFactory;
 use PHPUnit\Framework\TestCase;
+use Serixa\Component\Button;
+use Serixa\Component\Center;
+use Serixa\Component\Column;
+use Serixa\Component\Component;
+use Serixa\Component\Text;
+use Serixa\Contracts\ComponentInterface;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Event\ClickEvent;
+use Serixa\Event\NullWidgetEventDispatcher;
+use Serixa\Rendering\Renderer;
+use Serixa\State\StateBuilder;
+use Serixa\State\StateManager;
+use Serixa\State\StateResolver;
+use Serixa\State\WidgetState;
+use Serixa\Token\ColorToken;
+use Serixa\Tree\TreeWalker;
+use Serixa\Tree\WidgetTree;
+use Serixa\Widget\Widget;
+use Serixa\Widget\WidgetCollection;
+use Serixa\Widget\WidgetFactory;
 
 final class FoundationTest extends TestCase
 {
@@ -173,19 +173,19 @@ final class FoundationTest extends TestCase
             Column::make([Text::make('A'), Text::make('B')]),
         );
 
-        (new TreeWalker())->walk($tree->root(), new class ($visited) implements \NovaPHP\Tree\TreeVisitor {
+        (new TreeWalker())->walk($tree->root(), new class ($visited) implements \Serixa\Tree\TreeVisitor {
             public function __construct(private int &$visited)
             {
             }
 
-            public function enter(\NovaPHP\Tree\TreeNode $node): void
+            public function enter(\Serixa\Tree\TreeNode $node): void
             {
                 if ($node->isWidget()) {
                     $this->visited++;
                 }
             }
 
-            public function leave(\NovaPHP\Tree\TreeNode $node): void
+            public function leave(\Serixa\Tree\TreeNode $node): void
             {
             }
         });

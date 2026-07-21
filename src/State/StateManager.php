@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\State;
+namespace Serixa\State;
 
-use NovaPHP\Contracts\StateInterface;
+use Serixa\Contracts\StateInterface;
 
 /**
  * Process-scoped, memory-only state registry.
  *
- * No HTTP, sessions, cookies, or database — prepared for Modal/Tabs/etc.
+ * No HTTP, sessions, cookies, or database â€” prepared for Modal/Tabs/etc.
  * Injectable later via constructor; static current() mirrors ThemeManager convention.
  */
 final class StateManager

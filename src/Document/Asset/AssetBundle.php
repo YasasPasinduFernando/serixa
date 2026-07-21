@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Document\Asset;
+namespace Serixa\Document\Asset;
 
 /**
  * A named collection of related assets (e.g. "app", "vendor").

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Plugin;
+namespace Serixa\Plugin;
 
 /**
  * Plugin that contributes themes or token maps.

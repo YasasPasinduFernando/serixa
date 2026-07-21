@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace NovaPHP\Tests\Runtime;
+namespace Serixa\Tests\Runtime;
 
-use NovaPHP\Component\Button;
-use NovaPHP\Component\Text;
-use NovaPHP\Container\Container;
-use NovaPHP\Contracts\ThemeInterface;
-use NovaPHP\Exception\PipelineException;
-use NovaPHP\Pipeline\Pass\BuildTreePass;
-use NovaPHP\Pipeline\RenderPipeline;
-use NovaPHP\Plugin\PluginManager;
-use NovaPHP\Plugin\WidgetPlugin;
-use NovaPHP\Registry\WidgetMetadata;
-use NovaPHP\Registry\WidgetRegistry;
-use NovaPHP\Rendering\HtmlWriter;
-use NovaPHP\Rendering\Renderer;
-use NovaPHP\Runtime\RenderContext;
-use NovaPHP\Runtime\WidgetContext;
-use NovaPHP\Theme\DefaultTheme;
-use NovaPHP\Theme\ThemeManager;
-use NovaPHP\Token\DesignToken;
 use PHPUnit\Framework\TestCase;
+use Serixa\Component\Button;
+use Serixa\Component\Text;
+use Serixa\Container\Container;
+use Serixa\Contracts\ThemeInterface;
+use Serixa\Exception\PipelineException;
+use Serixa\Pipeline\Pass\BuildTreePass;
+use Serixa\Pipeline\RenderPipeline;
+use Serixa\Plugin\PluginManager;
+use Serixa\Plugin\WidgetPlugin;
+use Serixa\Registry\WidgetMetadata;
+use Serixa\Registry\WidgetRegistry;
+use Serixa\Rendering\HtmlWriter;
+use Serixa\Rendering\Renderer;
+use Serixa\Runtime\RenderContext;
+use Serixa\Runtime\WidgetContext;
+use Serixa\Theme\DefaultTheme;
+use Serixa\Theme\ThemeManager;
+use Serixa\Token\DesignToken;
 
 final class RuntimeCoreTest extends TestCase
 {
