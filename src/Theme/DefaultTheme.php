@@ -52,6 +52,30 @@ final class DefaultTheme implements ThemeInterface
             'scaffold.main' => $this->scaffoldMain($state),
             'scaffold.body' => $this->scaffoldBody($state),
             'scaffold.footer' => $this->scaffoldFooter($state),
+            'appBar' => $this->appBar($state),
+            'appBar.title' => $this->appBarTitle($state),
+            'appBar.actions' => $this->appBarActions($state),
+            'sidebar' => $this->sidebar($state),
+            'mainContent' => $this->mainContent($state),
+            'footer' => $this->footerBar($state),
+            'form' => $this->form($state),
+            'label' => $this->label($state),
+            'input' => $this->input($state),
+            'textarea' => $this->textarea($state),
+            'checkbox' => $this->checkbox($state),
+            'checkbox.wrap' => $this->choiceWrap($state),
+            'checkbox.label' => $this->choiceLabel($state),
+            'radio' => $this->radio($state),
+            'radio.wrap' => $this->choiceWrap($state),
+            'radio.label' => $this->choiceLabel($state),
+            'switch' => $this->switchControl($state),
+            'switch.wrap' => $this->choiceWrap($state),
+            'switch.label' => $this->choiceLabel($state),
+            'select' => $this->select($state),
+            'fieldGroup' => $this->fieldGroup($state),
+            'helperText' => $this->helperText($state),
+            'errorText' => $this->errorText($state),
+            'link' => $this->link($state),
             default => throw new InvalidArgumentException(sprintf('Unknown theme component "%s".', $component)),
         };
     }
@@ -431,14 +455,324 @@ final class DefaultTheme implements ThemeInterface
      */
     private function divider(array $state): array
     {
+        $orientation = (string) ($state['orientation'] ?? 'horizontal');
+        $spacing = (string) ($state['spacing'] ?? 'md');
+
+        $spacingMap = [
+            'none' => ['my-0', 'mx-0'],
+            'sm' => ['my-2', 'mx-2'],
+            'md' => ['my-4', 'mx-4'],
+            'lg' => ['my-6', 'mx-6'],
+        ];
+
+        if (! isset($spacingMap[$spacing])) {
+            throw new InvalidArgumentException('Invalid divider spacing.');
+        }
+
+        if ($orientation === 'vertical') {
+            return [
+                'border-0',
+                'border-l',
+                'border-slate-200',
+                'dark:border-slate-700',
+                'h-auto',
+                'self-stretch',
+                'w-px',
+                $spacingMap[$spacing][1],
+            ];
+        }
+
         return [
             'border-0',
             'border-t',
             'border-slate-200',
             'dark:border-slate-700',
             'w-full',
-            'my-4',
+            $spacingMap[$spacing][0],
         ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function appBar(array $state): array
+    {
+        return [
+            'flex',
+            'w-full',
+            'items-center',
+            'justify-between',
+            'gap-4',
+            'px-4',
+            'py-3',
+            'bg-slate-900',
+            'text-white',
+        ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function appBarTitle(array $state): array
+    {
+        return ['text-lg', 'font-semibold', 'tracking-tight'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function appBarActions(array $state): array
+    {
+        return ['flex', 'items-center', 'gap-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function sidebar(array $state): array
+    {
+        return [
+            'flex',
+            'flex-col',
+            'gap-2',
+            'p-4',
+            'w-56',
+            'min-h-full',
+            'bg-slate-50',
+            'dark:bg-slate-900',
+            'border-r',
+            'border-slate-200',
+            'dark:border-slate-700',
+        ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function mainContent(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-4', 'p-6', 'w-full', 'min-w-0'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function footerBar(array $state): array
+    {
+        return [
+            'w-full',
+            'px-6',
+            'py-4',
+            'text-sm',
+            'text-slate-500',
+            'border-t',
+            'border-slate-200',
+            'dark:border-slate-700',
+        ];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function form(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-4', 'w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function label(array $state): array
+    {
+        return ['block', 'text-sm', 'font-medium', 'text-slate-700', 'dark:text-slate-200', 'mb-1'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function input(array $state): array
+    {
+        return $this->controlField($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function textarea(array $state): array
+    {
+        return array_merge($this->controlField($state), ['min-h-[5rem]']);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function select(array $state): array
+    {
+        return $this->controlField($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function controlField(array $state): array
+    {
+        $classes = [
+            'block',
+            'w-full',
+            'rounded-md',
+            'border',
+            'border-slate-300',
+            'dark:border-slate-600',
+            'bg-white',
+            'dark:bg-slate-900',
+            'px-3',
+            'py-2',
+            'text-sm',
+            'text-slate-900',
+            'dark:text-slate-100',
+            'shadow-sm',
+            'focus:outline-none',
+            'focus:ring-2',
+            'focus:ring-sky-500',
+            'focus:border-sky-500',
+        ];
+
+        if (! empty($state['invalid'])) {
+            $classes[] = 'border-rose-500';
+            $classes[] = 'focus:ring-rose-500';
+            $classes[] = 'focus:border-rose-500';
+        }
+
+        if (! empty($state['disabled'])) {
+            $classes[] = 'opacity-60';
+            $classes[] = 'cursor-not-allowed';
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function checkbox(array $state): array
+    {
+        return $this->choiceControl($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function radio(array $state): array
+    {
+        return $this->choiceControl($state);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function switchControl(array $state): array
+    {
+        return array_merge($this->choiceControl($state), ['accent-sky-600']);
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function choiceControl(array $state): array
+    {
+        $classes = ['h-4', 'w-4', 'rounded', 'border-slate-300', 'text-sky-600', 'focus:ring-sky-500'];
+
+        if (! empty($state['disabled'])) {
+            $classes[] = 'opacity-60';
+            $classes[] = 'cursor-not-allowed';
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function choiceWrap(array $state): array
+    {
+        return ['flex', 'items-center', 'gap-2'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function choiceLabel(array $state): array
+    {
+        return ['text-sm', 'text-slate-700', 'dark:text-slate-200'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function fieldGroup(array $state): array
+    {
+        return ['flex', 'flex-col', 'gap-1', 'w-full'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function helperText(array $state): array
+    {
+        return ['text-xs', 'text-slate-500', 'dark:text-slate-400'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function errorText(array $state): array
+    {
+        return ['text-xs', 'font-medium', 'text-rose-600', 'dark:text-rose-400'];
+    }
+
+    /**
+     * @param array<string, scalar|bool|null> $state
+     * @return list<string>
+     */
+    private function link(array $state): array
+    {
+        $classes = [
+            'text-sm',
+            'font-medium',
+            'text-sky-600',
+            'hover:text-sky-700',
+            'underline-offset-2',
+            'hover:underline',
+        ];
+
+        if (! empty($state['active'])) {
+            $classes[] = 'text-sky-800';
+            $classes[] = 'font-semibold';
+            $classes[] = 'underline';
+        }
+
+        return $classes;
     }
 
     /**

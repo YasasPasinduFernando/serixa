@@ -5,6 +5,27 @@ All notable changes to SERIXA are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [v0.6.0] — 2026-07-22
+
+### Added
+- UI Foundation chrome: `AppBar`, `Sidebar`, `MainContent`, `Footer` (compose with `Scaffold`)
+- Forms: `Form`, `Label`, `Input`, `PasswordInput`, `Textarea`, `Checkbox`, `Radio`, `SwitchControl`, `Select`
+- Navigation: `Link`
+- Field messaging: `FieldGroup`, `HelperText`, `ErrorText`
+- `HasFormControl` shared concern (`name`, `id`, `disabled`, `required`, `invalid`, `describedBy`)
+- Docs: `docs/ui-foundation.md`, `examples/forms.php`, `examples/scaffold.php`
+- PHPUnit coverage for all new widgets
+
+### Changed
+- `Divider` supports `orientation()`, `spacing()`, and optional `label()` (aria-label)
+- `WidgetRegistry` / `DefaultTheme` include UI Foundation widgets
+
+### Deprecated
+- None
+
+### Fixed
+- None
+
 ## [v0.5.2] — 2026-07-22
 
 ### Added

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 $pages = ['login', 'dashboard', 'crud', 'settings', 'profile'];
 $needles = [
-    'login' => ['Sign in', 'Missing widget: Input'],
+    'login' => ['Sign in', 'type="email"', 'type="password"', 'Remember me', 'Forgot password?'],
     'dashboard' => ['Dashboard', 'Missing widget: Chart'],
     'crud' => ['Missing widget: DataTable'],
-    'settings' => ['Missing widget: Switch'],
+    'settings' => ['Workspace name', 'role="switch"', 'Email digests', 'Save changes'],
     'profile' => ['Missing widget: Avatar'],
 ];
 

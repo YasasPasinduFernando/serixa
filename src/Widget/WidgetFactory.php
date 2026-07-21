@@ -7,23 +7,30 @@ namespace Serixa\Widget;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Center;
+use Serixa\Component\Checkbox;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Component\Divider;
 use Serixa\Component\Expanded;
+use Serixa\Component\Form;
+use Serixa\Component\Input;
+use Serixa\Component\Link;
 use Serixa\Component\Padding;
 use Serixa\Component\Row;
+use Serixa\Component\Scaffold;
+use Serixa\Component\Select;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Spacer;
 use Serixa\Component\Stack;
 use Serixa\Component\Text;
+use Serixa\Component\Textarea;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Exception\InvalidArgumentException;
 
 /**
  * Named widget construction for registries, serializers, and future DevTools.
  *
- * Does not replace fluent make() APIs â€” those remain the primary DX.
+ * Does not replace fluent make() APIs — those remain the primary DX.
  */
 final class WidgetFactory
 {
@@ -57,6 +64,13 @@ final class WidgetFactory
             'sizedBox' => SizedBox::class,
             'stack' => Stack::class,
             'divider' => Divider::class,
+            'scaffold' => Scaffold::class,
+            'form' => Form::class,
+            'input' => Input::class,
+            'textarea' => Textarea::class,
+            'checkbox' => Checkbox::class,
+            'select' => Select::class,
+            'link' => Link::class,
         ];
     }
 

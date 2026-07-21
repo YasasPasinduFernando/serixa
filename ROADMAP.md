@@ -52,12 +52,19 @@ Product vision: the easiest way to build modern websites with PHP only — Flutt
 - [x] Canonical `Serixa\` namespace across the codebase
 - [x] Namespace / architecture docs
 
+### Milestone 6.0 — UI Foundation (`v0.6.0`)
+- [x] AppBar, Sidebar, MainContent, Footer
+- [x] Form, Label, Input, PasswordInput, Textarea, Checkbox, Radio, SwitchControl, Select
+- [x] Link, FieldGroup, HelperText, ErrorText
+- [x] Divider orientation / spacing improvements
+
 ## Upcoming
 
-### Milestone 6 — Forms
-- [ ] Input, Textarea, Select, Checkbox, Label
-- [ ] Form layout helpers
-- [ ] Validation display (UI only)
+### Milestone 6.1 — Form validation display & data primitives
+- [ ] Field error / success state adapters (UI only)
+- [ ] SearchField, DataTable, Pagination
+- [ ] StatCard / Metric, List / ListTile
+- [ ] Avatar
 
 ### Milestone 7 — Interactive widgets
 - [ ] Modal, Tabs, Accordion, Drawer, Dropdown, Toast

@@ -7,9 +7,13 @@ namespace SerixaDemo\Pages;
 use Serixa\Component\Button;
 use Serixa\Component\Card;
 use Serixa\Component\Column;
+use Serixa\Component\Input;
+use Serixa\Component\Label;
+use Serixa\Component\Link;
 use Serixa\Component\Row;
 use Serixa\Component\SizedBox;
 use Serixa\Component\Text;
+use Serixa\Component\Textarea;
 use Serixa\Document\Document;
 use SerixaDemo\DocumentFactory;
 use SerixaDemo\Missing;
@@ -27,7 +31,6 @@ final class ProfilePage
             Text::make('Personal presence and public details.')->tone('muted'),
             SizedBox::height(3),
             Card::make(
-                // Missing: Avatar
                 Missing::widget('Avatar', 'Circular user photo / initials'),
                 Text::make('Ada Lovelace')->as('h2')->size('lg')->weight('semibold'),
                 Text::make('ada@example.com')->tone('muted')->size('sm'),
@@ -35,28 +38,29 @@ final class ProfilePage
             SizedBox::height(3),
             Card::make(
                 Text::make('Personal details')->as('h2')->size('lg')->weight('semibold'),
-                Missing::widget('Input', 'Full name'),
-                Missing::widget('Input', 'Job title'),
-                Missing::widget('Input', 'Location'),
+                Label::make('Full name')->for('full_name'),
+                Input::make()->id('full_name')->name('full_name')->value('Ada Lovelace'),
+                Label::make('Job title')->for('job_title'),
+                Input::make()->id('job_title')->name('job_title')->value('Mathematician'),
+                Label::make('Location')->for('location'),
+                Input::make()->id('location')->name('location')->value('London'),
             )->padding('md'),
             SizedBox::height(3),
             Card::make(
                 Text::make('Bio')->as('h2')->size('lg')->weight('semibold'),
-                // Missing: Textarea
-                Missing::widget('Textarea', 'Multi-line biography'),
+                Label::make('Biography')->for('bio'),
+                Textarea::make('Pioneer of computing.')->id('bio')->name('bio')->rows(4),
             )->padding('md'),
             SizedBox::height(3),
             Card::make(
                 Text::make('Social links')->as('h2')->size('lg')->weight('semibold'),
-                // Missing: LinkList / IconLink
-                Missing::widget('LinkField', 'Website URL'),
-                Missing::widget('LinkField', 'GitHub / X / LinkedIn'),
-                Text::make('https://example.com/ada')
-                    ->as('a')
-                    ->size('sm')
-                    ->tone('primary')
-                    ->attribute('href', 'https://example.com/ada')
-                    ->attribute('target', '_blank'),
+                Label::make('Website')->for('website'),
+                Input::make()->id('website')->name('website')->type('url')->value('https://example.com/ada'),
+                Link::make('https://example.com/ada')
+                    ->href('https://example.com/ada')
+                    ->target('_blank'),
+                // Still missing dedicated LinkField / social icon row
+                Missing::widget('LinkField', 'GitHub / X / LinkedIn icon row'),
             )->padding('md'),
         ])->gap(2)->alignStart();
 

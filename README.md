@@ -16,6 +16,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 
 - Fluent, chainable widgets (`Button::make('Save')->primary()->large()`)
 - Layout widgets: `Row`, `Column`, `Center`, `Padding`, `Spacer`, `Expanded`, `SizedBox`, `Stack`, `Divider`, `Scaffold`
+- **UI Foundation:** `AppBar`, `Sidebar`, `MainContent`, `Footer`, `Form`, `Input`, `Select`, `Link`, …
 - Fluent `Padding::make()->x(6)->y(4)->child(...)`
 - Theme seam + design tokens
 - Widget tree + lifecycle hooks
@@ -37,6 +38,7 @@ SERIXA is not a Laravel clone and not a React clone. It is a **components-first 
 | 5 | Document & Asset Engine | Complete (`v0.5.0`) |
 | 5.1 | API Stewardship | Complete (`v0.5.1`) |
 | 5.2 | DX cleanup | Complete (`v0.5.2`) |
+| 6.0 | UI Foundation | Complete (`v0.6.0`) |
 
 See [ROADMAP.md](ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
@@ -161,6 +163,7 @@ examples/
 - [Framework foundations](docs/framework-foundations.md)
 - [Runtime Core](docs/runtime-core.md)
 - [Document & Asset Engine](docs/document-engine.md)
+- [UI Foundation](docs/ui-foundation.md)
 
 ## Roadmap
 
