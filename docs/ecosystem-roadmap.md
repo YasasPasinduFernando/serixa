@@ -58,9 +58,17 @@ Phase tag: `phase-2-commerce-v0.1.0`. Report: [phase-2-commerce.md](releases/pha
 
 Phase tag: `phase-3-cms-v0.1.0`. Report: [phase-3-cms.md](releases/phase-3-cms.md).
 
-## Phase 4 — Storage
+## Phase 4 — Storage (complete)
 
-`local-storage` → `aws-s3` → `cloudinary` → `google-drive` → `dropbox`
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/local-storage` | framework | **0.1.0** (`serixa-local-storage-v0.1.0`) |
+| `serixa/aws-s3` | local-storage | **0.1.0** (`serixa-aws-s3-v0.1.0`) |
+| `serixa/cloudinary` | local-storage | **0.1.0** (`serixa-cloudinary-v0.1.0`) |
+| `serixa/google-drive` | local-storage | **0.1.0** (`serixa-google-drive-v0.1.0`) |
+| `serixa/dropbox` | local-storage | **0.1.0** (`serixa-dropbox-v0.1.0`) |
+
+Phase tag: `phase-4-storage-v0.1.0`. Report: [phase-4-storage.md](releases/phase-4-storage.md).
 
 ## Phase 5 — Files
 
