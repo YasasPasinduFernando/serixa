@@ -1,0 +1,31 @@
+name: serixa-cart
+
+on:
+  push:
+    paths:
+      - 'packages/cart/**'
+      - 'framework/**'
+  pull_request:
+    paths:
+      - 'packages/cart/**'
+      - 'framework/**'
+
+jobs:
+  package:
+    name: cart package QA
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/cart
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+      - name: Install
+        run: composer install --no-interaction --prefer-dist
+      - name: QA
+        run: composer qa
