@@ -43,6 +43,7 @@ final class DocsCatalog
             ['slug' => 'deployment', 'title' => 'Deployment', 'group' => 'Guides', 'source' => 'deployment.md', 'marker' => 'Deployment'],
             ['slug' => 'troubleshooting', 'title' => 'Troubleshooting', 'group' => 'Guides', 'source' => 'troubleshooting.md', 'marker' => 'Troubleshooting'],
             ['slug' => 'performance', 'title' => 'Performance', 'group' => 'Guides', 'source' => 'performance-v1.md', 'marker' => 'Performance'],
+            ['slug' => 'accessibility', 'title' => 'Accessibility', 'group' => 'Guides', 'source' => 'accessibility.md', 'marker' => 'Accessibility'],
             ['slug' => 'faq', 'title' => 'FAQ', 'group' => 'Guides', 'source' => 'faq.md', 'marker' => 'FAQ'],
             ['slug' => 'roadmap', 'title' => 'Roadmap', 'group' => 'Guides', 'source' => '@roadmap', 'marker' => 'Roadmap'],
         ];
