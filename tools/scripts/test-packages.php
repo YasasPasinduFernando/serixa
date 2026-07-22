@@ -17,6 +17,7 @@ $packages = [
     'passkeys', 'webauthn', 'two-factor', 'recaptcha', 'hcaptcha',
     'meilisearch', 'algolia', 'typesense', 'elasticsearch',
     'openai', 'gemini', 'anthropic', 'deepseek', 'ollama',
+    'firebase', 'onesignal', 'twilio', 'slack', 'discord', 'telegram', 'whatsapp',
 ];
 $failed = 0;
 
