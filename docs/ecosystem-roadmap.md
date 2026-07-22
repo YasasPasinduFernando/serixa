@@ -104,11 +104,19 @@ Phase tag: `phase-6-security-v0.1.0`. Report: [phase-6-security.md](releases/pha
 
 Phase tag: `phase-7-search-v0.1.0`. Report: [phase-7-search.md](releases/phase-7-search.md).
 
-**Next (awaiting confirmation):** Phase 8 — AI.
+## Phase 8 — AI (complete)
 
-## Phase 8 — AI
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/openai` | framework | **0.1.0** (`serixa-openai-v0.1.0`) |
+| `serixa/gemini` | openai | **0.1.0** (`serixa-gemini-v0.1.0`) |
+| `serixa/anthropic` | openai | **0.1.0** (`serixa-anthropic-v0.1.0`) |
+| `serixa/deepseek` | openai | **0.1.0** (`serixa-deepseek-v0.1.0`) |
+| `serixa/ollama` | openai | **0.1.0** (`serixa-ollama-v0.1.0`) |
 
-`openai` → `gemini` → `anthropic` → `deepseek` → `ollama`
+Phase tag: `phase-8-ai-v0.1.0`. Report: [phase-8-ai.md](releases/phase-8-ai.md).
+
+**Next (awaiting confirmation):** Phase 9 — Notifications.
 
 ## Phase 9 — Notifications
 
