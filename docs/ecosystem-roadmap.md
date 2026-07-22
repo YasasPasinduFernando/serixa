@@ -32,8 +32,6 @@ Framework development is **API frozen** (additive-only). New work is packages, s
 
 Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases/phase-1-enterprise.md).
 
-**Next (awaiting confirmation):** Phase 7 — Search.
-
 ## Phase 2 — Commerce (complete)
 
 | Package | Depends on | Status |
@@ -83,13 +81,30 @@ Phase tag: `phase-4-storage-v0.1.0`. Report: [phase-4-storage.md](releases/phase
 
 Phase tag: `phase-5-files-v0.1.0`. Report: [phase-5-files.md](releases/phase-5-files.md).
 
-## Phase 6 — Security
+## Phase 6 — Security (complete)
 
-`passkeys` → `webauthn` → `two-factor` → `recaptcha` → `hcaptcha`
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/passkeys` | framework | **0.1.0** (`serixa-passkeys-v0.1.0`) |
+| `serixa/webauthn` | passkeys | **0.1.0** (`serixa-webauthn-v0.1.0`) |
+| `serixa/two-factor` | framework | **0.1.0** (`serixa-two-factor-v0.1.0`) |
+| `serixa/recaptcha` | framework | **0.1.0** (`serixa-recaptcha-v0.1.0`) |
+| `serixa/hcaptcha` | framework | **0.1.0** (`serixa-hcaptcha-v0.1.0`) |
 
-## Phase 7 — Search
+Phase tag: `phase-6-security-v0.1.0`. Report: [phase-6-security.md](releases/phase-6-security.md).
 
-`meilisearch` → `algolia` → `typesense` → `elasticsearch`
+## Phase 7 — Search (complete)
+
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/meilisearch` | framework | **0.1.0** (`serixa-meilisearch-v0.1.0`) |
+| `serixa/algolia` | meilisearch | **0.1.0** (`serixa-algolia-v0.1.0`) |
+| `serixa/typesense` | meilisearch | **0.1.0** (`serixa-typesense-v0.1.0`) |
+| `serixa/elasticsearch` | meilisearch | **0.1.0** (`serixa-elasticsearch-v0.1.0`) |
+
+Phase tag: `phase-7-search-v0.1.0`. Report: [phase-7-search.md](releases/phase-7-search.md).
+
+**Next (awaiting confirmation):** Phase 8 — AI.
 
 ## Phase 8 — AI
 
