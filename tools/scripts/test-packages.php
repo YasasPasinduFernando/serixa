@@ -15,6 +15,7 @@ $packages = [
     'local-storage', 'aws-s3', 'cloudinary', 'google-drive', 'dropbox',
     'media-library', 'file-manager', 'pdf', 'excel', 'word', 'zip',
     'passkeys', 'webauthn', 'two-factor', 'recaptcha', 'hcaptcha',
+    'meilisearch', 'algolia', 'typesense', 'elasticsearch',
 ];
 $failed = 0;
 
