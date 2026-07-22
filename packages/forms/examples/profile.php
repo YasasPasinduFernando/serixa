@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\Component\Column;
 use Serixa\Document\Document;
 use Serixa\Forms\Builder\FormBuilder;
@@ -56,6 +58,6 @@ if ($data !== [] && $result->passed()) {
 $children[] = $form;
 
 $document = Document::make()->title('Profile · SERIXA Forms')->body(Column::make(...$children)->gap(4));
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
 
 echo (new Renderer())->render($document), PHP_EOL;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\AuthUi\Components\BrandLogo;
 use Serixa\AuthUi\Layout\AuthLayout;
 use Serixa\AuthUi\Pages\TwoFactorCard;
@@ -19,6 +21,6 @@ $layout = AuthLayout::make()->card(
 );
 
 $document = Document::make()->title('Two-factor · SERIXA Auth UI')->body($layout);
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
 
 echo (new Renderer())->render($document), PHP_EOL;

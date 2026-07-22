@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\Charts\Runtime\ChartRuntime;
 use Serixa\Charts\Theme\ChartsTheme;
 use Serixa\Component\Column;
@@ -26,7 +28,7 @@ function charts_example_document(string $title, array $children): Document
         )->padding('lg'),
     );
 
-    $document->assets()->js('https://cdn.tailwindcss.com');
+    StyleSheet::register($document->assets());
     $document->assets()->js('/assets/serixa.js', ['defer' => true]);
     ChartRuntime::register($document->assets(), '/assets/charts/charts.js');
 

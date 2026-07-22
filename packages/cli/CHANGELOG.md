@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1] — 2026-07-22
+
+### Changed
+- `serixa build` compiles offline CSS via `StyleSheet::build()`, copies runtime JS, writes asset manifests, and prints a build report
+- New project layout stub registers `StyleSheet` instead of Tailwind CDN
+- Project template includes `resources/css/app.css`
+
 ## [0.1.0] — 2026-07-22
 
 ### Added

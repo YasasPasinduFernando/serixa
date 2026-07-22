@@ -8,6 +8,7 @@ use Serixa\Component\Container;
 use Serixa\Component\Text;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
+use Serixa\Assets\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
 /**
@@ -17,9 +18,7 @@ final class AppLayout
 {
     public static function wrap(Document $document): Document
     {
-        $document->assets()
-            ->js('https://cdn.tailwindcss.com')
-            ->css('/app.css');
+        StyleSheet::register($document->assets());
 
         ClientRuntime::register($document->assets(), '/assets/runtime/serixa.js');
 

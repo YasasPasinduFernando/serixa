@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App;
 
+use Serixa\Assets\StyleSheet;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
 use Serixa\Runtime\ClientRuntime;
 
 /**
- * Builds a fully-configured {@see Document} for every page: SEO title, the
- * Tailwind CDN build, and the SERIXA progressive-enhancement runtime.
+ * Builds a fully-configured {@see Document}: SEO title, compiled SERIXA CSS, runtime.
  */
 final class DocumentFactory
 {
@@ -24,8 +24,7 @@ final class DocumentFactory
             ->themeColor('#4f46e5')
             ->body($body);
 
-        $document->assets()->js('https://cdn.tailwindcss.com');
-        $document->assets()->css('/app.css');
+        StyleSheet::register($document->assets());
         ClientRuntime::register($document->assets());
 
         return $document;

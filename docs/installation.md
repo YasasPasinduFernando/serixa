@@ -92,9 +92,11 @@ declare(strict_types=1);
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use Serixa\Component\Button;
+use Serixa\Assets\StyleSheet;
 use Serixa\Component\Text;
 use Serixa\Document\Document;
 use Serixa\Rendering\Renderer;
+use Serixa\Runtime\ClientRuntime;
 
 $document = Document::make()
     ->title('Hello SERIXA')
@@ -105,16 +107,17 @@ $document = Document::make()
         Button::make('Continue')->primary(),
     );
 
-// Tailwind utilities for local development (swap for compiled CSS in production)
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
+ClientRuntime::register($document->assets());
 
 header('Content-Type: text/html; charset=utf-8');
 echo (new Renderer())->render($document);
 ```
 
-Serve from `public/`:
+Serve from `public/` (run `serixa build` or `composer build` first so `/assets/app.css` exists):
 
 ```bash
+vendor/bin/serixa build
 php -S localhost:8000 -t public
 ```
 
@@ -233,7 +236,7 @@ $classes = ThemeManager::current()->classes('button', [
 
 Unknown component keys or invalid variants throw `InvalidArgumentException` — intentional fail-fast. See [Unknown theme state](troubleshooting.md#unknown-theme-state).
 
-Tailwind classes still need CSS in the browser: use the CDN in development, compile `app.css` for production ([deployment.md](deployment.md#tailwind-cdn-vs-production-css)).
+Theme classes still need CSS in the browser: run `serixa build` to emit `/assets/app.css` offline ([assets.md](assets.md)).
 
 ---
 
@@ -351,7 +354,8 @@ $document = Document::make()
     ->title('Hello · SERIXA')
     ->body($shell);
 
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
+ClientRuntime::register($document->assets());
 
 header('Content-Type: text/html; charset=utf-8');
 echo (new Renderer())->render($document);
@@ -359,6 +363,7 @@ echo (new Renderer())->render($document);
 
 ```bash
 composer install
+vendor/bin/serixa build
 php -S localhost:8000 -t public
 ```
 

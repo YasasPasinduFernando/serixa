@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\Calendar\Runtime\CalendarRuntime;
 use Serixa\Calendar\Theme\CalendarTheme;
 use Serixa\Component\Column;
@@ -26,7 +28,7 @@ function calendar_example_document(string $title, array $children): Document
         )->padding('lg'),
     );
 
-    $document->assets()->js('https://cdn.tailwindcss.com');
+    StyleSheet::register($document->assets());
     $document->assets()->js('/assets/serixa.js', ['defer' => true]);
     CalendarRuntime::register($document->assets(), '/assets/calendar/calendar.js');
 

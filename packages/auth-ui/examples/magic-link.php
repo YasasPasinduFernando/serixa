@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\AuthUi\Components\BrandLogo;
 use Serixa\AuthUi\Layout\AuthAside;
 use Serixa\AuthUi\Layout\AuthIllustration;
@@ -24,6 +26,6 @@ $layout = AuthLayout::make()
     );
 
 $document = Document::make()->title('Magic link · SERIXA Auth UI')->body($layout);
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
 
 echo (new Renderer())->render($document), PHP_EOL;

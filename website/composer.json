@@ -66,6 +66,7 @@
         "cs-fix": "php-cs-fixer fix",
         "qa": ["@test", "@phpstan", "@cs-check"],
         "start": "php -S localhost:8080 -t public",
+        "build": "php bin/build-assets.php",
         "sync-runtime": "php bin/sync-runtime.php"
     },
     "minimum-stability": "dev",

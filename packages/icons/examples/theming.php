@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\Component\Column;
 use Serixa\Component\Row;
 use Serixa\Component\Text;
@@ -33,7 +35,7 @@ $html = $renderer->render(
     ])->gap(4),
 );
 
-echo '<!DOCTYPE html><html><head><meta charset="utf-8"><script src="https://cdn.tailwindcss.com"></script>';
+echo '<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/assets/app.css">';
 echo '<title>Icon theming</title></head><body class="p-8 text-slate-900">';
 echo $html;
 echo '</body></html>';

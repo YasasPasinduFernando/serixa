@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Serixa\Cli\Commands;
 
+use Serixa\Assets\StyleSheet;
 use Serixa\Cli\Command;
 use Serixa\Cli\InputOutput;
 use Serixa\Cli\Scaffold\TemplateEngine;
@@ -94,6 +95,7 @@ final class NewProjectCommand extends Command
             }
 
             $this->publishRuntime($target);
+            $this->publishStyles($target);
         } catch (InvalidArgumentException $e) {
             $io->error($e->getMessage());
 
@@ -104,6 +106,7 @@ final class NewProjectCommand extends Command
         $io->info('Next:');
         $io->info(sprintf('  cd %s', $name));
         $io->info('  composer install');
+        $io->info('  vendor/bin/serixa build');
         $io->info('  php -S localhost:8000 -t public');
         $io->info('Then open http://localhost:8000 - see docs/getting-started.md');
 
@@ -137,6 +140,15 @@ final class NewProjectCommand extends Command
 
         if (is_file($src)) {
             copy($src, $destDir . DIRECTORY_SEPARATOR . 'serixa.js');
+        }
+    }
+
+    private function publishStyles(string $target): void
+    {
+        try {
+            StyleSheet::build($target);
+        } catch (\Throwable) {
+            // Styles compile after composer install when the framework package is linked.
         }
     }
 }

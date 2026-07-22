@@ -20,3 +20,8 @@
 /starters/**/composer.lock
 /packages/**/composer.lock
 /website/composer.lock
+/tools/css/node_modules/
+/website/build/
+/starters/**/build/
+/playground/**/build/
+/validation/**/build/

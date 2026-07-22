@@ -206,10 +206,11 @@ Skeleton::make()->variant('avatar');
 ## Wiring the runtime
 
 ```php
+use Serixa\Assets\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
 $document = Document::make()->title('App')->body($page);
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets()); // /assets/app.css
 ClientRuntime::register($document->assets()); // defer serixa.js
 ```
 

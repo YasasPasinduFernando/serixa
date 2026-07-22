@@ -40,7 +40,7 @@ final class SiteLayout
         ])
             ->gap(0)
             ->alignStretch()
-            ->class('site-shell')
+            ->class($theme === 'dark' ? 'site-shell dark' : 'site-shell')
             ->attribute('data-theme', $theme);
 
         return DocumentFactory::make($title, $shell);

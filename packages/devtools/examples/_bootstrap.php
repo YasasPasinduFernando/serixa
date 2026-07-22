@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\DevTools\DevTools;
@@ -27,7 +29,7 @@ function devtools_example_document(string $title, array $children, bool $withDev
         )->padding('lg'),
     );
 
-    $document->assets()->js('https://cdn.tailwindcss.com');
+    StyleSheet::register($document->assets());
     $document->assets()->js('/assets/serixa.js', ['defer' => true]);
 
     if ($withDevToolsAssets && DevTools::enabled()) {

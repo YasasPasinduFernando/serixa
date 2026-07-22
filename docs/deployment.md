@@ -101,45 +101,29 @@ ClientRuntime::register($document->assets(), 'https://cdn.example.com/serixa/0.1
 
 The canonical source file is always `Serixa\Runtime\ClientRuntime::scriptPath()` (physically `assets/runtime/serixa.js` in the framework package).
 
-## Tailwind: CDN vs. production CSS
+## CSS: official offline build
 
-Generated apps register Tailwind via the CDN script for convenience:
+SERIXA apps register the compiled stylesheet — never a Tailwind CDN:
 
 ```php
-$document->assets()->js('https://cdn.tailwindcss.com');
+use Serixa\Assets\StyleSheet;
+use Serixa\Runtime\ClientRuntime;
+
+StyleSheet::register($document->assets()); // /assets/app.css
+ClientRuntime::register($document->assets());
 ```
 
-This is fine for local development and demos. It is **not** recommended for production:
+Build assets before deploy (offline):
 
-- It downloads and compiles Tailwind's entire class set in the browser on every page load.
-- It depends on an external CDN being available.
-- SERIXA's theme (`DefaultTheme`) only decides *which* Tailwind class names to emit — it does not compile CSS. The CDN script (or a real build step) is what turns those class names into actual styles.
+```bash
+vendor/bin/serixa build
+```
 
-For production, replace the CDN script with a compiled stylesheet:
+This merges `framework/assets/css/serixa.css` with `resources/css/app.css` into `public/assets/app.css`, copies the runtime JS, and writes `public/assets/manifest.json`.
 
-1. Install Tailwind CLI (or PostCSS) in your app, separately from SERIXA: `npm install -D tailwindcss`.
-2. Point Tailwind's `content` glob at your PHP files, since utility classes live inside PHP strings, not `.html`/`.jsx`:
+See [assets.md](assets.md) for the full pipeline. Maintainers regenerating the base stylesheet use `tools/css` (Node once); shipped apps stay offline.
 
-   ```js
-   // tailwind.config.js
-   module.exports = {
-     content: ['./pages/**/*.php', './components/**/*.php', './layouts/**/*.php'],
-   };
-   ```
-
-3. Build once (or on every deploy):
-
-   ```bash
-   npx tailwindcss -i ./resources/app.css -o ./public/app.css --minify
-   ```
-
-4. Remove the CDN `js()` call and keep only `->css('/app.css')` in your layout's `wrap()`:
-
-   ```php
-   $document->assets()->css('/app.css'); // no more cdn.tailwindcss.com
-   ```
-
-SERIXA does not ship a bundler or a Tailwind build pipeline — this step is entirely app-owned, same as routing and auth.
+For production, deploy `public/assets/app.css` and `public/assets/runtime/serixa.js` with your app. Do **not** register `cdn.tailwindcss.com`.
 
 ## Composer path repositories in production
 
@@ -158,7 +142,8 @@ and remove the `repositories` block. Path repositories with `"symlink": true` ar
 ## Checklist before you deploy
 
 - [ ] Document root points at `public/`, not the app root.
-- [ ] `public/assets/runtime/serixa.js` exists and matches the URL passed to `ClientRuntime::register()`.
-- [ ] Tailwind CDN script replaced with a compiled `app.css` (or accepted deliberately for a low-traffic demo).
+- [ ] `public/assets/app.css` exists (from `serixa build`) and is registered via `StyleSheet::register()`
+- [ ] No Tailwind Play CDN script tags in layouts
+- [ ] `public/assets/runtime/serixa.js` exists and matches the URL passed to `ClientRuntime::register()`
 - [ ] `composer.json` uses a version constraint for `serixa/framework`, not a local `path` repository.
 - [ ] `composer install --no-dev --optimize-autoloader` run on the deployment target.

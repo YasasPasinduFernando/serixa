@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\AuthUi\Components\BrandLogo;
 use Serixa\AuthUi\Components\PasswordRequirements;
 use Serixa\AuthUi\Components\PasswordStrength;
@@ -26,6 +28,6 @@ $layout = AuthLayout::make()->card(AuthCard::make(
 ));
 
 $document = Document::make()->title('Register · SERIXA Auth UI')->body($layout);
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
 
 echo (new Renderer())->render($document), PHP_EOL;

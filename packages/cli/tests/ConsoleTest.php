@@ -44,7 +44,7 @@ final class ConsoleTest extends TestCase
         $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'version'], $io));
-        $this->assertStringContainsString('0.1.0', $io->output());
+        $this->assertStringContainsString('0.1.1', $io->output());
 
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'help'], $io));

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Serixa\Assets\StyleSheet;
+
 use Serixa\Admin\Breadcrumb\Breadcrumb;
 use Serixa\Admin\Breadcrumb\BreadcrumbItem;
 use Serixa\Admin\Cards\MetricCard;
@@ -120,6 +122,6 @@ $shell = AdminLayout::shell()
     ->footer(FooterBar::make('© 2026 Acme Inc. — serixa/admin reports example'));
 
 $document = Document::make()->title('Reports · Acme Admin')->body($shell);
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
 
 echo (new Renderer())->render($document), PHP_EOL;

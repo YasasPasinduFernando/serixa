@@ -14,10 +14,10 @@ Built as a **SERIXA application** inside this monorepo — same architecture as 
 ```bash
 cd website
 composer install
-composer sync-runtime
+composer build
 ```
 
-Tailwind utilities are served from `public/assets/vendor/tailwindcss.js` (local copy of the Play CDN build) so layout styles work offline / when `cdn.tailwindcss.com` is blocked.
+CSS is compiled offline from `framework/assets/css/serixa.css` + `resources/css/app.css` into `public/assets/app.css`. No Tailwind CDN.
 
 ## Run
 
@@ -53,7 +53,10 @@ website/
   layouts/       SiteLayout, DocsLayout
   pages/         Home, Docs, Packages, Playground, Examples
   routes/        Web.php
-  public/        index.php bootstrap + app.css
+  resources/css  App overrides
+  public/        index.php + assets/app.css
 ```
 
-Dark mode is cookie/query driven (`?theme=dark|light`) and applied via `data-theme` on the site shell.
+Dark mode is cookie/query driven (`?theme=dark|light`) via `data-theme` / `.dark` on the site shell.
+
+See [docs/assets.md](../docs/assets.md) for the official asset pipeline.

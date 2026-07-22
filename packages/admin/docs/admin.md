@@ -53,6 +53,7 @@ use Serixa\Admin\Layout\SidebarItem;
 use Serixa\Admin\Layout\TopBar;
 use Serixa\Admin\Page\Page;
 use Serixa\Admin\UserMenu\UserMenu;
+use Serixa\Assets\StyleSheet;
 use Serixa\Document\Document;
 use Serixa\Rendering\Renderer;
 
@@ -80,7 +81,7 @@ $shell = AdminLayout::shell()
     ->footer(FooterBar::make('© 2026 Acme Inc.'));
 
 $document = Document::make()->title('Dashboard')->body($shell);
-$document->assets()->js('https://cdn.tailwindcss.com');
+StyleSheet::register($document->assets());
 
 echo (new Renderer())->render($document);
 ```

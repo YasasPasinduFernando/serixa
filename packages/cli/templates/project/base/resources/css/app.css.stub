@@ -1,0 +1,6 @@
+/* {{ProjectName}} — app CSS overrides (appended after SERIXA base utilities). */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}

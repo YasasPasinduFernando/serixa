@@ -1,0 +1,266 @@
+/*
+ * SERIXA documentation website — presentation layer.
+ * Utilities come from the Tailwind CDN; this file owns docs chrome + dark mode.
+ */
+
+:root {
+    color-scheme: light;
+    --site-bg: #f8fafc;
+    --site-fg: #0f172a;
+    --site-muted: #64748b;
+    --site-border: #e2e8f0;
+    --site-card: #ffffff;
+    --site-accent: #0f172a;
+    --site-code-bg: #0b1220;
+    --site-code-fg: #e2e8f0;
+    --site-header: rgba(248, 250, 252, 0.92);
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+    --site-bg: #020617;
+    --site-fg: #e2e8f0;
+    --site-muted: #94a3b8;
+    --site-border: #1e293b;
+    --site-card: #0f172a;
+    --site-accent: #f8fafc;
+    --site-code-bg: #020617;
+    --site-code-fg: #e2e8f0;
+    --site-header: rgba(2, 6, 23, 0.92);
+}
+
+body {
+    margin: 0;
+    background: var(--site-bg);
+    color: var(--site-fg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.site-shell {
+    min-height: 100vh;
+    background: var(--site-bg);
+    color: var(--site-fg);
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(10px);
+    background: var(--site-header);
+    border-bottom: 1px solid var(--site-border);
+    padding: 0.85rem 1.5rem;
+    width: 100%;
+}
+
+.site-footer {
+    padding: 1.25rem 1.5rem 2rem;
+}
+
+.site-nav__brand {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: 1.15rem;
+    color: var(--site-fg) !important;
+    text-decoration: none;
+}
+
+.site-nav__link,
+.site-nav__theme,
+.site-nav__github,
+.breadcrumb__link,
+.doc-pager__link,
+.hero-github,
+.btn-primary {
+    text-decoration: none;
+    color: var(--site-fg);
+}
+
+.site-nav__search {
+    border: 1px solid var(--site-border);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--site-card);
+    min-width: 10rem;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--site-accent);
+    color: var(--site-bg) !important;
+    padding: 0.65rem 1.1rem;
+    border-radius: 0.55rem;
+    font-weight: 600;
+}
+
+.site-main,
+.docs-frame {
+    padding: 1.5rem;
+}
+
+.docs-grid {
+    max-width: 72rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.docs-sidebar {
+    /* Override DefaultTheme Column `w-full` so the sidebar stays a fixed rail. */
+    width: 15rem !important;
+    max-width: 15rem;
+    flex: 0 0 15rem;
+    flex-shrink: 0;
+    position: sticky;
+    top: 4.5rem;
+    max-height: calc(100vh - 5rem);
+    overflow: auto;
+    padding-right: 1rem;
+}
+
+.docs-sidebar__group {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--site-muted);
+    margin: 0;
+}
+
+.docs-sidebar__link {
+    display: block;
+    padding: 0.25rem 0;
+    color: var(--site-fg);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.docs-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto !important;
+    max-width: none !important;
+}
+
+.docs-article {
+    max-width: 48rem;
+}
+
+.doc-pager {
+    padding-top: 1rem;
+    border-top: 1px solid var(--site-border);
+}
+
+.hero-brand {
+    letter-spacing: -0.04em;
+}
+
+.section {
+    width: 100%;
+}
+
+.feature-card,
+.cta-card,
+article {
+    background: var(--site-card);
+    border-color: var(--site-border);
+}
+
+.code-sample,
+.doc-pre {
+    background: var(--site-code-bg);
+    color: var(--site-code-fg);
+    border-radius: 0.75rem;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.55;
+}
+
+.doc-prose {
+    line-height: 1.7;
+    color: var(--site-fg);
+}
+
+.doc-prose h1,
+.doc-prose h2,
+.doc-prose h3,
+.doc-prose h4 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+}
+
+.doc-prose p,
+.doc-prose ul,
+.doc-prose ol {
+    margin: 0.75rem 0;
+}
+
+.doc-prose a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.doc-prose code {
+    background: color-mix(in srgb, var(--site-border) 65%, transparent);
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.3rem;
+    font-size: 0.9em;
+}
+
+.doc-prose .doc-pre code {
+    background: transparent;
+    padding: 0;
+}
+
+.doc-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+}
+
+.doc-table th,
+.doc-table td {
+    border: 1px solid var(--site-border);
+    padding: 0.5rem 0.65rem;
+    text-align: left;
+}
+
+.doc-missing {
+    color: #b91c1c;
+}
+
+.example-nav a {
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .docs-grid {
+        flex-direction: column !important;
+    }
+
+    .docs-sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+        border-bottom: 1px solid var(--site-border);
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .site-nav__links,
+    .site-nav__search {
+        display: none;
+    }
+
+    .feature-row,
+    .starter-row {
+        flex-direction: column !important;
+    }
+}

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace SerixaDemo;
 
+use Serixa\Assets\StyleSheet;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
 use Serixa\Runtime\ClientRuntime;
 
 /**
- * Shared document shell for demo pages (SEO + assets).
+ * Shared document shell for demo pages (SEO + compiled SERIXA CSS).
  */
 final class DocumentFactory
 {
@@ -22,12 +23,7 @@ final class DocumentFactory
             ->themeColor('#0f766e')
             ->body($body);
 
-        // Tailwind Play CDN so theme utility classes from SERIXA are visible.
-        // DX note: no first-class “useTailwindCdn()” helper on Document.
-        $document->assets()
-            ->js('https://cdn.tailwindcss.com')
-            ->css('/assets/demo.css');
-
+        StyleSheet::register($document->assets());
         ClientRuntime::register($document->assets());
 
         return $document;
