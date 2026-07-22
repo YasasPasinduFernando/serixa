@@ -2,44 +2,52 @@
 
 declare(strict_types=1);
 
-$checks = [
-    'website' => static function (): string {
-        require 'D:/yasas/PersonalProjects/Serixa/website/vendor/autoload.php';
-        App\SiteContext::boot('home', 'light');
-        $h = (new Serixa\Rendering\Renderer())->render(App\Web::document('home'));
+$root = dirname(__DIR__, 2);
 
-        return status($h);
+$checks = [
+    'website' => static function () use ($root): void {
+        require $root . '/website/vendor/autoload.php';
+        $html = (new Serixa\Rendering\Renderer())->render(
+            App\DocumentFactory::make('t', Serixa\Component\Text::make('x')),
+        );
+        echo 'website '
+            . (str_contains($html, 'cdn.tailwindcss') ? 'CDN_BAD' : 'CDN_OK') . ' '
+            . (str_contains($html, '/assets/serixa.css') ? 'CSS_OK' : 'CSS_BAD') . ' '
+            . (str_contains($html, 'serixa.js') ? 'JS_OK' : 'JS_BAD') . PHP_EOL;
+    },
+    'blog' => static function () use ($root): void {
+        require $root . '/starters/blog/vendor/autoload.php';
+        $html = (new Serixa\Rendering\Renderer())->render(
+            App\DocumentFactory::make('t', Serixa\Component\Text::make('x')),
+        );
+        echo 'blog '
+            . (str_contains($html, 'cdn.tailwindcss') ? 'CDN_BAD' : 'CDN_OK') . ' '
+            . (str_contains($html, '/assets/serixa.css') ? 'CSS_OK' : 'CSS_BAD') . PHP_EOL;
+    },
+    'admin' => static function () use ($root): void {
+        require $root . '/starters/admin/vendor/autoload.php';
+        $html = (new Serixa\Rendering\Renderer())->render(
+            App\DocumentFactory::make('t', Serixa\Component\Text::make('x')),
+        );
+        echo 'admin '
+            . (str_contains($html, 'cdn.tailwindcss') ? 'CDN_BAD' : 'CDN_OK') . ' '
+            . (str_contains($html, '/assets/serixa.css') ? 'CSS_OK' : 'CSS_BAD') . PHP_EOL;
+    },
+    'playground' => static function () use ($root): void {
+        require $root . '/playground/serixa-demo/vendor/autoload.php';
+        $html = (new Serixa\Rendering\Renderer())->render(
+            App\DocumentFactory::make('t', Serixa\Component\Text::make('x')),
+        );
+        echo 'playground '
+            . (str_contains($html, 'cdn.tailwindcss') ? 'CDN_BAD' : 'CDN_OK') . ' '
+            . (str_contains($html, '/assets/serixa.css') ? 'CSS_OK' : 'CSS_BAD') . PHP_EOL;
     },
 ];
 
-function status(string $h): string
-{
-    $cdn = str_contains($h, 'cdn.tailwindcss') ? 'CDN_BAD' : 'CDN_OK';
-    $css = str_contains($h, '/assets/app.css') ? 'CSS_OK' : 'CSS_BAD';
-    $js = str_contains($h, 'serixa.js') ? 'JS_OK' : 'JS_BAD';
-
-    return "{$cdn} {$css} {$js}";
+foreach ($checks as $name => $fn) {
+    try {
+        $fn();
+    } catch (Throwable $e) {
+        echo $name . ' ERROR ' . $e->getMessage() . PHP_EOL;
+    }
 }
-
-echo 'website ' . $checks['website']() . PHP_EOL;
-
-// Blog in separate process to avoid App\ autoload clash
-passthru('php -r ' . escapeshellarg(
-    "require 'D:/yasas/PersonalProjects/Serixa/starters/blog/vendor/autoload.php'; "
-    . "Serixa\\Theme\\ThemeManager::reset(); Serixa\\Icons\\Registry\\IconRegistry::reset(); "
-    . "\$h=(new Serixa\\Rendering\\Renderer())->render(App\\Web::document('dashboard')); "
-    . "echo 'blog '.(str_contains(\$h,'cdn.tailwindcss')?'CDN_BAD':'CDN_OK').' '.(str_contains(\$h,'/assets/app.css')?'CSS_OK':'CSS_BAD').PHP_EOL;"
-));
-
-passthru('php -r ' . escapeshellarg(
-    "require 'D:/yasas/PersonalProjects/Serixa/starters/admin/vendor/autoload.php'; "
-    . "Serixa\\Theme\\ThemeManager::reset(); Serixa\\Icons\\Registry\\IconRegistry::reset(); "
-    . "\$h=(new Serixa\\Rendering\\Renderer())->render(App\\Web::document('dashboard')); "
-    . "echo 'admin '.(str_contains(\$h,'cdn.tailwindcss')?'CDN_BAD':'CDN_OK').' '.(str_contains(\$h,'/assets/app.css')?'CSS_OK':'CSS_BAD').PHP_EOL;"
-));
-
-passthru('php -r ' . escapeshellarg(
-    "require 'D:/yasas/PersonalProjects/Serixa/playground/serixa-demo/vendor/autoload.php'; "
-    . "\$h=(new Serixa\\Rendering\\Renderer())->render(SerixaDemo\\DocumentFactory::page('Demo', Serixa\\Component\\Text::make('Hi'))); "
-    . "echo 'playground '.(str_contains(\$h,'cdn.tailwindcss')?'CDN_BAD':'CDN_OK').' '.(str_contains(\$h,'/assets/app.css')?'CSS_OK':'CSS_BAD').PHP_EOL;"
-));

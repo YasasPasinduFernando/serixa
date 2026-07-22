@@ -210,7 +210,7 @@ use Serixa\Assets\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
 $document = Document::make()->title('App')->body($page);
-StyleSheet::register($document->assets()); // /assets/app.css
+StyleSheet::register($document->assets()); // /assets/serixa.css
 ClientRuntime::register($document->assets()); // defer serixa.js
 ```
 

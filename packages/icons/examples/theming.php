@@ -35,7 +35,7 @@ $html = $renderer->render(
     ])->gap(4),
 );
 
-echo '<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/assets/app.css">';
+echo '<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/assets/serixa.css">';
 echo '<title>Icon theming</title></head><body class="p-8 text-slate-900">';
 echo $html;
 echo '</body></html>';

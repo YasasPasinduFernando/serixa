@@ -114,7 +114,7 @@ header('Content-Type: text/html; charset=utf-8');
 echo (new Renderer())->render($document);
 ```
 
-Serve from `public/` (run `serixa build` or `composer build` first so `/assets/app.css` exists):
+Serve from `public/` (run `serixa build` or `composer build` first so `/assets/serixa.css` exists):
 
 ```bash
 vendor/bin/serixa build
@@ -236,7 +236,7 @@ $classes = ThemeManager::current()->classes('button', [
 
 Unknown component keys or invalid variants throw `InvalidArgumentException` — intentional fail-fast. See [Unknown theme state](troubleshooting.md#unknown-theme-state).
 
-Theme classes still need CSS in the browser: run `serixa build` to emit `/assets/app.css` offline ([assets.md](assets.md)).
+Theme classes still need CSS in the browser: run `serixa build` to emit `/assets/serixa.css` offline ([assets.md](assets.md)).
 
 ---
 

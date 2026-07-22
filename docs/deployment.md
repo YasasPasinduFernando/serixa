@@ -109,7 +109,7 @@ SERIXA apps register the compiled stylesheet — never a Tailwind CDN:
 use Serixa\Assets\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
-StyleSheet::register($document->assets()); // /assets/app.css
+StyleSheet::register($document->assets()); // /assets/serixa.css
 ClientRuntime::register($document->assets());
 ```
 
@@ -119,11 +119,11 @@ Build assets before deploy (offline):
 vendor/bin/serixa build
 ```
 
-This merges `framework/assets/css/serixa.css` with `resources/css/app.css` into `public/assets/app.css`, copies the runtime JS, and writes `public/assets/manifest.json`.
+This merges `framework/assets/css/serixa.css` with `resources/css/app.css` into `public/assets/serixa.css`, copies the runtime JS, and writes `public/assets/manifest.json`.
 
 See [assets.md](assets.md) for the full pipeline. Maintainers regenerating the base stylesheet use `tools/css` (Node once); shipped apps stay offline.
 
-For production, deploy `public/assets/app.css` and `public/assets/runtime/serixa.js` with your app. Do **not** register `cdn.tailwindcss.com`.
+For production, deploy `public/assets/serixa.css` and `public/assets/runtime/serixa.js` with your app. Do **not** register `cdn.tailwindcss.com`.
 
 ## Composer path repositories in production
 
@@ -142,7 +142,7 @@ and remove the `repositories` block. Path repositories with `"symlink": true` ar
 ## Checklist before you deploy
 
 - [ ] Document root points at `public/`, not the app root.
-- [ ] `public/assets/app.css` exists (from `serixa build`) and is registered via `StyleSheet::register()`
+- [ ] `public/assets/serixa.css` exists (from `serixa build`) and is registered via `StyleSheet::register()`
 - [ ] No Tailwind Play CDN script tags in layouts
 - [ ] `public/assets/runtime/serixa.js` exists and matches the URL passed to `ClientRuntime::register()`
 - [ ] `composer.json` uses a version constraint for `serixa/framework`, not a local `path` repository.

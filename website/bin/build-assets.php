@@ -8,7 +8,7 @@ declare(strict_types=1);
  *     php bin/build-assets.php
  */
 
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
@@ -30,9 +30,10 @@ if (! is_dir(dirname($runtimeDest))) {
 copy($runtimeSrc, $runtimeDest);
 
 echo sprintf(
-    "Built %s (%d bytes) from [%s]%s",
-    'public/assets/app.css',
+    "Built %s (%d bytes, %d rules) from [%s]%s",
+    'public/assets/serixa.css',
     $css['bytes'],
+    $css['rules'] ?? 0,
     implode(', ', $css['sources']),
     PHP_EOL,
 );

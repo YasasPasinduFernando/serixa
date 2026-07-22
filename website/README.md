@@ -17,7 +17,7 @@ composer install
 composer build
 ```
 
-CSS is compiled offline from `framework/assets/css/serixa.css` + `resources/css/app.css` into `public/assets/app.css`. No Tailwind CDN.
+CSS is compiled offline from `framework/assets/css/serixa.css` + `resources/css/app.css` into `public/assets/serixa.css`. No Tailwind CDN.
 
 ## Run
 

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Serixa\Cli\Commands;
 
-use Serixa\Assets\StyleSheet;
 use Serixa\Cli\Command;
 use Serixa\Cli\InputOutput;
 use Serixa\Cli\Scaffold\WorkingDirectory;
 use Serixa\Runtime\ClientRuntime;
+use Serixa\Styling\StyleSheet;
 
 /**
- * serixa build — compile CSS, copy runtime, write manifest, refresh docs cache.
+ * serixa build — compile theme CSS, copy runtime, optimize, write manifest.
  */
 final class BuildCommand extends Command
 {
@@ -27,7 +27,7 @@ final class BuildCommand extends Command
 
     public function description(): string
     {
-        return 'Compile CSS, copy runtime JS, write asset manifest, and refresh docs cache';
+        return 'Compile theme CSS, copy runtime JS, optimize assets, and write manifests';
     }
 
     public function handle(array $arguments, array $options, InputOutput $io): int
@@ -50,24 +50,14 @@ final class BuildCommand extends Command
             'steps' => [],
         ];
 
-        // 1) Theme tokens (stub map for tooling / docs)
-        $tokens = [
-            'colors' => ['primary', 'secondary', 'success', 'warning', 'danger', 'muted'],
-            'spacing' => [0, 1, 2, 3, 4, 6, 8],
-            'radius' => ['sm', 'md', 'lg', 'full'],
-            'generated_at' => gmdate('c'),
-        ];
-        $tokensPath = $buildDir . DIRECTORY_SEPARATOR . 'tokens.json';
-        file_put_contents($tokensPath, json_encode($tokens, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-        $report['steps']['tokens'] = ['path' => 'build/tokens.json', 'bytes' => filesize($tokensPath)];
-
-        // 2) Compile CSS (base serixa.css + app resources) → public/assets/app.css
+        // 1) Compile CSS (ThemeCompiler → optimize → foundation → app) → public/assets/serixa.css
         try {
             $css = StyleSheet::build($cwd);
             $report['steps']['css'] = [
-                'path' => 'public/assets/app.css',
+                'path' => 'public/assets/serixa.css',
                 'bytes' => $css['bytes'],
                 'sources' => $css['sources'],
+                'rules' => $css['rules'] ?? null,
                 'ms' => $css['ms'],
             ];
         } catch (\Throwable $e) {
@@ -76,7 +66,7 @@ final class BuildCommand extends Command
             return 1;
         }
 
-        // 3) Copy progressive-enhancement runtime
+        // 2) Copy progressive-enhancement runtime
         $runtimeSrc = ClientRuntime::scriptPath();
         $runtimeDestDir = $cwd . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'runtime';
         $runtimeDest = $runtimeDestDir . DIRECTORY_SEPARATOR . 'serixa.js';
@@ -96,7 +86,17 @@ final class BuildCommand extends Command
             'bytes' => $runtimeBytes,
         ];
 
-        // 4) Asset manifest (framework-shaped map + build metadata)
+        // 3) Theme token snapshot (from compiler manifest when available)
+        $tokensPath = $buildDir . DIRECTORY_SEPARATOR . 'tokens.json';
+        $tokenPayload = [
+            'tokens' => $css['manifest']->toArray()['tokens'] ?? [],
+            'generated_at' => gmdate('c'),
+            'engine' => 'Serixa\\Styling\\ThemeCompiler',
+        ];
+        file_put_contents($tokensPath, json_encode($tokenPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $report['steps']['tokens'] = ['path' => 'build/tokens.json', 'bytes' => filesize($tokensPath)];
+
+        // 4) Asset manifest
         $manifest = [
             'version' => \Serixa\Cli\Application::VERSION,
             'framework_root' => $this->frameworkRoot,
@@ -104,15 +104,17 @@ final class BuildCommand extends Command
             'css' => StyleSheet::PUBLIC_URL,
             'runtime' => '/assets/runtime/serixa.js',
             'tokens' => 'build/tokens.json',
+            'theme_manifest' => 'build/theme-manifest.json',
             'assets' => [
-                'app.css' => StyleSheet::PUBLIC_URL,
+                'serixa.css' => StyleSheet::PUBLIC_URL,
                 'serixa.js' => '/assets/runtime/serixa.js',
             ],
             'sources' => $css['sources'],
             'sizes' => [
-                'app.css' => $css['bytes'],
+                'serixa.css' => $css['bytes'],
                 'serixa.js' => $runtimeBytes,
             ],
+            'rules' => $css['rules'] ?? null,
         ];
 
         $manifestBuild = $buildDir . DIRECTORY_SEPARATOR . 'manifest.json';
@@ -137,13 +139,18 @@ final class BuildCommand extends Command
         );
 
         $io->success('Build complete.');
-        $io->info(sprintf('  CSS      public/assets/app.css (%s bytes, %s ms)', number_format($css['bytes']), $css['ms']));
+        $io->info(sprintf(
+            '  CSS      public/assets/serixa.css (%s bytes, %s rules, %s ms)',
+            number_format($css['bytes']),
+            number_format((int) ($css['rules'] ?? 0)),
+            $css['ms'],
+        ));
         foreach ($css['sources'] as $source) {
             $io->info('           + ' . $source);
         }
         $io->info(sprintf('  Runtime  public/assets/runtime/serixa.js (%s bytes)', number_format($runtimeBytes)));
         $io->info('  Manifest build/manifest.json');
-        $io->info('  Manifest public/assets/manifest.json');
+        $io->info('  Theme    build/theme-manifest.json');
         $io->info(sprintf('  Elapsed  %s ms', $report['elapsed_ms']));
 
         return 0;

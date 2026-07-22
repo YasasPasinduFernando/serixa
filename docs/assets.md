@@ -1,17 +1,19 @@
 # Asset pipeline
 
+See also [styling.md](styling.md) for the Theme Compiler and `.sx-*` recipes.
+
 SERIXA ships an **offline CSS build**. Apps never load `cdn.tailwindcss.com` or a runtime Tailwind compiler.
 
 ## Layout
 
 ```text
-framework/assets/css/serixa.css   # official base (theme utilities, committed)
+framework/assets/css/serixa.css   # utility foundation (DefaultTheme maps)
 resources/css/app.css             # app overrides
-public/assets/app.css             # compiled output (base + app)
+public/assets/serixa.css          # compiled output (theme + foundation + app)
 public/assets/runtime/serixa.js   # progressive-enhancement runtime
 public/assets/manifest.json       # asset map from serixa build
-build/manifest.json
-build/app.css
+build/serixa.css
+build/theme-manifest.json
 build/tokens.json
 build/report.json
 ```
@@ -26,23 +28,24 @@ composer build   # → php bin/build-assets.php
 
 `serixa build`:
 
-1. Writes theme token stub → `build/tokens.json`
-2. Merges `serixa.css` + `resources/css/app.css` → `public/assets/app.css`
+1. Compiles theme tokens + `.sx-*` recipes via `ThemeCompiler`
+2. Appends utility foundation + `resources/css/app.css` → `public/assets/serixa.css`
 3. Copies `ClientRuntime` → `public/assets/runtime/serixa.js`
-4. Writes `build/manifest.json` and `public/assets/manifest.json`
-5. Prints a build report (sizes, sources, elapsed ms)
+4. Writes manifests and a build report
 
 ## Registering assets
 
 ```php
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
-StyleSheet::register($document->assets()); // /assets/app.css
+StyleSheet::register($document->assets()); // /assets/serixa.css
 ClientRuntime::register($document->assets());
 ```
 
-## Rebuilding the base stylesheet
+`Serixa\Assets\StyleSheet` still works as a compatibility alias.
+
+## Rebuilding the utility foundation
 
 Maintainers regenerating `framework/assets/css/serixa.css` (requires Node once):
 
@@ -52,4 +55,4 @@ npm install
 npx tailwindcss -i ./input.css -o ../../framework/assets/css/serixa.css --minify
 ```
 
-Apps and CI stay offline — they only consume the committed `serixa.css`.
+Apps and CI stay offline — they only consume the committed foundation plus the PHP Theme Compiler output.

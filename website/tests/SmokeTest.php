@@ -62,7 +62,7 @@ final class SmokeTest extends TestCase
         $this->assertStringContainsString('SERIXA', $html);
         $this->assertStringContainsString($expectedText, $html);
         $this->assertStringContainsString('site-nav', $html);
-        $this->assertStringContainsString('/assets/app.css', $html);
+        $this->assertStringContainsString('/assets/serixa.css', $html);
         $this->assertStringNotContainsString('src="https://cdn.tailwindcss.com"', $html);
         $this->assertStringNotContainsString('/assets/vendor/tailwindcss.js', $html);
     }

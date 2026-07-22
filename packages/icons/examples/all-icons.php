@@ -30,7 +30,7 @@ $html = $renderer->render(
     ])->gap(6),
 );
 
-echo '<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/assets/app.css">';
+echo '<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/assets/serixa.css">';
 echo '<title>All SERIXA Icons</title></head><body class="p-8">';
 echo $html;
 echo '</body></html>';
