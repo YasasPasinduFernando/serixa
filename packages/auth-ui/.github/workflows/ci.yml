@@ -4,19 +4,34 @@ on:
   push:
     paths:
       - 'packages/auth-ui/**'
+      - 'packages/forms/**'
+      - 'packages/admin/**'
+      - 'packages/icons/**'
       - 'framework/**'
   pull_request:
     paths:
       - 'packages/auth-ui/**'
+      - 'packages/forms/**'
+      - 'packages/admin/**'
+      - 'packages/icons/**'
       - 'framework/**'
 
 jobs:
-  placeholder:
-    name: Package skeleton
+  package:
+    name: Auth UI package QA
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/auth-ui
     steps:
       - uses: actions/checkout@v4
-      - name: Verify skeleton
-        run: |
-          test -f packages/auth-ui/composer.json
-          test -d packages/auth-ui/src
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+      - name: Install
+        run: composer install --no-interaction --prefer-dist
+      - name: QA
+        run: composer qa

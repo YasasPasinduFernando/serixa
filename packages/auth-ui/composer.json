@@ -1,11 +1,14 @@
 {
     "name": "serixa/auth-ui",
-    "description": "SERIXA authentication UI widgets (skeleton).",
+    "description": "Official SERIXA authentication UI — login/register/reset cards and layouts. No sessions, guards, or auth logic.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "serixa",
-        "auth-ui"
+        "auth-ui",
+        "login",
+        "register",
+        "ssr"
     ],
     "authors": [
         {
@@ -14,15 +17,41 @@
     ],
     "require": {
         "php": "^8.2",
-        "serixa/framework": "^0.11"
+        "serixa/framework": "*@dev",
+        "serixa/forms": "*@dev",
+        "serixa/icons": "*@dev",
+        "serixa/admin": "*@dev"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../forms",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../icons",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../admin",
             "options": {
                 "symlink": true
             }
@@ -37,6 +66,17 @@
         "psr-4": {
             "Serixa\\AuthUi\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": [
+            "@test",
+            "@phpstan",
+            "@cs-check"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true

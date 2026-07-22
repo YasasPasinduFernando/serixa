@@ -1,11 +1,11 @@
-﻿<?php
+<?php
 
 declare(strict_types=1);
 
 namespace Serixa\AuthUi;
 
 /**
- * Package root marker. Implementation ships in a future release.
+ * Package root marker for serixa/auth-ui.
  *
  * @internal
  */
