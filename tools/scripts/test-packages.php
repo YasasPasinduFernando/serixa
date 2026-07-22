@@ -16,6 +16,7 @@ $packages = [
     'media-library', 'file-manager', 'pdf', 'excel', 'word', 'zip',
     'passkeys', 'webauthn', 'two-factor', 'recaptcha', 'hcaptcha',
     'meilisearch', 'algolia', 'typesense', 'elasticsearch',
+    'openai', 'gemini', 'anthropic', 'deepseek', 'ollama',
 ];
 $failed = 0;
 
