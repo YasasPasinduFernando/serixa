@@ -32,11 +32,19 @@ Framework development is **API frozen** (additive-only). New work is packages, s
 
 Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases/phase-1-enterprise.md).
 
-**Next (awaiting confirmation):** Phase 2 — Commerce.
+**Next (awaiting confirmation):** Phase 3 — CMS.
 
-## Phase 2 — Commerce
+## Phase 2 — Commerce (complete)
 
-`cart` → `checkout` → `invoice` → `tax` → `subscriptions`
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/cart` | framework | **0.1.0** (`serixa-cart-v0.1.0`) |
+| `serixa/checkout` | cart | **0.1.0** (`serixa-checkout-v0.1.0`) |
+| `serixa/invoice` | framework | **0.1.0** (`serixa-invoice-v0.1.0`) |
+| `serixa/tax` | framework | **0.1.0** (`serixa-tax-v0.1.0`) |
+| `serixa/subscriptions` | framework | **0.1.0** (`serixa-subscriptions-v0.1.0`) |
+
+Phase tag: `phase-2-commerce-v0.1.0`. Report: [phase-2-commerce.md](releases/phase-2-commerce.md).
 
 ## Phase 3 — CMS
 

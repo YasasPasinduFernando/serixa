@@ -10,6 +10,7 @@ $root = dirname(__DIR__, 2);
 $packages = [
     'icons', 'charts', 'calendar', 'admin', 'auth-ui', 'devtools', 'cli', 'forms',
     'rbac', 'permissions', 'organization', 'teams', 'activity-log', 'audit',
+    'cart', 'checkout', 'invoice', 'tax', 'subscriptions',
 ];
 $failed = 0;
 
