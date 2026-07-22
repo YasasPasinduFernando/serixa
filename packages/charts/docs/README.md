@@ -1,3 +1,3 @@
-﻿# charts
+﻿# Charts docs
 
-Skeleton documentation. Implementation TBD.
+Canonical guide: [charts.md](charts.md).

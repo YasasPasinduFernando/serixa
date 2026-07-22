@@ -335,6 +335,7 @@ final class CartesianRenderer
     /**
      * Map indexed series values to plot coordinates.
      *
+     * @param array{left: float, top: float, right: float, bottom: float, width: float, height: float} $plot
      * @return list<array{0: float, 1: float}>
      */
     public static function indexedPoints(Series $series, array $plot, float $yMin, float $yMax): array

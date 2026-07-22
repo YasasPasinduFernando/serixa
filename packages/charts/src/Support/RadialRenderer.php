@@ -167,6 +167,8 @@ final class RadialRenderer
 
     /**
      * Progress / gauge arc from min→max mapped to start→end angles.
+     *
+     * @return array{start: float, end: float, fullStart: float, fullEnd: float, ratio: float}
      */
     public static function arcAngles(float $value, float $min, float $max, float $start = -M_PI * 0.75, float $end = M_PI * 0.75): array
     {

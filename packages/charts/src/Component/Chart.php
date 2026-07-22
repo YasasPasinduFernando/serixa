@@ -123,7 +123,7 @@ abstract class Chart extends Component implements ChartWidgetInterface
         return $this;
     }
 
-    public function legend(bool|Legend $legend): static
+    public function legend(bool|Legend $legend = true): static
     {
         if (is_bool($legend)) {
             $this->showLegend = $legend;
@@ -137,7 +137,7 @@ abstract class Chart extends Component implements ChartWidgetInterface
         return $this;
     }
 
-    public function grid(bool|Grid $grid): static
+    public function grid(bool|Grid $grid = true): static
     {
         if (is_bool($grid)) {
             $this->showGrid = $grid;
@@ -209,7 +209,7 @@ abstract class Chart extends Component implements ChartWidgetInterface
         return $this;
     }
 
-    public function tooltip(bool|Tooltip $tooltip): static
+    public function tooltip(bool|Tooltip $tooltip = true): static
     {
         $this->tooltipConfig = is_bool($tooltip) ? Tooltip::make($tooltip) : $tooltip;
 

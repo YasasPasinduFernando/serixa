@@ -1,21 +1,43 @@
-﻿# serixa/charts
+﻿# SERIXA Charts
 
-SERIXA chart widgets (skeleton).
+Official charts package for SERIXA — SSR SVG and table charts with progressive
+enhancement. UI only: no analytics engine, no database querying, no reporting.
 
-> Skeleton only — implementation comes in a later release.
+## Requirements
 
-## Local development
+- PHP 8.2+
+- `serixa/framework`
+- `serixa/icons`
+
+## Installation (monorepo)
 
 ```bash
+cd packages/charts
 composer install
+composer qa
 ```
 
-Uses a Composer **path repository** pointing at `../../framework` (no Packagist required).
+## Quick start
 
-## Namespace
+```php
+use Serixa\Charts\Component\LineChart;
+use Serixa\Charts\Dataset\Dataset;
+use Serixa\Charts\Dataset\Series;
+use Serixa\Charts\Theme\ChartsTheme;
+use Serixa\Theme\DefaultTheme;
+use Serixa\Theme\ThemeManager;
 
-`Serixa\Charts\`
+ThemeManager::set(new ChartsTheme(new DefaultTheme()));
 
-## Status
+$chart = LineChart::make()
+    ->labels(['Jan', 'Feb', 'Mar'])
+    ->dataset(
+        Dataset::make()->addSeries(Series::make('Sales')->values([12, 18, 9])),
+    )
+    ->smooth()
+    ->legend();
+```
 
-Not implemented. Public API will be designed when this package is scheduled.
+Load `serixa.js` then `ChartRuntime::register(...)` for progressive enhancement.
+
+See [docs/charts.md](docs/charts.md) for architecture, catalog, SSR/PE, and a11y.

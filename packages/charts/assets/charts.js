@@ -1,13 +1,10 @@
-<?php
-
-declare(strict_types=1);
-
 /**
  * SERIXA charts progressive enhancement module.
  *
- * Requires framework serixa.js to be loaded first (provides Serixa.module / boot).
- * Apps must include both scripts so the `chart` module is registered before boot
- * mounts [data-serixa-chart] elements. No virtual DOM — enhances existing SVG.
+ * Requires framework serixa.js first (provides Serixa.module / boot).
+ * Include both scripts (defer, serixa.js then charts.js) so the `chart`
+ * module registers before DOMContentLoaded boot. No virtual DOM — enhances
+ * the existing SSR SVG.
  */
 (function (global) {
   'use strict';
@@ -74,7 +71,9 @@ declare(strict_types=1);
   }
 
   function pointsOf(el) {
-    return Array.prototype.slice.call(el.querySelectorAll('.charts-point, [data-serixa-chart] path.charts-slice, path.charts-point'));
+    return Array.prototype.slice.call(
+      el.querySelectorAll('.charts-point, path.charts-slice, [data-serixa-chart-point]')
+    );
   }
 
   function bindChart(el) {
