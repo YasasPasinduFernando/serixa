@@ -7,7 +7,8 @@
         "php": "^8.2",
         "serixa/framework": "*@dev",
         "serixa/icons": "*@dev",
-        "serixa/admin": "*@dev"
+        "serixa/admin": "*@dev",
+        "serixa/forms": "*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.0",
@@ -32,6 +33,13 @@
         {
             "type": "path",
             "url": "../../packages/admin",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../../packages/forms",
             "options": {
                 "symlink": true
             }

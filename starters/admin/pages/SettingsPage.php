@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Support\DemoCsrf;
 use Serixa\Admin\Breadcrumb\Breadcrumb;
 use Serixa\Admin\Breadcrumb\BreadcrumbItem;
 use Serixa\Admin\Cards\InfoCard;
 use Serixa\Admin\Page\Page;
-use Serixa\Component\Button;
-use Serixa\Component\Checkbox;
-use Serixa\Component\FieldGroup;
-use Serixa\Component\Form;
-use Serixa\Component\HelperText;
-use Serixa\Component\Input;
-use Serixa\Component\Label;
-use Serixa\Component\Row;
-use Serixa\Component\Select;
+use Serixa\Component\Column;
 use Serixa\Document\Document;
+use Serixa\Forms\Binding\FormBinder;
+use Serixa\Forms\Binding\RequestData;
+use Serixa\Forms\Builder\FormBuilder;
+use Serixa\Forms\Components\SuccessMessage;
+use Serixa\Forms\Components\ValidationSummary;
+use Serixa\Forms\Field\Checkbox;
+use Serixa\Forms\Field\Input;
+use Serixa\Forms\Field\Select;
+use Serixa\Forms\State\ErrorsBag;
+use Serixa\Forms\State\OldInput;
+use Serixa\Forms\Validation\Validator;
 
 /**
- * Workspace-wide preferences. Everything here is a static form — no settings
- * store, no persistence.
+ * Workspace settings with serixa/forms validation demo (no persistence).
  */
 final class SettingsPage
 {
@@ -34,60 +37,92 @@ final class SettingsPage
      */
     public static function document(array $query = []): Document
     {
-        $page = Page::make(
-            InfoCard::make(
-                Form::make(
-                    FieldGroup::make(
-                        Label::make('Workspace name')->for('workspace_name'),
-                        Input::make()->id('workspace_name')->name('workspace_name')->value('SERIXA Admin'),
-                    ),
-                    FieldGroup::make(
-                        Label::make('Support email')->for('support_email'),
-                        Input::make()->id('support_email')->name('support_email')->type('email')->value('support@serixa.dev'),
-                    ),
-                    FieldGroup::make(
-                        Label::make('Timezone')->for('timezone'),
-                        Select::make()->id('timezone')->name('timezone')->options([
-                            'UTC' => 'UTC',
-                            'Asia/Colombo' => 'Asia/Colombo',
-                            'America/New_York' => 'America/New_York',
-                            'Europe/London' => 'Europe/London',
-                        ])->value('UTC'),
-                        HelperText::make('Used for invoices, audit timestamps, and digests.'),
-                    ),
-                    FieldGroup::make(
-                        Label::make('Default locale')->for('locale'),
-                        Select::make()->id('locale')->name('locale')->options([
-                            'en' => 'English',
-                            'si' => 'Sinhala',
-                            'ta' => 'Tamil',
-                        ])->value('en'),
-                    ),
-                    FieldGroup::make(
-                        Checkbox::make()->id('maintenance')->name('maintenance')->label('Show maintenance banner to operators'),
-                        Checkbox::make()->id('allow_invites')->name('allow_invites')->label('Allow admins to invite new users')->checked(),
-                        Checkbox::make()->id('require_2fa')->name('require_2fa')->label('Require 2FA for all admins')->checked(),
-                    ),
-                    Row::make(Button::make('Save settings')->type('submit')->primary())->gap(3),
-                )->method('POST')->action('#'),
-            )->title('General'),
-            InfoCard::make(
-                Form::make(
-                    FieldGroup::make(
-                        Label::make('Primary brand color')->for('brand_color'),
-                        Input::make()->id('brand_color')->name('brand_color')->value('#0f766e'),
-                        HelperText::make('Presentation only in this starter — wire to your ThemeInterface.'),
-                    ),
-                    Row::make(Button::make('Save branding')->type('submit')->primary())->gap(3),
-                )->method('POST')->action('#'),
-            )->title('Branding'),
-        )
+        $defaults = [
+            'workspace_name' => 'SERIXA Admin',
+            'support_email' => 'support@serixa.dev',
+            'timezone' => 'UTC',
+            'locale' => 'en',
+            'maintenance' => '',
+            'allow_invites' => '1',
+            'require_2fa' => '1',
+            'brand_color' => '#0f766e',
+        ];
+
+        $submitted = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
+        $request = RequestData::fromArray($submitted ? $_POST : []);
+
+        $result = Validator::make($submitted ? $request->all() : $defaults, [
+            'workspace_name' => 'required|min:2|max:120',
+            'support_email' => 'required|email',
+            'timezone' => 'required|in:UTC,Asia/Colombo,America/New_York,Europe/London',
+            'locale' => 'required|in:en,si,ta',
+            'maintenance' => 'boolean',
+            'allow_invites' => 'boolean',
+            'require_2fa' => 'boolean',
+            'brand_color' => 'required|regex:/^#[0-9A-Fa-f]{6}$/',
+        ])->validate();
+
+        $csrf = new DemoCsrf();
+        $csrfOk = ! $submitted || $csrf->validate($request->string('_token', ''));
+
+        $state = FormBinder::make()
+            ->defaults($defaults)
+            ->fill($request)
+            ->oldInput($submitted ? OldInput::make($request->all()) : OldInput::make())
+            ->toFormState()
+            ->withErrors($submitted && $csrfOk ? $result->toErrorsBag() : ErrorsBag::make());
+
+        $general = FormBuilder::make()
+            ->action('?page=settings')
+            ->csrf($csrf)
+            ->state($state)
+            ->field(Input::make('workspace_name')->label('Workspace name')->required()->min(2)->max(120))
+            ->field(Input::make('support_email')->label('Support email')->type('email')->required()->email())
+            ->field(Select::make('timezone')->label('Timezone')->required()->options([
+                'UTC' => 'UTC',
+                'Asia/Colombo' => 'Asia/Colombo',
+                'America/New_York' => 'America/New_York',
+                'Europe/London' => 'Europe/London',
+            ])->help('Used for invoices, audit timestamps, and digests.'))
+            ->field(Select::make('locale')->label('Default locale')->required()->options([
+                'en' => 'English',
+                'si' => 'Sinhala',
+                'ta' => 'Tamil',
+            ]))
+            ->field(Checkbox::make('maintenance')->label('Show maintenance banner to operators')->boolean())
+            ->field(Checkbox::make('allow_invites')->label('Allow admins to invite new users')->boolean())
+            ->field(Checkbox::make('require_2fa')->label('Require 2FA for all admins')->boolean())
+            ->submit('Save settings')
+            ->toWidget();
+
+        $branding = FormBuilder::make()
+            ->action('?page=settings')
+            ->csrf($csrf)
+            ->state($state)
+            ->field(Input::make('brand_color')->label('Primary brand color')->required()->regex('/^#[0-9A-Fa-f]{6}$/')->help('Presentation only — wire to your ThemeInterface.'))
+            ->submit('Save branding')
+            ->toWidget();
+
+        $messages = [];
+
+        if ($submitted && ! $csrfOk) {
+            $messages[] = ValidationSummary::make(ErrorsBag::make(['_token' => ['Invalid CSRF token (demo).']]));
+        } elseif ($submitted && $result->failed()) {
+            $messages[] = ValidationSummary::make($result->toErrorsBag());
+        } elseif ($submitted && $result->passed()) {
+            $messages[] = SuccessMessage::make('Settings look valid. Demo only — nothing was saved.');
+        }
+
+        $page = Page::make(...array_merge($messages, [
+            InfoCard::make(Column::make($general)->gap(4))->title('General'),
+            InfoCard::make(Column::make($branding)->gap(4))->title('Branding'),
+        ]))
             ->breadcrumb(Breadcrumb::make(
                 BreadcrumbItem::make('Dashboard')->href('?page=dashboard'),
                 BreadcrumbItem::make('Settings')->current(),
             ))
             ->title('Settings')
-            ->description('Workspace-wide preferences. UI only — no persistence in this starter.');
+            ->description('Workspace-wide preferences. Validated with serixa/forms — no persistence.');
 
         return PanelLayout::wrap('settings', $page);
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Data\Fixtures;
+use App\Support\DemoCsrf;
 use Serixa\Admin\Breadcrumb\Breadcrumb;
 use Serixa\Admin\Breadcrumb\BreadcrumbItem;
 use Serixa\Admin\Cards\InfoCard;
@@ -12,18 +13,21 @@ use Serixa\Admin\Components\DescriptionItem;
 use Serixa\Admin\Components\DescriptionList;
 use Serixa\Admin\Components\StatusBadge;
 use Serixa\Admin\Page\Page;
-use Serixa\Component\Button;
-use Serixa\Component\FieldGroup;
-use Serixa\Component\Form;
-use Serixa\Component\Input;
-use Serixa\Component\Label;
-use Serixa\Component\Row;
-use Serixa\Component\Textarea;
+use Serixa\Component\Column;
 use Serixa\Document\Document;
+use Serixa\Forms\Binding\FormBinder;
+use Serixa\Forms\Binding\RequestData;
+use Serixa\Forms\Builder\FormBuilder;
+use Serixa\Forms\Components\SuccessMessage;
+use Serixa\Forms\Components\ValidationSummary;
+use Serixa\Forms\Field\Input;
+use Serixa\Forms\Field\Textarea;
+use Serixa\Forms\State\ErrorsBag;
+use Serixa\Forms\State\OldInput;
+use Serixa\Forms\Validation\Validator;
 
 /**
- * The signed-in author's own account page: read-only summary plus an
- * editable (UI only) profile form.
+ * Signed-in author profile with serixa/forms validation demo (no persistence).
  */
 final class ProfilePage
 {
@@ -45,6 +49,52 @@ final class ProfilePage
             'joined' => '2025-11-02',
         ];
 
+        $defaults = [
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'bio' => 'Building things with SERIXA.',
+        ];
+
+        $submitted = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
+        $request = RequestData::fromArray($submitted ? $_POST : []);
+
+        $result = Validator::make($submitted ? $request->all() : $defaults, [
+            'name' => 'required|min:2|max:120',
+            'email' => 'required|email|max:255',
+            'bio' => 'nullable|max:500',
+        ])->validate();
+
+        $csrf = new DemoCsrf();
+        $csrfOk = ! $submitted || $csrf->validate($request->string('_token', ''));
+
+        $state = FormBinder::make()
+            ->defaults($defaults)
+            ->fill($request)
+            ->oldInput($submitted ? OldInput::make($request->all()) : OldInput::make())
+            ->toFormState()
+            ->withErrors($submitted && $csrfOk ? $result->toErrorsBag() : ErrorsBag::make());
+
+        $builder = FormBuilder::make()
+            ->action('?page=profile')
+            ->csrf($csrf)
+            ->state($state)
+            ->field(Input::make('name')->label('Display name')->required()->min(2)->max(120))
+            ->field(Input::make('email')->label('Email')->type('email')->required()->email()->max(255))
+            ->field(Textarea::make('bio')->label('Bio')->rows(4)->nullable()->max(500)->help('UI only — changes are not persisted.'))
+            ->submit('Save profile');
+
+        $formBody = [];
+
+        if ($submitted && ! $csrfOk) {
+            $formBody[] = ValidationSummary::make(ErrorsBag::make(['_token' => ['Invalid CSRF token (demo).']]));
+        } elseif ($submitted && $result->failed()) {
+            $formBody[] = ValidationSummary::make($result->toErrorsBag());
+        } elseif ($submitted && $result->passed()) {
+            $formBody[] = SuccessMessage::make('Profile looks valid. Demo only — nothing was saved.');
+        }
+
+        $formBody[] = $builder->toWidget();
+
         $page = Page::make(
             InfoCard::make(
                 DescriptionList::make(
@@ -55,30 +105,14 @@ final class ProfilePage
                     DescriptionItem::make('Joined', $user['joined']),
                 ),
             )->title('Account'),
-            InfoCard::make(
-                Form::make(
-                    FieldGroup::make(
-                        Label::make('Display name')->for('name'),
-                        Input::make()->id('name')->name('name')->value($user['name']),
-                    ),
-                    FieldGroup::make(
-                        Label::make('Email')->for('email'),
-                        Input::make()->id('email')->name('email')->type('email')->value($user['email']),
-                    ),
-                    FieldGroup::make(
-                        Label::make('Bio')->for('bio'),
-                        Textarea::make('Building things with SERIXA.')->id('bio')->name('bio')->rows(4),
-                    ),
-                    Row::make(Button::make('Save profile')->type('submit')->primary())->gap(3),
-                )->method('POST')->action('#'),
-            )->title('Edit profile'),
+            InfoCard::make(Column::make(...$formBody)->gap(4))->title('Edit profile'),
         )
             ->breadcrumb(Breadcrumb::make(
                 BreadcrumbItem::make('Dashboard')->href('?page=dashboard'),
                 BreadcrumbItem::make('Profile')->current(),
             ))
             ->title('Profile')
-            ->description('Your account details. UI only — changes are not persisted.');
+            ->description('Your account details. Validation runs via serixa/forms; nothing is persisted.');
 
         return BlogLayout::wrap('profile', $page);
     }
