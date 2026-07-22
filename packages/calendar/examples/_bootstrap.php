@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Serixa\Styling\StyleSheet;
-
 use Serixa\Calendar\Runtime\CalendarRuntime;
 use Serixa\Calendar\Theme\CalendarTheme;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Document\Document;
+use Serixa\Styling\StyleSheet;
 use Serixa\Theme\DefaultTheme;
 use Serixa\Theme\ThemeManager;
 

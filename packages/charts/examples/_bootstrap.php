@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Serixa\Styling\StyleSheet;
-
 use Serixa\Charts\Runtime\ChartRuntime;
 use Serixa\Charts\Theme\ChartsTheme;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Document\Document;
+use Serixa\Styling\StyleSheet;
 use Serixa\Theme\DefaultTheme;
 use Serixa\Theme\ThemeManager;
 
