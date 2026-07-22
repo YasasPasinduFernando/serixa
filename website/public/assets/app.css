@@ -3,7 +3,7 @@
 /* --- resources/css/app.css --- */
 /*
  * SERIXA documentation website — presentation layer.
- * Utilities come from the Tailwind CDN; this file owns docs chrome + dark mode.
+ * Theme utilities come from public/assets/app.css; this file owns docs chrome + dark mode.
  */
 
 :root {
@@ -106,15 +106,12 @@ body {
 .docs-grid {
     max-width: 72rem;
     margin: 0 auto;
-    width: 100%;
 }
 
+/* Specialized docs rail — owns its width (generic Column no longer forces w-full). */
 .docs-sidebar {
-    /* Override DefaultTheme Column `w-full` so the sidebar stays a fixed rail. */
-    width: 15rem !important;
-    max-width: 15rem;
+    width: 15rem;
     flex: 0 0 15rem;
-    flex-shrink: 0;
     position: sticky;
     top: 4.5rem;
     max-height: calc(100vh - 5rem);
@@ -135,13 +132,6 @@ body {
     color: var(--site-fg);
     text-decoration: none;
     font-size: 0.95rem;
-}
-
-.docs-content {
-    flex: 1 1 auto;
-    min-width: 0;
-    width: auto !important;
-    max-width: none !important;
 }
 
 .docs-article {
@@ -245,11 +235,12 @@ article {
 
 @media (max-width: 900px) {
     .docs-grid {
-        flex-direction: column !important;
+        flex-direction: column;
     }
 
     .docs-sidebar {
         width: 100%;
+        flex: 0 0 auto;
         position: static;
         max-height: none;
         border-bottom: 1px solid var(--site-border);
@@ -264,6 +255,6 @@ article {
 
     .feature-row,
     .starter-row {
-        flex-direction: column !important;
+        flex-direction: column;
     }
 }

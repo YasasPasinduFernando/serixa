@@ -7,6 +7,7 @@ namespace App;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Component\Divider;
+use Serixa\Component\Expanded;
 use Serixa\Component\Row;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
@@ -39,17 +40,21 @@ final class DocsLayout
         ])->gap(6)->alignStart()->class('docs-article');
 
         // Full-bleed shell; constrain only the docs frame content width.
+        // Sidebar owns rail width (app CSS); Expanded owns the fluid article pane.
         $shell = Column::make([
             SiteNav::make(DocsCatalog::route($slug), $theme)->class('site-header'),
             Container::make(
                 Row::make([
                     DocsSidebar::make($slug),
-                    Container::make($body)->maxWidth('full')->padding('none')->class('docs-content'),
-                ])->gap(8)->alignStart()->class('docs-grid'),
+                    Expanded::make(
+                        Container::make($body)->maxWidth('full')->padding('none')->fill(false)->class('docs-content'),
+                    ),
+                ])->gap(8)->alignStart()->fill()->class('docs-grid'),
             )->maxWidth('xl')->class('docs-frame'),
         ])
             ->gap(0)
             ->alignStretch()
+            ->fill()
             ->class($theme === 'dark' ? 'site-shell dark' : 'site-shell')
             ->attribute('data-theme', $theme);
 

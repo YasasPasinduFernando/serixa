@@ -40,6 +40,7 @@ final class SiteLayout
         ])
             ->gap(0)
             ->alignStretch()
+            ->fill()
             ->class($theme === 'dark' ? 'site-shell dark' : 'site-shell')
             ->attribute('data-theme', $theme);
 
