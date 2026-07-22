@@ -1,6 +1,6 @@
 {
     "name": "serixa/starter-crm",
-    "description": "SERIXA CRM starter kit \u2014 dashboard shell for customer management apps.",
+    "description": "Official SERIXA CRM Starter — sales pipeline demo built with framework, admin, forms, icons, charts, and calendar.",
     "type": "project",
     "license": "MIT",
     "homepage": "https://github.com/YasasPasinduFernando/serixa",
@@ -9,40 +9,49 @@
         "source": "https://github.com/YasasPasinduFernando/serixa",
         "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
     },
-    "keywords": [
-        "serixa",
-        "php",
-        "ui"
-    ],
-    "authors": [
-        {
-            "name": "SERIXA Contributors",
-            "homepage": "https://github.com/YasasPasinduFernando/serixa"
-        }
-    ],
+    "keywords": ["serixa", "php", "ui", "crm", "starter"],
+    "authors": [{"name": "SERIXA Contributors", "homepage": "https://github.com/YasasPasinduFernando/serixa"}],
     "require": {
         "php": "^8.2",
-        "serixa/framework": "^0.11"
+        "serixa/framework": "*@dev",
+        "serixa/icons": "*@dev",
+        "serixa/admin": "*@dev",
+        "serixa/forms": "*@dev",
+        "serixa/charts": "*@dev",
+        "serixa/calendar": "*@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "phpstan/phpstan": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.64"
     },
     "autoload": {
         "psr-4": {
-            "App\\": [
-                "app/",
-                "components/",
-                "layouts/",
-                "pages/"
-            ]
+            "App\\": ["app/", "components/", "layouts/", "pages/", "routes/"]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
         }
     },
     "repositories": [
-        {
-            "type": "path",
-            "url": "../../framework",
-            "options": {
-                "symlink": true
-            }
-        }
+        {"type": "path", "url": "../../framework", "options": {"symlink": true}},
+        {"type": "path", "url": "../../packages/icons", "options": {"symlink": true}},
+        {"type": "path", "url": "../../packages/admin", "options": {"symlink": true}},
+        {"type": "path", "url": "../../packages/forms", "options": {"symlink": true}},
+        {"type": "path", "url": "../../packages/charts", "options": {"symlink": true}},
+        {"type": "path", "url": "../../packages/calendar", "options": {"symlink": true}}
     ],
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": ["@test", "@phpstan", "@cs-check"],
+        "start": "php -S localhost:8000 -t public",
+        "build": "php -r \"require 'vendor/autoload.php'; echo Serixa\\Styling\\StyleSheet::build(__DIR__)['bytes'], PHP_EOL;\""
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }

@@ -1,13 +1,14 @@
 {
-    "version": "1.0.0-rc3",
-    "built_at": "2026-07-22T14:30:55+00:00",
-    "compile_ms": 8.14,
+    "version": "1.0.0",
+    "built_at": "2026-07-22T18:20:19+00:00",
+    "compile_ms": 7.55,
     "css": "/assets/serixa.css",
     "selectors": [
         ":root",
         ".dark",
         "[data-theme=\"dark\"]",
         ".sx-btn",
+        ".sx-btn:focus-visible",
         ".sx-btn-sm",
         ".sx-btn-md",
         ".sx-btn-lg",
@@ -23,12 +24,13 @@
         ".sx-btn-disabled",
         ".sx-card",
         ".sx-input",
+        ".sx-input:focus-visible",
         ".sx-label",
         ".sx-text",
         ".sx-text-muted",
         ".sx-heading"
     ],
-    "selector_count": 23,
+    "selector_count": 25,
     "tokens": [
         "color.primary",
         "color.primary.hover",
@@ -51,9 +53,31 @@
         "shadow.small",
         "shadow.medium",
         "shadow.large",
+        "typography.body",
+        "typography.heading",
+        "typography.label",
         "typography.body.size",
         "typography.heading.size",
-        "typography.label.size"
+        "typography.label.size",
+        "typography.muted",
+        "border.subtle",
+        "border.strong",
+        "border.focus",
+        "opacity.disabled",
+        "opacity.muted",
+        "opacity.overlay",
+        "zIndex.base",
+        "zIndex.dropdown",
+        "zIndex.sticky",
+        "zIndex.modal",
+        "zIndex.toast",
+        "breakpoint.sm",
+        "breakpoint.md",
+        "breakpoint.lg",
+        "breakpoint.xl",
+        "transition.fast",
+        "transition.normal",
+        "transition.slow"
     ],
     "sources": [
         "theme:compiler",
@@ -61,7 +85,7 @@
         "resources/css/app.css"
     ],
     "sizes": {
-        "serixa.css": 37212,
-        "theme": 3499
+        "serixa.css": 38222,
+        "theme": 4509
     }
 }
