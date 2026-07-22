@@ -30,6 +30,8 @@ final class DocsCatalog
             ['slug' => 'layouts', 'title' => 'Layouts', 'group' => 'Core', 'source' => 'layout-engine.md', 'marker' => 'Layout engine'],
             ['slug' => 'forms', 'title' => 'Forms', 'group' => 'Core', 'source' => 'forms.md', 'marker' => 'Forms'],
             ['slug' => 'themes', 'title' => 'Themes', 'group' => 'Core', 'source' => 'layout-engine.md', 'marker' => 'Theme seam'],
+            ['slug' => 'styling', 'title' => 'Styling', 'group' => 'Core', 'source' => 'styling.md', 'marker' => 'SERIXA styling'],
+            ['slug' => 'assets', 'title' => 'Assets', 'group' => 'Core', 'source' => 'assets.md', 'marker' => 'Asset pipeline'],
             ['slug' => 'cli', 'title' => 'CLI', 'group' => 'Tooling', 'source' => 'cli.md', 'marker' => 'CLI'],
             ['slug' => 'packages', 'title' => 'Packages', 'group' => 'Ecosystem', 'source' => 'monorepo.md', 'marker' => 'Monorepo'],
             ['slug' => 'icons', 'title' => 'Icons', 'group' => 'Ecosystem', 'source' => 'icons.md', 'marker' => 'Icons'],
@@ -39,6 +41,8 @@ final class DocsCatalog
             ['slug' => 'devtools', 'title' => 'DevTools', 'group' => 'Ecosystem', 'source' => 'devtools.md', 'marker' => 'DevTools'],
             ['slug' => 'starter-kits', 'title' => 'Starter Kits', 'group' => 'Ecosystem', 'source' => 'starter-blog.md', 'marker' => 'Starter'],
             ['slug' => 'deployment', 'title' => 'Deployment', 'group' => 'Guides', 'source' => 'deployment.md', 'marker' => 'Deployment'],
+            ['slug' => 'troubleshooting', 'title' => 'Troubleshooting', 'group' => 'Guides', 'source' => 'troubleshooting.md', 'marker' => 'Troubleshooting'],
+            ['slug' => 'performance', 'title' => 'Performance', 'group' => 'Guides', 'source' => 'performance-v1.md', 'marker' => 'Performance'],
             ['slug' => 'faq', 'title' => 'FAQ', 'group' => 'Guides', 'source' => 'faq.md', 'marker' => 'FAQ'],
             ['slug' => 'roadmap', 'title' => 'Roadmap', 'group' => 'Guides', 'source' => '@roadmap', 'marker' => 'Roadmap'],
         ];

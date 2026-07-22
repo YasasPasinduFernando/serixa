@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 
 use Serixa\Component\Column;
 use Serixa\Document\Document;

@@ -26,7 +26,9 @@ Use `StatCard` for a full KPI tile in a dashboard grid (title, big value, option
 
 ## Why is theme styling class names instead of a CSS file?
 
-SERIXA's "theme" is a Tailwind **class map**: `DefaultTheme::classes('button', ['variant' => 'primary'])` returns a list of Tailwind utility class names, which the widget attaches to its HTML. There is no CSS compilation step inside the framework. Something still has to turn those class names into real styles — either the Tailwind CDN script (development) or a compiled `app.css` (production). See [deployment.md](deployment.md#tailwind-cdn-vs-production-css).
+SERIXA themes map widget state to **class names**. `DefaultTheme` still emits utility class lists for broad coverage; the **Theme Compiler** also emits CSS variables and semantic `.sx-*` recipes (for example `.sx-btn-primary`).
+
+At build time, `serixa build` (or `composer build` in the website) compiles offline CSS to `/assets/serixa.css`. There is **no** Tailwind Play CDN and **no** runtime CSS generation. See [styling.md](styling.md) and [assets.md](assets.md).
 
 ## Can I swap out the theme?
 
@@ -34,7 +36,7 @@ Yes — `serixa make:theme Dark` scaffolds a custom theme class implementing `Th
 
 ## Is there a Chart widget? A Calendar widget?
 
-Not yet. Use `EmptyState` (explicit "not available" messaging) or `Skeleton` (loading-style placeholder) as an honest stand-in until you add your own, or integrate a JS charting library directly and mount it against a container widget.
+Yes — official packages `serixa/charts` and `serixa/calendar` ship chart and calendar UI widgets. See [charts.md](charts.md) and [calendar.md](calendar.md).
 
 ## Does SERIXA use a virtual DOM or hydration?
 

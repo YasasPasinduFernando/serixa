@@ -13,7 +13,7 @@ use Serixa\Component\Sidebar;
 use Serixa\Component\Text;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 use Serixa\Runtime\ClientRuntime;
 
 /**

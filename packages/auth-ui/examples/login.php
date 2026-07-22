@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 
 use Serixa\AuthUi\Components\AuthDivider;
 use Serixa\AuthUi\Components\BrandLogo;

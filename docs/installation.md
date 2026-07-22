@@ -294,7 +294,7 @@ SERIXA does **not** include a router — wire pages yourself (typically `match (
 
 ## Example
 
-Minimal end-to-end app: install, one page, layout, theme CDN, render.
+Minimal end-to-end app: install, one page, layout, offline CSS build, render.
 
 **`composer.json`**
 
@@ -375,7 +375,7 @@ php -S localhost:8000 -t public
 2. **Compose, don't concatenate HTML** — build UI with widgets; let `Renderer` produce markup.
 3. **One layout, many pages** — shared `Scaffold` / `AppLayout` for chrome; page classes return `Document`.
 4. **Theme owns styling** — avoid raw Tailwind class strings on widgets when a fluent API exists (`->primary()`, `->tone('muted')`).
-5. **CDN in development, compiled CSS in production** — see [deployment.md](deployment.md).
+5. **Compile CSS offline** — run `serixa build` so `/assets/serixa.css` exists; see [styling.md](styling.md) and [deployment.md](deployment.md).
 6. **Register `ClientRuntime` only when needed** — static pages need zero JavaScript.
 7. **Keep apps outside `framework/`** when using path repositories.
 8. **Own routing and auth** — SERIXA renders UI; sessions, validation, and URLs are your app's responsibility.
@@ -390,7 +390,7 @@ php -S localhost:8000 -t public
 |---------|--------------|-----|
 | `Class "Serixa\…" not found` | Autoload / wrong path junction | `composer dump-autoload`; ensure path repo URL is `…/framework` |
 | Interactive widgets do nothing | Missing or 404 `serixa.js` | Serve `-t public`; check [runtime script 404](troubleshooting.md#runtime-script-404) |
-| No Tailwind styles | No CSS source | Add CDN script or compile utilities into `app.css` |
+| No styles / unstyled page | Missing compiled CSS | Run `serixa build`; register `StyleSheet::register()` → `/assets/serixa.css` |
 | `Unknown theme component` | Typo or unsupported variant | Use allowed variants/sizes; see [unknown theme state](troubleshooting.md#unknown-theme-state) |
 | `composer install` hangs in monorepo | Nested path recursion | Generate apps as siblings; [path-repository recursion](troubleshooting.md#path-repository-recursion) |
 | Package not found on Packagist | Local-only / unpublished | Use a path repository against this clone |

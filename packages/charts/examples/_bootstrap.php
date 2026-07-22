@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 
 use Serixa\Charts\Runtime\ChartRuntime;
 use Serixa\Charts\Theme\ChartsTheme;

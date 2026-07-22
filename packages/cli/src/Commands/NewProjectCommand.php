@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Serixa\Cli\Commands;
 
-use Serixa\Assets\StyleSheet;
 use Serixa\Cli\Command;
 use Serixa\Cli\InputOutput;
 use Serixa\Cli\Scaffold\TemplateEngine;
 use Serixa\Exception\InvalidArgumentException;
 use Serixa\Runtime\ClientRuntime;
+use Serixa\Styling\StyleSheet;
 
 /**
  * serixa new {name} - generate a project skeleton (blog|crm|ecommerce presets).

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-use Serixa\Assets\StyleSheet;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
 use Serixa\Runtime\ClientRuntime;
+use Serixa\Styling\StyleSheet;
 
 /**
  * Builds every page Document: SEO title, compiled SERIXA CSS, client runtime.

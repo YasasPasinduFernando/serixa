@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use Serixa\Assets\StyleSheet;
+use Serixa\Styling\StyleSheet;
 use Serixa\Contracts\WidgetInterface;
 use Serixa\Document\Document;
 use Serixa\Runtime\ClientRuntime;
