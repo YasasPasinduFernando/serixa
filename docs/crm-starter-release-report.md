@@ -121,12 +121,10 @@ See [crm-framework-review.md](crm-framework-review.md). Highlights:
 38b422622e3bdf5c103e83b82d7b70c6412a1d04
 ```
 
-(Primary deliverable commit. Docs hash update may follow as a tiny follow-up commit.)
-
 ## Suggested tag
 
 ```text
 serixa-starter-crm-v0.1.0
 ```
 
-Annotated tag created locally on the starter commit. Do not push. Do not publish Packagist packages for this starter (application, not a library).
+Local annotated tag points at the starter commit above. Do not push. Do not publish Packagist packages for this starter (application, not a library).
