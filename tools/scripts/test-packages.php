@@ -11,6 +11,7 @@ $packages = [
     'icons', 'charts', 'calendar', 'admin', 'auth-ui', 'devtools', 'cli', 'forms',
     'rbac', 'permissions', 'organization', 'teams', 'activity-log', 'audit',
     'cart', 'checkout', 'invoice', 'tax', 'subscriptions',
+    'cms', 'menu', 'seo', 'sitemap', 'blog',
 ];
 $failed = 0;
 
