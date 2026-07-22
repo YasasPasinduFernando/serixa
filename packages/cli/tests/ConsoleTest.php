@@ -44,7 +44,7 @@ final class ConsoleTest extends TestCase
         $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'version'], $io));
-        $this->assertStringContainsString('0.1.2', $io->output());
+        $this->assertStringContainsString('0.1.3', $io->output());
 
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'help'], $io));
@@ -57,9 +57,11 @@ final class ConsoleTest extends TestCase
         $this->assertStringContainsString('doctor', $io->output());
         $this->assertStringContainsString('benchmark', $io->output());
         $this->assertStringContainsString('inspect', $io->output());
+        $this->assertStringContainsString('profile', $io->output());
+        $this->assertStringContainsString('cache:clear', $io->output());
     }
 
-    public function testDoctorInspectAndBenchmarkCommands(): void
+    public function testDoctorInspectBenchmarkProfileAndCacheClear(): void
     {
         $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
 
@@ -74,6 +76,16 @@ final class ConsoleTest extends TestCase
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'benchmark'], $io));
         $this->assertStringContainsString('ThemeCompiler', $io->output());
+
+        $io = new InputOutput(true);
+        $this->assertSame(0, $app->run(['serixa', 'profile'], $io));
+        $this->assertStringContainsString('ThemeCompiler cold', $io->output());
+        $this->assertStringContainsString('Document once', $io->output());
+
+        $io = new InputOutput(true);
+        $this->assertSame(0, $app->run(['serixa', 'cache:clear'], $io));
+        $this->assertStringContainsString('ClassMerger', $io->output());
+        $this->assertStringContainsString('cleared', $io->output());
     }
 
     public function testCommandRegistrationAndPluginFacade(): void

@@ -58,7 +58,7 @@ Product branding is **SERIXA** (`serixa/framework`).
 4. **Plugins** — implement `WidgetPlugin` / `ThemePlugin` / `RuntimePlugin`
 5. **Context** — pass `WidgetContext` into `Renderer`
 6. **Documents** — `Document::make()` + assets/SEO
-7. **Inspectors / profilers** — implement contracts when DevTools land
+7. **Inspectors / profilers** — contracts in `serixa/framework`; panels in `serixa/devtools`; CLI `serixa profile` / `serixa inspect` for local DX
 
 ## Governance
 

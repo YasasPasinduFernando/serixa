@@ -1,11 +1,11 @@
-# SERIXA CLI (`serixa/cli` v0.1.2)
+# SERIXA CLI (`serixa/cli` v0.1.3)
 
 The CLI is a **separate Composer package** from the runtime engine.
 
 | Package | Role |
 |---------|------|
 | `serixa/framework` | Widgets, renderer, theme, document, `serixa.js` |
-| `serixa/cli` | `serixa new`, `make:*`, `docs`, `build`, `dev` |
+| `serixa/cli` | Scaffolding, build, doctor, profile, inspect |
 
 ```bash
 composer require --dev serixa/cli
@@ -49,8 +49,15 @@ New to SERIXA? [getting-started.md](getting-started.md) and [first-blog.md](firs
 | Command | Purpose |
 |---------|---------|
 | `serixa docs` | Write `docs/generated/*` |
-| `serixa build` | Tokens, runtime copy, manifest, docs cache |
-| `serixa dev --once` | Single watch cycle |
+| `serixa build` | Offline CSS (`serixa.css`), runtime copy, manifest, docs cache |
+| `serixa dev --once` | Single watch cycle (omit `--once` to poll) |
+| `serixa doctor` | PHP / extensions / framework CSS / project asset checks |
+| `serixa inspect` | Print cwd, stylesheet URL, and a theme sample |
+| `serixa benchmark` | Sample ThemeCompiler / StyleCompiler / Renderer timings |
+| `serixa profile` | Cold/warm profile for caches, theme map, Renderer, Document |
+| `serixa cache:clear` | Clear in-process ClassMerger / ThemeCompiler / pipeline caches |
+
+Theme and asset compilation are performed by `serixa build` (and `serixa dev`). There are no separate `theme:compile` / `asset:compile` commands.
 
 ## Plugin commands
 
@@ -60,4 +67,4 @@ use Serixa\Cli\Plugin;
 Plugin::registerCommand(new MyCommand());
 ```
 
-See also [scaffolding.md](scaffolding.md), [project-generator.md](project-generator.md), [templates.md](templates.md), [monorepo.md](monorepo.md).
+See also [scaffolding.md](scaffolding.md), [project-generator.md](project-generator.md), [templates.md](templates.md), [monorepo.md](monorepo.md), [accessibility.md](accessibility.md).

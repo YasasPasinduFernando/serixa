@@ -31,7 +31,7 @@ Be clear about scope before you start:
 - **No router.** SERIXA does not decide which page to show for a URL. Your app does that (see [first-blog.md](first-blog.md) for a small `match()` example).
 - **No auth / sessions.** Login and profile pages are HTML only. Wire your own session/auth logic in your app.
 - **No ORM or database layer.** SERIXA renders widgets; where the data comes from is up to you.
-- **No Chart or Calendar widgets.** Not implemented yet. Use `EmptyState` or `Skeleton` as an honest placeholder if you need one today.
+- **Charts & Calendar** ship as optional packages (`serixa/charts`, `serixa/calendar`), not core framework widgets. Install them when you need those surfaces.
 - **No virtual DOM / SPA state.** The client runtime (`assets/runtime/serixa.js`) is a small progressive-enhancement script, not a framework runtime.
 
 If you keep this in mind, the rest of the framework is straightforward.

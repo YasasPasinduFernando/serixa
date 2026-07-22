@@ -13,7 +13,7 @@ use Serixa\Cli\Support\FrameworkLocator;
  */
 final class Application
 {
-    public const VERSION = '0.1.2';
+    public const VERSION = '0.1.3';
 
     private ?TemplateEngine $templateEngine = null;
 
@@ -158,7 +158,9 @@ final class Application
             new Commands\BuildCommand($frameworkRoot),
             new Commands\DoctorCommand($frameworkRoot),
             new Commands\BenchmarkCommand(),
+            new Commands\ProfileCommand(),
             new Commands\InspectCommand($frameworkRoot),
+            new Commands\CacheClearCommand(),
         ];
     }
 
@@ -252,6 +254,11 @@ final class Application
             'docs' => ['serixa docs', 'Writes docs/generated/*'],
             'build' => ['serixa build', 'Tokens, runtime copy, manifest, docs cache'],
             'dev' => ['serixa dev --once', 'Single watch cycle (omit --once to poll)'],
+            'doctor' => ['serixa doctor', 'Checks PHP, extensions, framework CSS, and project assets'],
+            'benchmark' => ['serixa benchmark', 'Samples ThemeCompiler, StyleCompiler, and Renderer'],
+            'profile' => ['serixa profile', 'Detailed cold/warm timings for caches and Document'],
+            'inspect' => ['serixa inspect', 'Prints cwd, stylesheet URL, and theme sample'],
+            'cache:clear' => ['serixa cache:clear', 'Clears in-process ClassMerger / ThemeCompiler caches'],
             default => [],
         };
 

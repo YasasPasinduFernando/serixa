@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3] — 2026-07-22
+
+### Added
+- `serixa profile` — cold/warm timings for ThemeCompiler, ClassMerger, Renderer, Document
+- `serixa cache:clear` — clear in-process ClassMerger / ThemeCompiler / ThemeManager / RenderPipeline caches
+- Help examples for `doctor`, `benchmark`, `profile`, `inspect`, `cache:clear`
+
 ## [0.1.2] — 2026-07-22
 
 ### Added
