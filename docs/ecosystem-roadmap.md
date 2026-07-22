@@ -116,11 +116,21 @@ Phase tag: `phase-7-search-v0.1.0`. Report: [phase-7-search.md](releases/phase-7
 
 Phase tag: `phase-8-ai-v0.1.0`. Report: [phase-8-ai.md](releases/phase-8-ai.md).
 
-**Next (awaiting confirmation):** Phase 9 — Notifications.
+## Phase 9 — Notifications (complete)
 
-## Phase 9 — Notifications
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/firebase` | framework | **0.1.0** (`serixa-firebase-v0.1.0`) |
+| `serixa/onesignal` | firebase | **0.1.0** (`serixa-onesignal-v0.1.0`) |
+| `serixa/twilio` | firebase | **0.1.0** (`serixa-twilio-v0.1.0`) |
+| `serixa/slack` | firebase | **0.1.0** (`serixa-slack-v0.1.0`) |
+| `serixa/discord` | firebase | **0.1.0** (`serixa-discord-v0.1.0`) |
+| `serixa/telegram` | firebase | **0.1.0** (`serixa-telegram-v0.1.0`) |
+| `serixa/whatsapp` | firebase | **0.1.0** (`serixa-whatsapp-v0.1.0`) |
 
-`firebase` → `onesignal` → `twilio` → `slack` → `discord` → `telegram` → `whatsapp`
+Phase tag: `phase-9-notifications-v0.1.0`. Report: [phase-9-notifications.md](releases/phase-9-notifications.md).
+
+**Next (awaiting confirmation):** Phase 10 — Integrations.
 
 ## Phase 10 — Integrations
 
