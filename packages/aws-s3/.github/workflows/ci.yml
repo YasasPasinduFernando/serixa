@@ -1,0 +1,14 @@
+name: serixa-aws-s3
+on:
+  push: { paths: ['packages/aws-s3/**', 'framework/**'] }
+  pull_request: { paths: ['packages/aws-s3/**', 'framework/**'] }
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: packages/aws-s3 } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: '8.2', coverage: none, tools: 'composer:v2' }
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer qa

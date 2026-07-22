@@ -1,0 +1,40 @@
+{
+    "name": "serixa/aws-s3",
+    "description": "Official SERIXA AWS S3 storage adapter implementing local-storage contracts.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/YasasPasinduFernando/serixa",
+    "support": {
+        "issues": "https://github.com/YasasPasinduFernando/serixa/issues",
+        "source": "https://github.com/YasasPasinduFernando/serixa",
+        "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
+    },
+    "keywords": ["serixa", "s3", "aws", "storage"],
+    "authors": [{"name": "SERIXA Contributors", "homepage": "https://github.com/YasasPasinduFernando/serixa"}],
+    "require": {
+        "php": "^8.2",
+        "serixa/framework": "*@dev",
+        "serixa/local-storage": "*@dev"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": { "psr-4": { "Serixa\\AwsS3\\": "src/" } },
+    "autoload-dev": { "psr-4": { "Serixa\\AwsS3\\Tests\\": "tests/" } },
+    "repositories": [
+        { "type": "path", "url": "../../framework", "options": {"symlink": true} },
+        { "type": "path", "url": "../local-storage", "options": {"symlink": true} }
+    ],
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": ["@test", "@phpstan", "@cs-check"],
+        "smoke": "php examples/basic.php"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
