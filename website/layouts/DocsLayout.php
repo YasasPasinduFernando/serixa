@@ -38,17 +38,20 @@ final class DocsLayout
             DocPager::make($slug),
         ])->gap(6)->alignStart()->class('docs-article');
 
-        $shell = Container::make(
-            Column::make([
-                Container::make(SiteNav::make(DocsCatalog::route($slug), $theme))->class('site-header'),
-                Container::make(
-                    Row::make([
-                        DocsSidebar::make($slug),
-                        Container::make($body)->class('docs-content'),
-                    ])->gap(8)->alignStart()->class('docs-grid'),
-                )->class('docs-frame'),
-            ])->gap(0)->alignStretch(),
-        )->class('site-shell')->attribute('data-theme', $theme);
+        // Full-bleed shell; constrain only the docs frame content width.
+        $shell = Column::make([
+            SiteNav::make(DocsCatalog::route($slug), $theme)->class('site-header'),
+            Container::make(
+                Row::make([
+                    DocsSidebar::make($slug),
+                    Container::make($body)->maxWidth('full')->padding('none')->class('docs-content'),
+                ])->gap(8)->alignStart()->class('docs-grid'),
+            )->maxWidth('xl')->class('docs-frame'),
+        ])
+            ->gap(0)
+            ->alignStretch()
+            ->class('site-shell')
+            ->attribute('data-theme', $theme);
 
         return DocumentFactory::make($title, $shell, 'SERIXA documentation — ' . $title);
     }

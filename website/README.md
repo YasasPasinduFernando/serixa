@@ -17,6 +17,8 @@ composer install
 composer sync-runtime
 ```
 
+Tailwind utilities are served from `public/assets/vendor/tailwindcss.js` (local copy of the Play CDN build) so layout styles work offline / when `cdn.tailwindcss.com` is blocked.
+
 ## Run
 
 ```bash

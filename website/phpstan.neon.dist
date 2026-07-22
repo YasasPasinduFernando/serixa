@@ -10,3 +10,5 @@ parameters:
     analyseAndScan:
       - vendor
   treatPhpDocTypesAsCertain: false
+  parallel:
+    maximumNumberOfProcesses: 2

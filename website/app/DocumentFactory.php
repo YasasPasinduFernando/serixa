@@ -9,7 +9,11 @@ use Serixa\Document\Document;
 use Serixa\Runtime\ClientRuntime;
 
 /**
- * Builds every page Document: SEO title, Tailwind CDN, site CSS, client runtime.
+ * Builds every page Document: SEO title, Tailwind utilities, site CSS, client runtime.
+ *
+ * Theme classes from DefaultTheme are Tailwind utilities. The Play CDN build is
+ * served locally (public/assets/vendor/tailwindcss.js) without defer so styles
+ * apply even when cdn.tailwindcss.com is blocked or fails to load.
  */
 final class DocumentFactory
 {
@@ -28,7 +32,8 @@ final class DocumentFactory
             ->language('en')
             ->body($body);
 
-        $document->assets()->js('https://cdn.tailwindcss.com');
+        // Local Tailwind browser build — must not defer (Play CDN injects styles on execute).
+        $document->assets()->js('/assets/vendor/tailwindcss.js', ['defer' => false]);
         $document->assets()->css('/app.css');
         ClientRuntime::register($document->assets());
 

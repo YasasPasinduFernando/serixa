@@ -26,19 +26,22 @@ final class SiteLayout
     {
         $theme = SiteContext::theme();
 
-        $shell = Container::make(
-            Column::make([
-                Container::make(SiteNav::make($active, $theme))->class('site-header'),
-                Container::make($content)->class('site-main'),
-                Divider::make(),
-                Footer::make(
-                    Column::make([
-                        Text::make('SERIXA — Modern SSR UI for PHP')->size('sm')->tone('muted'),
-                        Link::make('GitHub')->href('https://github.com/YasasPasinduFernando/serixa'),
-                    ])->gap(2),
-                ),
-            ])->gap(0)->alignStretch(),
-        )->class('site-shell')->attribute('data-theme', $theme);
+        // Full-bleed shell (no Container max-width) so header/nav are not squeezed.
+        $shell = Column::make([
+            SiteNav::make($active, $theme)->class('site-header'),
+            Container::make($content)->maxWidth('xl')->class('site-main'),
+            Divider::make(),
+            Footer::make(
+                Column::make([
+                    Text::make('SERIXA — Modern SSR UI for PHP')->size('sm')->tone('muted'),
+                    Link::make('GitHub')->href('https://github.com/YasasPasinduFernando/serixa'),
+                ])->gap(2),
+            )->class('site-footer'),
+        ])
+            ->gap(0)
+            ->alignStretch()
+            ->class('site-shell')
+            ->attribute('data-theme', $theme);
 
         return DocumentFactory::make($title, $shell);
     }
