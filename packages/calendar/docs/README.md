@@ -1,3 +1,3 @@
-﻿# calendar
+﻿# Calendar docs
 
-Skeleton documentation. Implementation TBD.
+Canonical guide: [calendar.md](calendar.md).

@@ -4,19 +4,30 @@ on:
   push:
     paths:
       - 'packages/calendar/**'
+      - 'packages/icons/**'
       - 'framework/**'
   pull_request:
     paths:
       - 'packages/calendar/**'
+      - 'packages/icons/**'
       - 'framework/**'
 
 jobs:
-  placeholder:
-    name: Package skeleton
+  package:
+    name: Calendar package QA
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/calendar
     steps:
       - uses: actions/checkout@v4
-      - name: Verify skeleton
-        run: |
-          test -f packages/calendar/composer.json
-          test -d packages/calendar/src
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+      - name: Install
+        run: composer install --no-interaction --prefer-dist
+      - name: QA
+        run: composer qa
