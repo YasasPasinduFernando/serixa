@@ -1,0 +1,38 @@
+{
+    "name": "serixa/seo",
+    "description": "Official SERIXA SEO package — meta tags, Open Graph, and Twitter cards for documents.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/YasasPasinduFernando/serixa",
+    "support": {
+        "issues": "https://github.com/YasasPasinduFernando/serixa/issues",
+        "source": "https://github.com/YasasPasinduFernando/serixa",
+        "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
+    },
+    "keywords": ["serixa", "seo", "meta", "open-graph"],
+    "authors": [{"name": "SERIXA Contributors", "homepage": "https://github.com/YasasPasinduFernando/serixa"}],
+    "require": {
+        "php": "^8.2",
+        "serixa/framework": "*@dev"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": { "psr-4": { "Serixa\\Seo\\": "src/" } },
+    "autoload-dev": { "psr-4": { "Serixa\\Seo\\Tests\\": "tests/" } },
+    "repositories": [
+        { "type": "path", "url": "../../framework", "options": {"symlink": true} }
+    ],
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": ["@test", "@phpstan", "@cs-check"],
+        "smoke": "php examples/basic.php"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
