@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e9250ac3d83dbfa7a2b51f9fcfb247a",
+    "content-hash": "be87294ba2836d03b793613db5f499af",
     "packages": [
         {
             "name": "serixa/framework",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../..",
-                "reference": "c1af87df5397d4d1d723c1d831ee5b47599903b2"
+                "url": "../../framework",
+                "reference": "140a1599afa722635fa5ccc2c32c13db44823d0f"
             },
             "require": {
                 "php": "^8.2"
@@ -21,6 +21,9 @@
                 "friendsofphp/php-cs-fixer": "^3.64",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0"
+            },
+            "suggest": {
+                "serixa/cli": "Official scaffolding CLI (serixa new, make:*, build, docs)"
             },
             "type": "library",
             "autoload": {
