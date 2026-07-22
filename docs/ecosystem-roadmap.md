@@ -32,7 +32,7 @@ Framework development is **API frozen** (additive-only). New work is packages, s
 
 Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases/phase-1-enterprise.md).
 
-**Next (awaiting confirmation):** Phase 3 — CMS.
+**Next (awaiting confirmation):** Phase 4 — Storage.
 
 ## Phase 2 — Commerce (complete)
 
@@ -46,9 +46,17 @@ Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases
 
 Phase tag: `phase-2-commerce-v0.1.0`. Report: [phase-2-commerce.md](releases/phase-2-commerce.md).
 
-## Phase 3 — CMS
+## Phase 3 — CMS (complete)
 
-`cms` → `menu` → `seo` → `sitemap` → `blog`
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/cms` | framework | **0.1.0** (`serixa-cms-v0.1.0`) |
+| `serixa/menu` | framework | **0.1.0** (`serixa-menu-v0.1.0`) |
+| `serixa/seo` | framework | **0.1.0** (`serixa-seo-v0.1.0`) |
+| `serixa/sitemap` | framework | **0.1.0** (`serixa-sitemap-v0.1.0`) |
+| `serixa/blog` | cms | **0.1.0** (`serixa-blog-v0.1.0`) |
+
+Phase tag: `phase-3-cms-v0.1.0`. Report: [phase-3-cms.md](releases/phase-3-cms.md).
 
 ## Phase 4 — Storage
 
