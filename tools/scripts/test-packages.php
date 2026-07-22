@@ -14,6 +14,7 @@ $packages = [
     'cms', 'menu', 'seo', 'sitemap', 'blog',
     'local-storage', 'aws-s3', 'cloudinary', 'google-drive', 'dropbox',
     'media-library', 'file-manager', 'pdf', 'excel', 'word', 'zip',
+    'passkeys', 'webauthn', 'two-factor', 'recaptcha', 'hcaptcha',
 ];
 $failed = 0;
 

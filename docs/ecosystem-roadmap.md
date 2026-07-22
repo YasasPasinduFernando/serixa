@@ -32,7 +32,7 @@ Framework development is **API frozen** (additive-only). New work is packages, s
 
 Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases/phase-1-enterprise.md).
 
-**Next (awaiting confirmation):** Phase 5 — Files.
+**Next (awaiting confirmation):** Phase 7 — Search.
 
 ## Phase 2 — Commerce (complete)
 
@@ -70,9 +70,18 @@ Phase tag: `phase-3-cms-v0.1.0`. Report: [phase-3-cms.md](releases/phase-3-cms.m
 
 Phase tag: `phase-4-storage-v0.1.0`. Report: [phase-4-storage.md](releases/phase-4-storage.md).
 
-## Phase 5 — Files
+## Phase 5 — Files (complete)
 
-`media-library` → `file-manager` → `pdf` → `excel` → `word` → `zip`
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/media-library` | local-storage | **0.1.0** (`serixa-media-library-v0.1.0`) |
+| `serixa/file-manager` | local-storage, media-library | **0.1.0** (`serixa-file-manager-v0.1.0`) |
+| `serixa/pdf` | framework | **0.1.0** (`serixa-pdf-v0.1.0`) |
+| `serixa/excel` | framework | **0.1.0** (`serixa-excel-v0.1.0`) |
+| `serixa/word` | framework | **0.1.0** (`serixa-word-v0.1.0`) |
+| `serixa/zip` | framework | **0.1.0** (`serixa-zip-v0.1.0`) |
+
+Phase tag: `phase-5-files-v0.1.0`. Report: [phase-5-files.md](releases/phase-5-files.md).
 
 ## Phase 6 — Security
 
