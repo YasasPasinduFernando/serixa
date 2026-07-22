@@ -1,4 +1,4 @@
-# SERIXA CLI (`serixa/cli` v0.1.1)
+# SERIXA CLI (`serixa/cli` v0.1.2)
 
 The CLI is a **separate Composer package** from the runtime engine.
 

@@ -44,7 +44,7 @@ final class ConsoleTest extends TestCase
         $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'version'], $io));
-        $this->assertStringContainsString('0.1.1', $io->output());
+        $this->assertStringContainsString('0.1.2', $io->output());
 
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'help'], $io));
@@ -54,6 +54,26 @@ final class ConsoleTest extends TestCase
         $this->assertSame(0, $app->run(['serixa', 'list'], $io));
         $this->assertStringContainsString('new', $io->output());
         $this->assertStringContainsString('build', $io->output());
+        $this->assertStringContainsString('doctor', $io->output());
+        $this->assertStringContainsString('benchmark', $io->output());
+        $this->assertStringContainsString('inspect', $io->output());
+    }
+
+    public function testDoctorInspectAndBenchmarkCommands(): void
+    {
+        $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
+
+        $io = new InputOutput(true);
+        $this->assertSame(0, $app->run(['serixa', 'doctor'], $io));
+        $this->assertStringContainsString('PHP >= 8.2', $io->output());
+
+        $io = new InputOutput(true);
+        $this->assertSame(0, $app->run(['serixa', 'inspect'], $io));
+        $this->assertStringContainsString('/assets/serixa.css', $io->output());
+
+        $io = new InputOutput(true);
+        $this->assertSame(0, $app->run(['serixa', 'benchmark'], $io));
+        $this->assertStringContainsString('ThemeCompiler', $io->output());
     }
 
     public function testCommandRegistrationAndPluginFacade(): void

@@ -13,7 +13,7 @@ use Serixa\Cli\Support\FrameworkLocator;
  */
 final class Application
 {
-    public const VERSION = '0.1.1';
+    public const VERSION = '0.1.2';
 
     private ?TemplateEngine $templateEngine = null;
 
@@ -156,6 +156,9 @@ final class Application
             new Commands\DocsCommand($frameworkRoot),
             new Commands\DevCommand($frameworkRoot),
             new Commands\BuildCommand($frameworkRoot),
+            new Commands\DoctorCommand($frameworkRoot),
+            new Commands\BenchmarkCommand(),
+            new Commands\InspectCommand($frameworkRoot),
         ];
     }
 

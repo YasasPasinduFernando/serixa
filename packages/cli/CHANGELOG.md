@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2] — 2026-07-22
+
+### Added
+- `serixa doctor` — environment / asset health checks
+- `serixa benchmark` — ThemeCompiler / StyleCompiler / Renderer samples
+- `serixa inspect` — cwd, stylesheet URL, theme sample
+
 ## [0.1.1] — 2026-07-22
 
 ### Changed
