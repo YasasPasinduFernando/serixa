@@ -12,6 +12,7 @@ $packages = [
     'rbac', 'permissions', 'organization', 'teams', 'activity-log', 'audit',
     'cart', 'checkout', 'invoice', 'tax', 'subscriptions',
     'cms', 'menu', 'seo', 'sitemap', 'blog',
+    'local-storage', 'aws-s3', 'cloudinary', 'google-drive', 'dropbox',
 ];
 $failed = 0;
 
