@@ -28,15 +28,17 @@ final class SiteLayout
 
         // Full-bleed shell (no Container max-width) so header/nav are not squeezed.
         $shell = Column::make([
+            Link::make('Skip to content')->href('#main-content')->class('skip-link'),
             SiteNav::make($active, $theme)->class('site-header'),
-            Container::make($content)->maxWidth('xl')->class('site-main'),
+            Container::make($content)->maxWidth('xl')->class('site-main')->id('main-content')->attribute('role', 'main'),
             Divider::make(),
             Footer::make(
                 Column::make([
                     Text::make('SERIXA — Modern SSR UI for PHP')->size('sm')->tone('muted'),
                     Link::make('GitHub')->href('https://github.com/YasasPasinduFernando/serixa'),
+                    Link::make('Security')->href('https://github.com/YasasPasinduFernando/serixa/blob/main/SECURITY.md'),
                 ])->gap(2),
-            )->class('site-footer'),
+            )->class('site-footer')->attribute('role', 'contentinfo'),
         ])
             ->gap(0)
             ->alignStretch()

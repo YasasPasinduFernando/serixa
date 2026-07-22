@@ -1,7 +1,7 @@
 {
-    "version": "1.0.0-rc3",
-    "built_at": "2026-07-22T14:45:07+00:00",
-    "compile_ms": 7.88,
+    "version": "1.0.0",
+    "built_at": "2026-07-22T16:26:04+00:00",
+    "compile_ms": 9.59,
     "css": "/assets/serixa.css",
     "selectors": [
         ":root",
@@ -53,6 +53,9 @@
         "shadow.small",
         "shadow.medium",
         "shadow.large",
+        "typography.body",
+        "typography.heading",
+        "typography.label",
         "typography.body.size",
         "typography.heading.size",
         "typography.label.size",
@@ -82,7 +85,7 @@
         "resources/css/app.css"
     ],
     "sizes": {
-        "serixa.css": 43055,
-        "theme": 4419
+        "serixa.css": 44240,
+        "theme": 4509
     }
 }

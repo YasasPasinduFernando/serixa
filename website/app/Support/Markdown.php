@@ -33,9 +33,9 @@ final class Markdown
             if ($i % 2 === 1) {
                 $nl = strpos($part, "\n");
                 $code = $nl === false ? $part : substr($part, $nl + 1);
-                $html .= '<pre class="doc-pre"><code>'
+                $html .= '<div class="doc-code"><button type="button" class="doc-copy" data-serixa-copy aria-label="Copy code">Copy</button><pre class="doc-pre"><code>'
                     . htmlspecialchars(rtrim($code), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
-                    . '</code></pre>';
+                    . '</code></pre></div>';
                 continue;
             }
 

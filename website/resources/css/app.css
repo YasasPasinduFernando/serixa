@@ -14,6 +14,7 @@
     --site-code-bg: #0b1220;
     --site-code-fg: #e2e8f0;
     --site-header: rgba(248, 250, 252, 0.92);
+    --site-focus: #0284c7;
 }
 
 [data-theme="dark"] {
@@ -35,6 +36,32 @@ body {
     color: var(--site-fg);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+a:focus-visible,
+button:focus-visible,
+.site-nav__search:focus-visible,
+.doc-copy:focus-visible,
+.docs-sidebar__link:focus-visible {
+    outline: 2px solid var(--site-focus);
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0.75rem;
+    z-index: 100;
+    background: var(--site-accent);
+    color: var(--site-bg) !important;
+    padding: 0.5rem 0.85rem;
+    border-radius: 0.4rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: 0.75rem;
 }
 
 .site-shell {
@@ -164,6 +191,30 @@ article {
     overflow-x: auto;
     font-size: 0.875rem;
     line-height: 1.55;
+}
+
+.doc-code {
+    position: relative;
+    margin: 1rem 0;
+}
+
+.doc-code .doc-pre {
+    margin: 0;
+    padding-top: 2.4rem;
+}
+
+.doc-copy {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    z-index: 1;
+    border: 1px solid color-mix(in srgb, var(--site-code-fg) 25%, transparent);
+    background: color-mix(in srgb, var(--site-code-bg) 80%, #fff 8%);
+    color: var(--site-code-fg);
+    border-radius: 0.4rem;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.75rem;
+    cursor: pointer;
 }
 
 .doc-prose {

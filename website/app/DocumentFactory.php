@@ -31,6 +31,9 @@ final class DocumentFactory
 
         StyleSheet::register($document->assets());
         ClientRuntime::register($document->assets());
+        $document->assets()->inlineScript(<<<'JS'
+document.addEventListener('click',function(e){var b=e.target.closest('[data-serixa-copy]');if(!b)return;var c=b.parentElement&&b.parentElement.querySelector('code');if(!c||!navigator.clipboard)return;navigator.clipboard.writeText(c.textContent||'').then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)});});
+JS);
 
         return $document;
     }
