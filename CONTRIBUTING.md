@@ -6,9 +6,10 @@ Thanks for helping build SERIXA.
 
 This repository is an ecosystem monorepo. Read [docs/monorepo.md](docs/monorepo.md) first.
 
-- Framework code: `framework/`
-- Optional packages: `packages/` (skeletons until scheduled)
-- Starters: `starters/` (structure only until scheduled)
+- Framework code: `framework/` (`serixa/framework`)
+- Optional packages: `packages/*` (admin, forms, icons, charts, calendar, auth-ui, devtools, cli)
+- Starters: `starters/admin` and `starters/blog` are full kits; others are scaffolds
+- Docs site: `website/`
 
 ## Rules
 
@@ -19,7 +20,6 @@ This repository is an ecosystem monorepo. Read [docs/monorepo.md](docs/monorepo.
 - Mark non-SemVer types with `@internal`.
 - Add or update PHPUnit tests for behavior changes.
 - Update `framework/CHANGELOG.md` for user-visible framework changes.
-- Do not implement package/starter features unless a milestone explicitly calls for it.
 - Record significant decisions as ADRs in `docs/adr/`.
 
 ## Setup
@@ -31,9 +31,15 @@ php framework/examples/basic.php
 cd packages/cli && composer install && php bin/serixa version
 ```
 
+Run `composer qa` inside any package you change (`framework`, `packages/*`, `website`, `starters/admin|blog`).
+
+## Security
+
+Do not open public issues for vulnerabilities. See [SECURITY.md](SECURITY.md).
+
 ## Pull requests
 
 - Keep diffs focused.
 - Document architectural decisions in `docs/` when introducing new seams.
 - Mention BC impact in the PR description.
-- Ensure CI (framework tests + PHPStan + CS + skeleton checks) is green.
+- Ensure CI (framework tests + PHPStan + CS) is green.

@@ -3,13 +3,21 @@
     "description": "SERIXA DX playground \u2014 consumes the local framework like a real app",
     "type": "project",
     "license": "MIT",
-    "repositories": [
+    "homepage": "https://github.com/YasasPasinduFernando/serixa",
+    "support": {
+        "issues": "https://github.com/YasasPasinduFernando/serixa/issues",
+        "source": "https://github.com/YasasPasinduFernando/serixa",
+        "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
+    },
+    "keywords": [
+        "serixa",
+        "php",
+        "ui"
+    ],
+    "authors": [
         {
-            "type": "path",
-            "url": "../../framework",
-            "options": {
-                "symlink": true
-            }
+            "name": "SERIXA Contributors",
+            "homepage": "https://github.com/YasasPasinduFernando/serixa"
         }
     ],
     "require": {
@@ -23,6 +31,15 @@
             "SerixaDemo\\Components\\": "components/"
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

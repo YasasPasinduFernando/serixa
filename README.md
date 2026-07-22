@@ -100,6 +100,14 @@ Each package path-requires `serixa/framework` for local development.
 
 SERIXA does **not** use the Tailwind Play CDN. Run `serixa build` to compile `/assets/serixa.css` via the Theme Compiler. See [docs/styling.md](docs/styling.md).
 
+## Security
+
+See [SECURITY.md](SECURITY.md) for supported versions and vulnerability reporting.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

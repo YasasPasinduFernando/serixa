@@ -2,9 +2,31 @@
     "name": "app/admin-dashboard",
     "description": "Admin dashboard \u2014 SERIXA validation application",
     "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/YasasPasinduFernando/serixa",
+    "support": {
+        "issues": "https://github.com/YasasPasinduFernando/serixa/issues",
+        "source": "https://github.com/YasasPasinduFernando/serixa",
+        "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
+    },
+    "authors": [
+        {
+            "name": "SERIXA Contributors",
+            "homepage": "https://github.com/YasasPasinduFernando/serixa"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "serixa/framework": "*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Pages\\": "pages/",
+            "App\\Components\\": "components/",
+            "App\\Layouts\\": "layouts/",
+            "App\\Themes\\": "themes/",
+            "App\\Plugins\\": "plugins/"
+        }
     },
     "repositories": [
         {
@@ -15,15 +37,6 @@
             }
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "App\\Pages\\": "pages/",
-            "App\\Components\\": "components/",
-            "App\\Layouts\\": "layouts/",
-            "App\\Themes\\": "themes/",
-            "App\\Plugins\\": "plugins/"
-        }
-    },
     "scripts": {
         "start": "php -S localhost:8000 -t public"
     },

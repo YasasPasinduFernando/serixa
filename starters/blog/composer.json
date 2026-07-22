@@ -1,8 +1,25 @@
 {
     "name": "serixa/starter-blog",
-    "description": "Official SERIXA Blog Starter — production-ready blog CMS scaffold (UI only).",
+    "description": "Official SERIXA Blog Starter \u2014 production-ready blog CMS scaffold (UI only).",
     "type": "project",
     "license": "MIT",
+    "homepage": "https://github.com/YasasPasinduFernando/serixa",
+    "support": {
+        "issues": "https://github.com/YasasPasinduFernando/serixa/issues",
+        "source": "https://github.com/YasasPasinduFernando/serixa",
+        "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
+    },
+    "keywords": [
+        "serixa",
+        "php",
+        "ui"
+    ],
+    "authors": [
+        {
+            "name": "SERIXA Contributors",
+            "homepage": "https://github.com/YasasPasinduFernando/serixa"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "serixa/framework": "*@dev",
@@ -14,6 +31,22 @@
         "phpunit/phpunit": "^11.0",
         "phpstan/phpstan": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.64"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": [
+                "app/",
+                "components/",
+                "layouts/",
+                "pages/",
+                "routes/"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
     },
     "repositories": [
         {
@@ -45,22 +78,16 @@
             }
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "App\\": ["app/", "components/", "layouts/", "pages/", "routes/"]
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
-    },
     "scripts": {
         "test": "phpunit",
         "phpstan": "phpstan analyse --memory-limit=512M",
         "cs-check": "php-cs-fixer fix --dry-run --diff",
         "cs-fix": "php-cs-fixer fix",
-        "qa": ["@test", "@phpstan", "@cs-check"],
+        "qa": [
+            "@test",
+            "@phpstan",
+            "@cs-check"
+        ],
         "start": "php -S localhost:8000 -t public",
         "build": "php -r \"require 'vendor/autoload.php'; echo Serixa\\Assets\\StyleSheet::build(__DIR__)['bytes'], PHP_EOL;\""
     },

@@ -1,8 +1,14 @@
 {
     "name": "serixa/cli",
-    "description": "Official SERIXA CLI — project scaffolding, generators, build and docs tooling.",
+    "description": "Official SERIXA CLI \u2014 project scaffolding, generators, build and docs tooling.",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/YasasPasinduFernando/serixa",
+    "support": {
+        "issues": "https://github.com/YasasPasinduFernando/serixa/issues",
+        "source": "https://github.com/YasasPasinduFernando/serixa",
+        "docs": "https://github.com/YasasPasinduFernando/serixa/tree/main/docs"
+    },
     "keywords": [
         "serixa",
         "cli",
@@ -10,7 +16,8 @@
     ],
     "authors": [
         {
-            "name": "SERIXA Contributors"
+            "name": "SERIXA Contributors",
+            "homepage": "https://github.com/YasasPasinduFernando/serixa"
         }
     ],
     "require": {
@@ -23,18 +30,6 @@
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../framework",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
-    "bin": [
-        "bin/serixa"
-    ],
     "autoload": {
         "psr-4": {
             "Serixa\\Cli\\": "src/"
@@ -45,6 +40,15 @@
             "Serixa\\Cli\\Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../framework",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "scripts": {
         "test": "phpunit",
         "phpstan": "phpstan analyse --memory-limit=512M",
@@ -57,5 +61,8 @@
         ]
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "bin": [
+        "bin/serixa"
+    ]
 }

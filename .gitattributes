@@ -1,0 +1,19 @@
+# Auto-detect text files
+* text=auto eol=lf
+
+# Packagist / export-ignore (keep dist archives lean)
+/.github            export-ignore
+/.git               export-ignore
+/docs               export-ignore
+/tools              export-ignore
+/validation         export-ignore
+/playground         export-ignore
+/website            export-ignore
+/starters           export-ignore
+**/tests            export-ignore
+**/phpunit.xml      export-ignore
+**/phpstan.neon.dist export-ignore
+**/.php-cs-fixer.dist.php export-ignore
+**/.php-cs-fixer.cache export-ignore
+**/.phpunit.cache   export-ignore
+**/phpstan.neon     export-ignore
