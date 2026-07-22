@@ -13,6 +13,7 @@ $packages = [
     'cart', 'checkout', 'invoice', 'tax', 'subscriptions',
     'cms', 'menu', 'seo', 'sitemap', 'blog',
     'local-storage', 'aws-s3', 'cloudinary', 'google-drive', 'dropbox',
+    'media-library', 'file-manager', 'pdf', 'excel', 'word', 'zip',
 ];
 $failed = 0;
 

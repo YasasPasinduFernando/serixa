@@ -32,7 +32,7 @@ Framework development is **API frozen** (additive-only). New work is packages, s
 
 Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases/phase-1-enterprise.md).
 
-**Next (awaiting confirmation):** Phase 4 — Storage.
+**Next (awaiting confirmation):** Phase 5 — Files.
 
 ## Phase 2 — Commerce (complete)
 
