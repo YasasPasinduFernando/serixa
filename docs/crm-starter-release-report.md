@@ -117,7 +117,11 @@ See [crm-framework-review.md](crm-framework-review.md). Highlights:
 
 ## Commit hash
 
-*(filled after commit)*
+```text
+38b422622e3bdf5c103e83b82d7b70c6412a1d04
+```
+
+(Primary deliverable commit. Docs hash update may follow as a tiny follow-up commit.)
 
 ## Suggested tag
 
@@ -125,4 +129,4 @@ See [crm-framework-review.md](crm-framework-review.md). Highlights:
 serixa-starter-crm-v0.1.0
 ```
 
-Do not push. Do not publish Packagist packages for this starter (application, not a library).
+Annotated tag created locally on the starter commit. Do not push. Do not publish Packagist packages for this starter (application, not a library).
