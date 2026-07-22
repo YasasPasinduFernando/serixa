@@ -1,3 +1,3 @@
-﻿# devtools
+﻿# DevTools docs
 
-Skeleton documentation. Implementation TBD.
+Canonical guide: [devtools.md](devtools.md).

@@ -1,0 +1,104 @@
+/* SERIXA DevTools overlay — compact slate/sky companion styles */
+
+#serixa-devtools {
+  --devtools-bg: #0f172a;
+  --devtools-panel-bg: #020617;
+  --devtools-border: #334155;
+  --devtools-text: #e2e8f0;
+  --devtools-muted: #94a3b8;
+  --devtools-accent: #38bdf8;
+  --devtools-tab-active: #1e293b;
+  color: var(--devtools-text);
+  font: 13px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+#serixa-devtools[hidden] {
+  display: none !important;
+}
+
+#serixa-devtools [role="toolbar"] {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.65rem;
+  border-top: 1px solid var(--devtools-border);
+  background: var(--devtools-bg);
+  box-shadow: 0 -4px 16px rgba(2, 6, 23, 0.45);
+}
+
+#serixa-devtools [data-devtools-tab] {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  background: transparent;
+  color: var(--devtools-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+}
+
+#serixa-devtools [data-devtools-tab][aria-selected="true"] {
+  background: var(--devtools-tab-active);
+  border-color: var(--devtools-border);
+  color: #f8fafc;
+}
+
+#serixa-devtools [data-devtools-tab]:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+#serixa-devtools [data-devtools-tab]:focus-visible {
+  outline: 2px solid var(--devtools-accent);
+  outline-offset: 2px;
+}
+
+#serixa-devtools [data-devtools-panel-content] {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 2.6rem;
+  z-index: 9998;
+  max-height: 40vh;
+  overflow: auto;
+  padding: 0.75rem 0.85rem;
+  border-top: 1px solid var(--devtools-border);
+  background: var(--devtools-panel-bg);
+}
+
+#serixa-devtools [data-devtools-panel-content][hidden] {
+  display: none !important;
+}
+
+#serixa-devtools [data-devtools-inspector-pane] {
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--devtools-border);
+  border-radius: 0.35rem;
+  background: #0b1220;
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
+#serixa-devtools [data-devtools-live] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.serixa-devtools-highlight {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 2px;
+}

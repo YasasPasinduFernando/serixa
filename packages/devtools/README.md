@@ -1,21 +1,28 @@
-﻿# serixa/devtools
+﻿# SERIXA DevTools
 
-SERIXA developer tooling helpers (skeleton).
+Official developer tools for SERIXA — inspectors, collectors, overlay, and CLI.
+**Development only. Do not ship to production.**
 
-> Skeleton only — implementation comes in a later release.
+## Requirements
 
-## Local development
+- PHP 8.2+
+- `serixa/framework`
+- `serixa/cli`
+
+## Installation (monorepo / require-dev)
 
 ```bash
+cd packages/devtools
 composer install
+composer qa
 ```
 
-Uses a Composer **path repository** pointing at `../../framework` (no Packagist required).
+In apps: `"serixa/devtools": "*@dev"` under `require-dev`, then:
 
-## Namespace
+```php
+if (getenv('APP_ENV') !== 'production') {
+    \Serixa\DevTools\DevTools::enable();
+}
+```
 
-`Serixa\DevTools\`
-
-## Status
-
-Not implemented. Public API will be designed when this package is scheduled.
+See [docs/devtools.md](docs/devtools.md).

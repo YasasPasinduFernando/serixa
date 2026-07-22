@@ -1,11 +1,13 @@
 {
     "name": "serixa/devtools",
-    "description": "SERIXA developer tooling helpers (skeleton).",
+    "description": "Official SERIXA developer tools — inspectors, collectors, overlay. Development only; never ship to production.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "serixa",
-        "devtools"
+        "devtools",
+        "inspector",
+        "profiler"
     ],
     "authors": [
         {
@@ -14,9 +16,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "serixa/framework": "^0.11"
+        "serixa/framework": "*@dev",
+        "serixa/cli": "*@dev"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0"
     },
     "repositories": [
@@ -26,17 +31,38 @@
             "options": {
                 "symlink": true
             }
+        },
+        {
+            "type": "path",
+            "url": "../cli",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "autoload": {
         "psr-4": {
             "Serixa\\DevTools\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Serixa\\DevTools\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --memory-limit=512M",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "qa": [
+            "@test",
+            "@phpstan",
+            "@cs-check"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
