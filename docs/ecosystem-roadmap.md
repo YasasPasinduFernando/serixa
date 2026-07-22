@@ -19,16 +19,20 @@ Framework development is **API frozen** (additive-only). New work is packages, s
 - Packages: admin, auth-ui, forms, icons, charts, calendar, cli, devtools
 - Starters: admin, blog, crm (full); docs, ecommerce, portfolio (scaffolds)
 
-## Phase 1 — Enterprise (in progress)
+## Phase 1 — Enterprise (complete)
 
 | Package | Depends on | Status |
 |---------|------------|--------|
-| `serixa/rbac` | framework | pending |
-| `serixa/permissions` | rbac | pending |
-| `serixa/organization` | framework | pending |
-| `serixa/teams` | organization | pending |
-| `serixa/activity-log` | framework | pending |
-| `serixa/audit` | activity-log | pending |
+| `serixa/rbac` | framework | **0.1.0** (`serixa-rbac-v0.1.0`) |
+| `serixa/permissions` | rbac | **0.1.0** (`serixa-permissions-v0.1.0`) |
+| `serixa/organization` | framework | **0.1.0** (`serixa-organization-v0.1.0`) |
+| `serixa/teams` | organization | **0.1.0** (`serixa-teams-v0.1.0`) |
+| `serixa/activity-log` | framework | **0.1.0** (`serixa-activity-log-v0.1.0`) |
+| `serixa/audit` | activity-log | **0.1.0** (`serixa-audit-v0.1.0`) |
+
+Phase tag: `phase-1-enterprise-v0.1.0`. Report: [phase-1-enterprise.md](releases/phase-1-enterprise.md).
+
+**Next (awaiting confirmation):** Phase 2 — Commerce.
 
 ## Phase 2 — Commerce
 
