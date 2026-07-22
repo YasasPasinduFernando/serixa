@@ -14,7 +14,9 @@
 /playground/**/vendor/
 /starters/**/vendor/
 /packages/**/vendor/
+/website/vendor/
 /validation/**/composer.lock
 /playground/**/composer.lock
 /starters/**/composer.lock
 /packages/**/composer.lock
+/website/composer.lock

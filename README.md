@@ -8,6 +8,10 @@ This repository is a **monorepo**. The production package is [`framework/`](fram
 
 See [docs/monorepo.md](docs/monorepo.md) for architecture, versioning, and the future split strategy.
 
+**New here?** Start with the [Installation Guide](docs/installation.md).
+
+**Documentation website:** [`website/`](website/) — official SSR docs site (`composer start` inside `website/`).
+
 ## Repository layout
 
 ```text

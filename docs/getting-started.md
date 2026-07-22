@@ -2,6 +2,8 @@
 
 This page is the entry point for new SERIXA users. It explains what SERIXA is, what it is not, and where to go next.
 
+For a full walkthrough of Composer install, first page, rendering, widgets, themes, and layouts, see the **[Installation Guide](installation.md)**.
+
 ## What SERIXA is
 
 SERIXA is a PHP UI framework. You write widgets in PHP; SERIXA renders clean HTML with Tailwind classes applied through a theme. Rendering is server-side (SSR) — there is no virtual DOM and no client-side hydration.
@@ -99,6 +101,7 @@ echo (new Renderer())->render($document);
 
 | Goal | Doc |
 |------|-----|
+| Install and render a first page | [installation.md](installation.md) |
 | Build a full blog end-to-end | [first-blog.md](first-blog.md) |
 | Build an admin dashboard shell | [first-dashboard.md](first-dashboard.md) |
 | Understand the generated folder layout | [project-structure.md](project-structure.md) |

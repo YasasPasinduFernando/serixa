@@ -1,0 +1,55 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App;
+
+use Serixa\Component\Column;
+use Serixa\Component\Container;
+use Serixa\Component\Divider;
+use Serixa\Component\Row;
+use Serixa\Contracts\WidgetInterface;
+use Serixa\Document\Document;
+
+/**
+ * Documentation chrome: top nav + left sidebar + article column.
+ */
+final class DocsLayout
+{
+    private function __construct()
+    {
+    }
+
+    public static function wrap(string $slug, WidgetInterface $article, string $title): Document
+    {
+        $theme = SiteContext::theme();
+        $entry = DocsCatalog::find($slug);
+        $group = $entry['group'] ?? 'Docs';
+
+        $body = Column::make([
+            Breadcrumbs::make([
+                ['label' => 'Home', 'href' => '?page=home'],
+                ['label' => 'Docs', 'href' => DocsCatalog::href('introduction')],
+                ['label' => $group, 'href' => null],
+                ['label' => $title, 'href' => null],
+            ]),
+            $article,
+            Divider::make(),
+            DocPager::make($slug),
+        ])->gap(6)->alignStart()->class('docs-article');
+
+        $shell = Container::make(
+            Column::make([
+                Container::make(SiteNav::make(DocsCatalog::route($slug), $theme))->class('site-header'),
+                Container::make(
+                    Row::make([
+                        DocsSidebar::make($slug),
+                        Container::make($body)->class('docs-content'),
+                    ])->gap(8)->alignStart()->class('docs-grid'),
+                )->class('docs-frame'),
+            ])->gap(0)->alignStretch(),
+        )->class('site-shell')->attribute('data-theme', $theme);
+
+        return DocumentFactory::make($title, $shell, 'SERIXA documentation — ' . $title);
+    }
+}
