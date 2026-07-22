@@ -17,7 +17,8 @@ The production Composer package remains **`serixa/framework`** (`framework/`). E
 |------|------|
 | `framework/` | Core UI framework (`Serixa\`) — runtime only |
 | `packages/cli` | Official CLI (`serixa/cli`) — scaffolding & DX |
-| `packages/*` | Optional packages (icons, admin, charts, …) |
+| `packages/*` | Optional packages (icons, admin, charts, enterprise rbac/…, …) |
+| `docs/ecosystem-roadmap.md` | Phases 1–12 product roadmap (post-v1.0) |
 | `starters/*` | Starter kit skeletons |
 | `playground/` | Manual demos |
 | `tools/` | Build, release, benchmark, scripts |

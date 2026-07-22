@@ -7,8 +7,9 @@ Thanks for helping build SERIXA.
 This repository is an ecosystem monorepo. Read [docs/monorepo.md](docs/monorepo.md) first.
 
 - Framework code: `framework/` (`serixa/framework`)
-- Optional packages: `packages/*` (admin, forms, icons, charts, calendar, auth-ui, devtools, cli)
-- Starters: `starters/admin` and `starters/blog` are full kits; others are scaffolds
+- Optional packages: `packages/*` (admin, forms, icons, charts, calendar, auth-ui, devtools, cli, plus Phase 1 enterprise: rbac, permissions, organization, teams, activity-log, audit)
+- Starters: `starters/admin`, `starters/blog`, and `starters/crm` are full kits; others are scaffolds
+- Ecosystem phases: see `docs/ecosystem-roadmap.md`
 - Docs site: `website/`
 
 ## Rules
