@@ -18,6 +18,9 @@ $packages = [
     'meilisearch', 'algolia', 'typesense', 'elasticsearch',
     'openai', 'gemini', 'anthropic', 'deepseek', 'ollama',
     'firebase', 'onesignal', 'twilio', 'slack', 'discord', 'telegram', 'whatsapp',
+    'google-calendar', 'outlook-calendar', 'ical', 'caldav',
+    'google-oauth', 'github-oauth', 'facebook-oauth', 'microsoft-oauth',
+    'stripe', 'paypal', 'payhere', 'koko',
 ];
 $failed = 0;
 
