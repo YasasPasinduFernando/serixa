@@ -1,0 +1,3 @@
+# Koko
+
+`KokoGateway::make($client)`.
