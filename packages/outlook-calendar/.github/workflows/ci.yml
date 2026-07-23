@@ -1,0 +1,14 @@
+name: serixa-outlook-calendar
+on:
+  push: { paths: ['packages/outlook-calendar/**', 'framework/**'] }
+  pull_request: { paths: ['packages/outlook-calendar/**', 'framework/**'] }
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: packages/outlook-calendar } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: '8.2', coverage: none, tools: 'composer:v2' }
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer qa
