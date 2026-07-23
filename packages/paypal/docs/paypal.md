@@ -1,0 +1,3 @@
+# PayPal
+
+`PayPalGateway::make($client)`.
