@@ -130,14 +130,38 @@ Phase tag: `phase-8-ai-v0.1.0`. Report: [phase-8-ai.md](releases/phase-8-ai.md).
 
 Phase tag: `phase-9-notifications-v0.1.0`. Report: [phase-9-notifications.md](releases/phase-9-notifications.md).
 
-**Next (awaiting confirmation):** Phase 10 — Integrations.
+## Phase 10 — Integrations (complete)
 
-## Phase 10 — Integrations
+### Calendar
 
-Calendar: `google-calendar` → `outlook-calendar` → `ical` → `caldav`  
-OAuth: `google-oauth` → `github-oauth` → `facebook-oauth` → `microsoft-oauth`  
-Payments: `stripe` → `paypal` → `payhere` → `koko`  
-(Requires Phase 2 checkout before payment adapters.)
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/google-calendar` | framework | **0.1.0** (`serixa-google-calendar-v0.1.0`) |
+| `serixa/outlook-calendar` | google-calendar | **0.1.0** (`serixa-outlook-calendar-v0.1.0`) |
+| `serixa/ical` | google-calendar | **0.1.0** (`serixa-ical-v0.1.0`) |
+| `serixa/caldav` | google-calendar | **0.1.0** (`serixa-caldav-v0.1.0`) |
+
+### OAuth
+
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/google-oauth` | framework | **0.1.0** (`serixa-google-oauth-v0.1.0`) |
+| `serixa/github-oauth` | google-oauth | **0.1.0** (`serixa-github-oauth-v0.1.0`) |
+| `serixa/facebook-oauth` | google-oauth | **0.1.0** (`serixa-facebook-oauth-v0.1.0`) |
+| `serixa/microsoft-oauth` | google-oauth | **0.1.0** (`serixa-microsoft-oauth-v0.1.0`) |
+
+### Payments
+
+| Package | Depends on | Status |
+|---------|------------|--------|
+| `serixa/stripe` | checkout | **0.1.0** (`serixa-stripe-v0.1.0`) |
+| `serixa/paypal` | stripe, checkout | **0.1.0** (`serixa-paypal-v0.1.0`) |
+| `serixa/payhere` | stripe, checkout | **0.1.0** (`serixa-payhere-v0.1.0`) |
+| `serixa/koko` | stripe, checkout | **0.1.0** (`serixa-koko-v0.1.0`) |
+
+Phase tag: `phase-10-integrations-v0.1.0`. Report: [phase-10-integrations.md](releases/phase-10-integrations.md).
+
+**Next (awaiting confirmation):** Phase 11 — Official CLI Templates.
 
 ## Phase 11 — Official CLI Templates
 
