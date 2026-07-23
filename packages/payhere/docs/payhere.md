@@ -1,0 +1,3 @@
+# PayHere
+
+`PayHereGateway::make($client)`.
