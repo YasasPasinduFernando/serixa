@@ -1,4 +1,4 @@
-﻿/vendor/
+/vendor/
 /framework/vendor/
 /.phpunit.cache/
 /framework/.phpunit.cache/
@@ -25,3 +25,9 @@
 /starters/**/build/
 /playground/**/build/
 /validation/**/build/
+
+# local QA capture files
+**/qa-out.txt
+**/cs-out.txt
+**/install-out.txt
+**/smoke-out.txt
