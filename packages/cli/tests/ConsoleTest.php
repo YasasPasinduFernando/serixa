@@ -44,7 +44,7 @@ final class ConsoleTest extends TestCase
         $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'version'], $io));
-        $this->assertStringContainsString('0.1.3', $io->output());
+        $this->assertStringContainsString('0.2.0', $io->output());
 
         $io = new InputOutput(true);
         $this->assertSame(0, $app->run(['serixa', 'help'], $io));
@@ -220,6 +220,53 @@ final class ConsoleTest extends TestCase
             $io = new InputOutput(true);
             $this->assertSame(0, $app->run(['serixa', 'dev', '--once'], $io), $io->output());
             $this->assertStringContainsString('rebuilding', $io->output());
+        } finally {
+            chdir($cwd ?: $this->cliRoot);
+        }
+    }
+
+    public function testOfficialPresetsScaffoldFeaturePages(): void
+    {
+        $cwd = getcwd();
+        chdir($this->tmp);
+
+        $expected = [
+            'admin' => 'DashboardPage.php',
+            'blog' => 'PostsPage.php',
+            'ecommerce' => 'CatalogPage.php',
+            'crm' => 'ContactsPage.php',
+            'cms' => 'ArticlesPage.php',
+            'saas' => 'BillingPage.php',
+        ];
+
+        try {
+            $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
+
+            foreach ($expected as $preset => $pageFile) {
+                $io = new InputOutput(true);
+                $folder = 'demo-' . $preset;
+                $code = $app->run(['serixa', 'new', $folder, '--type=' . $preset], $io);
+                $this->assertSame(0, $code, $preset . ': ' . $io->output());
+                $project = $this->tmp . DIRECTORY_SEPARATOR . $folder;
+                $this->assertFileExists($project . DIRECTORY_SEPARATOR . 'pages' . DIRECTORY_SEPARATOR . $pageFile);
+                $index = (string) file_get_contents($project . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'index.php');
+                $this->assertStringContainsString('class_exists', $index);
+            }
+        } finally {
+            chdir($cwd ?: $this->cliRoot);
+        }
+    }
+
+    public function testUnknownPresetFails(): void
+    {
+        $cwd = getcwd();
+        chdir($this->tmp);
+
+        try {
+            $app = new Application(cliRoot: $this->cliRoot, frameworkRoot: $this->frameworkRoot);
+            $io = new InputOutput(true);
+            $this->assertSame(1, $app->run(['serixa', 'new', 'weird', '--type=unknown'], $io));
+            $this->assertStringContainsString('Unknown project type', $io->output());
         } finally {
             chdir($cwd ?: $this->cliRoot);
         }

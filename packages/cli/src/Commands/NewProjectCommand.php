@@ -12,12 +12,12 @@ use Serixa\Runtime\ClientRuntime;
 use Serixa\Styling\StyleSheet;
 
 /**
- * serixa new {name} - generate a project skeleton (blog|crm|ecommerce presets).
+ * serixa new {name} - generate a project skeleton from official presets.
  */
 final class NewProjectCommand extends Command
 {
     /** @var list<string> */
-    private const PRESETS = ['blog', 'crm', 'ecommerce'];
+    private const PRESETS = ['admin', 'blog', 'ecommerce', 'crm', 'cms', 'saas'];
 
     public function __construct(
         private readonly TemplateEngine $templates,
@@ -32,7 +32,7 @@ final class NewProjectCommand extends Command
 
     public function description(): string
     {
-        return 'Create a new SERIXA application (blog, crm, ecommerce, or custom name)';
+        return 'Create a new SERIXA application (admin, blog, ecommerce, crm, cms, saas, or custom name)';
     }
 
     public function handle(array $arguments, array $options, InputOutput $io): int
@@ -72,7 +72,7 @@ final class NewProjectCommand extends Command
         }
 
         $namespace = 'App';
-        $title = ucfirst($preset) . ' Â- ' . $name;
+        $title = ucfirst($preset) . ' · ' . $name;
 
         try {
             $this->templates->publish('project/base', $target, [

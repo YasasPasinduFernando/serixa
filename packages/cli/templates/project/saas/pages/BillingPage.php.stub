@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Pages;
+
+use App\Layouts\AppLayout;
+use Serixa\Component\Column;
+use Serixa\Component\Text;
+use Serixa\Document\Document;
+
+/**
+ * SaaS billing / subscription overview.
+ */
+final class BillingPage
+{
+    public static function document(): Document
+    {
+        $body = Column::make([
+            AppLayout::titleBar('Billing'),
+            Text::make('Manage plans, seats, and invoices.')->tone('muted'),
+        ])->gap(3);
+
+        return Document::make()->title('Billing · {{ProjectName}}')->body($body);
+    }
+}

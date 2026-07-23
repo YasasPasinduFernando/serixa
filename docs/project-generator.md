@@ -1,9 +1,12 @@
 # Project generator
 
 ```bash
+serixa new admin
 serixa new blog
-serixa new crm
 serixa new ecommerce
+serixa new crm
+serixa new cms
+serixa new saas
 serixa new my-app --type=blog
 ```
 
@@ -23,11 +26,16 @@ serixa new my-app --type=blog
 
 Presets add:
 
-| Preset | Extra page |
-|--------|------------|
-| blog | `PostsPage` |
-| crm | `ContactsPage` |
-| ecommerce | `CatalogPage` |
+| Preset | Extra page | Try |
+|--------|------------|-----|
+| admin | `DashboardPage` | `?page=dashboard` |
+| blog | `PostsPage` | `?page=posts` |
+| ecommerce | `CatalogPage` | `?page=catalog` |
+| crm | `ContactsPage` | `?page=contacts` |
+| cms | `ArticlesPage` | `?page=articles` |
+| saas | `BillingPage` | `?page=billing` |
+
+Generated `public/index.php` resolves `?page=` to `App\Pages\{Name}Page` when the class exists.
 
 After generation:
 

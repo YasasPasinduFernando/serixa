@@ -12,14 +12,16 @@ This assumes ~20 minutes and public APIs only.
 
 ## Step 1 — Create the project
 
-There is **no dedicated "admin" CLI preset**. Use `blog`, `crm`, or `ecommerce` as a base and build your own admin layout on top — the presets only affect which starter pages get generated, not the widgets available to you.
+Use the official **admin** CLI preset (or any other official preset with `--type=`):
 
 ```bash
-serixa new admin --type=blog
+serixa new admin
 cd admin
 composer install
 php -S localhost:8000 -t public
 ```
+
+Open `http://localhost:8000/?page=dashboard` for the generated dashboard page.
 
 ## Step 2 — Build the admin layout
 

@@ -161,11 +161,13 @@ Phase tag: `phase-9-notifications-v0.1.0`. Report: [phase-9-notifications.md](re
 
 Phase tag: `phase-10-integrations-v0.1.0`. Report: [phase-10-integrations.md](releases/phase-10-integrations.md).
 
-**Next (awaiting confirmation):** Phase 11 — Official CLI Templates.
+## Phase 11 — Official CLI Templates (complete)
 
-## Phase 11 — Official CLI Templates
+`serixa new admin|blog|ecommerce|crm|cms|saas` via `serixa/cli` **0.2.0** (`serixa-cli-v0.2.0`).
 
-`serixa new admin|blog|ecommerce|crm|cms|saas`
+Phase tag: `phase-11-cli-templates-v0.1.0`. Report: [phase-11-cli-templates.md](releases/phase-11-cli-templates.md).
+
+**Next (awaiting confirmation):** Phase 12 — Specialized Starters.
 
 ## Phase 12 — Specialized Starters
 

@@ -1,4 +1,4 @@
-# SERIXA CLI (`serixa/cli` v0.1.3)
+# SERIXA CLI (`serixa/cli` v0.2.0)
 
 The CLI is a **separate Composer package** from the runtime engine.
 
@@ -37,7 +37,7 @@ New to SERIXA? [getting-started.md](getting-started.md) and [first-blog.md](firs
 
 | Command | Purpose |
 |---------|---------|
-| `serixa new blog` | Scaffold blog / crm / ecommerce (or `--type=`) |
+| `serixa new admin` | Scaffold admin / blog / ecommerce / crm / cms / saas (or `--type=`) |
 | `serixa make:page Dashboard` | Create `pages/DashboardPage.php` |
 | `serixa make:component UserCard` | Create `components/UserCard.php` |
 | `serixa make:layout Admin` | Create `layouts/AdminLayout.php` |

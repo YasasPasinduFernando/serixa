@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.0] — 2026-07-23
+
+### Added
+- Official `serixa new` presets: `admin`, `blog`, `ecommerce`, `crm`, `cms`, `saas`
+- Preset feature pages: Dashboard, Posts, Catalog, Contacts, Articles, Billing
+- Dynamic `?page=` routing in generated `public/index.php` for any `App\Pages\*Page`
+
+### Fixed
+- Project title separator encoding in generated README/home titles
+
 ## [0.1.3] — 2026-07-22
 
 ### Added

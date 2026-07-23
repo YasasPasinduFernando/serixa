@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Pages;
+
+use App\Layouts\AppLayout;
+use Serixa\Component\Column;
+use Serixa\Component\Text;
+use Serixa\Document\Document;
+
+/**
+ * Admin dashboard overview.
+ */
+final class DashboardPage
+{
+    public static function document(): Document
+    {
+        $body = Column::make([
+            AppLayout::titleBar('Dashboard'),
+            Text::make('Monitor users, roles, and system health.')->tone('muted'),
+        ])->gap(3);
+
+        return Document::make()->title('Dashboard · {{ProjectName}}')->body($body);
+    }
+}

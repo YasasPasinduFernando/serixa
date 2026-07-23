@@ -1,0 +1,12 @@
+PHP CS Fixer 3.95.15 Adalbertus by Fabien Potencier, Dariusz Ruminski and contributors.
+PHP runtime: 8.2.12
+Loaded config default from "D:\yasas\PersonalProjects\Serixa\packages\cli\.php-cs-fixer.dist.php".
+Running analysis on 7 cores with 10 files per process.
+Using cache file ".php-cs-fixer.cache".
+  0/26 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%
+  1/26 [▓░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3%
+ 24/26 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░]  92%
+ 26/26 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+
+Fixed 0 of 26 files in 2.534 seconds, 36.00 MB memory used

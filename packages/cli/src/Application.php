@@ -13,7 +13,7 @@ use Serixa\Cli\Support\FrameworkLocator;
  */
 final class Application
 {
-    public const VERSION = '0.1.3';
+    public const VERSION = '0.2.0';
 
     private ?TemplateEngine $templateEngine = null;
 
@@ -241,9 +241,10 @@ final class Application
     {
         $examples = match ($name) {
             'new' => [
+                'serixa new admin',
                 'serixa new blog',
                 'serixa new my-app --type=crm',
-                'Presets: blog, crm, ecommerce (use --type= for custom folder names)',
+                'Presets: admin, blog, ecommerce, crm, cms, saas (use --type= for custom folder names)',
                 'Avoid creating projects inside the framework tree (path-repo recursion).',
             ],
             'make:page' => ['serixa make:page Articles', 'Creates pages/ArticlesPage.php'],
