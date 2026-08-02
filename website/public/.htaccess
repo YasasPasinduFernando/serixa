@@ -1,0 +1,15 @@
+# Enable Apache rewrite so /packages → ?page=packages when hosted on PHP+Apache.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([A-Za-z0-9\-]+)/?$ index.php?page=$1 [L,QSA]
+</IfModule>
+
+# Security / performance headers (when AllowOverride permits)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

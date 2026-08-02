@@ -34,7 +34,8 @@ final class SiteLayout
             Divider::make(),
             Footer::make(
                 Column::make([
-                    Text::make('SERIXA — Modern SSR UI for PHP')->size('sm')->tone('muted'),
+                    Text::make('SERIXA — Flutter-inspired PHP UI engine')->size('sm')->tone('muted'),
+                    Link::make('Documentation')->href('https://serixa.yasaboy.com'),
                     Link::make('GitHub')->href('https://github.com/YasasPasinduFernando/serixa'),
                     Link::make('Security')->href('https://github.com/YasasPasinduFernando/serixa/blob/main/SECURITY.md'),
                 ])->gap(2),
@@ -46,6 +47,10 @@ final class SiteLayout
             ->class($theme === 'dark' ? 'site-shell dark' : 'site-shell')
             ->attribute('data-theme', $theme);
 
-        return DocumentFactory::make($title, $shell);
+        $path = $active === 'home' || $active === ''
+            ? '/'
+            : '/?page=' . rawurlencode($active);
+
+        return DocumentFactory::make($title, $shell, '', $path);
     }
 }

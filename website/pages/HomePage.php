@@ -31,7 +31,7 @@ final class HomePage
         $hero = Column::make([
             Text::make('SERIXA')->as('h1')->size('2xl')->weight('bold')->class('hero-brand'),
             Text::make('Modern SSR UI Framework for PHP')->as('p')->size('xl')->weight('semibold'),
-            Text::make('Write PHP widgets. Get semantic HTML. Theme with Tailwind. Ship with a tiny progressive-enhancement runtime.')
+            Text::make('Write PHP widgets. Get semantic HTML. Compile offline CSS. Ship a tiny progressive-enhancement runtime.')
                 ->tone('muted'),
             Row::make([
                 Link::make('Get started')->href(DocsCatalog::href('installation'))->class('btn-primary'),
@@ -45,7 +45,7 @@ final class HomePage
             Text::make('Features')->as('h2')->size('xl')->weight('bold'),
             Row::make([
                 self::feature('SSR widgets', 'Compose Flutter-inspired PHP widgets into clean HTML.'),
-                self::feature('Theme seam', 'DefaultTheme maps variants to Tailwind — swap themes without touching widgets.'),
+                self::feature('Theme Compiler', 'Offline CSS from design tokens and themes — no Tailwind Play CDN.'),
                 self::feature('Tiny runtime', 'Optional serixa.js for modals, tabs, toasts — not a SPA framework.'),
             ])->gap(4)->class('feature-row'),
         ])->gap(4)->class('section');
@@ -84,7 +84,7 @@ PHP),
                     ->child(Text::make($p['name'])->size('sm')->tone('muted'))
                     ->child(Text::make($p['description'])->tone('muted'))
                     ->child(Link::make('Learn more →')->href($p['href'])),
-                array_slice(PackageCatalog::all(), 0, 6),
+                PackageCatalog::featured(6),
             ))->gap(3),
             Link::make('All packages →')->href('?page=packages'),
         ])->gap(4)->class('section');

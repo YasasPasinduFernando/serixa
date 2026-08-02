@@ -14,7 +14,9 @@ No. Login/Profile pages you see in examples are HTML only — no session checks,
 
 ## Are forms validated automatically?
 
-No. `Form`, `Input`, `Textarea`, `Select`, etc. render real HTML with native constraints (`required`, `minlength`, `pattern`, …) and can carry a UI-only `invalid()` flag for styling. Nothing in SERIXA reads `$_POST`, validates it, or repopulates fields after a failed submission — that's your app's code.
+**Core widgets:** `Form`, `Input`, `Textarea`, `Select`, etc. render real HTML with native constraints (`required`, `minlength`, `pattern`, …) and can carry a UI-only `invalid()` flag for styling. The **framework** does not read `$_POST` or run a validation engine by itself.
+
+**Optional package:** [`serixa/forms`](forms.md) adds form builders, binding, and validators when you need server-side validation — still your app decides when to run them against request input.
 
 ## What's the difference between `Widget` and `Component`?
 

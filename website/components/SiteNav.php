@@ -40,7 +40,8 @@ final class SiteNav
                 $link('Playground', 'playground', $active),
             ])->gap(4)->class('site-nav__links'),
             Row::make([
-                Text::make('Search docs…')->as('span')->size('sm')->tone('muted')->class('site-nav__search'),
+                Text::make('Search · Coming Soon')->as('span')->size('sm')->tone('muted')->class('site-nav__search')
+                    ->attribute('title', 'Full-text docs search is not available yet'),
                 Link::make($theme === 'dark' ? 'Light' : 'Dark')
                     ->href(ThemeMode::toggleUrl($theme, $active === '' ? 'home' : $active))
                     ->class('site-nav__theme'),
