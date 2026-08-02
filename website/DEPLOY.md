@@ -46,9 +46,31 @@ Optional env:
 export SERIXA_SITE_URL=https://serixa.yasaboy.com
 ```
 
-## Cloudflare Pages note
+## Cloudflare Pages (static export)
 
-Cloudflare **Pages** serves static assets by default. This docs app needs a **PHP runtime** (or a pre-rendered static export). Prefer a PHP VPS / shared host / Forge / Railway PHP with Cloudflare proxy, unless you add a static export pipeline later.
+Production is also deployable as a **static export** to Cloudflare Pages:
+
+```bash
+cd website
+composer install
+composer build
+php bin/export-static.php
+npx wrangler pages deploy dist --project-name=serixa
+```
+
+Custom domain: attach `serixa.yasaboy.com` in Pages → Custom domains, then add DNS:
+
+| Type  | Name   | Target            | Proxy |
+|-------|--------|-------------------|-------|
+| CNAME | serixa | serixa.pages.dev  | Proxied |
+
+Do **not** put `/?page=…` rules in `_redirects` — Pages ignores query strings when matching and will break `/`.
+
+Optional env for build-time absolute URLs:
+
+```bash
+export SERIXA_SITE_URL=https://serixa.yasaboy.com
+```
 
 ## Local
 
