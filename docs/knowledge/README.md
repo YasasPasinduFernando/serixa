@@ -14,3 +14,5 @@ The local archive contains 46 transcript files, including copies of subagent con
 Older audit claims that Packagist is empty or the docs are down describe pre-launch observations. The later launch report supersedes those observations; neither establishes today's service health. Verify external state afresh. Do not repeat old test counts as fresh results.
 
 Update this knowledge base when a verified architectural decision or operational fix changes. Link source files and record the date; distinguish proposed work from shipped behavior. Never copy raw chats, credentials or private account details here.
+
+Latest verification and remaining gaps: [v1.0.1 review](release-review-2026-10-31.md).
