@@ -27,3 +27,7 @@ We aim to acknowledge reports within **72 hours** and ship fixes as promptly as 
 In scope: XSS via rendered HTML, CSRF handling in official form helpers, unsafe defaults in Document / Asset APIs, dependency advisories that affect published packages.
 
 Out of scope: application-level auth bugs in example apps, intentional progressive-enhancement trade-offs documented in the accessibility guide.
+
+## PHP runtime advisories
+
+See [PHP runtime security](docs/php-runtime-security.md) for the October 2026 runtime vulnerabilities, fixed versions and deployment verification. Composer updates alone do not patch PHP.
