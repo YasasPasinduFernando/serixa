@@ -10,3 +10,5 @@ Read `README.md`, `CONTRIBUTING.md`, `SECURITY.md`, and the affected package sou
 Run framework `composer test`, `composer phpstan`, and `composer cs-check` from `framework/`. Root `composer test:packages` and `composer test:starters` check package/starter skeletons. Verify website changes with `website/bin/export-static.php` after reading its options and `website/DEPLOY.md`. Never publish PHP source as static assets.
 
 For PHP security work read `docs/php-runtime-security.md`. Composer/library updates cannot patch the web server's PHP runtime. Verify the actual FPM/Apache/container version separately; CLI version alone is insufficient. Do not claim production remediation from a local test. Package release/tag/Packagist publication is separate from committing a monorepo change.
+
+Start project onboarding with `docs/knowledge/README.md`; use architecture.md for boundaries, decisions.md for static hosting/theme incidents, and release.md for the separate Composer mirror. Paths are relative to the repository root. Keep historical evidence distinct from fresh verification.

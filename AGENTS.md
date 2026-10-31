@@ -9,3 +9,6 @@ Never commit secrets, chat transcripts, environment files, generated dependency 
 
 ## Project skill
 Read `.agents/skills/serixa-engineering/SKILL.md` for project work.
+
+## Project knowledge
+Start with `docs/knowledge/README.md`. Historical launch/audit reports may conflict; use the reconciled knowledge base and verify current source and remote state. Update the relevant knowledge page with verified decisions after meaningful changes.

@@ -1,0 +1,52 @@
+name: Sync Composer framework
+on:
+  push:
+    branches: [main]
+    paths: ['framework/**', '.github/workflows/sync-framework.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sync-framework
+  cancel-in-progress: false
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Prepare destination authentication
+        env:
+          SYNC_KEY: ${{ secrets.FRAMEWORK_SYNC_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$SYNC_KEY" || { echo 'Missing FRAMEWORK_SYNC_SSH_KEY'; exit 1; }
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SYNC_KEY" > ~/.ssh/framework-sync
+          chmod 600 ~/.ssh/framework-sync
+          curl --fail --silent --show-error https://api.github.com/meta | python3 -c 'import json,sys; print("\n".join("github.com " + k for k in json.load(sys.stdin)["ssh_keys"]))' > ~/.ssh/known_hosts
+      - name: Synchronize tracked package snapshot
+        env:
+          GIT_SSH_COMMAND: ssh -i /home/runner/.ssh/framework-sync -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes
+        run: |
+          set -euo pipefail
+          source_sha=$(git rev-parse HEAD)
+          git archive HEAD:framework > "$RUNNER_TEMP/framework.tar"
+          mirror="$RUNNER_TEMP/framework-mirror"
+          git clone --branch main git@github.com:YasasPasinduFernando/serixa-framework.git "$mirror"
+          git -C "$mirror" rm -r --ignore-unmatch .
+          tar -xf "$RUNNER_TEMP/framework.tar" -C "$mirror"
+          git -C "$mirror" add -A
+          if git -C "$mirror" diff --cached --quiet; then
+            echo 'Framework mirror already matches.'
+            exit 0
+          fi
+          git -C "$mirror" diff --cached --check
+          git -C "$mirror" -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Sync framework from serixa $source_sha"
+          git -C "$mirror" push origin HEAD:main
+      - name: Remove deployment key
+        if: always()
+        run: rm -f ~/.ssh/framework-sync
