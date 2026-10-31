@@ -99,4 +99,14 @@ final class SmokeTest extends TestCase
 
         $this->assertStringContainsString('data-theme="dark"', $html);
     }
+
+    public function testHomepageShowcasesRealFrameworkComponents(): void
+    {
+        $html = $this->renderer->render(Web::document('home'));
+
+        $this->assertStringContainsString('Built with SERIXA', $html);
+        $this->assertStringContainsString('data-serixa-alert', $html);
+        $this->assertStringContainsString('data-serixa-progress', $html);
+        $this->assertStringContainsString('Explore every component', $html);
+    }
 }

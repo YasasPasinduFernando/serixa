@@ -734,6 +734,80 @@ body {
     background: rgba(255, 255, 255, 0.035);
 }
 
+.components-section {
+    position: relative;
+}
+
+.component-stage {
+    align-items: stretch;
+}
+
+.component-stage > * {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.component-preview,
+.component-code {
+    padding: clamp(1.35rem, 3vw, 2.25rem);
+    border: 1px solid var(--site-border);
+    border-radius: 1.6rem;
+    background: var(--site-card);
+    box-shadow: var(--site-shadow);
+}
+
+.component-preview {
+    background:
+        radial-gradient(circle at 100% 0%, rgba(0, 216, 214, 0.12), transparent 17rem),
+        var(--site-card);
+}
+
+.component-preview [role="alert"] {
+    border-radius: 1rem;
+}
+
+.component-chips {
+    flex-wrap: wrap;
+}
+
+.component-code {
+    color: #e8edff;
+    border-color: rgba(124, 58, 237, 0.28);
+    background:
+        radial-gradient(circle at 100% 0%, rgba(124, 58, 237, 0.22), transparent 22rem),
+        linear-gradient(145deg, #151b34, #080b19);
+}
+
+.component-code .text-slate-900,
+.component-code .text-slate-500 {
+    color: inherit;
+}
+
+.component-code .code-sample {
+    width: 100%;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 1rem;
+    background: rgba(2, 6, 23, 0.7);
+}
+
+.built-with-panel {
+    gap: 2rem;
+    padding: 1.15rem 1.35rem;
+    border: 1px solid color-mix(in srgb, var(--brand-cyan) 32%, var(--site-border));
+    border-radius: 1.25rem;
+    background:
+        linear-gradient(110deg, rgba(0, 216, 214, 0.08), rgba(124, 58, 237, 0.08)),
+        var(--site-card);
+}
+
+.built-with-panel [role="img"] {
+    flex: 0 0 auto;
+    color: #06131a;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--brand-cyan), #8df7f0);
+    box-shadow: 0 10px 30px rgba(0, 216, 214, 0.24);
+}
+
 .package-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -896,6 +970,8 @@ body {
 
     .feature-grid,
     .showcase-heading,
+    .component-stage,
+    .built-with-panel,
     .cta-panel,
     .footer-main {
         flex-direction: column;
@@ -918,6 +994,8 @@ body {
     }
 
     .code-showcase,
+    .component-preview,
+    .component-code,
     .cta-panel {
         border-radius: 1.35rem;
     }

@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
-    "built_at": "2026-10-31T13:54:03+00:00",
-    "compile_ms": 7.96,
+    "built_at": "2026-10-31T13:57:40+00:00",
+    "compile_ms": 5.69,
     "css": "/assets/serixa.css",
     "selectors": [
         ":root",
@@ -85,7 +85,7 @@
         "resources/css/app.css"
     ],
     "sizes": {
-        "serixa.css": 58410,
+        "serixa.css": 60162,
         "theme": 4509
     }
 }

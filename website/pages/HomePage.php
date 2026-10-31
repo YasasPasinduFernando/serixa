@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App;
 
+use Serixa\Component\Alert;
+use Serixa\Component\Avatar;
 use Serixa\Component\Badge;
 use Serixa\Component\Card;
+use Serixa\Component\Chip;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Component\Image;
 use Serixa\Component\Link;
+use Serixa\Component\Progress;
 use Serixa\Component\Row;
 use Serixa\Component\Text;
 use Serixa\Document\Document;
@@ -126,6 +130,67 @@ PHP),
             ])->gap(3)->class('code-metrics'),
         ])->gap(4)->class('section code-showcase');
 
+        $components = Column::make([
+            self::sectionHeading(
+                'A component system you can see working',
+                'This page is not a visual mockup. Every surface below is rendered by the same composable SERIXA components you can import into your own PHP application.',
+            ),
+            Row::make([
+                Column::make([
+                    Row::make([
+                        Text::make('Release workspace')->weight('bold'),
+                        Badge::make('Live')->color('success'),
+                    ])->spaceBetween()->alignCenter(),
+                    Text::make('A small interface composed from real framework primitives.')->size('sm')->tone('muted'),
+                    Alert::make()
+                        ->tone('success')
+                        ->title('Ready to ship')
+                        ->body('Theme tokens compiled and accessibility contracts passed.'),
+                    Column::make([
+                        Row::make([
+                            Text::make('Build progress')->size('sm')->weight('semibold'),
+                            Text::make('84%')->size('sm')->tone('muted'),
+                        ])->spaceBetween(),
+                        Progress::make()->value(84)->label('Build progress'),
+                    ])->gap(2),
+                    Row::make([
+                        Chip::make('PHP 8.2')->color('primary'),
+                        Chip::make('SSR')->color('success'),
+                        Chip::make('Semantic HTML'),
+                    ])->gap(2)->class('component-chips'),
+                ])->gap(4)->class('component-preview'),
+                Column::make([
+                    Badge::make('Copy the pattern')->color('primary'),
+                    Text::make('Import only what the interface needs.')->as('h3')->size('xl')->weight('bold'),
+                    Text::make('Typed APIs keep composition discoverable while the renderer keeps output predictable.')
+                        ->tone('muted'),
+                    CodeSample::make(<<<'PHP'
+use Serixa\Component\{
+    Alert, Badge, Card,
+    Chip, Progress, Row, Text
+};
+
+$status = Card::make(
+    Alert::make()
+        ->tone('success')
+        ->title('Ready to ship')
+        ->body('All checks passed.')
+);
+PHP),
+                ])->gap(3)->alignStart()->class('component-code'),
+            ])->gap(5)->class('component-stage'),
+            Row::make([
+                Row::make([
+                    Avatar::make()->initials('SX')->size('lg'),
+                    Column::make([
+                        Text::make('Built with SERIXA')->weight('bold'),
+                        Text::make('The official docs are a production proof of the framework.')->size('sm')->tone('muted'),
+                    ])->gap(1),
+                ])->gap(3)->alignCenter(),
+                Link::make('Explore every component →')->href(DocsCatalog::href('widgets'))->class('text-link'),
+            ])->spaceBetween()->alignCenter()->class('built-with-panel'),
+        ])->gap(5)->class('section components-section');
+
         $packages = Column::make([
             self::sectionHeading(
                 'One foundation, an expanding ecosystem',
@@ -173,7 +238,7 @@ PHP),
         ])->spaceBetween()->alignCenter()->class('section cta-panel');
 
         $page = Container::make(
-            Column::make([$hero, $principles, $code, $packages, $starters, $cta])
+            Column::make([$hero, $principles, $code, $components, $packages, $starters, $cta])
                 ->gap(10)
                 ->alignStretch(),
         )->maxWidth('xl')->padding('lg')->class('home-container');
