@@ -21,3 +21,9 @@ Historical custom-domain registration succeeded before its DNS CNAME existed. Pa
 - Keep roadmap, FAQ and package marketing consistent with verified implementation.
 - Track actual PHP runtime patching separately from framework releases; see `../php-runtime-security.md`.
 - Validate browser theme behavior and exported routes after website changes.
+
+## Flagship docs presentation (2026-10-31)
+
+The public homepage is a SERIXA-native showcase built from framework widgets rather than a separate frontend stack. Brand assets live under `website/public/assets/brand`; the source pack is not required at build time. `website/resources/css/app.css` is the maintained presentation source, and `website/public/assets/{app,serixa}.css` are generated outputs.
+
+The visual system uses the supplied cyan/violet identity, a real widget-tree demonstration, responsive ecosystem/starter grids, and accessible light/dark modes. Preserve one `h1`, the main landmark, keyboard focus styles, reduced-motion behavior, and mobile horizontal navigation. Verify 390px, 768px and 1440px in both themes after layout changes. The static exporter writes Cloudflare Pages security/cache headers; review them when adding browser capabilities or third-party origins.

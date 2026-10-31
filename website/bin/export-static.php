@@ -204,6 +204,22 @@ file_put_contents(
 );
 echo "Wrote _redirects (empty ruleset)\n";
 
+file_put_contents(
+    $dist . '/_headers',
+    <<<'HEADERS'
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Frame-Options: DENY
+
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+HEADERS
+);
+echo "Wrote _headers (security + asset caching)\n";
+
 echo sprintf(
     "\nStatic export complete: %d pages → %s\n",
     $written,

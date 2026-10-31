@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App;
 
 use Serixa\Component\Component;
+use Serixa\Component\Image;
 use Serixa\Component\Link;
 use Serixa\Component\Row;
-use Serixa\Component\Text;
 
 /**
  * Top site navigation — brand, primary links, search placeholder, theme toggle.
@@ -32,7 +32,15 @@ final class SiteNav
         };
 
         return Row::make([
-            Link::make('SERIXA')->href('?page=home')->class('site-nav__brand'),
+            Row::make([
+                Image::make()
+                    ->src('/assets/brand/icon-128x128.png')
+                    ->alt('')
+                    ->width(128)
+                    ->height(128)
+                    ->class('site-nav__logo'),
+                Link::make('SERIXA')->href('?page=home')->class('site-nav__brand'),
+            ])->gap(2)->alignCenter()->class('site-nav__brand-lockup'),
             Row::make([
                 $link('Docs', 'docs-introduction', $active),
                 $link('Packages', 'packages', $active),
@@ -40,12 +48,10 @@ final class SiteNav
                 $link('Playground', 'playground', $active),
             ])->gap(4)->class('site-nav__links'),
             Row::make([
-                Text::make('Search · Coming Soon')->as('span')->size('sm')->tone('muted')->class('site-nav__search')
-                    ->attribute('title', 'Full-text docs search is not available yet'),
                 Link::make($theme === 'dark' ? 'Light' : 'Dark')
                     ->href(ThemeMode::toggleUrl($theme, $active === '' ? 'home' : $active))
                     ->class('site-nav__theme'),
-                Link::make('GitHub')
+                Link::make('GitHub ↗')
                     ->href('https://github.com/YasasPasinduFernando/serixa')
                     ->class('site-nav__github'),
             ])->gap(3)->alignCenter()->class('site-nav__actions'),

@@ -8,7 +8,9 @@ use Serixa\Component\Column;
 use Serixa\Component\Container;
 use Serixa\Component\Divider;
 use Serixa\Component\Footer;
+use Serixa\Component\Image;
 use Serixa\Component\Link;
+use Serixa\Component\Row;
 use Serixa\Component\Text;
 use Serixa\Contracts\ComponentInterface;
 use Serixa\Document\Document;
@@ -33,12 +35,30 @@ final class SiteLayout
             Container::make($content)->maxWidth('xl')->class('site-main')->id('main-content')->attribute('role', 'main'),
             Divider::make(),
             Footer::make(
-                Column::make([
-                    Text::make('SERIXA — Flutter-inspired PHP UI engine')->size('sm')->tone('muted'),
-                    Link::make('Documentation')->href('https://serixa.yasaboy.com'),
-                    Link::make('GitHub')->href('https://github.com/YasasPasinduFernando/serixa'),
-                    Link::make('Security')->href('https://github.com/YasasPasinduFernando/serixa/blob/main/SECURITY.md'),
-                ])->gap(2),
+                Container::make(
+                    Column::make([
+                        Row::make([
+                            Row::make([
+                                Image::make()
+                                    ->src('/assets/brand/icon-128x128.png')
+                                    ->alt('')
+                                    ->width(128)
+                                    ->height(128)
+                                    ->class('footer-logo'),
+                                Column::make([
+                                    Text::make('SERIXA')->weight('bold'),
+                                    Text::make('Flutter-inspired PHP UI engine')->size('sm')->tone('muted'),
+                                ])->gap(1),
+                            ])->gap(3)->alignCenter(),
+                            Row::make([
+                                Link::make('Documentation')->href('https://serixa.yasaboy.com'),
+                                Link::make('GitHub')->href('https://github.com/YasasPasinduFernando/serixa'),
+                                Link::make('Security')->href('https://github.com/YasasPasinduFernando/serixa/blob/main/SECURITY.md'),
+                            ])->gap(4)->class('footer-links'),
+                        ])->spaceBetween()->alignCenter()->class('footer-main'),
+                        Text::make('Built with SERIXA. Rendered as semantic HTML.')->size('sm')->tone('muted'),
+                    ])->gap(5),
+                )->maxWidth('xl')->padding('none'),
             )->class('site-footer')->attribute('role', 'contentinfo'),
         ])
             ->gap(0)

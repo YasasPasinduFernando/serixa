@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App;
 
+use Serixa\Component\Badge;
 use Serixa\Component\Card;
 use Serixa\Component\Column;
 use Serixa\Component\Container;
+use Serixa\Component\Image;
 use Serixa\Component\Link;
 use Serixa\Component\Row;
 use Serixa\Component\Text;
 use Serixa\Document\Document;
 
 /**
- * Official documentation homepage.
+ * Official documentation homepage — built entirely from SERIXA widgets.
  */
 final class HomePage
 {
@@ -28,124 +30,201 @@ final class HomePage
     {
         unset($query);
 
-        $hero = Column::make([
-            Text::make('SERIXA')->as('h1')->size('2xl')->weight('bold')->class('hero-brand'),
-            Text::make('Modern SSR UI Framework for PHP')->as('p')->size('xl')->weight('semibold'),
-            Text::make('Write PHP widgets. Get semantic HTML. Compile offline CSS. Ship a tiny progressive-enhancement runtime.')
-                ->tone('muted'),
+        $heroCopy = Column::make([
+            Badge::make('Stable v1.0.1 · Composer ready')->color('success')->class('hero-eyebrow'),
+            Text::make('Build expressive interfaces. Keep the web simple.')
+                ->as('h1')
+                ->size('2xl')
+                ->weight('bold')
+                ->class('hero-title'),
+            Text::make('SERIXA brings a Flutter-inspired widget tree to PHP, then renders clean semantic HTML with an offline theme compiler and a tiny progressive-enhancement runtime.')
+                ->tone('muted')
+                ->class('hero-lead'),
             Row::make([
-                Link::make('Get started')->href(DocsCatalog::href('installation'))->class('btn-primary'),
-                Link::make('View on GitHub')
-                    ->href('https://github.com/YasasPasinduFernando/serixa')
-                    ->class('hero-github'),
-            ])->gap(4)->alignCenter(),
-        ])->gap(4)->alignStart()->class('hero');
-
-        $features = Column::make([
-            Text::make('Features')->as('h2')->size('xl')->weight('bold'),
+                Link::make('Start building')->href(DocsCatalog::href('installation'))->class('btn-primary hero-primary'),
+                Link::make('Explore the architecture')
+                    ->href(DocsCatalog::href('rendering'))
+                    ->class('btn-secondary'),
+            ])->gap(3)->alignCenter()->class('hero-actions'),
             Row::make([
-                self::feature('SSR widgets', 'Compose Flutter-inspired PHP widgets into clean HTML.'),
-                self::feature('Theme Compiler', 'Offline CSS from design tokens and themes — no Tailwind Play CDN.'),
-                self::feature('Tiny runtime', 'Optional serixa.js for modals, tabs, toasts — not a SPA framework.'),
-            ])->gap(4)->class('feature-row'),
-        ])->gap(4)->class('section');
+                self::signal('PHP 8.2+', 'Modern runtime'),
+                self::signal('Semantic HTML', 'Accessible output'),
+                self::signal('No hydration', 'Lean by design'),
+            ])->gap(3)->class('hero-signals'),
+        ])->gap(5)->alignStart()->class('hero-copy');
 
-        $install = Column::make([
-            Text::make('Installation')->as('h2')->size('xl')->weight('bold'),
-            Text::make('Install the framework with Composer, then scaffold with the CLI.')->tone('muted'),
-            CodeSample::make("composer require serixa/framework\ncomposer require --dev serixa/cli\nvendor/bin/serixa new blog"),
-            Link::make('Full installation guide →')->href(DocsCatalog::href('installation')),
-        ])->gap(3)->class('section');
+        $heroVisual = Column::make([
+            Image::make()
+                ->src('/assets/brand/logo-full-1200w.png')
+                ->alt('SERIXA PHP UI Framework')
+                ->width(1200)
+                ->height(973)
+                ->loading('eager')
+                ->class('hero-logo'),
+            Column::make([
+                Row::make([
+                    Text::make('Widget tree')->size('sm')->weight('semibold'),
+                    Badge::make('PHP')->color('primary'),
+                ])->spaceBetween()->alignCenter(),
+                Text::make('Document → Layout → Components')->tone('muted')->size('sm'),
+                Row::make([
+                    self::node('Text'),
+                    self::node('Button'),
+                    self::node('Card'),
+                ])->gap(2)->class('hero-nodes'),
+                Row::make([
+                    Text::make('Semantic HTML')->size('sm')->weight('semibold'),
+                    Text::make('SSR · 0 hydration')->size('sm')->tone('muted'),
+                ])->spaceBetween()->class('hero-output'),
+            ])->gap(3)->class('hero-inspector'),
+        ])->gap(2)->alignCenter()->class('hero-visual');
 
-        $example = Column::make([
-            Text::make('Code example')->as('h2')->size('xl')->weight('bold'),
+        $hero = Row::make([$heroCopy, $heroVisual])
+            ->spaceBetween()
+            ->alignCenter()
+            ->class('hero hero-grid');
+
+        $principles = Column::make([
+            self::sectionHeading(
+                'A UI system that still feels like PHP',
+                'Compose layouts with familiar server-side code. SERIXA handles rendering, themes and progressive behavior without turning your application into a JavaScript runtime.',
+            ),
+            Row::make([
+                self::feature('01', 'Compose', 'Build interfaces from typed widgets, Rows, Columns and reusable components.'),
+                self::feature('02', 'Compile', 'Generate theme-aware CSS offline from tokens. No browser compiler and no CDN dependency.'),
+                self::feature('03', 'Render', 'Ship semantic server-rendered HTML with accessibility contracts and predictable output.'),
+            ])->gap(4)->class('feature-row feature-grid'),
+        ])->gap(6)->class('section principles-section');
+
+        $code = Column::make([
+            Row::make([
+                Text::make('A complete interface in PHP')->as('h2')->size('xl')->weight('bold'),
+                Badge::make('SERIXA syntax')->color('primary'),
+            ])->spaceBetween()->alignCenter()->class('showcase-heading'),
+            Text::make('The widget tree stays readable, testable and close to the HTML it produces.')->tone('muted'),
             CodeSample::make(<<<'PHP'
-use Serixa\Component\Button;
-use Serixa\Component\Text;
+use Serixa\Component\{Button, Card, Column, Text};
 use Serixa\Document\Document;
 use Serixa\Rendering\Renderer;
 
-$document = Document::make()
-    ->title('Hello')
-    ->body(
-        Text::make('Hello, SERIXA')->as('h1')->size('xl')->weight('bold'),
-        Button::make('Continue')->primary(),
-    );
+$profile = Card::make(
+    Column::make([
+        Text::make('Welcome back')->as('h1')->size('2xl'),
+        Text::make('Your workspace is ready.')->tone('muted'),
+        Button::make('Open dashboard')->primary(),
+    ])->gap(4)
+);
 
-echo (new Renderer())->render($document);
+echo (new Renderer())->render(
+    Document::make()->title('Dashboard')->body($profile)
+);
 PHP),
-        ])->gap(3)->class('section');
+            Row::make([
+                self::metric('Widget tree', 'Declarative composition'),
+                self::metric('Theme tokens', 'Consistent by default'),
+                self::metric('HTML output', 'Search and screen-reader friendly'),
+            ])->gap(3)->class('code-metrics'),
+        ])->gap(4)->class('section code-showcase');
 
         $packages = Column::make([
-            Text::make('Official Packages')->as('h2')->size('xl')->weight('bold'),
-            Column::make(array_map(
-                static fn (array $p): Card => Card::make()
-                    ->title($p['title'])
-                    ->child(Text::make($p['name'])->size('sm')->tone('muted'))
-                    ->child(Text::make($p['description'])->tone('muted'))
-                    ->child(Link::make('Learn more →')->href($p['href'])),
+            self::sectionHeading(
+                'One foundation, an expanding ecosystem',
+                'Start with the framework, then add focused packages when the product needs them.',
+            ),
+            Row::make(array_map(
+                static fn (array $package): Card => Card::make()
+                    ->title($package['title'])
+                    ->child(Text::make($package['name'])->size('sm')->tone('muted')->class('package-name'))
+                    ->child(Text::make($package['description'])->tone('muted'))
+                    ->child(Link::make('Explore package ↗')->href($package['href'])->class('card-link'))
+                    ->class('package-card'),
                 PackageCatalog::featured(6),
-            ))->gap(3),
-            Link::make('All packages →')->href('?page=packages'),
-        ])->gap(4)->class('section');
+            ))->gap(4)->class('package-grid'),
+            Link::make('Browse the full package catalog →')->href('?page=packages')->class('text-link'),
+        ])->gap(5)->class('section ecosystem-section');
 
         $starters = Column::make([
-            Text::make('Starter Kits')->as('h2')->size('xl')->weight('bold'),
+            self::sectionHeading(
+                'Go from idea to a real product',
+                'Use a starter as a learning reference or the first commit of your next PHP interface.',
+            ),
             Row::make([
-                self::starter('Blog', 'examples-blog'),
-                self::starter('Admin', 'examples-admin'),
-                self::starter('CRM', 'examples-crm'),
-                self::starter('Ecommerce', 'examples-ecommerce'),
-                self::starter('Portfolio', 'examples-portfolio'),
-            ])->gap(3)->class('starter-row'),
-        ])->gap(4)->class('section');
+                self::starter('Blog', 'Editorial foundation', 'examples-blog'),
+                self::starter('Admin', 'Operational dashboards', 'examples-admin'),
+                self::starter('CRM', 'Customer workflows', 'examples-crm'),
+                self::starter('Commerce', 'Product experiences', 'examples-ecommerce'),
+                self::starter('Portfolio', 'Personal presence', 'examples-portfolio'),
+            ])->gap(3)->class('starter-row starter-grid'),
+        ])->gap(5)->class('section starters-section');
 
-        $performance = Column::make([
-            Text::make('Performance')->as('h2')->size('xl')->weight('bold'),
-            Text::make('Server-rendered HTML with memoized theme lookups and a lean client runtime that mounts interactive modules only when markers are present.')
-                ->tone('muted'),
-            Link::make('Read the performance notes →')->href(DocsCatalog::href('rendering')),
-        ])->gap(3)->class('section');
-
-        $cta = Card::make()
-            ->title('Build with SERIXA')
-            ->child(Text::make('Star the repo, open an issue, or scaffold your first app.')->tone('muted'))
-            ->child(
-                Row::make([
-                    Link::make('GitHub repository')->href('https://github.com/YasasPasinduFernando/serixa'),
-                    Link::make('Installation')->href(DocsCatalog::href('installation')),
-                ])->gap(4),
-            )
-            ->class('section cta-card');
+        $cta = Row::make([
+            Column::make([
+                Badge::make('Build the interface, not the machinery')->color('primary'),
+                Text::make('Your next PHP UI can be this clear.')->as('h2')->size('2xl')->weight('bold'),
+                Text::make('Install the stable framework, follow the guided introduction, and render your first widget tree today.')
+                    ->tone('muted'),
+            ])->gap(3)->alignStart(),
+            Column::make([
+                Link::make('Read the quick start')->href(DocsCatalog::href('quick-start'))->class('btn-primary'),
+                Link::make('View source on GitHub')
+                    ->href('https://github.com/YasasPasinduFernando/serixa')
+                    ->class('btn-secondary'),
+            ])->gap(3)->class('cta-actions'),
+        ])->spaceBetween()->alignCenter()->class('section cta-panel');
 
         $page = Container::make(
-            Column::make([
-                $hero,
-                $features,
-                $install,
-                $example,
-                $packages,
-                $starters,
-                $performance,
-                $cta,
-            ])->gap(10)->alignStart(),
-        )->maxWidth('xl')->padding('lg');
+            Column::make([$hero, $principles, $code, $packages, $starters, $cta])
+                ->gap(10)
+                ->alignStretch(),
+        )->maxWidth('xl')->padding('lg')->class('home-container');
 
-        return SiteLayout::wrap('home', $page, 'Documentation');
+        return SiteLayout::wrap('home', $page, 'Modern PHP UI Framework');
     }
 
-    private static function feature(string $title, string $body): Card
+    private static function sectionHeading(string $title, string $body): Column
+    {
+        return Column::make([
+            Text::make($title)->as('h2')->size('2xl')->weight('bold')->class('section-title'),
+            Text::make($body)->tone('muted')->class('section-lead'),
+        ])->gap(2)->alignStart()->class('section-heading');
+    }
+
+    private static function feature(string $number, string $title, string $body): Card
     {
         return Card::make()
-            ->title($title)
+            ->child(Text::make($number)->size('sm')->weight('bold')->class('feature-number'))
+            ->child(Text::make($title)->as('h3')->size('xl')->weight('bold'))
             ->child(Text::make($body)->tone('muted'))
             ->class('feature-card');
     }
 
-    private static function starter(string $label, string $page): Card
+    private static function starter(string $title, string $subtitle, string $page): Card
     {
         return Card::make()
-            ->title($label)
-            ->child(Link::make('View showcase →')->href('?page=' . $page));
+            ->child(Text::make($title)->as('h3')->size('lg')->weight('bold'))
+            ->child(Text::make($subtitle)->size('sm')->tone('muted'))
+            ->child(Link::make('View starter →')->href('?page=' . $page)->class('card-link'))
+            ->class('starter-card');
+    }
+
+    private static function signal(string $value, string $label): Column
+    {
+        return Column::make([
+            Text::make($value)->size('sm')->weight('bold'),
+            Text::make($label)->size('sm')->tone('muted'),
+        ])->gap(1)->class('hero-signal');
+    }
+
+    private static function node(string $label): Text
+    {
+        return Text::make($label)->size('sm')->weight('semibold')->class('hero-node');
+    }
+
+    private static function metric(string $title, string $body): Column
+    {
+        return Column::make([
+            Text::make($title)->size('sm')->weight('bold'),
+            Text::make($body)->size('sm')->tone('muted'),
+        ])->gap(1)->class('code-metric');
     }
 }

@@ -33,7 +33,7 @@ final class SmokeTest extends TestCase
      */
     public static function pages(): iterable
     {
-        yield 'home' => ['home', 'Modern SSR UI Framework for PHP'];
+        yield 'home' => ['home', 'Build expressive interfaces. Keep the web simple.'];
         yield 'packages' => ['packages', 'Official Packages'];
         yield 'playground' => ['playground', 'Playground'];
         yield 'examples-blog' => ['examples-blog', 'Blog Showcase'];
