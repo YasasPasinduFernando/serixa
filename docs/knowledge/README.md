@@ -1,6 +1,6 @@
 # Serixa knowledge base
 
-Start here when taking over the project. Reconciled on 2026-10-31 from the recovered Cursor archive, repository source and public package metadata. Historical chat conclusions are evidence of past work, not current production health.
+Start here when taking over the project. Reconciled on 2026-11-01 from the recovered Cursor archive, repository source and public package metadata. Historical chat conclusions are evidence of past work, not current production health.
 
 1. Read [architecture](architecture.md) for ownership and package boundaries.
 2. Read [decisions and incidents](decisions.md) before changing website routing, themes or deployment.
@@ -15,4 +15,4 @@ Older audit claims that Packagist is empty or the docs are down describe pre-lau
 
 Update this knowledge base when a verified architectural decision or operational fix changes. Link source files and record the date; distinguish proposed work from shipped behavior. Never copy raw chats, credentials or private account details here.
 
-Latest verification and remaining gaps: [v1.0.1 review](release-review-2026-10-31.md).
+Latest verification and remaining gaps: [v1.0.2 review](release-review-2026-11-01.md).

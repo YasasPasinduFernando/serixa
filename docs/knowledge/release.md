@@ -1,6 +1,6 @@
 # Composer synchronization and releases
 
-Packagist `serixa/framework` tracks `YasasPasinduFernando/serixa-framework`, not the monorepo. As checked on 2026-10-31 its published stable version was v1.0.0. Root monorepo tags do not automatically become package releases.
+Packagist `serixa/framework` tracks `YasasPasinduFernando/serixa-framework`, not the monorepo. As checked on 2026-11-01 its published stable version was v1.0.2 at mirror commit `26aca622c989531ae2b5ae240a57011ae6b1fd89`. Root monorepo tags do not automatically become package releases.
 
 The framework sync workflow copies only tracked `framework/` contents to the package repository's main branch. It preserves destination commit history, creates no tags and never force-pushes. Do not edit the mirror directly: a subsequent sync replaces its tracked content with the framework snapshot. Repository settings are not mirrored.
 
