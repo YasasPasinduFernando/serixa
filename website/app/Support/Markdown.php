@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use App\DocsCatalog;
+
 /**
  * Lightweight Markdown → HTML converter for first-party documentation.
  * Trusted content only (monorepo /docs and ROADMAP.md).
@@ -20,7 +22,10 @@ final class Markdown
             return '<p class="doc-missing">Documentation file not found.</p>';
         }
 
-        return self::toHtml((string) file_get_contents($path));
+        return self::rewriteRepositoryLinks(
+            self::toHtml((string) file_get_contents($path)),
+            $path,
+        );
     }
 
     public static function toHtml(string $markdown): string
@@ -220,5 +225,58 @@ final class Markdown
         ) ?? $text;
 
         return $text;
+    }
+
+    private static function rewriteRepositoryLinks(string $html, string $sourcePath): string
+    {
+        $rewritten = preg_replace_callback(
+            '/<a\s+href="([^"]+)"/',
+            static function (array $match) use ($sourcePath): string {
+                $href = html_entity_decode($match[1], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $target = self::repositoryHref($href, $sourcePath);
+
+                return '<a href="' . htmlspecialchars($target, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '"';
+            },
+            $html,
+        );
+
+        return is_string($rewritten) ? $rewritten : $html;
+    }
+
+    private static function repositoryHref(string $href, string $sourcePath): string
+    {
+        if ($href === '' || str_starts_with($href, '#') || str_starts_with($href, '/') || str_starts_with($href, '?')) {
+            return $href;
+        }
+
+        $scheme = parse_url($href, PHP_URL_SCHEME);
+        if (is_string($scheme) && $scheme !== '') {
+            return $href;
+        }
+
+        [$relativePath, $fragment] = array_pad(explode('#', $href, 2), 2, '');
+        $pathWithoutQuery = explode('?', $relativePath, 2)[0];
+        $basename = basename($pathWithoutQuery);
+
+        if (str_ends_with(strtolower($basename), '.md')) {
+            foreach (DocsCatalog::all() as $entry) {
+                if (basename($entry['source']) === $basename) {
+                    return DocsCatalog::href($entry['slug']) . ($fragment !== '' ? '#' . $fragment : '');
+                }
+            }
+        }
+
+        $resolved = realpath(dirname($sourcePath) . DIRECTORY_SEPARATOR . $pathWithoutQuery);
+        $repoRoot = realpath(dirname(__DIR__, 3));
+
+        if ($resolved === false || $repoRoot === false || ! str_starts_with($resolved, $repoRoot . DIRECTORY_SEPARATOR)) {
+            return $href;
+        }
+
+        $relative = str_replace(DIRECTORY_SEPARATOR, '/', substr($resolved, strlen($repoRoot) + 1));
+        $kind = is_dir($resolved) ? 'tree' : 'blob';
+        $github = sprintf('https://github.com/YasasPasinduFernando/serixa/%s/main/%s', $kind, $relative);
+
+        return $github . ($fragment !== '' ? '#' . $fragment : '');
     }
 }

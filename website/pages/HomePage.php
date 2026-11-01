@@ -35,7 +35,7 @@ final class HomePage
         unset($query);
 
         $heroCopy = Column::make([
-            Badge::make('Stable v1.0.1 · Composer ready')->color('success')->class('hero-eyebrow'),
+            Badge::make('Stable v1.0.2 · Composer ready')->color('success')->class('hero-eyebrow'),
             Text::make('Build expressive interfaces. Keep the web simple.')
                 ->as('h1')
                 ->size('2xl')
@@ -187,7 +187,7 @@ PHP),
                         Text::make('The official docs are a production proof of the framework.')->size('sm')->tone('muted'),
                     ])->gap(1),
                 ])->gap(3)->alignCenter(),
-                Link::make('Explore every component →')->href(DocsCatalog::href('widgets'))->class('text-link'),
+                Link::make('Explore every component →')->href('?page=components')->class('text-link'),
             ])->spaceBetween()->alignCenter()->class('built-with-panel'),
         ])->gap(5)->class('section components-section');
 

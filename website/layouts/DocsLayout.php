@@ -58,6 +58,11 @@ final class DocsLayout
             ->class($theme === 'dark' ? 'site-shell dark' : 'site-shell')
             ->attribute('data-theme', $theme);
 
-        return DocumentFactory::make($title, $shell, 'SERIXA documentation — ' . $title);
+        return DocumentFactory::make(
+            $title,
+            $shell,
+            'SERIXA documentation — ' . $title,
+            '/?page=' . rawurlencode(DocsCatalog::route($slug)),
+        );
     }
 }

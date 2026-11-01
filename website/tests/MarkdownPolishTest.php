@@ -24,4 +24,18 @@ final class MarkdownPolishTest extends TestCase
         $this->assertStringContainsString('<h1>Title</h1>', $html);
         $this->assertStringContainsString('href="https://example.com"', $html);
     }
+
+    public function testRepositoryMarkdownLinksResolveToPublicDestinations(): void
+    {
+        $root = dirname(__DIR__, 2);
+
+        $assets = Markdown::fileToHtml($root . '/docs/assets.md');
+        $this->assertStringContainsString('href="?page=docs-styling"', $assets);
+
+        $admin = Markdown::fileToHtml($root . '/docs/admin.md');
+        $this->assertStringContainsString(
+            'href="https://github.com/YasasPasinduFernando/serixa/tree/main/packages/admin"',
+            $admin,
+        );
+    }
 }

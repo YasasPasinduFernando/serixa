@@ -34,6 +34,7 @@ final class SmokeTest extends TestCase
     public static function pages(): iterable
     {
         yield 'home' => ['home', 'Build expressive interfaces. Keep the web simple.'];
+        yield 'components' => ['components', 'Beautiful defaults. Real PHP components.'];
         yield 'packages' => ['packages', 'Official Packages'];
         yield 'playground' => ['playground', 'Playground'];
         yield 'examples-blog' => ['examples-blog', 'Blog Showcase'];
@@ -65,6 +66,7 @@ final class SmokeTest extends TestCase
         $this->assertStringContainsString('/assets/serixa.css', $html);
         $this->assertStringNotContainsString('src="https://cdn.tailwindcss.com"', $html);
         $this->assertStringNotContainsString('/assets/vendor/tailwindcss.js', $html);
+        $this->assertSame(1, substr_count($html, '<h1'), sprintf('"%s" should have one h1.', $page));
     }
 
     public function testAllRoutesHaveSmokeCoverage(): void
@@ -108,5 +110,33 @@ final class SmokeTest extends TestCase
         $this->assertStringContainsString('data-serixa-alert', $html);
         $this->assertStringContainsString('data-serixa-progress', $html);
         $this->assertStringContainsString('Explore every component', $html);
+    }
+
+    public function testComponentCatalogRendersInteractiveContracts(): void
+    {
+        $html = $this->renderer->render(Web::document('components'));
+
+        $this->assertStringContainsString('data-serixa-open-modal="catalog-modal"', $html);
+        $this->assertStringContainsString('data-serixa-open-drawer="catalog-drawer"', $html);
+        $this->assertStringContainsString('data-serixa-show-toast="catalog-toast"', $html);
+        $this->assertStringContainsString('data-serixa-tabs', $html);
+        $this->assertStringContainsString('data-serixa-accordion', $html);
+        $this->assertStringContainsString('data-serixa-dropdown-trigger', $html);
+        $this->assertStringContainsString('data-serixa-popover-trigger', $html);
+    }
+
+    public function testDocumentationCanonicalUsesItsPublicRoute(): void
+    {
+        SiteContext::boot('docs-assets', 'light');
+        $html = $this->renderer->render(Web::document('docs-assets'));
+
+        $this->assertStringContainsString(
+            'rel="canonical" href="https://serixa.yasaboy.com/?page=docs-assets"',
+            $html,
+        );
+        $this->assertStringContainsString(
+            'property="og:url" content="https://serixa.yasaboy.com/?page=docs-assets"',
+            $html,
+        );
     }
 }

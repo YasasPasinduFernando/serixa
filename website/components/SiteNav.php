@@ -43,6 +43,7 @@ final class SiteNav
             ])->gap(2)->alignCenter()->class('site-nav__brand-lockup'),
             Row::make([
                 $link('Docs', 'docs-introduction', $active),
+                $link('Components', 'components', $active),
                 $link('Packages', 'packages', $active),
                 $link('Examples', 'examples-blog', $active),
                 $link('Playground', 'playground', $active),

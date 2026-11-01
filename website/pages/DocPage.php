@@ -31,6 +31,9 @@ final class DocPage
         }
 
         $html = Markdown::fileToHtml(DocsCatalog::resolvePath($entry['source']));
+        // The page chrome owns the sole document-level heading. Markdown source
+        // titles become section headings so screen-reader navigation stays valid.
+        $html = str_replace(['<h1>', '</h1>'], ['<h2>', '</h2>'], $html);
 
         $article = Column::make([
             Text::make($entry['title'])->as('h1')->size('2xl')->weight('bold'),

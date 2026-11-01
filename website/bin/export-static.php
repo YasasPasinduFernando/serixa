@@ -84,6 +84,7 @@ function rewriteStaticLinks(string $html): string
             }
             $query = substr($query, 1);
             $query = html_entity_decode($query, ENT_QUOTES | ENT_HTML5);
+            [$query, $fragment] = array_pad(explode('#', $query, 2), 2, '');
             parse_str($query, $params);
             if (! isset($params['page']) || ! is_string($params['page'])) {
                 return $m[0];
@@ -94,6 +95,9 @@ function rewriteStaticLinks(string $html): string
             if ($params !== []) {
                 $path .= '?' . http_build_query($params);
             }
+            if ($fragment !== '') {
+                $path .= '#' . $fragment;
+            }
 
             return $attr . '=' . $quote . $path . $quote;
         },
@@ -103,24 +107,25 @@ function rewriteStaticLinks(string $html): string
     return is_string($out) ? $out : $html;
 }
 
-function rewriteSitemap(string $xml): string
+/**
+ * Keep canonical, Open Graph, and JSON-LD URLs aligned with exported routes.
+ */
+function rewriteProductionPageUrls(string $html): string
 {
     $out = preg_replace_callback(
-        '#https://serixa\.yasaboy\.com/\?page=([^<&]+)#',
-        static function (array $m): string {
-            $page = rawurldecode(html_entity_decode($m[1], ENT_QUOTES | ENT_HTML5));
-            if ($page === 'home' || $page === '') {
-                return 'https://serixa.yasaboy.com/';
-            }
+        '#https://serixa\.yasaboy\.com/\?page=([a-z0-9_-]+)#i',
+        static function (array $match): string {
+            $page = rawurldecode($match[1]);
 
-            return 'https://serixa.yasaboy.com/' . rawurlencode($page) . '/';
+            return $page === '' || $page === 'home'
+                ? 'https://serixa.yasaboy.com/'
+                : 'https://serixa.yasaboy.com/' . rawurlencode($page) . '/';
         },
-        $xml
+        $html,
     );
 
-    return is_string($out) ? $out : $xml;
+    return is_string($out) ? $out : $html;
 }
-
 
 /**
  * Inject client-side theme runtime for Cloudflare Pages (no PHP request boot).
@@ -155,6 +160,7 @@ foreach ($routes as $page) {
     $document = Web::document($page, ['page' => $page]);
     $html = $renderer->render($document) . "\n";
     $html = rewriteStaticLinks($html);
+    $html = rewriteProductionPageUrls($html);
     $html = injectThemeStaticScript($html);
 
     if ($page === 'home') {
@@ -186,13 +192,28 @@ foreach (['robots.txt', 'favicon.svg'] as $file) {
     }
 }
 
-$sitemapSrc = $public . '/sitemap.xml';
-if (is_file($sitemapSrc)) {
-    $sitemap = rewriteSitemap((string) file_get_contents($sitemapSrc));
-    // Ensure path-style entries for all exported routes that might be missing
-    file_put_contents($dist . '/sitemap.xml', $sitemap);
-    echo "Wrote sitemap.xml (path-style)\n";
+$sitemapEntries = [];
+foreach ($routes as $page) {
+    $path = $page === 'home' ? '/' : '/' . rawurlencode($page) . '/';
+    $priority = match (true) {
+        $page === 'home' => '1.0',
+        $page === 'components', $page === 'packages' => '0.9',
+        str_starts_with($page, 'docs-') => '0.8',
+        default => '0.6',
+    };
+    $location = htmlspecialchars('https://serixa.yasaboy.com' . $path, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+    $sitemapEntries[] = sprintf(
+        '  <url><loc>%s</loc><changefreq>weekly</changefreq><priority>%s</priority></url>',
+        $location,
+        $priority,
+    );
 }
+$sitemap = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+    . "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n"
+    . implode("\n", $sitemapEntries)
+    . "\n</urlset>\n";
+file_put_contents($dist . '/sitemap.xml', $sitemap);
+echo sprintf("Wrote sitemap.xml (%d path-style routes)\n", count($routes));
 
 // Cloudflare Pages ignores query strings when matching _redirects, so rules like
 // "/?page=packages /packages/" are treated as "/ → /packages/" and break the homepage.
@@ -212,6 +233,10 @@ file_put_contents(
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   X-Frame-Options: DENY
+  X-Permitted-Cross-Domain-Policies: none
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'
 
 /assets/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400

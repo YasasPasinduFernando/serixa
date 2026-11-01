@@ -14,6 +14,7 @@ final class Web
     /** @var array<string, class-string> */
     private const ROUTES = [
         'home' => HomePage::class,
+        'components' => ComponentsPage::class,
         'packages' => PackagesPage::class,
         'playground' => PlaygroundPage::class,
         'examples-blog' => Examples\BlogExamplePage::class,
